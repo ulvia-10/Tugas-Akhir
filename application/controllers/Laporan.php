@@ -170,6 +170,77 @@ $writer->save('php://output');
 exit;
 }
 
+
+
+
+    function exportNeraca() {
+
+
+        $id_cabang = $this->session->userdata('sess_id_cabang');
+        // $bulan     = date('F'); // default bulan ini 
+        $bulan     = "January"; // default bulan ini 
+        $bulan = $this->input->post('bulan');
+
+
+        $ambilAssetMasuk = $this->M_laporan->assetKas($bulan, $id_cabang, "masuk");
+        $ambilAssetKeluar = $this->M_laporan->assetKas($bulan, $id_cabang, "keluar");
+
+        $jumlahAsset = 0;
+        $jumlahKewajiban = 0;
+
+
+        if ( $ambilAssetMasuk->num_rows() > 0 ) {
+
+            foreach ( $ambilAssetMasuk->result_array() AS $asset ) {
+
+                $jumlahAsset = $jumlahAsset + $asset['nominal'];
+            }
+            
+        }
+
+
+        if ( $ambilAssetKeluar->num_rows() > 0 ) {
+
+            foreach ( $ambilAssetKeluar->result_array() AS $kewajiban ) {
+
+                $jumlahKewajiban = $jumlahKewajiban + $kewajiban['nominal'];
+            }
+        }
+
+
+
+
+        // pengelolaan 
+        echo '<h2>Per-bulan '.$bulan.'</h2> <hr>';
+
+
+
+        echo '<b>Asset</b> <br><br>';
+
+        echo '&emsp;&emsp;<b>Asset Lancar</b> <br>';
+
+        echo '&emsp;&emsp;&emsp; Kas = '.$jumlahAsset.'<br><br>';
+
+
+        echo '&emsp;&emsp;<b>Asset Lancar</b> <br>';
+
+        echo '&emsp;&emsp;&emsp; Asset Tetap = 0 <br><br>';
+        echo '<b>Jumlah Asset</b> Rp '.number_format($jumlahAsset, 2).'<br><br>';
+
+
+        // kewajiban
+        echo '&emsp;&emsp;<b>Kewajiban</b> <br>';
+        echo '&emsp;&emsp;&emsp; Utang = '.$jumlahKewajiban.'<br><br>';
+
+
+        $bersih = $jumlahAsset - $jumlahKewajiban;
+        echo '<b>Jumlah Asset Bersih dan Kewajiban</b>&emsp;Rp '.number_format( $bersih, 2 ).'<br>';
+
+
+        
+        
+
+    }
 }
 
 /* End of file Laporan.php */

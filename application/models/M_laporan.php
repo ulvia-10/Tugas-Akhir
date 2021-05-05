@@ -47,6 +47,19 @@ ORDER BY data_donasi.id_donasi ASC";
 return $this->db->query($sql)->result();
 }
 
+
+
+function assetKas($bulan, $id_cabang, $jenis) {
+
+    $sql = 'SELECT * FROM `data_keuangan` 
+            WHERE MONTHNAME(tgl_bayar) = "'.$bulan.'" AND 
+            id_cabang = '.$id_cabang.' AND jenis_keuangan = "'.$jenis.'"';
+
+
+    return $this->db->query( $sql );
+
+}
+
 }
 
 /* End of file Provinsi_model.php */
