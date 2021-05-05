@@ -105,6 +105,20 @@ class Keuangan extends CI_Controller
         );
         $this->load->view('templating/Template_anggotanew', $data);
     }
+    // di korwil bro ini 
+    public function tambahbuktikaskorwil()
+    {
+        $data = array(
+
+            'namafolder'    => "keuangan",
+            'namafileview'    => "V_tambah_buktikaskorwil",
+            'title'         => "Kas | Senyum Desa",
+
+            // // variable
+            // 'dataCabang'    => $getDataCabang
+        );
+        $this->load->view('templating/korwil/template_korwil', $data);
+    }
     // kas anggota 
     public function uploadbuktikas(){
            // helper 
@@ -112,6 +126,7 @@ class Keuangan extends CI_Controller
     $this->load->library('form_validation');
     // form validation 
     $this->form_validation->set_rules('tgl_bayar','tgl_bayar','required');
+    $this->form_validation->set_rules('judul','judul','required');
     $this->form_validation->set_rules('no_rekening','no_rekening','required');
     $this->form_validation->set_rules('nominal','nominal','required');
     $this->form_validation->set_rules('deskripsi','deskripsi','required');
@@ -131,6 +146,32 @@ class Keuangan extends CI_Controller
         }
     }
     }
+    // di korwil ya ini buat tambah kas 
+    public function uploadbuktikaskorwil(){
+        // helper 
+        $this->load->helper(array('form', 'url'));
+        $this->load->library('form_validation');
+        // form validation 
+        $this->form_validation->set_rules('tgl_bayar','tgl_bayar','required');
+        $this->form_validation->set_rules('judul','judul','required');
+        $this->form_validation->set_rules('no_rekening','no_rekening','required');
+        $this->form_validation->set_rules('nominal','nominal','required');
+        $this->form_validation->set_rules('deskripsi','deskripsi','required');
+
+        if ($this->form_validation->run()==FALSE){
+            echo validation_errors();
+        }
+        else{
+            $upload = $this->M_keuangan->upload();
+            if($upload ['result'] == 'success'){
+                $this->M_keuangan->tambahbuktikaskorwil($upload);
+                $this->session->set_flashdata('flash-data','ditambahkan');
+                redirect('keuangan','refresh');
+            }else{
+                echo $upload['error'];
+            }
+        }
+        }
     public function detailkasanggota($id)
 	{
 		$data = array(
@@ -171,7 +212,57 @@ class Keuangan extends CI_Controller
 	{
 		$this->M_keuangan->hapuskas($id);
 		$this->session->set_flashdata('flash-data','Account berhasil Dihapus');
-		redirect('adminkorwil/kas','refresh');
+		redirect('kegiatan/historypembayaran','refresh');
 	}
- 
+    public function deletekasanggota($id)
+	{
+		$this->M_keuangan->hapuskas($id);
+		$this->session->set_flashdata('flash-data','Account berhasil Dihapus');
+		redirect('kegiatan/historypembayaran','refresh');
+	}
+
+    public function editkasanggota($id){
+        $data = array(
+			'namafolder'	=> "anggota",
+			'namafileview'	=> "V_edit_kas_anggota",
+			'title'         => "Detail Kas | Senyum Desa"
+		);
+       		$data['kas']= $this->M_keuangan->getKasById($id);
+              
+		$this->load->view('templating/template_anggotanew', $data);
+    }
+    public function proseseditkasanggota(){
+        $this->load->helper(array('form', 'url'));
+        $this->load->library('form_validation');
+        
+        // form validation 
+        $this->form_validation->set_rules('judul','judul','required');
+        $this->form_validation->set_rules('tgl_bayar','tgl_bayar','required');
+        $this->form_validation->set_rules('nominal','nominal','required');
+        $this->form_validation->set_rules('no_rekening','no_rekening','required');
+        $this->form_validation->set_rules('deskripsi','deskripsi','required');
+        
+        if ($this->form_validation->run() == FALSE){
+            echo validation_errors();
+          }
+          else{
+            $upload = $this->M_keuangan->upload();
+            if($upload ['result'] == 'success'){
+                $this->M_keuangan->ubahkasanggota($upload);
+                $this->session->set_flashdata('flash-data','ditambahkan');
+                redirect('keuangan','refresh');
+            }else{
+                echo $upload['error'];
+            }
+            //session 
+            $elementHTML = '<div class="alert alert-danger"><b>Pemberitahuan</b> <br> Notifikasi Kegiatan sudah dibaca pada ' . date('d F Y H.i A') . '</div>';
+            $this->session->set_flashdata('msg', $elementHTML);
+            // echo "<pre>";
+            // echo var_dump($data);
+            // echo "</pre>";
+            //redirect 
+            redirect('kegiatan/historypembayaran','refresh');  
+
+    }
+}
 }

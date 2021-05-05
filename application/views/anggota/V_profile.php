@@ -36,7 +36,7 @@
 				</div>
 			</div>
 		</div>
-
+<br><br>
     <div class="col-xl-6 box-col-6">
 
       <div class="card">

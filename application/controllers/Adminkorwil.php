@@ -355,29 +355,41 @@ class Adminkorwil extends CI_Controller
           $this->load->view('templating/korwil/Template_korwil', $data);
       }
 
-      public function editKas()
+      public function editKas($id)
       {
           $data = array(
   
               'namafolder'    => "keuangan",
               'namafileview'    => "V_edit_kas",
               'title'         => "Kas | Senyum Desa",
-            
+             
           );
-        //   $data['kas'] = $this->M_keuangan->getkeuanganById($id);
-          $this->form_validation->set_rules('status_verif','status_verif','required');
+          $data['kas']= $this->M_keuangan->getkeuanganById($id);
+         
+          $this->load->view('templating/korwil/template_korwil', $data);
+
+      }
+      public function proseseditkas($id){
+
+        $this->form_validation->set_rules('status','status','required');
+        $this->form_validation->set_rules('status_verif','status_verif','required');
 		 
           if ($this->form_validation->run() == FALSE){
-           echo validation_errors();
+            echo validation_errors();
           }
           else{
+            //run ke model 
             $this->M_keuangan->ubahdata();
-         
-            redirect('adminkorwil/editKas','refresh');
-              
+            //session 
+            $elementHTML = '<div class="alert alert-danger"><b>Pemberitahuan</b> <br> Notifikasi Kegiatan sudah dibaca pada ' . date('d F Y H.i A') . '</div>';
+            $this->session->set_flashdata('msg', $elementHTML);
+            // echo "<pre>";
+            // echo var_dump($data);
+            // echo "</pre>";
+            //redirect 
+            redirect('adminkorwil/Kas','refresh');   
           }
-        
-          $this->load->view('templating/korwil/Template_korwil', $data);
+          
       }
 
   

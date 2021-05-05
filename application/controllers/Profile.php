@@ -78,4 +78,7 @@ class Profile extends CI_Controller
         $this->M_Profile->update_data($where, $data, 'akun_profile');
         redirect('Profile');
     }
+    public function editprofileanggota(){
+
+    }
 }

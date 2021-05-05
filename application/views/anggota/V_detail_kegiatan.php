@@ -16,7 +16,7 @@
 			</p>
 			<p class="card-text">
 				<label for="tanggal_kegiatan"><b> Tanggal Kegiatan: </b></label>
-				<?= date('d-m-Y'),(strtotime( $kegiatan['tanggal_kegiatan'])); ?>
+				<?= date('d-m-Y', strtotime( $kegiatan['tanggal_kegiatan'])); ?>
 			</p>
 			<p class="card-text">
 				<label for="tanggal_berakhir"><b> Tanggal Kegiatan Berakhir: </b></label>
@@ -27,7 +27,7 @@
 				<?= $kegiatan['deskripsi']; ?>
 			</p>
             <p class="card-text">
-				<label for="created"><b>Created at </b></label>
+				<label for="created"><b>Created at: </b></label>
 				<?= date('d-m-Y H:i:s',strtotime($kegiatan['created_at'])); ?>
 			</p>
             <p class="card-text">

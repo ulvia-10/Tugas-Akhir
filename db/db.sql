@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 30 Apr 2021 pada 12.03
+-- Waktu pembuatan: 05 Bulan Mei 2021 pada 17.59
 -- Versi server: 10.1.35-MariaDB
 -- Versi PHP: 7.2.9
 
@@ -45,7 +45,6 @@ CREATE TABLE `akun_profile` (
   `link_sharing` varchar(50) NOT NULL,
   `tgl_wawancara` date NOT NULL,
   `tgl_sharing` date NOT NULL,
-  `id_keuangan` int(11) DEFAULT NULL,
   `tanggal_lahir` date NOT NULL,
   `asal` varchar(50) NOT NULL,
   `reason_join` text NOT NULL,
@@ -57,12 +56,12 @@ CREATE TABLE `akun_profile` (
 -- Dumping data untuk tabel `akun_profile`
 --
 
-INSERT INTO `akun_profile` (`id_profile`, `username`, `password`, `level`, `status_account`, `created_at`, `photo`, `gender`, `full_name`, `id_cabang`, `tempat_lahir`, `cv`, `link_wawancara`, `link_sharing`, `tgl_wawancara`, `tgl_sharing`, `id_keuangan`, `tanggal_lahir`, `asal`, `reason_join`, `bukti_follow`, `bukti_bayar`) VALUES
-(1, 'lusi', '$2y$10$VxjO.cX5XbsnXJ1vF6Atf.sbBrkjfcdiFWPjYCexjsJ2UNGp5UONG', 'pusat', 'active', '2021-04-25 15:45:15', 'logo.png', 'P', 'Lusi Tiana ', 5, 'Sidoarjo', '', '', '', '0000-00-00', '0000-00-00', NULL, '2021-03-11', 'TNI', 'tauk ah', 'Sudah', ''),
-(8, 'lina', '$2y$10$YtP8IBJFa8eFaUynStzu0eH.rhdUgYs6Zk9A7qLyndeU7Ktx0of62', 'anggota', 'active', '2021-04-25 15:45:33', 'vaksinasi_covid4.jpeg', 'P', 'Maylina Triyas Putri', 14, 'Batu', '', '', '', '0000-00-00', '0000-00-00', NULL, '2018-01-23', 'SMPN 1 Ngantang', '', 'Sudah', ''),
-(10, 'luvia', '$2y$10$UKmMmj0uCdhnRqW7ph1Ndeo5LfDfxcs.RYrPU/BhFukrCe6npsZ/O', 'calon_anggota', 'active', '2021-04-25 15:49:41', 'vaksin11.jpeg', 'P', 'Luvia', 17, 'Malang', 'CamScanner_03-09-2021_10_04_42.jpg', 'https://www.youtube.com/watch?v=nLNIiMVThv0', 'https://www.youtube.com/watch?v=nLNIiMVThv0', '0000-00-00', '0000-00-00', NULL, '2018-01-01', 'Jakarta', 'Ingin berpetualang', 'Sudah', 'SS1.jpg'),
-(13, 'lucyana', '$2y$10$5ONo6E4a0x8FZL182Alw2uT.APBcM1u/T8Mnb7KZKW7AByA5XODt6', 'korwil', 'active', '2021-04-14 17:30:57', 'coba.jpeg', 'P', 'tiana', 11, 'surabaya', '', '', '', '0000-00-00', '0000-00-00', NULL, '2018-01-01', 'smk suhat malang', '', 'Sudah', ''),
-(14, 'viayuli', '$2y$10$RTaXERqBLoy6845zGAVIbeLRE6z6r0kQWaEmEItjgxGSG5c1Jr8By', 'korwil', 'active', '2021-04-26 01:12:04', 'me_Ulvia_Yulianti6.jpeg', 'P', 'viayuli', 8, 'Malang', '', '', '', '0000-00-00', '0000-00-00', NULL, '2018-01-17', 'Polinema', '', 'Sudah', '');
+INSERT INTO `akun_profile` (`id_profile`, `username`, `password`, `level`, `status_account`, `created_at`, `photo`, `gender`, `full_name`, `id_cabang`, `tempat_lahir`, `cv`, `link_wawancara`, `link_sharing`, `tgl_wawancara`, `tgl_sharing`, `tanggal_lahir`, `asal`, `reason_join`, `bukti_follow`, `bukti_bayar`) VALUES
+(1, 'lusi', '$2y$10$VxjO.cX5XbsnXJ1vF6Atf.sbBrkjfcdiFWPjYCexjsJ2UNGp5UONG', 'pusat', 'active', '2021-04-25 15:45:15', 'logo.png', 'P', 'Lusi Tiana ', 5, 'Sidoarjo', '', '', '', '0000-00-00', '0000-00-00', '2021-03-11', 'TNI', 'tauk ah', 'Sudah', ''),
+(8, 'lina', '$2y$10$YtP8IBJFa8eFaUynStzu0eH.rhdUgYs6Zk9A7qLyndeU7Ktx0of62', 'anggota', 'active', '2021-05-01 04:40:28', 'vaksinasi_covid4.jpeg', 'P', 'Maylina Triyas Putri', 8, 'Batu', '', '', '', '0000-00-00', '0000-00-00', '2018-01-23', 'SMPN 1 Ngantang', '', 'Sudah', ''),
+(13, 'lucyana', '$2y$10$5ONo6E4a0x8FZL182Alw2uT.APBcM1u/T8Mnb7KZKW7AByA5XODt6', 'korwil', 'active', '2021-04-14 17:30:57', 'coba.jpeg', 'P', 'tiana', 11, 'surabaya', '', '', '', '0000-00-00', '0000-00-00', '2018-01-01', 'smk suhat malang', '', 'Sudah', ''),
+(14, 'viayuli', '$2y$10$RTaXERqBLoy6845zGAVIbeLRE6z6r0kQWaEmEItjgxGSG5c1Jr8By', 'korwil', 'active', '2021-04-26 01:12:04', 'me_Ulvia_Yulianti6.jpeg', 'P', 'viayuli', 8, 'Malang', '', '', '', '0000-00-00', '0000-00-00', '2018-01-17', 'Polinema', '', 'Sudah', ''),
+(16, '123456', '$2y$10$QDYlP7uz4TaWaI8in0n9zOrJaGzDRFWiBi9k9j68bLRoqx231OqJG', 'calon_anggota', NULL, '2021-05-02 06:45:12', NULL, 'P', 'via', NULL, 'Malang', '', '', '', '0000-00-00', '0000-00-00', '2021-04-12', '', '', 'Sudah', '');
 
 -- --------------------------------------------------------
 
@@ -79,20 +78,34 @@ CREATE TABLE `data_donasi` (
   `status` enum('Lunas','Belum Lunas','Kadaluwarsa') CHARACTER SET utf8mb4 NOT NULL,
   `jml_donasi` int(50) NOT NULL,
   `id_cabang` int(11) DEFAULT NULL,
-  `id_profile` int(11) DEFAULT NULL,
-  `status_verif` enum('baru','belum verifikasi') DEFAULT 'belum verifikasi'
+  `id_profile` int(11),
+  `status_verif` enum('baru','belum verifikasi') DEFAULT 'belum verifikasi',
+  `email_donatur` varchar(50) NOT NULL,
+  `telp_donatur` varchar(50) NOT NULL,
+  `tipe` enum('anggota','non anggota') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `data_donasi`
 --
 
-INSERT INTO `data_donasi` (`Id_donasi`, `no_rekening`, `nama_donatur`, `bukti_donasi`, `tgl_donasi`, `status`, `jml_donasi`, `id_cabang`, `id_profile`, `status_verif`) VALUES
-(2, '42701007477501', 'Lusi Tiana  Trisila', '', '2021-04-11 17:00:00', 'Lunas', 25000000, 13, 2, 'belum verifikasi'),
-(3, '4480100432503', 'Cahya Eka Purnama', '', '2021-04-20 17:00:00', 'Lunas', 123500000, 11, 8, 'belum verifikasi'),
-(4, '44801004376502', 'Putri Soekarno Ningrat', '', '2021-04-16 17:00:00', 'Lunas', 130000000, 14, NULL, 'belum verifikasi'),
-(10, '44801004374500', 'Ulvia Yulianti', '', '2021-04-26 17:00:00', 'Lunas', 400000, 8, NULL, 'belum verifikasi'),
-(11, '8988598353', '', 'tokped3.jpeg', '2021-04-26 17:00:00', 'Lunas', 2000000, 8, 8, 'baru');
+INSERT INTO `data_donasi` (`Id_donasi`, `no_rekening`, `nama_donatur`, `bukti_donasi`, `tgl_donasi`, `status`, `jml_donasi`, `id_cabang`, `id_profile`, `status_verif`, `email_donatur`, `telp_donatur`, `tipe`) VALUES
+(2, '42701007477501', 'Lusi Tiana  Trisila', '', '2021-04-11 17:00:00', 'Lunas', 25000000, 13, 2, 'belum verifikasi', '', '', NULL),
+(4, '44801004376502', 'Putri Soekarno Ningrat', '', '2021-04-16 17:00:00', 'Lunas', 130000000, 14, NULL, 'belum verifikasi', '', '', NULL),
+(10, '44801004374500', 'Ulvia Yulianti', '', '2021-04-26 17:00:00', 'Lunas', 400000, 8, NULL, 'baru', '', '', NULL),
+(16, '83921083031', 'Daffa', 'cuka1.jpeg', '2021-05-02 03:36:19', 'Lunas', 0, NULL, NULL, 'belum verifikasi', 'ulvia.yulianti@yahoo.co.id', '081390682636', NULL),
+(17, '83921083031', 'Ita', 'cuka2.jpeg', '2021-05-01 17:00:00', 'Lunas', 0, NULL, NULL, 'belum verifikasi', 'ulvia.yulianti@yahoo.co.id', '081390682636', NULL),
+(18, '83921083031', 'Ita lina', '20945831.jpg', '2021-05-01 17:00:00', 'Lunas', 200000, NULL, NULL, 'belum verifikasi', 'ulvia.yulianti@yahoo.co.id', '081390682636', NULL),
+(24, '23131389138319', 'Daffa elek', 'logo4.png', '2021-05-03 17:00:00', 'Lunas', 20000, 8, 14, 'baru', 'ulvia.yulianti@gmail.com', '892390132', 'non anggota'),
+(27, '93213813', '', 'tokped9.jpeg', '2021-05-03 17:00:00', 'Lunas', 900000, 8, 14, 'baru', '', '', NULL),
+(29, '39213819203082', '', 'Screenshot_2021-03-09_1359393.png', '2021-05-03 17:00:00', 'Lunas', 80000, 8, 14, 'baru', '', '', NULL),
+(31, '80238129', '', 'logo7.png', '2021-05-03 17:00:00', 'Lunas', 9000, 8, 14, 'baru', '', '', NULL),
+(34, '08398284108', 'Ulvia Cantik', 'logo8.png', '2021-05-03 17:00:00', 'Lunas', 9000, 8, 14, 'baru', 'ulvia.yulianti@gmail.com', '892390132', 'non anggota'),
+(36, '392183192381', '', 'kas-masuk8.jpg', '2021-05-03 17:00:00', 'Lunas', 9000, 8, 14, 'baru', '', '', NULL),
+(38, '23131389138319', '', 'logo10.png', '2021-05-03 17:00:00', 'Lunas', 80000, 8, 8, 'belum verifikasi', '', '', NULL),
+(39, '9809880890', '', 'hadist5.jpg', '2021-05-03 17:00:00', 'Lunas', 90000, 8, 8, 'belum verifikasi', '', '', NULL),
+(40, '23131389138319', '', 'logo11.png', '2021-05-03 17:00:00', 'Lunas', 9000, 8, 8, 'belum verifikasi', '', '', NULL),
+(41, '389213897', '', 'me_Ulvia_Yulianti9.jpeg', '2021-05-04 17:00:00', 'Lunas', 90000, 8, 14, 'baru', '', '', NULL);
 
 -- --------------------------------------------------------
 
@@ -114,7 +127,8 @@ CREATE TABLE `data_informasiprofile` (
 --
 
 INSERT INTO `data_informasiprofile` (`id_informasiprofile`, `telp`, `address`, `email`, `update_at`, `id_profile`) VALUES
-(0, '0836728361', 'Ngantang ', 'ulvia.yulinati@gmail.com', '2021-04-01 15:19:01', 1);
+(1, '0836728361', 'Ngantang ', 'ulvia.yulinati@gmail.com', '2021-04-01 15:19:01', 1),
+(2, '087817381718', 'Jalan Binuaoa', 'ulvia.yulianti@gmail.com', '2021-05-02 06:45:12', 16);
 
 -- --------------------------------------------------------
 
@@ -171,6 +185,7 @@ CREATE TABLE `data_keuangan` (
   `jenis_keuangan` enum('masuk','keluar') NOT NULL,
   `status` enum('lunas','belum lunas') NOT NULL,
   `nominal` int(15) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `tipe` varchar(50) NOT NULL,
   `status_verif` enum('baru','belum verifikasi') DEFAULT 'belum verifikasi'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -179,9 +194,14 @@ CREATE TABLE `data_keuangan` (
 -- Dumping data untuk tabel `data_keuangan`
 --
 
-INSERT INTO `data_keuangan` (`id_keuangan`, `id_cabang`, `id_profile`, `tgl_bayar`, `judul`, `bukti_bayar`, `no_rekening`, `deskripsi`, `tanggal_laporan`, `jenis_keuangan`, `status`, `nominal`, `tipe`, `status_verif`) VALUES
-(1, 18, 1, '2021-04-27 23:42:58', 'Setoran Modal', '', '', 'setoran kas', '2021-03-24 11:46:24', 'masuk', 'lunas', 20000000, 'Rekening', 'belum verifikasi'),
-(15, 8, 14, '2021-04-30 10:56:35', 'setor', '', '8908809', 'kas', '2021-04-30 03:56:35', 'masuk', 'lunas', 0, '', 'belum verifikasi');
+INSERT INTO `data_keuangan` (`id_keuangan`, `id_cabang`, `id_profile`, `tgl_bayar`, `judul`, `bukti_bayar`, `no_rekening`, `deskripsi`, `tanggal_laporan`, `jenis_keuangan`, `status`, `nominal`, `created_at`, `tipe`, `status_verif`) VALUES
+(1, 18, 1, '2021-04-27 23:42:58', 'Setoran Modal', '', '', 'setoran kas', '2021-03-24 11:46:24', 'masuk', 'lunas', 20000000, '2021-05-01 03:45:20', 'Rekening', 'belum verifikasi'),
+(21, 8, 8, '2021-05-03 10:31:51', 'cabang malang', 'tokped5.jpeg', '879777777', 'bayar malang bln jan', '2021-05-03 03:31:51', 'masuk', 'lunas', 800000, '2021-05-03 03:31:51', '', 'baru'),
+(22, 8, 14, '2021-05-03 12:21:35', 'Makan sapi', 'floow1.jpg', '910920192', 'bayar makanan', '2021-05-03 05:21:35', 'masuk', 'lunas', 200000, '2021-05-03 05:21:35', '', 'baru'),
+(23, 8, 14, '2021-05-04 00:00:00', 'Bayar Bulan des', 'hadist3.jpg', '8934810', 'bayar bulan ini yaa', '2021-05-04 16:27:42', 'masuk', 'lunas', 9000, '2021-05-04 16:27:42', '', 'belum verifikasi'),
+(24, 8, 14, '2021-05-04 00:00:00', 'Bayar Bulan des', 'hadist4.jpg', '83921313823', 'bayar bulan januari', '2021-05-04 16:44:12', 'masuk', 'lunas', 90000, '2021-05-04 16:44:12', '', 'belum verifikasi'),
+(25, 8, 14, '2021-05-04 00:00:00', 'Bayar Kas Bulan September', 'kas-masuk7.jpg', '83921381', 'kas masuk', '2021-05-04 16:44:49', 'masuk', 'lunas', 9021319, '2021-05-04 16:44:49', '', 'belum verifikasi'),
+(27, 8, 8, '2021-05-05 00:00:00', 'Makan sapi', 'Screenshot_2021-03-09_1359397.png', '8992173', 'hai', '2021-05-05 10:18:22', 'masuk', 'lunas', 90000, '2021-05-05 10:18:22', '', 'belum verifikasi');
 
 -- --------------------------------------------------------
 
@@ -259,8 +279,7 @@ INSERT INTO `tbl_notif` (`id_notif`, `tema`, `judul`, `name_cabang`, `pesan`, `t
 --
 ALTER TABLE `akun_profile`
   ADD PRIMARY KEY (`id_profile`),
-  ADD KEY `FK_akun_profile_master_cabang` (`id_cabang`),
-  ADD KEY `FK_akun_profile_data_keuangan` (`id_keuangan`);
+  ADD KEY `FK_akun_profile_master_cabang` (`id_cabang`);
 
 --
 -- Indeks untuk tabel `data_donasi`
@@ -313,13 +332,19 @@ ALTER TABLE `tbl_notif`
 -- AUTO_INCREMENT untuk tabel `akun_profile`
 --
 ALTER TABLE `akun_profile`
-  MODIFY `id_profile` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_profile` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT untuk tabel `data_donasi`
 --
 ALTER TABLE `data_donasi`
-  MODIFY `Id_donasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `Id_donasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+
+--
+-- AUTO_INCREMENT untuk tabel `data_informasiprofile`
+--
+ALTER TABLE `data_informasiprofile`
+  MODIFY `id_informasiprofile` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `data_kegiatan`
@@ -331,7 +356,7 @@ ALTER TABLE `data_kegiatan`
 -- AUTO_INCREMENT untuk tabel `data_keuangan`
 --
 ALTER TABLE `data_keuangan`
-  MODIFY `id_keuangan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_keuangan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT untuk tabel `master_cabang`
@@ -353,7 +378,6 @@ ALTER TABLE `tbl_notif`
 -- Ketidakleluasaan untuk tabel `akun_profile`
 --
 ALTER TABLE `akun_profile`
-  ADD CONSTRAINT `FK_akun_profile_data_keuangan` FOREIGN KEY (`id_keuangan`) REFERENCES `data_keuangan` (`id_keuangan`),
   ADD CONSTRAINT `FK_akun_profile_master_cabang` FOREIGN KEY (`id_cabang`) REFERENCES `master_cabang` (`id_cabang`);
 
 --

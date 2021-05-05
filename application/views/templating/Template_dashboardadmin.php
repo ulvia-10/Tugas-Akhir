@@ -276,8 +276,7 @@
     <!-- Plugins JS Ends-->
     <!-- Theme js-->
     <script src="<?php echo base_url() ?>assets/pusatbackend/js/script.js"></script>
-    <script src="<?php echo base_url() ?>assets/pusatbackend/js/theme-customizer/customizer.js"></script>
-
+  
     <!-- Dashboard JS-->
     <script src="<?= base_url('assets/pusatbackend/js/chart/chartist/chartist.js'); ?>"></script>
     <script src="<?= base_url('assets/pusatbackend/js/chart/chartist/chartist-plugin-tooltip.js'); ?>"></script>

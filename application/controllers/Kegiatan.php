@@ -91,7 +91,6 @@ public function index()
 		$data['kas']= $this->M_kegiatan->getDataKas();
 		//disesuaikan sama dengan nama view$ 
 		$this->load->view('templating/template_anggotanew', $data);
-       
 	}
 	public function detailpembayaran($id)
 	{

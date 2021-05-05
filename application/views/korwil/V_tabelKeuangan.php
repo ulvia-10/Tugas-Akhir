@@ -42,7 +42,7 @@
                             </thead>
                             <tbody style=" text-align:center;">
                                 <?php $no = 1;
-                                foreach ($data_keuangan->result_array() as $kas) { ?>
+                                foreach ($data_keuangan AS $kas) { ?>
                                 <tr>
                                     <td> <?= $no++; ?></td>
                                     <td><?= $kas["tanggal_laporan"]; ?></td>

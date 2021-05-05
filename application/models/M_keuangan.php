@@ -6,10 +6,15 @@ class M_keuangan extends CI_Model
 {
     public function getallkeuangan()
     {
-        $query  = $this->db->query('SELECT a.id_keuangan, a.judul, a.tgl_bayar, a.nominal, a.no_rekening, a.deskripsi,  a.status_verif, a.status,  a.jenis_keuangan, a.tanggal_laporan, b.id_cabang, b.name_cabang
-        from data_keuangan a, master_cabang b
-        where a.id_cabang = b.id_cabang');
-        return $query->row_array();
+        // $query  = $this->db->query('SELECT a.id_keuangan, a.judul, a.tgl_bayar, a.nominal, a.no_rekening, a.deskripsi,  a.status_verif, a.status,  a.jenis_keuangan, a.tanggal_laporan, b.id_cabang, b.name_cabang
+        // from data_keuangan a, master_cabang b
+        // where a.id_cabang = b.id_cabang');
+        // return $query->result_array();
+        $sql="SELECT data_keuangan.*, master_cabang.*,akun_profile.id_profile,akun_profile.full_name
+            FROM data_keuangan
+            JOIN master_cabang ON master_cabang.id_cabang = data_keuangan.id_cabang
+            JOIN akun_profile ON akun_profile.id_profile = data_keuangan.id_profile";
+            return $this->db->query($sql)->result_array();
     }
 
     // proses  cari data
@@ -68,7 +73,6 @@ class M_keuangan extends CI_Model
         $this->db->where('id_keuangan', $id_keuangan);
         $this->db->delete('data_keuangan');
 
-
         // flashdata
         $elementHTML = '<div class="alert alert-warning"><b>Pemberitahuan</b> <br> Data keuangan berhasil dihapus pada ' . date('d F Y H.i A') . '</div>';
         $this->session->set_flashdata('pesan', $elementHTML);
@@ -85,23 +89,20 @@ class M_keuangan extends CI_Model
             ->where('id_keuangan', $data['id_keuangan'])
             ->update($data);
     }
-
+    //function ubah data kas id
     public function ubahdata()
     {
-
-
         $id_keuangan = $this->input->post('id_keuangan');
-
         $data = [
-            "id_keuangan"    => $id_keuangan,
+            "status"=>$this->input->post('status',true),
             "status_verif"   => $this->input->post('status_verif', true)
-        ];
-
-        $this->db->where('id_keuangan', $id_keuangan);
-        $this->db->update('data_keuangan', $data);
-
+            ];
+        $this->db->where('id_keuangan', $this->input->post('id_keuangan'));
+        $this->db->update('data_keuangan', $data);      
+        // flash data 
         $msg = '<div class="alert alert-info">Informasi pelaporan berhasil diperbarui <br><small>Pada tanggal ' . date('d F Y H.i A') . '</small></div>';
         $this->session->set_flashdata('flash-data', $msg);
+
         print_r($data);
         echo $id_keuangan;
         // redirect('adminkorwil/Kas' . $id_keuangan);
@@ -117,6 +118,34 @@ class M_keuangan extends CI_Model
         (
             'id_profile' => $id_profile,
             'id_cabang' => $id_cabang,
+            'judul'  => $this->input->post('judul'),
+            'no_rekening'  => $this->input->post('no_rekening'),
+            'tgl_bayar'   => $this->input->post('tgl_bayar'),
+            'nominal'   => $this->input->post('nominal'),
+            'bukti_bayar'  => $upload ['file']['file_name'],
+            'deskripsi'   => $this->input->post('deskripsi')
+        );
+             $this->db->insert('data_keuangan', $data);
+    
+    
+            // flashdata
+            $elementHTML = '<div class="alert alert-primary"><b>Pemberitahuan</b> <br> Data Kas berhasil ditambahkan pada ' . date('d F Y H.i A') . ' Silahkan menunggu verifikasi lebih lanjut</div>';
+            $this->session->set_flashdata('flash-data', $elementHTML);
+    
+            // redirect
+            redirect('kegiatan/historypembayaran');
+    }
+    // korwil kas 
+    public function tambahbuktikaskorwil($upload){
+
+        $id_profile = $this->session->userdata('sess_id_profile');
+        $id_cabang = $this->session->userdata('sess_id_cabang');
+        $data = array
+        (
+            'id_profile' => $id_profile,
+            'id_cabang' => $id_cabang,
+            'judul'  => $this->input->post('judul'),
+            'status_verif' => "baru",
             'no_rekening'  => $this->input->post('no_rekening'),
             'tgl_bayar'   => $this->input->post('tgl_bayar'),
             'nominal'   => $this->input->post('nominal'),
@@ -131,7 +160,7 @@ class M_keuangan extends CI_Model
             $this->session->set_flashdata('pesan', $elementHTML);
     
             // redirect
-            redirect('kegiatan/historypembayaran');
+            redirect('adminkorwil/kas/');
     }
         public function upload(){    
             $config['upload_path'] = './assets/images/';    
@@ -151,13 +180,12 @@ class M_keuangan extends CI_Model
             JOIN akun_profile ON akun_profile.id_profile = data_keuangan.id_profile
             WHERE data_keuangan.id_keuangan = '$id_keuangan'";
             return $this->db->query($sql)->row_array();
-
         }
 
         // keuangan kas di admin korwil $status
         public function datakeuangan( $status ){
             $id_cabang = $this->session->userdata('sess_id_cabang');
-            $sql ="  SELECT data_keuangan.*,master_cabang.*,akun_profile.*
+            $sql =" SELECT data_keuangan.*,master_cabang.*,akun_profile.full_name
             FROM data_keuangan
             JOIN master_cabang ON master_cabang.id_cabang = data_keuangan.id_cabang
             JOIN akun_profile ON akun_profile.id_profile = data_keuangan.id_profile
@@ -166,34 +194,51 @@ class M_keuangan extends CI_Model
         }
         public function getalldatakeuangan(){
             $id_cabang = $this->session->userdata('sess_id_cabang');
-            $sql ="  SELECT data_keuangan.*,master_cabang.*
+            $sql ="  SELECT data_keuangan.*,master_cabang.*,akun_profile.full_name
             FROM data_keuangan
             JOIN master_cabang ON master_cabang.id_cabang = data_keuangan.id_cabang
+            JOIN akun_profile ON akun_profile.id_profile = data_keuangan.id_profile
             WHERE data_keuangan.id_cabang = '$id_cabang'";
             return $this->db->query($sql)->result_array();
         }
 
         public function getkeuanganById($id){
-            $sql = "SELECT akun_profile.*, data_keuangan.*
+            $sql = "SELECT data_keuangan.*
             FROM data_keuangan
-            JOIN akun_profile ON akun_profile.id_profile = data_keuangan.id_profile
-            
             WHERE data_keuangan.id_keuangan = '$id'";
-        
             return $this->db->query($sql)->row_array();
            }
 
         public function hapuskas($id){
             $this->db->where('id_keuangan',$id);
             $this->db->delete('data_keuangan');
-
             
              //flashdata 
-             $elementHTML = '<div class="alert alert-secondary"><b>Pemberitahuan</b> <br> Akun berhasil dihapus </div>';
-             $this->session->set_flashdata('msg', $elementHTML);
+             $elementHTML = '<div class="alert alert-info"><b>Pemberitahuan</b> <br> Data kas berhasil dihapus </div>';
+             $this->session->set_flashdata('flash-data', $elementHTML);
  
             //redirect
-            redirect('adminkorwil/kas','refresh');
+            redirect('kegiatan/historypembayaran','refresh');
+        }
+        public function ubahkasanggota($upload){
+            $data = [
+                "judul"=>$this->input->post('judul',true),
+                "tgl_bayar"=>$this->input->post('tgl_bayar',true),
+                "nominal"=>$this->input->post('nominal',true),
+                "no_rekening"=>$this->input->post('no_rekening',true),
+                "deskripsi"=>$this->input->post('deskripsi',true),
+                'bukti_bayar'  => $upload ['file']['file_name']
+                ];
+
+            // query
+            $this->db->where('id_keuangan', $this->input->post('id_keuangan'));
+            $this->db->update('data_keuangan', $data);      
+            // flash data 
+    
+            $msg = '<div class="alert alert-info">Data kas anggota berhasil diperbarui <br><small>Pada tanggal ' . date('d F Y H.i A') . '</small></div>';
+            $this->session->set_flashdata('flash-data', $msg);
+            
+            redirect('kegiatan/historypembayaran');
         }
 
 }

@@ -78,7 +78,7 @@
                 <span>s</span>
                 <span>a</span>
             </div>
-        </div> -->
+        </div>  -->
 
         <!-- preloader end -->
 
@@ -103,7 +103,7 @@
                                     <ul class="navbar-nav me-auto">
                                         <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle active"
                                                 href="href="<?= base_url('Page'); ?> > <i class="fa fa-home" aria-hidden="true"></i> Home</a>
-                                            <!-- <ul class="dropdown-menu">
+                                            <ul class="dropdown-menu">
                                                 <li><a class="dropdown-item" href="<?= base_url('Page'); ?>">Beranda</a>
                                                 </li>
                                                 <li><a class="dropdown-item"
@@ -112,7 +112,7 @@
                                                 </li>
                                                 <li><a class="dropdown-item" href="index-2.html">Visi Dan Misi</a>
                                                 </li>
-                                            </ul> -->
+                                            </ul>
                                         </li>
 
                                         <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle"
@@ -157,7 +157,7 @@
                                             <ul class="dropdown-menu">
                                                 <li><a class="dropdown-item" href="<?= base_url('donasi_non/donasinonanggota'); ?>">Tambah Bukti Donasi</a>
                                                 </li>
-                                                <li><a class="dropdown-item" href="<?= base_url('donasi/riwayatdonasinonanggota'); ?>">Daftar Donasi</a>
+                                                <li><a class="dropdown-item" href="<?= base_url('donasi_non/riwayatdonasinonanggota'); ?>">Daftar Donasi</a>
                                                 </li>
                                             </ul>
                                         </li>

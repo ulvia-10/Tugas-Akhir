@@ -12,6 +12,7 @@ class Donasi extends CI_Controller
 
         $this->load->model('M_donasi');
         $this->load->model('M_master');
+        
         $this->load->library('form_validation');
 
         // pengecekan sesi 
@@ -142,8 +143,7 @@ class Donasi extends CI_Controller
     // tambah donasi 
     public function tambahbuktidonasi()
     {
-        // $getDataCabang = $this->M_master->getallwilayah();
-        
+    
         $data = array(
 
             'namafolder'    => "anggota",
@@ -152,22 +152,22 @@ class Donasi extends CI_Controller
         );
         $this->load->view('templating/Template_anggotanew', $data);
     }
+    public function tambahbuktidonasikorwil()
+    {
+        // $getDataCabang = $this->M_master->getallwilayah();
+        
+        $data = array(
+
+            'namafolder'    => "donasi",
+            'namafileview'    => "V_tambah_buktidonasikorwil",
+            'title'         => "Donasi",
+        );
+      
+        $this->load->view('templating/korwil/Template_korwil', $data);
+    }
+
 // riwayat donasi non anggota
-public function riwayatdonasinonanggota()
-{
-  
-    $data = array(
 
-        'namafolder'    => "donasi",
-        'namafileview'    => "V_riwayat_nondonasi",
-        'title'         => "Donasi Non Anggota | Senyum Desa",
-
-       
-    );
-    $this->load->view('templating/template_loginheader', $data);
-  
-    
-}
 // data donasi di korwil
 public function datadonasi(){
     
@@ -177,12 +177,12 @@ public function datadonasi(){
         'namafileview'    => "V_donasi",
         'title'         => "Donasi Anggota | Senyum Desa",
 
-       
     );
+    // variabel
     $data['donasi_sudah_verifikasi'] = $this->M_donasi->datadonasi("baru");
     $data['donasi_baru'] = $this->M_donasi->datadonasi("belum verifikasi");
-    $data['donasi']=$this->M_donasi->getalldatadonasi();
-
+    $data['donasi']=$this->M_donasi-> getalldatadonasi();
+    // redirect 
     $this->load->view('templating/korwil/Template_korwil', $data);
 }
 // bukti donasi 
@@ -210,6 +210,32 @@ public function uploadbuktidonasi(){
         }
     }
 }
+
+//bukti donasi korwil 
+public function uploadbuktidonasikorwil(){
+    // helper 
+    $this->load->helper(array('form', 'url'));
+    $this->load->library('form_validation');
+    // form validation 
+    $this->form_validation->set_rules('tgl_donasi','tgl_donasi','required');
+    $this->form_validation->set_rules('no_rekening','no_rekening','required');
+    $this->form_validation->set_rules('jml_donasi','jml_donasi','required');
+
+    if ($this->form_validation->run()==FALSE){
+
+        echo validation_errors();
+    }
+    else{
+        $upload = $this->M_donasi->upload();
+        if($upload ['result'] == 'success'){
+            $this->M_donasi->tambahbuktidonasikorwil($upload);
+            $this->session->set_flashdata('flash-data','ditambahkan');
+            redirect('donasi/datadonasi','refresh');
+        }else{
+            echo $upload['error'];
+        }
+    }
+} 
 public function detaildonasianggota($id){
  
     $data = array(
@@ -235,6 +261,128 @@ public function detaildonasikorwil($id){
     
     $this->load->view('templating/korwil/Template_korwil', $data);
 }
+public function hapusdonasi($Id_donasi){
+    $this->M_donasi->processDeleteDonasi($Id_donasi);
+    $this->session->set_flashdata('flash-data','Account berhasil Dihapus');
+    redirect('donasi/riwayatdonasi','refresh');
+}
+public function hapusdonasikorwil($Id_donasi){
+    $this->M_donasi->processDeleteDonasikorwil($Id_donasi);
+    $this->session->set_flashdata('flash-data','Account berhasil Dihapus');
+    redirect('donasi/datadonasi','refresh');
+}
+//DONASI EDIT BAGI ANGGOTA 
+public function editdonasianggota($id){
+ 
+    $data = array(
+
+        'namafolder'    => "donasi",
+        'namafileview'  => "V_edit_donasi_anggota",
+        'title'         => "Donasi Anggota | Senyum Desa",
+
+    );
+    $data['donasi'] = $this->M_donasi->getDonasiById($id);
+    
+    $this->load->view('templating/Template_anggotanew', $data);
+}
+
+public function proseseditdonasianggota(){
+    $this->load->helper(array('form', 'url'));
+    $this->load->library('form_validation');
+    
+    // form validation 
+    $this->form_validation->set_rules('tgl_donasi','tgl_donasi','required');
+    $this->form_validation->set_rules('no_rekening','no_rekening','required');
+    $this->form_validation->set_rules('bukti donasi','bukti_donasi','required');
+    $this->form_validation->set_rules('nominal','nominal','required');
+    
+    if ($this->form_validation->run() == FALSE){
+        echo validation_errors();
+      }
+      else{
+        $upload = $this->M_donasi->upload();
+        if($upload ['result'] == 'success'){
+            $this->M_donasi->updatedonasianggota();
+            redirect('donasi','refresh');
+        }else{
+            echo $upload['error'];
+        }
+        //session 
+       
+        // echo "<pre>";
+        // echo var_dump($data);
+        // echo "</pre>";
+        //redirect 
+        redirect('donasi/riwayatdonasi','refresh');  
+}
 
 }
+
+// DONASI VERIFIKASI DI KORWIL
+ public function editdonasiverif($id){
+    $data = array(
+
+        'namafolder'    => "donasi",
+        'namafileview'  => "V_edit_donasi_verif",
+        'title'         => "Donasi Anggota | Senyum Desa",
+
+    );
+    $data['donasi'] = $this->M_donasi->getDonasiById($id);
+    $this->load->view('templating/korwil/Template_korwil', $data);
+ }
+
+ public function editdonasinonverif($id){
+    $data = array(
+
+        'namafolder'    => "donasi",
+        'namafileview'  => "V_edit_donasinon_verif",
+        'title'         => "Donasi Anggota | Senyum Desa",
+
+    );
+    $data['donasi'] = $this->M_donasi->getDonasiById($id);
+    $this->load->view('templating/korwil/Template_korwil', $data);
+ }
+
+
+public function proseseditdonasiverif($id){
+
+    $this->form_validation->set_rules('status','status','required');
+    $this->form_validation->set_rules('status_verif','status_verif','required');
+     
+      if ($this->form_validation->run() == FALSE){
+        echo validation_errors();
+      }
+      else{
+        //run ke model 
+        $this->M_donasi->ubahdata();
+
+        // echo "<pre>";
+        // echo var_dump($data);
+        // echo "</pre>";
+        //redirect 
+        redirect('donasi/datadonasi','refresh');  
+}
+}
+public function proseseditdonasinonverif($id){
+
+    $this->form_validation->set_rules('status','status','required');
+    $this->form_validation->set_rules('status_verif','status_verif','required');
+     
+      if ($this->form_validation->run() == FALSE){
+        echo validation_errors();
+      }
+      else{
+        //run ke model 
+        $this->M_donasi-> ubahdatanondonasi();
+        //session 
+        $elementHTML = '<div class="alert alert-danger"><b>Pemberitahuan</b> <br> Notifikasi Kegiatan sudah dibaca pada ' . date('d F Y H.i A') . '</div>';
+        $this->session->set_flashdata('msg', $elementHTML);
+        // echo "<pre>";
+        // echo var_dump($data);
+        // echo "</pre>";
+        //redirect 
+        redirect('donasi_non/datadonasinonanggota','refresh');  
+}
+}
  
+}

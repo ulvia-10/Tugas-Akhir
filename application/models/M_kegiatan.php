@@ -59,7 +59,6 @@ class M_kegiatan extends CI_Model
         $sql =" SELECT data_kegiatan.*,master_cabang.*
         FROM data_kegiatan
         JOIN master_cabang ON master_cabang.id_cabang = data_kegiatan.id_cabang
-        
         WHERE data_kegiatan.id_cabang = '$id_cabang' AND data_kegiatan.status = '$status'";
         return $this->db->query($sql)->result_array();
 

@@ -8,13 +8,13 @@
 			<h5>Edit Profile <i class="fa fa-user" aria-hidden="true"></i></h5>
 		</div>
 		<div class="contact-form card-body">
-			<form class="theme-form">
+			<form class="theme-form" action="" method="POST" enctype="multipart/form-data">
 				<div class="mb-3">
 					<label class="col-form-label" for="exampleInputEmail1" name="photo">Foto</label>
 					<input class="form-control" type="file" rows="3" cols="50" ></textarea>
 				</div>
 				<div class="text-sm-end">
-					<button class="btn btn-primary-gradien">EDIT</button>
+					<button class="btn btn-primary">Edit Photo</button>
 				</div>
 			</form>
 

@@ -219,6 +219,7 @@
 											data-feather="airplay">
 										</i><span>Donasi</span></a>
 								</li>
+								<!-- cetak donasi -->
 							
                                 <li class="sidebar-list">
 									<a class="sidebar-link sidebar-title link-nav" href="<?= base_url('login/logout'); ?>"><i
@@ -278,7 +279,7 @@
 	<!-- Plugins JS Ends-->
 	<!-- Theme js-->
 	<script src="<?php echo base_url() ?>assets/pusatbackend/js/script.js"></script>
-	<script src="<?php echo base_url() ?>assets/pusatbackend/js/theme-customizer/customizer.js"></script>
+
 
 	<!-- Dashboard JS-->
 	
@@ -346,15 +347,13 @@
 			});
 
 		});
-
-		<script>
+		// alert 
 		window.setTimeout(function () {
 			$(".alert").fadeTo(500, 0).slideUp(500, function () {
 				$(this).remove();
 			});
 		}, 5000);
 
-	</script>
 
 	</script>
 
