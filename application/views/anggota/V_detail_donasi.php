@@ -94,6 +94,14 @@
 							<span class="badge badge-<?php echo $warna ?>"> <?php echo $keterangan?></span>
 						</p>
 						<p class="card-text">
+							<label for="via"><b>Via Pembayaran: </b></label>
+							<?= $donasi['via']; ?>
+						</p>
+						<p class="card-text">
+							<label for="nama_bank"><b>Nama Bank: </b></label>
+							<b><?= $donasi['nama_bank']; ?></b>
+						</p>
+						<p class="card-text">
 							<label for="created_"><b>Upload pada: </b></label>
 							<?= date('d-m-Y H:i:s',strtotime($donasi['created_at'])); ?>
 						</p>

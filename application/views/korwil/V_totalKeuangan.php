@@ -42,7 +42,7 @@
                                     <th>Nama</th>
                                     <th>Judul</th>
                                     <th>Nominal</th>
-                                    <th>Bulan</th>
+                                    <!-- <th>Bulan</th> -->
                                     <th>Status</th>
                                     <th>Action</th>
                                   
@@ -79,7 +79,7 @@
 												<td> <span class="badge badge-<?php echo $warna ?>">
 														<?php echo $keterangan?></span></td>
                                                 <td>
-                                                <td><?=$ks["bulan"]?></td>
+                                                <!-- <td><?=$ks["bulan"]?></td> -->
                                                 <!-- detail  -->
                                                 <a href="<?= base_url(); ?>keuangan/detailkaskorwil/<?= $ks['id_keuangan'];?>"
 														class="badge badge-secondary">

@@ -72,7 +72,45 @@
 						</div>
 					</div>
 				</div>
+				<!-- nama bank  -->
+				<!-- <div class="form-group">
 
+<div class="row" id="element-wilayah">
+	<div class="mb-2 row">
+		<label class="col-sm-3 col-form-label">Nama Bank</label>
+		<div class="col-sm-6">
+			<select name="nama_bank" class="form-select digits" id=""
+				required="Nama Anggota harus diisi ">
+				<option value="nama_bank" disable>-- Pilih nama bank--</option>
+				<option value="BRI">BANK BRI </option>
+				<option value="BNI">BANK BNI</option>
+				<option value="MANDIRI">BANK MANDIRI</option>
+				<option value="BCA">BANK BCA</option>
+			</select>
+		</div>
+	</div>
+</div>
+</div> -->
+<!--  -->
+<!-- <div class="row">
+						<label class="col-sm-3 col-form-label">Via Pembayaran</label>
+						<div class="col-sm-9">
+							<div class="m-checkbox-inline custom-radio-ml">
+								<div class="form-check form-check-inline radio radio-primary">
+									<input class="form-check-input" id="radioinline4" type="radio" name="gender"
+										id="gender" value="P" required="Gender harap DiIsi">
+									<label class="form-check-label mb-0" for="radioinline4"><span class="digits">
+											Transfer</span></label>
+								</div>
+								<div class="form-check form-check-inline radio radio-primary">
+									<input class="form-check-input" id="radioinline5" type="radio" name="gender"
+										id="gender" value="L">
+									<label class="form-check-label mb-0" for="radioinline5"><span class="digits">
+											Laki</span></label>
+								</div>
+							</div>
+						</div>
+					</div> -->
 				<div class="row">
 					<div class="col">
 						<div class="mb-3 row">

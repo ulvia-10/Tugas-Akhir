@@ -46,7 +46,22 @@
 					</div>
 				</div>
 			</div>
-			
+			<div class="row">
+                <div class="col">
+                    <div class="mb-2 row">
+					<div class="col-sm-5">
+                        <label class="col-sm-3 col-form-label" for="nama_bank">Tipe</label>
+                        <select class="form-select form-control-lg digits " name="nama_bank" id="nama_bank" required="">
+                            <option selected="" disabled="" value="">Pilih Nama Bank</option>
+                            <option value="BRI">BRI</option>
+                            <option value="BNI">BNI</option>
+                            <option value="BCA">BCA</option>
+                            <option value="MANDIRI">MANDIRI</option>
+                        </select>
+						</div>
+                    </div>
+                </div>
+            </div>
             <div class="row">
 				<div class="col">
 					<div class="mb-3 row">

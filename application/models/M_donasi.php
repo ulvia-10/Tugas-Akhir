@@ -126,6 +126,8 @@ class M_donasi extends CI_Model
             'id_profile' => $id_profile,
             'id_cabang' => $id_cabang,
             'jenis'     =>"masuk",
+            'via'       =>"transfer",
+            'nama_bank'  => $this->input->post('nama_bank'),
             'no_rekening'  => $this->input->post('no_rekening'),
             'tgl_donasi'   => $this->input->post('tgl_donasi'),
             'jml_donasi'   => $this->input->post('jml_donasi'),

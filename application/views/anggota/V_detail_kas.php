@@ -76,6 +76,27 @@
 							<label for="status"><b>Status Pembayaran: </b></label>
 							<span class="badge badge-<?php echo $warna ?>"> <?php echo $keterangan?></span>
 						</p>
+						<?php
+                                $keterangan = "";
+                                $warna = "";
+
+                                if ( $kas['via'] == "tunai" ) {
+                                    $keterangan = "tunai";
+                                    $warna      = "success";
+                                } else if ( $kas['via'] == "transfer" ) {
+                                    $keterangan = "transfer";
+                                    $warna = "warning";
+
+                                } 
+                                ?>
+						<p class="card-text">
+							<label for="status"><b>Pembayaran Via: </b></label>
+							<span class="badge badge-<?php echo $warna ?>"> <?php echo $keterangan?></span>
+						</p>
+						<p class="card-text">
+							<label for="judul"><b> Nama Bank :</b></label>
+							<b>BANK <?= $kas['nama_bank']; ?></b>
+						</p>
 						<p class="card-text">
 							<label for="created_"><b>Upload pada: </b></label>
 							<?= date('d-m-Y H:i:s',strtotime($kas['created_at'])); ?>
