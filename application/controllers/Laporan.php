@@ -52,6 +52,15 @@ public function index()
         'title'         => "Donasi Anggota | Senyum Desa",
 
     );
+    $this->load->view('templating/korwil/Template_korwil', $data);
+}
+    //laporan donasi 
+    public function laporandonasi(){
+        $data=array(
+            'namafolder'    => "donasi",
+            'namafileview'    => "V_filter_donasi",
+            'title'         => "Filter Donasi | Senyum Desa",
+        );
     // load templating 
     $this->load->view('templating/korwil/Template_korwil', $data);
 }
@@ -269,8 +278,6 @@ public function exportdonasi()
 
 
 function exportNeraca() {
-
-
             $id_cabang = $this->session->userdata('sess_id_cabang');
             // $bulan     = date('F'); // default bulan ini 
             $bulan     = "January"; // default bulan ini 
@@ -332,6 +339,85 @@ function exportNeraca() {
             echo '<b>Jumlah Asset Bersih dan Kewajiban</b>&emsp;Rp '.number_format( $bersih, 2 ).'<br>';
 
 
+    }
+    // laporan laba rugi 
+   function exportlabarugi(){
+           // Create new Spreadsheet object
+     $spreadsheet = new Spreadsheet();
+         // Set document properties
+    $spreadsheet->getProperties()->setCreator('Ulvia Yulianti - Senyum Desa')
+    ->setLastModifiedBy('Ulvia Yulianti - Senyum Desa')
+    ->setTitle('Office 2007 XLSX Test Document')
+    ->setSubject('Office 2007 XLSX Test Document')
+    ->setDescription('Test document for Office 2007 XLSX, generated using PHP classes.')
+    ->setKeywords('office 2007 openxml php')
+    ->setCategory('Test result file');
+    $id_cabang = $this->session->userdata('sess_id_cabang');
+ 
+    $bulan     = "May"; // default bulan ini 
+    // $bulan = $this->input->post('bulan');
+
+    $ambilDonasiMasuk = $this->M_laporan->assetDonasi($bulan, $id_cabang, "masuk");
+    $ambilDonasiKeluar = $this->M_laporan->assetDonasi($bulan, $id_cabang, "keluar");
+
+    $jumlahDonasi = 0;
+    $jumlahPengeluaran = 0;
+
+    // donasi masuk 
+    if ( $ambilDonasiMasuk->num_rows() > 0 ) {
+
+        foreach ( $ambilDonasiMasuk->result_array() AS $donasi ) {
+
+            $jumlahDonasi = $jumlahDonasi + $donasi['jml_donasi'];
+        }
+    }
+    
+    // donasi keluar
+    if ( $ambilDonasiKeluar->num_rows() > 0 ) {
+
+        foreach ( $ambilDonasiKeluar->result_array() AS $keluar ) {
+
+            $jumlahPengeluaran = $jumlahPengeluaran + $keluar['jml_donasi'];
+        }
+    }
+
+ 
+    echo '&emsp;&emsp;<b>YAYASAN SOSIAL SENYUM DESA INDONESIA </b> <br>';
+    echo '&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<b>LABA RUGI</b> <br>';
+    // laporan laba rugi 
+    echo '<h2>Per-bulan '.$bulan.'</h2> <hr>';
+    echo '&emsp;&emsp;&emsp; Pendapatan Sumbangan = '.$jumlahDonasi.'<br><br>';
+    echo '&emsp;&emsp;&emsp; Jumlah Pendapatan = '.$jumlahDonasi.'<br><br>';
+    echo '&emsp;&emsp;&emsp; <b> Beban Operasional </b> <br> <br>';
+    echo '&emsp;&emsp;&emsp; <b> Jumlah Beban </b> = '.$jumlahPengeluaran.'<br><br>';
+    $total = $jumlahDonasi - $jumlahPengeluaran;
+    echo '&emsp;&emsp;&emsp; <b> Laba Operasional </b> = '.$total.'<br><br>';
+    echo '&emsp;&emsp;&emsp; <b> Saldo Akhir Bersih </b> = '.$total.'<br><br>';
+
+
+
+   // Rename worksheet
+        $spreadsheet->getActiveSheet()->setTitle('Laporan Laba Rugi'.date('d-m-Y H'));
+
+        // Set active sheet index to the first sheet, so Excel opens this as the first sheet
+        $spreadsheet->setActiveSheetIndex(0);
+
+        // Redirect output to a client’s web browser (Xlsx)
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="Laporan Donasi.xlsx"');
+        header('Cache-Control: max-age=0');
+        // If you're serving to IE 9, then the following may be needed
+        header('Cache-Control: max-age=1');
+
+        // If you're serving to IE over SSL, then the following may be needed
+        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+        header('Last-Modified: '. gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
+        header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+        header('Pragma: public'); // HTTP/1.0
+
+        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+        $writer->save('php://output');
+        exit;
     }
 }
 

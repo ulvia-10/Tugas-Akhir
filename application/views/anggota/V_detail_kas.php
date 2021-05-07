@@ -15,6 +15,10 @@
 							<?= $kas['judul']; ?>
 						</p>
 						<p class="card-text">
+							<label for="judul"><b> Nama :</b></label>
+							<?= $kas['full_name']; ?>
+						</p>
+						<p class="card-text">
 							<label for="tgl_bayar"><b> Tanggal Donasi: </b></label>
 							<?= date('d-m-Y',strtotime( $kas['tgl_bayar'])); ?>
 						</p>

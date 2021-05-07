@@ -264,12 +264,10 @@
                                     <ul class="sidebar-submenu">
                                         <li><a href="<?= base_url('donasi/datadonasi'); ?>">Donasi Anggota</a>
                                         </li>
-                                       
-
                                         <li><a href="<?= base_url('donasi_non/datadonasinonanggota'); ?>">Donasi Non Anggota</a></li>
-                                        <li><a href="<?= base_url('donasi/datadonasi'); ?>">Pengeluaran Donasi</a>
+                                        <li><a href="<?= base_url('donasi/listdonasi'); ?>">Pengeluaran Donasi</a>
                                         </li>
-                                        <li><a href="layout-rtl.html">Laporan Donasi</a></li>
+                                        <li><a href="<?= base_url('laporan/laporandonasi'); ?>">Laporan Donasi</a></li>
                                     </ul>
                                 </li>
 

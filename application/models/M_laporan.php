@@ -47,18 +47,22 @@ public function listingdonasinonanggota(){
     ORDER BY data_donasi.id_donasi ASC";
     return $this->db->query($sql)->result();
 }
-
+// asset kas
 function assetKas($bulan, $id_cabang, $jenis) {
 
     $sql = 'SELECT * FROM `data_keuangan` 
             WHERE MONTHNAME(tgl_bayar) = "'.$bulan.'" AND 
             id_cabang = '.$id_cabang.' AND jenis_keuangan = "'.$jenis.'"';
-
-
-    return $this->db->query( $sql );
+    return $this->db->query($sql)->result();
 
 }
-
+// asset donasi 
+function assetDonasi($bulan, $id_cabang, $jenis){
+    $sql = 'SELECT * FROM `data_donasi` 
+    WHERE MONTHNAME(tgl_donasi) = "'.$bulan.'" AND 
+    id_cabang = '.$id_cabang.' AND jenis = "'.$jenis.'"';
+    return $this->db->query($sql)->result();
+}
 }
 
 /* End of file Provinsi_model.php */

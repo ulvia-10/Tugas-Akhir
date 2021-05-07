@@ -144,6 +144,7 @@ class M_keuangan extends CI_Model
         (
             'id_profile' => $id_profile,
             'id_cabang' => $id_cabang,
+            'id_profile'   => $this->input->post('full_name'),
             'judul'  => $this->input->post('judul'),
             'status_verif' => "baru",
             'no_rekening'  => $this->input->post('no_rekening'),
@@ -185,7 +186,7 @@ class M_keuangan extends CI_Model
         // keuangan kas di admin korwil $status
         public function datakeuangan( $status ){
             $id_cabang = $this->session->userdata('sess_id_cabang');
-            $sql =" SELECT data_keuangan.*,master_cabang.*,akun_profile.full_name
+            $sql =" SELECT data_keuangan.*,MONTHNAME(tgl_bayar) AS MONTHNAME,master_cabang.*,akun_profile.full_name
             FROM data_keuangan
             JOIN master_cabang ON master_cabang.id_cabang = data_keuangan.id_cabang
             JOIN akun_profile ON akun_profile.id_profile = data_keuangan.id_profile
@@ -194,7 +195,7 @@ class M_keuangan extends CI_Model
         }
         public function getalldatakeuangan(){
             $id_cabang = $this->session->userdata('sess_id_cabang');
-            $sql ="  SELECT data_keuangan.*,master_cabang.*,akun_profile.full_name
+            $sql ="  SELECT data_keuangan.*,MONTHNAME(tgl_bayar) AS bulan,master_cabang.*,akun_profile.full_name
             FROM data_keuangan
             JOIN master_cabang ON master_cabang.id_cabang = data_keuangan.id_cabang
             JOIN akun_profile ON akun_profile.id_profile = data_keuangan.id_profile

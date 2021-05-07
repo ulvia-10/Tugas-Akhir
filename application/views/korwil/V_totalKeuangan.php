@@ -1,4 +1,4 @@
-
+<br><br>
 <!-- Container-fluid starts-->
 <div class="container-fluid">
     <div class="row">
@@ -6,7 +6,7 @@
             <?php echo $this->session->flashdata('pesan') ?>
             <div class="card">
                 <div class="card-header">
-                    <h5>Tabel Data Keuangan</h5><span>Total Keuangan Kas | Senyum Desa</span><br>
+                    <h5>Tabel Data Keuangan</h5><br>
                     <a href="<?= base_url('AdminKorwil/tambahKeuangan'); ?>" class="btn btn-outline-primary"
                         type="button" data-original-title="btn btn-outline-danger-2x" style="width: px;" title=""> <i class="fa fa-plus" aria-hidden="true"></i>
                         Tambah Data </a>
@@ -31,14 +31,18 @@
                         $totalPengeluaran = $keluar->TOTAL;
                     }
                     ?>
+                    <!-- cek bulan  -->
                     <div class="table-responsive">
                         <table class="display" id="API-3" >
                             <thead style=" text-align:center;">
                                 <tr>
                                     <th>No</th>
+                                   
                                     <th>Tanggal Kas</th>
+                                    <th>Nama</th>
                                     <th>Judul</th>
                                     <th>Nominal</th>
+                                    <th>Bulan</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                   
@@ -49,8 +53,11 @@
                                 foreach ($data_keuangan as $ks) { ?>
                                 <tr>
                                     <td> <?= $no++; ?></td>
+                            
                                     <td><?= date('d-m-Y',strtotime($ks["tgl_bayar"])); ?></td>
+                                    <td><?=$ks["full_name"]?></td>
                                     <td><?= $ks["judul"]; ?></td>
+
                                     <?php
                                             $nominal=  $ks["nominal"]
                                             ?>
@@ -62,16 +69,17 @@
 										if ( $ks["jenis_keuangan"] == "masuk" ) {
 
 											$keterangan = "masuk";
-											$warna      = "primary";
+											$warna      = "success";
 										} else if ( $ks["jenis_keuangan"] == "keluar" ) {
 
 											$keterangan = "keluar";
-											$warna = "info";
+											$warna = "secondary";
 										} 
 										?>
 												<td> <span class="badge badge-<?php echo $warna ?>">
 														<?php echo $keterangan?></span></td>
                                                 <td>
+                                                <td><?=$ks["bulan"]?></td>
                                                 <!-- detail  -->
                                                 <a href="<?= base_url(); ?>keuangan/detailkaskorwil/<?= $ks['id_keuangan'];?>"
 														class="badge badge-secondary">
@@ -90,9 +98,13 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>No</th>
+                                <th>Tanggal Kas</th>
+                                    <th>Nama</th>
                                     <th>Judul</th>
-                                 
+                                    <th>Nominal</th>
+                                    <!-- <th>Bulan</th> -->
+                                    <th>Status</th>
+                                    <th>Action</th>
                                 </tr>
                             </tfoot>
                             <tr>

@@ -125,6 +125,7 @@ class M_donasi extends CI_Model
         (
             'id_profile' => $id_profile,
             'id_cabang' => $id_cabang,
+            'jenis'     =>"masuk",
             'no_rekening'  => $this->input->post('no_rekening'),
             'tgl_donasi'   => $this->input->post('tgl_donasi'),
             'jml_donasi'   => $this->input->post('jml_donasi'),
@@ -152,6 +153,7 @@ class M_donasi extends CI_Model
             'id_cabang' => $id_cabang,
             'status_verif' => "baru",
             'tipe'         =>"anggota",
+            'jenis'        =>"masuk", 
             'no_rekening'  => $this->input->post('no_rekening'),
             'tgl_donasi'   => $this->input->post('tgl_donasi'),
             'jml_donasi'   => $this->input->post('jml_donasi'),
@@ -175,6 +177,7 @@ class M_donasi extends CI_Model
             'id_cabang'   => $this->input->post('name_cabang'),
             'nama_donatur'  => $this->input->post('nama_donatur'),
             'tipe'          => "non anggota",
+            'jenis'         =>"masuk",
             'no_rekening'  => $this->input->post('no_rekening'),
             'tgl_donasi'   => $this->input->post('tgl_donasi'),
             'email_donatur'   => $this->input->post('email_donatur'),
@@ -209,9 +212,10 @@ class M_donasi extends CI_Model
     
     public function getDonasiById($id){
         $id_cabang = $this->session->userdata('sess_id_cabang');
-        $sql="SELECT  data_donasi.*, master_cabang.id_cabang, master_cabang.created_at
+        $sql="SELECT data_donasi.*, master_cabang.id_cabang, master_cabang.created_at, akun_profile.full_name
         FROM data_donasi
         JOIN master_cabang ON master_cabang.id_cabang = data_donasi.id_cabang
+        JOIN akun_profile ON akun_profile.id_profile = data_donasi.id_profile
         WHERE data_donasi.Id_donasi = '$id' AND master_cabang.id_cabang = '$id_cabang'";
         return $this->db->query($sql)->row_array();
     }
@@ -308,6 +312,7 @@ class M_donasi extends CI_Model
         // post data 
         $data = [
             "tgl_donasi"=>$this->input->post('tgl_donasi',true),
+            "jenis"     =>'masuk',
             "no_rekening"=>$this->input->post('no_rekening',true),
             "jml_donasi"=>$this->input->post('jml_donasi',true),
             'bukti_donasi'  => $upload ['file']['file_name']
@@ -332,6 +337,7 @@ class M_donasi extends CI_Model
             'nama_donatur'  => $this->input->post('nama_donatur'),
             'tipe'          => "non anggota",
             'status_verif' => "baru",
+            'jenis'        =>"masuk",
             'no_rekening'  => $this->input->post('no_rekening'),
             'tgl_donasi'   => $this->input->post('tgl_donasi'),
             'email_donatur'   => $this->input->post('email_donatur'),

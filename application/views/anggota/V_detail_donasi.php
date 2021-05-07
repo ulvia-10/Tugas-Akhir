@@ -20,6 +20,10 @@
 							<?= $donasi['no_rekening']; ?>
 						</p>
 						<p class="card-text">
+							<label for="full_name"><b>Nama Donatur: </b></label>
+							<?= $donasi['full_name']; ?>
+						</p>
+						<p class="card-text">
 							<?php
                                 $nominal= $donasi["jml_donasi"]
                                 ?>
@@ -44,6 +48,26 @@
                                 ?>
 						  <p class="card-text">
 								<label for="status"><b>Status Verifikasi: </b></label>
+								<span class="badge badge-<?php echo $warna ?>">  <?php echo $keterangan?></span>	
+							</p>
+						
+								<?php
+                                $keterangan = "";
+                                $warna = "";
+
+                                if ( $donasi['jenis'] == "masuk" ) {
+
+                                    $keterangan = "masuk";
+                                    $warna      = "primary";
+                                } else if ( $donasi['jenis'] == "keluar" ) {
+
+                                    $keterangan = "keluar";
+                                    $warna = "warning";
+
+                                } 
+                                ?>
+						  <p class="card-text">
+								<label for="status"><b>Jenis: </b></label>
 								<span class="badge badge-<?php echo $warna ?>">  <?php echo $keterangan?></span>	
 							</p>
 							<?php
