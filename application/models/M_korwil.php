@@ -354,10 +354,16 @@ class M_korwil extends CI_Model
     //Menampilkan Seluruh Tabel Keuangan
     public function getallkeuangan()
     {
-        $this->db->select('data_keuangan.id_keuangan,data_keuangan.jenis_keuangan,data_keuangan.judul,data_keuangan.nominal,data_keuangan.tanggal_laporan, master_cabang.id_cabang, master_cabang.name_cabang')
-            ->from('data_keuangan')
-            ->join('master_cabang', 'data_keuangan.id_cabang = master_cabang.id_cabang');
-        return $this->db->get();
+        // $this->db->select('data_keuangan.id_keuangan,data_keuangan.jenis_keuangan,data_keuangan.judul,data_keuangan.nominal,data_keuangan.tanggal_laporan, master_cabang.id_cabang, master_cabang.name_cabang')
+        //     ->from('data_keuangan')
+        //     ->join('master_cabang', 'data_keuangan.id_cabang = master_cabang.id_cabang');
+        // return $this->db->get()->result_array();
+        $id_cabang = $this->session->userdata('sess_id_cabang');
+        $sql="SELECT data_keuangan.*, master_cabang.*
+        FROM data_keuangan 
+        JOIN master_cabang ON master_cabang.id_cabang = data_keuangan.id_cabang 
+        WHERE data_keuangan.id_cabang = '$id_cabang'";
+        return $this->db->query($sql)->result_array();
     }
     //Tambah Keuangang
     // proses insert/tambah data

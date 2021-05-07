@@ -201,7 +201,16 @@ class M_keuangan extends CI_Model
             WHERE data_keuangan.id_cabang = '$id_cabang'";
             return $this->db->query($sql)->result_array();
         }
-
+        // buat result array di anggota 
+        public function getanggotaByCabang(){
+            $id_cabang = $this->session->userdata('sess_id_cabang');
+            $sql=" SELECT data_keuangan.*,master_cabang.*,akun_profile.full_name
+            FROM data_keuangan
+            JOIN master_cabang ON master_cabang.id_cabang = data_keuangan.id_cabang
+            JOIN akun_profile ON akun_profile.id_profile = data_keuangan.id_profile
+            WHERE data_keuangan.id_cabang = '$id_cabang' AND akun_profile.level = 'anggota'";
+            return $this->db->query($sql)->result_array();
+        }
         public function getkeuanganById($id){
             $sql = "SELECT data_keuangan.*
             FROM data_keuangan

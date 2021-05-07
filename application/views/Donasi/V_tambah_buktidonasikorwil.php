@@ -19,6 +19,29 @@
 						</div>
 					</div>
 				</div>
+				<!-- nama anggota sesuai cabang  -->
+				<div class="form-group">
+
+<div class="row" id="element-wilayah">
+	<div class="mb-2 row">
+		<label class="col-sm-3 col-form-label">Nama Anggota</label>
+		<div class="col-sm-9">
+			<select name="name_cabang" class="form-select digits" id=""
+				required="wilayah harap DiIsi">
+				<option value="full_name">-- Pilih nama anggota--</option>
+
+				<?php
+
+				foreach ($donasiAnggota as $anggota) {
+
+					echo '<option value="' . $anggota['id_profile'] . '">' . $anggota['full_name'] . '</option>';
+				}
+				?>
+			</select>
+		</div>
+	</div>
+</div>
+</div>
 				<!-- no rekening -->
 				<div class="row">
 					<div class="col">

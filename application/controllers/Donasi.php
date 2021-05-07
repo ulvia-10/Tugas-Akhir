@@ -154,13 +154,15 @@ class Donasi extends CI_Controller
     }
     public function tambahbuktidonasikorwil()
     {
-        // $getDataCabang = $this->M_master->getallwilayah();
+        $getDataAnggota = $this->M_donasi->getAnggotaDonasi();
         
         $data = array(
 
             'namafolder'    => "donasi",
             'namafileview'    => "V_tambah_buktidonasikorwil",
             'title'         => "Donasi",
+            // variabel anggota donasi 
+            'donasiAnggota'    =>   $getDataAnggota
         );
       
         $this->load->view('templating/korwil/Template_korwil', $data);
@@ -211,7 +213,7 @@ public function uploadbuktidonasi(){
     }
 }
 
-//bukti donasi korwil 
+//bukti donasi korwil untuk anggota ya  
 public function uploadbuktidonasikorwil(){
     // helper 
     $this->load->helper(array('form', 'url'));

@@ -108,6 +108,7 @@ class Keuangan extends CI_Controller
     // di korwil bro ini 
     public function tambahbuktikaskorwil()
     {
+        $dataanggotaCabang = $this->M_keuangan->getanggotaByCabang();
         $data = array(
 
             'namafolder'    => "keuangan",
@@ -115,8 +116,9 @@ class Keuangan extends CI_Controller
             'title'         => "Kas | Senyum Desa",
 
             // // variable
-            // 'dataCabang'    => $getDataCabang
+            'dataAnggota'    =>   $dataanggotaCabang
         );
+     
         $this->load->view('templating/korwil/template_korwil', $data);
     }
     // kas anggota 

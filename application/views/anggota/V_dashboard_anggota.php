@@ -1,11 +1,10 @@
 <br> <br>
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-xl-6 xl-100 box-col-12">
+		<div class="col-xl-12 xl-100 box-col-12">
 			<div class="card">
 				<div class="cal-date-widget card-body">
 					<div class="row">
-					<h5><strong>Wadah Generasi Muda <br> Melunasi Janji Pelosok Nusantara</strong></h5>
 						<div class="col-xl-6 col-xs-12 col-md-6 col-sm-6">
 					
 							<div class="cal-info text-center">

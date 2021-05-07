@@ -151,6 +151,7 @@ class M_donasi extends CI_Model
             'id_profile' => $id_profile,
             'id_cabang' => $id_cabang,
             'status_verif' => "baru",
+            'tipe'         =>"anggota",
             'no_rekening'  => $this->input->post('no_rekening'),
             'tgl_donasi'   => $this->input->post('tgl_donasi'),
             'jml_donasi'   => $this->input->post('jml_donasi'),
@@ -253,6 +254,17 @@ class M_donasi extends CI_Model
         WHERE  data_donasi.id_cabang = '$id_cabang' AND data_donasi.tipe = 'non anggota'";
         return $this->db->query($sql)->result_array();
     }
+      // get data nama anggota sesuai cabangnya 
+      public function getAnggotaDonasi(){
+        $id_cabang = $this->session->userdata('sess_id_cabang');
+
+        $sql=" SELECT data_donasi.*,master_cabang.*,akun_profile.*
+        FROM data_donasi
+        JOIN master_cabang ON master_cabang.id_cabang = data_donasi.id_cabang
+        JOIN akun_profile ON akun_profile.id_profile = data_donasi.id_profile
+        WHERE data_donasi.id_cabang = '$id_cabang' AND akun_profile.level = 'anggota' AND data_donasi.tipe='anggota' ";
+        return $this->db->query($sql)->result_array();
+    }
     //ubah data di admin korwil 
     public function ubahdata()
     {
@@ -291,6 +303,7 @@ class M_donasi extends CI_Model
         redirect('donasi_non/datadonasinonanggota/');
       
     }
+  
     public function updatedonasianggota(){
         // post data 
         $data = [
