@@ -152,15 +152,30 @@ class Donasi extends CI_Controller
         );
         $this->load->view('templating/Template_anggotanew', $data);
     }
+    // tambah donasi rekapan pengeluaran 
+    public function tambahdonasimasukkeluar(){
+        $data = array(
+
+            'namafolder'    => "donasi",
+            'namafileview'    => "V_tambah_bukti_donasi",
+            'title'         => "Donasi",
+         
+        );
+        $this->load->view('templating/korwil/Template_korwil', $data);
+      
+      
+    }
     public function tambahbuktidonasikorwil()
     {
-        // $getDataCabang = $this->M_master->getallwilayah();
+        $getDataAnggota = $this->M_donasi->getAnggotaDonasi();
         
         $data = array(
 
             'namafolder'    => "donasi",
             'namafileview'    => "V_tambah_buktidonasikorwil",
             'title'         => "Donasi",
+            // variabel anggota donasi 
+            'donasiAnggota'    =>   $getDataAnggota
         );
       
         $this->load->view('templating/korwil/Template_korwil', $data);
@@ -211,7 +226,7 @@ public function uploadbuktidonasi(){
     }
 }
 
-//bukti donasi korwil 
+//bukti donasi korwil untuk anggota ya  
 public function uploadbuktidonasikorwil(){
     // helper 
     $this->load->helper(array('form', 'url'));
@@ -317,6 +332,17 @@ public function proseseditdonasianggota(){
 }
 
 }
+public function listdonasi(){
+    $data = array(
+
+        'namafolder'    => "donasi",
+        'namafileview'  => "V_list_Donasi",
+        'title'         => "List Donasi | Senyum Desa",
+
+    );
+    $data['donasi']=$this->M_donasi-> getalldatadonasi();
+    $this->load->view('templating/korwil/Template_korwil', $data);
+}
 
 // DONASI VERIFIKASI DI KORWIL
  public function editdonasiverif($id){
@@ -383,6 +409,7 @@ public function proseseditdonasinonverif($id){
         //redirect 
         redirect('donasi_non/datadonasinonanggota','refresh');  
 }
+
 }
  
 }

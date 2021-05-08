@@ -83,7 +83,6 @@
 														class="fa fa-trash"></i> Hapus</a>
 											</div>
 										</div>
-
 							</td>
 						</tr>
 						<?php
@@ -187,8 +186,8 @@
 				<div class="table-responsive">
 					<a href="<?= base_url(); ?>donasi/tambahbuktidonasikorwil/" class="btn btn-success btn-sm mb-3">
 							<i class="fa fa-plus" aria-hidden="true"></i> Tambah Data</a> <br>
-							<a href="<?= base_url(); ?>laporan/indexdonasi/" class="btn btn-primary mb-3">
-						<i class="fa fa-print" aria-hidden="true"></i> Cetak Data</a> <br>
+						<div style="margin-left:700px;"><a href="<?= base_url(); ?>laporan/indexdonasi/" class="btn btn-primary mb-3">
+						<i class="fa fa-print" aria-hidden="true"></i> Cetak Data</a> <br></div>
 					<table class="display" id="basic-1" style="text-align:center;">
 						<thead>
 							<tr>

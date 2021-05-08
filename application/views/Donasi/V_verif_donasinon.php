@@ -183,9 +183,10 @@
 				<div class="table-responsive">
 					<!-- show flash data from model M_donasi  -->
 					<?php echo $this->session->flashdata('pesan') ?>
-					
 					<a href="<?= base_url(); ?>donasi_non/tambahbuktidonasinonkorwil/" class="btn btn-secondary btn-sm mb-3">
 							<i class="fa fa-plus" aria-hidden="true"></i> Tambah Data</a> <br>
+					<div style="margin-left:700px;"><a href="<?= base_url(); ?>laporan/exportdatadonasinon/" class="btn btn-info">
+						<i class="fa fa-download" aria-hidden="true"></i> Cetak Data</a> </div> <br>
 					<table class="display" id="basic-1" style="text-align:center;">
 						<thead>
 							<tr>

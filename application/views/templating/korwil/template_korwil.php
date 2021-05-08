@@ -211,11 +211,6 @@
                                             data-feather="home"></i><span class="lan-3">Dashboard </span></a>
                                 </li>
                                 <li class="sidebar-list"
-                                    <?= $this->uri->segment(2) == 'Cetak Anggota' ? 'class="sidebar-submenu"' : '' ?>>
-                                    <a class="sidebar-link " href="<?= base_url('Adminkorwil/Dashboard'); ?>"><i
-                                            data-feather="home"></i><span class="lan-3">Cetak Anggota </span></a>
-                                </li>
-                                <li class="sidebar-list"
                                     <?= $this->uri->segment(2) == 'cabangkegiatan' ? 'class="sidebar-submenu"' : '' ?>>
                                     <a class="sidebar-link sidebar-title link-nav"
                                         href="<?= base_url('Adminkorwil/cabangkegiatan'); ?>"><i data-feather="info">
@@ -233,42 +228,48 @@
                                         href="<?= base_url('adminkorwil/kegiatan'); ?>"><i data-feather="user">
                                         </i><span> Kegiatan</span></a>
                                 </li>
-                                <li class="sidebar-list"
-                                    <?= $this->uri->segment(2) == 'kegiatan' ? 'class="sidebar-submenu"' : '' ?>>
-                                    <a class="sidebar-link sidebar-title link-nav"
-                                        href="<?= base_url('donasi/datadonasi'); ?>"><i data-feather="airplay">
-                                        </i><span> Donasi</span></a>
-                                </li>
-                                <li class="sidebar-list"
-                                    <?= $this->uri->segment(2) == 'kegiatan' ? 'class="sidebar-submenu"' : '' ?>>
-                                    <a class="sidebar-link sidebar-title link-nav"
-                                        href="<?= base_url('donasi_non/datadonasinonanggota'); ?>"><i data-feather="airplay">
-                                        </i><span> Donasi Non Anggota</span></a>
-                                </li>
-                                <li class="sidebar-list"
-                                    <?= $this->uri->segment(2) == 'kegiatan' ? 'class="sidebar-submenu"' : '' ?>>
-                                    <a class="sidebar-link sidebar-title link-nav"
-                                        href="<?= base_url('adminkorwil/kas'); ?>"><i data-feather="list">
-                                        </i><span> Kas </span></a>
-                                </li>
                                 <!-- <li class="sidebar-list"
-                                    <?= $this->uri->segment(2) == 'notifikasi' ? 'class="sidebar-submenu"' : '' ?>>
+                                    <?= $this->uri->segment(2) == 'kegiatan' ? 'class="sidebar-submenu"' : '' ?>>
                                     <a class="sidebar-link sidebar-title link-nav"
-                                        href="<?= base_url('Adminkorwil/notifikasi'); ?>"><i data-feather="bell">
-                                        </i><span>Information Notifikasi</span></a>
-                                </li>
-                                <li class="sidebar-list">
+                                        href="<?= base_url('donasi/datadonasi'); ?>"><i data-feather="clipboard">
+                                        </i><span> Donasi Anggota</span></a>
+                                </li> -->
+                                <!-- <li class="sidebar-list">
                                     <a class="sidebar-link sidebar-title" href="#"><i
                                             data-feather="file-plus"></i><span>Informasi Keuangan</span></a>
                                     <ul class="sidebar-submenu">
-                                        <li><a href="<?= base_url('Adminkorwil/tabelKeuangan'); ?>">Tabel Keuangan</a>
+                                        <li><a href="<?= base_url('adminkorwil/tabelKeuangan'); ?>">Tabel Keuangan</a>
                                         </li>
 
-                                        <li><a href="<?= base_url('Adminkorwil/tabeltotalKeuangan'); ?>">Total
+                                        <li><a href="<?= base_url('adminkorwil/tabeltotalKeuangan'); ?>">Total
                                                 Keuangan</a></li>
                                         <li><a href="layout-rtl.html">Laporan Keuangan</a></li>
                                     </ul>
                                 </li> -->
+                                <li class="sidebar-list">
+                                    <a class="sidebar-link sidebar-title" href="#"><i
+                                            data-feather="list"></i><span>Kas</span></a>
+                                    <ul class="sidebar-submenu">
+                                        <li><a href="<?= base_url('adminkorwil/kas'); ?>">Kas Masuk</a>
+                                        </li>
+
+                                        <li><a href="<?= base_url('adminkorwil/tabeltotalKeuangan'); ?>">Kas Keluar</a></li>
+                                        <li><a href="<?= base_url('laporan/laporanneraca'); ?>">Laporan Neraca</a></li>
+                                        <li><a href="<?= base_url('laporan/laporanlabarugi'); ?>">Laporan Laba Rugi</a></li>
+                                    </ul>
+                                </li>
+                                <li class="sidebar-list">
+                                    <a class="sidebar-link sidebar-title" href="#"><i
+                                            data-feather="file-plus"></i><span>Data Donasi</span></a>
+                                    <ul class="sidebar-submenu">
+                                        <li><a href="<?= base_url('donasi/datadonasi'); ?>">Donasi Anggota</a>
+                                        </li>
+                                        <li><a href="<?= base_url('donasi_non/datadonasinonanggota'); ?>">Donasi Non Anggota</a></li>
+                                        <li><a href="<?= base_url('donasi/listdonasi'); ?>">Pengeluaran Donasi</a>
+                                        </li>
+                                        <li><a href="<?= base_url('laporan/laporandonasi'); ?>">Laporan Donasi</a></li>
+                                    </ul>
+                                </li>
 
                             </ul>
                         </div>

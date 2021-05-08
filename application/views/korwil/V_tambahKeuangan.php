@@ -1,22 +1,9 @@
-<div class="container-fluid">
-    <div class="page-title">
-        <div class="row">
-            <div class="col-6">
-                <h3>Data Keuangan</h3>
-            </div>
-            <div class="col-6">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html"> <i data-feather="home"></i></a></li>
-                    <li class="breadcrumb-item">TabelKeuanngan</li>
-                    <li class="breadcrumb-item active">Tambah Data Keuangan Senyum Desa</li>
-                </ol>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="card">
+<br><br>
+<div class="container-fluid" style="margin-left:150px;">
+
+<div class="card col-7">
     <div class="card-header">
-        <h5>Tambah Keuangan Senyum Desa</h5>
+        <h6 class="text-primary" style="text-align:center;"> <i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Keuangan </h6>
     </div>
     <form class="form theme-form" action="<?php echo base_url('Adminkorwil/prosesTambahKeuangan') ?>" method="POST">
         <div class="card-body">
@@ -29,15 +16,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
-                    <div class="mb-3">
-                        <label class="form-label" for="deskripsi">Deskripsi</label>
-                        <textarea class="form-control form-control-lg" name="deskripsi" id="deskripsi" type="text"
-                            placeholder="Masukan deskripsi" required=""></textarea>
-                    </div>
-                </div>
-            </div>
+        
             <div class="row">
                 <div class="col">
                     <div class="mb-3">
@@ -92,7 +71,15 @@
             </div>
 
 
-
+            <div class="row">
+                <div class="col">
+                    <div class="mb-3">
+                        <label class="form-label" for="deskripsi">Deskripsi</label>
+                        <textarea class="form-control form-control-lg" name="deskripsi" id="deskripsi" type="text"
+                            placeholder="Masukan deskripsi" required=""></textarea>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="card-footer">
             <button class="btn btn-primary" type="submit">Submit</button>
@@ -101,5 +88,5 @@
         </div>
     </form>
 </div>
-
+</div>
 <!-- Container-fluid Ends-->
