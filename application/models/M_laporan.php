@@ -53,7 +53,7 @@ function assetKas($bulan, $id_cabang, $jenis) {
     $sql = 'SELECT * FROM `data_keuangan` 
             WHERE MONTHNAME(tgl_bayar) = "'.$bulan.'" AND 
             id_cabang = '.$id_cabang.' AND jenis_keuangan = "'.$jenis.'"';
-    return $this->db->query($sql)->result();
+    return $this->db->query($sql);
 
 }
 // asset donasi 
@@ -61,7 +61,7 @@ function assetDonasi($bulan, $id_cabang, $jenis){
     $sql = 'SELECT * FROM `data_donasi` 
     WHERE MONTHNAME(tgl_donasi) = "'.$bulan.'" AND 
     id_cabang = '.$id_cabang.' AND jenis = "'.$jenis.'"';
-    return $this->db->query($sql)->result();
+    return $this->db->query($sql);
 }
 }
 
