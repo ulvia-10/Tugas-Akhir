@@ -14,7 +14,7 @@ class M_kegiatan extends CI_Model
         $query = $this->db->query($sql);
         return $query;
     }
-    
+    // total kas 
     public function getdetailKas($id){
         $sql ="SELECT akun_profile.*, data_keuangan.*
         FROM data_keuangan
@@ -23,12 +23,11 @@ class M_kegiatan extends CI_Model
         WHERE data_keuangan.id_keuangan = '$id'";
         return $this->db->query($sql)->row_array();
     }
-
+    // total kegiatan di anggota
     public function totalkegiatanid(){
             $id_profile = $this->session->userdata('sess_id_profile');
-            $sql = "SELECT COUNT(id_kegiatan)from data_kegiatan where id_profile = '$id_profile' ";
-            $query = $this->db->query($sql);
-            return $query->num_rows();
+            $sql = "SELECT COUNT(judul)from data_kegiatan where id_profile = '$id_profile' ";
+            return $this->db->query($sql)->num_rows();
     }
 
     public function timeline(){

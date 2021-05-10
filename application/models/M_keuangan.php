@@ -6,7 +6,6 @@ class M_keuangan extends CI_Model
 {
     public function getallkeuangan()
     {
-
         $sql="SELECT data_keuangan.*, master_cabang.*,akun_profile.id_profile,akun_profile.full_name
             FROM data_keuangan
             JOIN master_cabang ON master_cabang.id_cabang = data_keuangan.id_cabang
@@ -115,10 +114,10 @@ class M_keuangan extends CI_Model
         (
             'id_profile' => $id_profile,
             'id_cabang' => $id_cabang,
-            'via'       =>'transfer',
-            'nama_bank' => $this->input->post('nama_bank'),
+            'via'       => "transfer",
             'judul'  => $this->input->post('judul'),
             'no_rekening'  => $this->input->post('no_rekening'),
+            'nama_bank'  => $this->input->post('nama_bank'),
             'tgl_bayar'   => $this->input->post('tgl_bayar'),
             'nominal'   => $this->input->post('nominal'),
             'bukti_bayar'  => $upload ['file']['file_name'],
@@ -141,13 +140,12 @@ class M_keuangan extends CI_Model
         $id_cabang = $this->session->userdata('sess_id_cabang');
         $data = array
         (
-            'id_profile' => $id_profile,
+            'id_profile' => $this->input->post('full_name'),
             'id_cabang' => $id_cabang,
-            'id_profile'   => $this->input->post('full_name'),
             'judul'  => $this->input->post('judul'),
+            'nama_bank'  => $this->input->post('nama_bank'),
+            'via'  => $this->input->post('via'),
             'status_verif' => "baru",
-            'via' => $this->input->post('via'),
-            'nama_bank' =>$this->input->post('nama_bank'),
             'no_rekening'  => $this->input->post('no_rekening'),
             'tgl_bayar'   => $this->input->post('tgl_bayar'),
             'nominal'   => $this->input->post('nominal'),
@@ -177,9 +175,10 @@ class M_keuangan extends CI_Model
             }  
         }
         public function getKasById($id_keuangan){
-            $sql="SELECT akun_profile.*, data_keuangan.*
+            $sql="SELECT akun_profile.*, data_keuangan.*,master_cabang.id_cabang, master_cabang.name_cabang,MONTHNAME(tgl_bayar) as bulan
             FROM data_keuangan
             JOIN akun_profile ON akun_profile.id_profile = data_keuangan.id_profile
+            JOIN master_cabang ON master_cabang.id_cabang = data_keuangan.id_cabang
             WHERE data_keuangan.id_keuangan = '$id_keuangan'";
             return $this->db->query($sql)->row_array();
         }
@@ -187,7 +186,7 @@ class M_keuangan extends CI_Model
         // keuangan kas di admin korwil $status
         public function datakeuangan( $status ){
             $id_cabang = $this->session->userdata('sess_id_cabang');
-            $sql =" SELECT data_keuangan.*,MONTHNAME(tgl_bayar) AS MONTHNAME,master_cabang.*,akun_profile.full_name
+            $sql =" SELECT data_keuangan.*,master_cabang.*,akun_profile.full_name
             FROM data_keuangan
             JOIN master_cabang ON master_cabang.id_cabang = data_keuangan.id_cabang
             JOIN akun_profile ON akun_profile.id_profile = data_keuangan.id_profile
@@ -196,23 +195,14 @@ class M_keuangan extends CI_Model
         }
         public function getalldatakeuangan(){
             $id_cabang = $this->session->userdata('sess_id_cabang');
-            $sql ="  SELECT data_keuangan.*,MONTHNAME(tgl_bayar) AS bulan,master_cabang.*,akun_profile.full_name
+            $sql ="  SELECT data_keuangan.*,master_cabang.*,akun_profile.full_name
             FROM data_keuangan
             JOIN master_cabang ON master_cabang.id_cabang = data_keuangan.id_cabang
             JOIN akun_profile ON akun_profile.id_profile = data_keuangan.id_profile
             WHERE data_keuangan.id_cabang = '$id_cabang'";
             return $this->db->query($sql)->result_array();
         }
-        // buat result array di anggota 
-        public function getanggotaByCabang(){
-            $id_cabang = $this->session->userdata('sess_id_cabang');
-            $sql=" SELECT data_keuangan.*,master_cabang.*,akun_profile.full_name
-            FROM data_keuangan
-            JOIN master_cabang ON master_cabang.id_cabang = data_keuangan.id_cabang
-            JOIN akun_profile ON akun_profile.id_profile = data_keuangan.id_profile
-            WHERE data_keuangan.id_cabang = '$id_cabang' AND akun_profile.level = 'anggota'";
-            return $this->db->query($sql)->result_array();
-        }
+
         public function getkeuanganById($id){
             $sql = "SELECT data_keuangan.*
             FROM data_keuangan
@@ -231,11 +221,23 @@ class M_keuangan extends CI_Model
             //redirect
             redirect('kegiatan/historypembayaran','refresh');
         }
+        public function getanggotaByCabang(){
+            $id_cabang = $this->session->userdata('sess_id_cabang');
+            $sql=" SELECT data_keuangan.*,master_cabang.*,akun_profile.full_name
+            FROM data_keuangan
+            JOIN master_cabang ON master_cabang.id_cabang = data_keuangan.id_cabang
+            JOIN akun_profile ON akun_profile.id_profile = data_keuangan.id_profile
+            WHERE data_keuangan.id_cabang = '$id_cabang' AND akun_profile.level = 'anggota'";
+            return $this->db->query($sql)->result_array();
+        }
+
         public function ubahkasanggota($upload){
             $data = [
                 "judul"=>$this->input->post('judul',true),
                 "tgl_bayar"=>$this->input->post('tgl_bayar',true),
                 "nominal"=>$this->input->post('nominal',true),
+                "via" => "transfer",
+                "nama_bank"=>$this->input->post('nama_bank',true),
                 "no_rekening"=>$this->input->post('no_rekening',true),
                 "deskripsi"=>$this->input->post('deskripsi',true),
                 'bukti_bayar'  => $upload ['file']['file_name']

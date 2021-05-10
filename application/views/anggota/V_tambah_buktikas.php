@@ -46,22 +46,26 @@
 					</div>
 				</div>
 			</div>
-			<div class="row">
-                <div class="col">
-                    <div class="mb-2 row">
-					<div class="col-sm-5">
-                        <label class="col-sm-3 col-form-label" for="nama_bank">Tipe</label>
-                        <select class="form-select form-control-lg digits " name="nama_bank" id="nama_bank" required="">
-                            <option selected="" disabled="" value="">Pilih Nama Bank</option>
-                            <option value="BRI">BRI</option>
-                            <option value="BNI">BNI</option>
-                            <option value="BCA">BCA</option>
-                            <option value="MANDIRI">MANDIRI</option>
-                        </select>
+					<!-- nama bank -->
+					<div class="form-group" id="element-wilayah">
+				<div class="row">
+					<div class="mb-2 row">
+						<label class="col-sm-3 col-form-label">Nama Bank</label>
+						<div class="col-sm-6">
+							<select name="nama_bank" class="form-select digits" 
+								required="Nama Anggota harus diisi ">
+								<option value="nama_bank" disable>-- Pilih nama bank--</option>
+								<option value="BRI">BANK BRI </option>
+								<option value="BNI">BANK BNI</option>
+								<option value="MANDIRI">BANK MANDIRI</option>
+								<option value="BCA">BANK BCA</option>
+							</select>
 						</div>
-                    </div>
-                </div>
-            </div>
+					</div>
+				</div>
+				</div>
+			<br>
+			
             <div class="row">
 				<div class="col">
 					<div class="mb-3 row">

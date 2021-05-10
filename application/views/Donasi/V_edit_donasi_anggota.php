@@ -6,24 +6,18 @@
                   </div>
                   <form class="form theme-form" action="<?php echo base_url('donasi/proseseditdonasianggota/'. $donasi['Id_donasi']) ?>" method="POST"  enctype="multipart/form-data" >
                     <div class="card-body">
-                    <!-- tanggal donasi -->
-                    <!-- <div class="row">
-                <div class="col">
-                    <div class="mb-3"> -->
                         <input class="form-control form-control-lg" name="Id_donasi" id="Id_donasi" value="<?= $donasi['Id_donasi'];?>" type="hidden">
-                    <!-- </div>
-                </div> -->
                      <div class="row">
                         <div class="col">
                           <div class="mb-3 row">
                             <label class="col-sm-3 col-form-label">Tanggal Donasi</label>
                             <div class="col-sm-9">
-                              <input class="form-control" type="date" name="tgl_donasi"value="<?= $donasi['tgl_donasi'] ;?>">
+                              <input class="form-control" type="date" name="tgl_donasi" value="<?php echo date('d-m-Y ')?>">
                             </div>
                           </div>
                         </div>
                       </div>
-                        <!-- no rekening -->
+                        <!-- no rekening -->  
                         <div class="row">
                         <div class="col">
                           <div class="mb-3 row">
@@ -34,6 +28,24 @@
                           </div>
                         </div>
                       </div>
+                      <div class="form-group" id="element-wilayah">
+				<div class="row">
+					<div class="mb-2 row">
+						<label class="col-sm-3 col-form-label">Nama Bank</label>
+						<div class="col-sm-6">
+							<select name="nama_bank" class="form-select digits" 
+								required="Nama Anggota harus diisi ">
+								<option value="nama_bank" disable>-- Pilih nama bank--</option>
+								<option value="BRI">BANK BRI </option>
+								<option value="BNI">BANK BNI</option>
+								<option value="MANDIRI">BANK MANDIRI</option>
+								<option value="BCA">BANK BCA</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				</div>
+			<br>
                          <!-- no rekening -->
                          <div class="row">
                         <div class="col">

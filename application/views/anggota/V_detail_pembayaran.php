@@ -13,6 +13,9 @@
     <div class="card">
         <div class="card-body">
         <p class="card-text">
+        <label for="full_name"><b> Nama:</b></label>
+                            <?= $kas['full_name']; ?>
+                        </p>
                         <label for="judul"><b> Judul:</b></label>
                             <?= $kas['judul']; ?>
                         </p>

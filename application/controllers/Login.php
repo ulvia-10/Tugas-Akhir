@@ -13,6 +13,8 @@ class Login extends CI_Controller
         // load model
         $this->load->model('M_login');
         $this->load->library('form_validation');
+
+        
     }
 
 

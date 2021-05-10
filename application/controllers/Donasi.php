@@ -152,30 +152,15 @@ class Donasi extends CI_Controller
         );
         $this->load->view('templating/Template_anggotanew', $data);
     }
-    // tambah donasi rekapan pengeluaran 
-    public function tambahdonasimasukkeluar(){
-        $data = array(
-
-            'namafolder'    => "donasi",
-            'namafileview'    => "V_tambah_bukti_donasi",
-            'title'         => "Donasi",
-         
-        );
-        $this->load->view('templating/korwil/Template_korwil', $data);
-      
-      
-    }
     public function tambahbuktidonasikorwil()
     {
-        $getDataAnggota = $this->M_donasi->getAnggotaDonasi();
+        // $getDataCabang = $this->M_master->getallwilayah();
         
         $data = array(
 
             'namafolder'    => "donasi",
             'namafileview'    => "V_tambah_buktidonasikorwil",
             'title'         => "Donasi",
-            // variabel anggota donasi 
-            'donasiAnggota'    =>   $getDataAnggota
         );
       
         $this->load->view('templating/korwil/Template_korwil', $data);
@@ -208,6 +193,7 @@ public function uploadbuktidonasi(){
     // form validation 
     $this->form_validation->set_rules('tgl_donasi','tgl_donasi','required');
     $this->form_validation->set_rules('no_rekening','no_rekening','required');
+    $this->form_validation->set_rules('nama_bank','nama_bank','required');
     $this->form_validation->set_rules('jml_donasi','jml_donasi','required');
 
     if ($this->form_validation->run()==FALSE){
@@ -226,7 +212,7 @@ public function uploadbuktidonasi(){
     }
 }
 
-//bukti donasi korwil untuk anggota ya  
+//bukti donasi korwil 
 public function uploadbuktidonasikorwil(){
     // helper 
     $this->load->helper(array('form', 'url'));
@@ -260,9 +246,12 @@ public function detaildonasianggota($id){
         'title'         => "Donasi Anggota | Senyum Desa",
 
     );
+    // get variable 
     $data['donasi'] = $this->M_donasi->getDonasiById($id);
+    // redirect 
     $this->load->view('templating/Template_anggotanew', $data);
 }
+// detail donasi di korwil
 public function detaildonasikorwil($id){
  
     $data = array(
@@ -276,9 +265,10 @@ public function detaildonasikorwil($id){
     
     $this->load->view('templating/korwil/Template_korwil', $data);
 }
+// hapus donasi di anggota 
 public function hapusdonasi($Id_donasi){
     $this->M_donasi->processDeleteDonasi($Id_donasi);
-    $this->session->set_flashdata('flash-data','Account berhasil Dihapus');
+    $this->session->set_flashdata('msg','Data Donasi berhasil Dihapus!');
     redirect('donasi/riwayatdonasi','refresh');
 }
 public function hapusdonasikorwil($Id_donasi){
@@ -308,8 +298,8 @@ public function proseseditdonasianggota(){
     // form validation 
     $this->form_validation->set_rules('tgl_donasi','tgl_donasi','required');
     $this->form_validation->set_rules('no_rekening','no_rekening','required');
-    $this->form_validation->set_rules('bukti donasi','bukti_donasi','required');
-    $this->form_validation->set_rules('nominal','nominal','required');
+    $this->form_validation->set_rules('jml_donasi','jml_donasi','required');
+    $this->form_validation->set_rules('nama_bank','nama_bank','required');
     
     if ($this->form_validation->run() == FALSE){
         echo validation_errors();
@@ -322,26 +312,9 @@ public function proseseditdonasianggota(){
         }else{
             echo $upload['error'];
         }
-        //session 
-       
-        // echo "<pre>";
-        // echo var_dump($data);
-        // echo "</pre>";
-        //redirect 
         redirect('donasi/riwayatdonasi','refresh');  
 }
 
-}
-public function listdonasi(){
-    $data = array(
-
-        'namafolder'    => "donasi",
-        'namafileview'  => "V_list_Donasi",
-        'title'         => "List Donasi | Senyum Desa",
-
-    );
-    $data['donasi']=$this->M_donasi-> getalldatadonasi();
-    $this->load->view('templating/korwil/Template_korwil', $data);
 }
 
 // DONASI VERIFIKASI DI KORWIL
@@ -409,7 +382,6 @@ public function proseseditdonasinonverif($id){
         //redirect 
         redirect('donasi_non/datadonasinonanggota','refresh');  
 }
-
 }
  
 }

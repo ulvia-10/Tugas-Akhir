@@ -1,12 +1,13 @@
 <br> <br>
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-xl-12 xl-100 box-col-12">
+		<div class="col-xl-6 xl-100 box-col-12">
 			<div class="card">
 				<div class="cal-date-widget card-body">
 					<div class="row">
+					<h5 class="text-primary" style="text-align:center;"><strong>Wadah Generasi Muda <br> Melunasi Janji Pelosok Nusantara</strong></h5>
 						<div class="col-xl-6 col-xs-12 col-md-6 col-sm-6">
-					
+					<br><br>
 							<div class="cal-info text-center">
 							
 							<img src="<?= base_url('assets/Home/images/hero/logo.png'); ?>" class="img-thumbnail" style="width: 75%;"  alt="...">

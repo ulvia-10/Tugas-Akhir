@@ -20,10 +20,9 @@
 				<div class="tab-pane fade" id="top-homedanger" role="tabpanel" aria-labelledby="top-home-tab">
 				<!--  showing flash data -->
 					<!-- show flash data from model M_donasi  -->
-					<?php echo $this->session->flashdata('pesan') ?>
-
-					<div class="table-responsive">
 					
+					<div class="table-responsive">
+					<!-- <?php echo $this->session->flashdata('pesan') ?> -->
 						<table class="display" id="basic-3" style="text-align:center;">
 					</div>
 
@@ -97,8 +96,8 @@
 			<div class="tab-pane fade active show" id="top-profiledanger" role="tabpanel"
 				aria-labelledby="profile-top-tab">
 					<!-- show flash data from model M_donasi  -->
-					<?php echo $this->session->flashdata('pesan') ?>
 				<div class="table-responsive">
+				<!-- <?php echo $this->session->flashdata('pesan') ?> -->
 					<table class="display" id="basic-2" style="text-align:center;">
 						<thead>
 							<tr>
@@ -182,11 +181,12 @@
 			<div class="tab-pane fade" id="top-contactdanger" role="tabpanel" aria-labelledby="contact-top-tab">
 				<div class="table-responsive">
 					<!-- show flash data from model M_donasi  -->
-					<?php echo $this->session->flashdata('pesan') ?>
+					<!-- <?php echo $this->session->flashdata('pesan') ?> -->
+					
 					<a href="<?= base_url(); ?>donasi_non/tambahbuktidonasinonkorwil/" class="btn btn-secondary btn-sm mb-3">
 							<i class="fa fa-plus" aria-hidden="true"></i> Tambah Data</a> <br>
-					<div style="margin-left:700px;"><a href="<?= base_url(); ?>laporan/exportdatadonasinon/" class="btn btn-info">
-						<i class="fa fa-download" aria-hidden="true"></i> Cetak Data</a> </div> <br>
+							<a href="<?= base_url(); ?>laporan/indexdonasi/" class="btn btn-success mb-3" style="margin-left:700px;">
+						<i class="fa fa-print" aria-hidden="true"></i> Cetak Data</a> <br>
 					<table class="display" id="basic-1" style="text-align:center;">
 						<thead>
 							<tr>
@@ -232,29 +232,8 @@
 								<a href="<?= base_url(); ?>donasi/detaildonasikorwil/<?= $dn['Id_donasi']; ?>" class="badge badge-secondary">
 									<i class="fa fa-eye" aria-hidden="true"></i></a></a>
 									<!-- hapus -->
-									<a href="#" data-bs-toggle="modal"
-										data-bs-target="#aksi-hapus-<?php echo $dn['Id_donasi'] ?>"
-										class="badge badge-warning "> <i class="fa fa-trash" aria-hidden="true"></i></a>
-									<!-- pop up  -->
-									<div class="modal fade" id="aksi-hapus-<?php echo $dn['Id_donasi'] ?>"
-										tabindex=" -1" role="dialog" aria-labelledby="exampleModalCenter"
-										aria-hidden="true">
-										<div class="modal-dialog modal-dialog-centered" role="document">
-											<div class="modal-content">
-												<div class="modal-body">
-													<h4>Hapus Akun</h4>
-													<p>Apakah anda yakin ingin menghapus donasi
-														<b><?php echo $dn['tgl_donasi'] ?></b>.
-													</p>
-												</div>
-												<div class="modal-footer">
-													<button class="btn btn-primary btn-sm" type="button"
-														data-bs-dismiss="modal">Batal</button>
-													<a href="<?php echo base_url('data_akun/delete/' . $dn['Id_donasi']) ?>"
-														class="btn btn-danger btn-sm" type="button"><i
-															class="fa fa-trash"></i> Hapus</a>
-												</div>
-											</div>
+									<a href="<?= base_url(); ?>donasi_non/hapusdonasikorwil/<?= $dn['Id_donasi']; ?>" class="badge badge-success">
+									<i class="fa fa-trash" aria-hidden="true"></i></a></a>
 
 								</td>
 							</tr>

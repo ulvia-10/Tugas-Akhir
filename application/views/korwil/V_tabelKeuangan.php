@@ -1,4 +1,19 @@
-<br><br>
+<div class="container-fluid">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-6">
+                <h3>Data Keuangan</h3>
+            </div>
+            <div class="col-6">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html"> <i data-feather="home"></i></a></li>
+                    <li class="breadcrumb-item">Data Tables</li>
+                    <li class="breadcrumb-item active">KeuanganSenyum Desa</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Container-fluid starts-->
 <div class="container-fluid">
     <div class="row">
@@ -30,7 +45,7 @@
                                 foreach ($data_keuangan AS $kas) { ?>
                                 <tr>
                                     <td> <?= $no++; ?></td>
-                                    <td><?= $kas["tanggal_laporan"]; ?></td>
+                                    <td><?= date('d/m/Y',strtotime($kas["tanggal_laporan"])); ?></td>
                                     <td><?= $kas["judul"]; ?></td>
                                     <td><?= $kas["name_cabang"]; ?></td>
                                     <td><?= $kas["jenis_keuangan"]; ?></td>

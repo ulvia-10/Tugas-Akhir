@@ -14,7 +14,15 @@ class Profile extends CI_Controller
         $this->load->model('M_login');
         $this->load->model('M_dataakun');
         $this->load->model('M_rekruitment');
-    }
+
+            // pengecekan sesi 
+            if (empty($this->session->userdata('sess_fullname'))) {
+
+                $this->session->set_flashdata('msg', '<div class="alert alert-warning"><b>Pemberitahuan</b> <br> <small>Maaf anda harus login terlebih dahulu</small></div>');
+                redirect('login');
+            }
+        }
+
 
 
     // main view tampilan
@@ -79,6 +87,24 @@ class Profile extends CI_Controller
         redirect('Profile');
     }
     public function editprofileanggota(){
-
+         // helper 
+        $this->load->helper(array('form', 'url'));
+        $this->load->library('form_validation');
+        // form validation 
+        $this->form_validation->set_rules('photo','photo','required');
+        // redirect 
+        if ($this->form_validation->run() == FALSE){
+            echo validation_errors();
+        }
+        else{
+            $upload = $this->M_profile->upload();
+            if($upload ['result'] == 'success'){
+                $this->M_profile->updateprofileanggota();
+                redirect('kegiatan/viewprofile','refresh');
+            }else{
+                echo $upload['error'];
+            }
+            redirect('kegiatan/viewprofile','refresh');  
     }
+}
 }

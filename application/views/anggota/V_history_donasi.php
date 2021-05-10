@@ -18,9 +18,11 @@
         
         <div class="card-body">
         <!-- flash data  -->
+
         <a href="<?= base_url(); ?>donasi/tambahbuktidonasi/" class="btn btn-secondary btn-sm mb-3">
                     <i class="fa fa-plus" aria-hidden="true"></i>Upload Bukti</a>
                     <?php echo $this->session->flashdata('msg') ?> 
+                    
             <div class="table-responsive">
                 <table class="display" id="basic-1" style="text-align:center;">
                     <thead>

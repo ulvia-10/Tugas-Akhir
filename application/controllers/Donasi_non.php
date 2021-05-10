@@ -11,7 +11,15 @@ class Donasi_non extends CI_Controller
         $this->load->model('M_kegiatan');
         $this->load->model('M_keuangan');
         $this->load->model('M_donasi');
-    }
+
+
+            // pengecekan sesi 
+            if (empty($this->session->userdata('sess_fullname'))) {
+
+                $this->session->set_flashdata('msg', '<div class="alert alert-warning"><b>Pemberitahuan</b> <br> <small>Maaf anda harus login terlebih dahulu</small></div>');
+                redirect('login');
+            }
+        }
 //index donas non anggota 
     public function donasinonanggota()
     {
@@ -89,6 +97,12 @@ class Donasi_non extends CI_Controller
     $data['donasi'] = $this->M_donasi->getallDonasinon();
     $this->load->view('templating/template_donasinon' , $data);
   
+}
+// hapus donasi non anggota di korwil 
+public function hapusdonasikorwil($Id_donasi){
+    $this->M_donasi->processDeleteDonasikorwil($Id_donasi);
+    $this->session->set_flashdata('flash-data','Account berhasil Dihapus');
+    redirect('donasi_non/datadonasinonanggota','refresh');
 }
 public function editdonasinonverif(){
     $data = array(

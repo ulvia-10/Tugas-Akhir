@@ -1,5 +1,7 @@
 <br><br> <br>
 <div class="container-fluid">
+	<!-- set flash data  -->
+<?php echo $this->session->flashdata('pesan') ?>
 	<div class="row" style="margin-left:50px;">
 
 		<div class="col-xl-4 box-col-6" >
@@ -30,8 +32,8 @@
 						<h3><span class="counter"><?= $profile['status_account']; ?></h3>
 					</div>
 					<div class="col-4 col-sm-4">
-						<h6>Total Kegiatan</h6>
-						<h3><span class="counter"><?= $total; ?>  </h3>
+						<h6>Total</h6>
+						<h3><span class="counter"><?=$total;?></h3>
 					</div>
 				</div>
 			</div>

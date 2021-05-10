@@ -1,11 +1,10 @@
-<br><br>
-<div class="container-fluid" style="margin-left:150px;">
+<div class="container-fluid">
 
-<div class="card col-7">
+<div class="card">
     <div class="card-header">
-        <h6 class="text-primary" style="text-align:center;"> <i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Keuangan </h6>
+        <h5>Tambah Keuangan Senyum Desa</h5>
     </div>
-    <form class="form theme-form" action="<?php echo base_url('Adminkorwil/prosesTambahKeuangan') ?>" method="POST">
+    <form class="form theme-form" action="<?php echo base_url('adminkorwil/prosesTambahKeuangan') ?>" method="POST">
         <div class="card-body">
             <div class="row">
                 <div class="col">
@@ -16,7 +15,15 @@
                     </div>
                 </div>
             </div>
-        
+            <div class="row">
+                <div class="col">
+                    <div class="mb-3">
+                        <label class="form-label" for="deskripsi">Deskripsi</label>
+                        <textarea class="form-control form-control-lg" name="deskripsi" id="deskripsi" type="text"
+                            placeholder="Masukan deskripsi" required=""></textarea>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="col">
                     <div class="mb-3">
@@ -71,15 +78,7 @@
             </div>
 
 
-            <div class="row">
-                <div class="col">
-                    <div class="mb-3">
-                        <label class="form-label" for="deskripsi">Deskripsi</label>
-                        <textarea class="form-control form-control-lg" name="deskripsi" id="deskripsi" type="text"
-                            placeholder="Masukan deskripsi" required=""></textarea>
-                    </div>
-                </div>
-            </div>
+
         </div>
         <div class="card-footer">
             <button class="btn btn-primary" type="submit">Submit</button>
@@ -89,4 +88,5 @@
     </form>
 </div>
 </div>
+
 <!-- Container-fluid Ends-->

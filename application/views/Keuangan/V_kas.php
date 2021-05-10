@@ -214,12 +214,12 @@
 								<?php echo $this->session->flashdata('pesan') ?>
 
 								<div class="table-responsive">
-								<div >	<a href="<?= base_url(); ?>keuangan/tambahbuktikaskorwil/"
+									<a href="<?= base_url(); ?>keuangan/tambahbuktikaskorwil/"
 										class="btn btn-primary btn-sm mb-3">
-										<i class="fa fa-plus" aria-hidden="true"></i> Tambah Kas Masuk</a> <br></div>
+										<i class="fa fa-plus" aria-hidden="true"></i> Tambah Data</a> <br>
 									<div style="margin-left:80%; margin-top:20px;">
-									<a href="<?= base_url(); ?>laporan/export/"
-										class="btn btn-success  mb-3">
+									<a href="<?= base_url(); ?>laporan/index/"
+										class="btn btn-info  mb-3">
 										<i class="fa fa-print" aria-hidden="true"></i> Cetak Data</a> <br>
 									</div>
 									<table class="display" id="basic-1" style="text-align:center;">
@@ -298,8 +298,8 @@
 												</td>
 											</tr>
 											<?php
-													}
-														?>
+                        }
+                            ?>
 										</tbody>
 									</table>
 

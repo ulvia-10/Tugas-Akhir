@@ -12,7 +12,15 @@ class Kegiatan extends CI_Controller
 		$this->load->model('M_rekruitment');
 		$this->load->library('form_validation');
 
-}
+		    // pengecekan sesi 
+			if (empty($this->session->userdata('sess_fullname'))) {
+
+				$this->session->set_flashdata('msg', '<div class="alert alert-warning"><b>Pemberitahuan</b> <br> <small>Maaf anda harus login terlebih dahulu</small></div>');
+				redirect('login');
+			}
+		}
+
+
 public function index()
 	{
 		$data = array(
@@ -49,7 +57,9 @@ public function index()
 			'namafolder'	=> "anggota",
 			'namafileview'	=> "V_edit_profile",
 			'title'         => "Edit Profile | Senyum Desa"
+
 		);
+		$data['profile']= $this->M_rekruitment->getDataProfile();
 		//disesuaikan sama dengan nama view$ 
 		$this->load->view('templating/template_anggotanew', $data);
        

@@ -83,6 +83,7 @@
 														class="fa fa-trash"></i> Hapus</a>
 											</div>
 										</div>
+
 							</td>
 						</tr>
 						<?php
@@ -186,8 +187,8 @@
 				<div class="table-responsive">
 					<a href="<?= base_url(); ?>donasi/tambahbuktidonasikorwil/" class="btn btn-success btn-sm mb-3">
 							<i class="fa fa-plus" aria-hidden="true"></i> Tambah Data</a> <br>
-						<div style="margin-left:700px;"><a href="<?= base_url(); ?>laporan/indexdonasi/" class="btn btn-primary mb-3">
-						<i class="fa fa-print" aria-hidden="true"></i> Cetak Data</a> <br></div>
+							<a href="<?= base_url(); ?>laporan/indexdonasi/" class="btn btn-primary mb-3" style="margin-left:700px;">
+						<i class="fa fa-print" aria-hidden="true"></i> Cetak Data</a> <br>
 					<table class="display" id="basic-1" style="text-align:center;">
 						<thead>
 							<tr>
@@ -232,12 +233,17 @@
 								<td>
 								<a href="<?= base_url(); ?>donasi/detaildonasikorwil/<?= $dn['Id_donasi']; ?>" class="badge badge-secondary">
 									<i class="fa fa-eye" aria-hidden="true"></i></a></a>
-									<!-- hapus -->
+								   <!-- hapus -->
+								   <a href="<?php echo base_url('donasi/hapusdonasikorwil/' . $dn['Id_donasi']); ?>"
+                                    class="badge badge-info">
+                                    <i class="fa fa-trash" aria-hidden="true"></i></a></a>
+
+									<!-- hapus
 									<a href="<?php echo base_url('donasi/hapusdonasikorwil/' . $dn['Id_donasi']) ?>" data-bs-toggle="modal"
 										data-bs-target="#aksi-hapus-<?php echo $dn['Id_donasi'] ?>"
 										class="badge badge-warning "> <i class="fa fa-trash" aria-hidden="true"></i></a>
 									<!-- pop up  -->
-									<div class="modal fade" id="aksi-hapus-<?php echo $dv['Id_donasi'] ?>" tabindex=" -1"
+									<!-- <div class="modal fade" id="aksi-hapus-<?php echo $dv['Id_donasi'] ?>" tabindex="-1"
 									role="dialog" aria-labelledby="exampleModalCenter" aria-hidden="true">
 									<div class="modal-dialog modal-dialog-centered" role="document">
 										<div class="modal-content">
@@ -255,7 +261,7 @@
 													class="btn btn-danger btn-sm" type="button"><i
 														class="fa fa-trash"></i> Hapus</a>
 											</div>
-										</div>
+										</div> --> 
 
 								</td>
 							</tr>

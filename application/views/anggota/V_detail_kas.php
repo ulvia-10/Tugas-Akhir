@@ -3,7 +3,7 @@
 		<br>
 		<div class="row">
 			<div class="col-5" style="margin-left:300px;">
-				<h5>Detail Kas <i class="fas fa-clipboard-check    "></i></h5>
+				<h5 >Detail Kas <i class="fa fa-clipboard" aria-hidden="true"></i></h5>
 			</div>
 			<br> <br> <br><br> <br>
 			<div class="col-sm-5">
@@ -11,16 +11,29 @@
 					<div class="card-body">
 						<!-- <img src="<?= base_url('./assets/images/' . $kas['bukti_bayar']); ?>" alt="Maaf bukti_donasi tidak tersedia" style="width:50%; height:45%; margin-left:90px;"> -->
 						<p class="card-text">
-							<label for="judul"><b> Judul :</b></label>
-							<?= $kas['judul']; ?>
-						</p>
-						<p class="card-text">
-							<label for="judul"><b> Nama :</b></label>
+							<label for="full_name"><b> Nama :</b></label>
 							<?= $kas['full_name']; ?>
 						</p>
 						<p class="card-text">
-							<label for="tgl_bayar"><b> Tanggal Donasi: </b></label>
-							<?= date('d-m-Y',strtotime( $kas['tgl_bayar'])); ?>
+							<label for="name_cabang"><b> Nama Cabang:</b></label>
+							<?= $kas['name_cabang']; ?>
+						</p>
+						<p class="card-text">
+							<label for="judul"><b> Judul :</b></label>
+							<?= $kas['judul']; ?>
+						</p>
+						<?php
+														
+														$tanggal = "-";
+														if ( $kas['tgl_bayar'] ){
+
+															$tanggal = date('d/m/Y',strtotime($kas['tgl_bayar']));
+														}
+													?>
+        
+						<p class="card-text">
+							<label for="tgl_bayar"><b> Tanggal Bayar Kas: </b></label>
+							<?= $tanggal ?>
 						</p>
 						<p class="card-text">
 							<label for="no_rekening"><b>No Rekening: </b></label>
@@ -76,26 +89,20 @@
 							<label for="status"><b>Status Pembayaran: </b></label>
 							<span class="badge badge-<?php echo $warna ?>"> <?php echo $keterangan?></span>
 						</p>
+						<p class="card-text">
+							<label for="deskripsi"><b>Nama Bank: </b></label>
+						<b> BANK<?= $kas['nama_bank']; ?></b>
 						<?php
-                                $keterangan = "";
-                                $warna = "";
-
-                                if ( $kas['via'] == "tunai" ) {
-                                    $keterangan = "tunai";
-                                    $warna      = "success";
-                                } else if ( $kas['via'] == "transfer" ) {
-                                    $keterangan = "transfer";
-                                    $warna = "warning";
-
-                                } 
-                                ?>
+														
+														$via = "-";
+														if ( $kas['via'] ){
+															$kas = $kas['via'];
+														}
+													?>
+        
 						<p class="card-text">
-							<label for="status"><b>Pembayaran Via: </b></label>
-							<span class="badge badge-<?php echo $warna ?>"> <?php echo $keterangan?></span>
-						</p>
-						<p class="card-text">
-							<label for="judul"><b> Nama Bank :</b></label>
-							<b>BANK <?= $kas['nama_bank']; ?></b>
+							<label for="tgl_bayar"><b> Via Pembayaran:  </b></label>
+							<?= $via ?>
 						</p>
 						<p class="card-text">
 							<label for="created_"><b>Upload pada: </b></label>

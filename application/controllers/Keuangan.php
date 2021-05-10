@@ -94,14 +94,12 @@ class Keuangan extends CI_Controller
     // ANGGOTA DATA KAS TAMBAH 
     public function tambahbuktikas()
     {
+      
         $data = array(
 
             'namafolder'    => "anggota",
             'namafileview'    => "V_tambah_buktikas",
             'title'         => "Kas | Senyum Desa",
-
-            // // variable
-            // 'dataCabang'    => $getDataCabang
         );
         $this->load->view('templating/Template_anggotanew', $data);
     }
@@ -115,10 +113,9 @@ class Keuangan extends CI_Controller
             'namafileview'    => "V_tambah_buktikaskorwil",
             'title'         => "Kas | Senyum Desa",
 
-            // // variable
-            'dataAnggota'    =>   $dataanggotaCabang
+          // // variable
+          'dataAnggota'    =>   $dataanggotaCabang
         );
-     
         $this->load->view('templating/korwil/template_korwil', $data);
     }
     // kas anggota 
@@ -131,7 +128,6 @@ class Keuangan extends CI_Controller
     $this->form_validation->set_rules('judul','judul','required');
     $this->form_validation->set_rules('no_rekening','no_rekening','required');
     $this->form_validation->set_rules('nominal','nominal','required');
-    $this->form_validation->set_rules('nama_bank','nama_bank', 'required');
     $this->form_validation->set_rules('deskripsi','deskripsi','required');
 
     if ($this->form_validation->run()==FALSE){
@@ -234,7 +230,6 @@ class Keuangan extends CI_Controller
               
 		$this->load->view('templating/template_anggotanew', $data);
     }
-    // PROSES EDIT KAS ANGGOTA 
     public function proseseditkasanggota(){
         $this->load->helper(array('form', 'url'));
         $this->load->library('form_validation');

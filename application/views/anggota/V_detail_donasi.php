@@ -10,7 +10,14 @@
 				<div class="card">
 					<div class="card-body">
 						<!-- <img src="<?= base_url('./assets/images/' . $donasi['bukti_donasi']); ?>" alt="Maaf bukti_donasi tidak tersedia" style="width:50%; height:45%; margin-left:90px;"> -->
-						
+						<p class="card-text">
+							<label for="full_name"><b>Nama: </b></label>
+							<?= $donasi['full_name']; ?>
+						</p>
+						<p class="card-text">
+							<label for="name_cabang"><b>Nama Cabang: </b></label>
+							<?= $donasi['name_cabang']; ?>
+						</p>
 						<p class="card-text">
 							<label for="tgl_bayar"><b> Tanggal Donasi: </b></label>
 							<?= date('d-m-Y',strtotime( $donasi['tgl_donasi'])); ?>
@@ -18,10 +25,6 @@
 						<p class="card-text">
 							<label for="no_rekening"><b>No Rekening: </b></label>
 							<?= $donasi['no_rekening']; ?>
-						</p>
-						<p class="card-text">
-							<label for="full_name"><b>Nama Donatur: </b></label>
-							<?= $donasi['full_name']; ?>
 						</p>
 						<p class="card-text">
 							<?php
@@ -50,26 +53,6 @@
 								<label for="status"><b>Status Verifikasi: </b></label>
 								<span class="badge badge-<?php echo $warna ?>">  <?php echo $keterangan?></span>	
 							</p>
-						
-								<?php
-                                $keterangan = "";
-                                $warna = "";
-
-                                if ( $donasi['jenis'] == "masuk" ) {
-
-                                    $keterangan = "masuk";
-                                    $warna      = "primary";
-                                } else if ( $donasi['jenis'] == "keluar" ) {
-
-                                    $keterangan = "keluar";
-                                    $warna = "warning";
-
-                                } 
-                                ?>
-						  <p class="card-text">
-								<label for="status"><b>Jenis: </b></label>
-								<span class="badge badge-<?php echo $warna ?>">  <?php echo $keterangan?></span>	
-							</p>
 							<?php
                                 $keterangan = "";
                                 $warna = "";
@@ -94,21 +77,17 @@
 							<span class="badge badge-<?php echo $warna ?>"> <?php echo $keterangan?></span>
 						</p>
 						<p class="card-text">
-							<label for="via"><b>Via Pembayaran: </b></label>
-							<?= $donasi['via']; ?>
+							<label for="no_rekening"><b>Via Pembayaran: </b></label>
+							<span class="badge badge-success"><?= $donasi['via']; ?></span>
 						</p>
 						<p class="card-text">
-							<label for="nama_bank"><b>Nama Bank: </b></label>
-							<b><?= $donasi['nama_bank']; ?></b>
+							<label for="no_rekening"><b>Nama Bank: </b></label>
+							<span class="badge badge-primary"><?= $donasi['nama_bank']; ?></span>
 						</p>
 						<p class="card-text">
 							<label for="created_"><b>Upload pada: </b></label>
 							<?= date('d-m-Y H:i:s',strtotime($donasi['created_at'])); ?>
 						</p>
-						<!-- <p class="card-text">
-							<a href="<?= base_url('kegiatan/historypembayaran'); ?>" class="btn btn-secondary" type="submit">
-								<i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Back</a>
-						</p> -->
 					</div>
 				</div>
 			</div>

@@ -25,6 +25,7 @@
                             <th>Tanggal Bayar</th>
                             <th>Nominal </th>
                             <th>Judul</th>
+                            <!-- <th>Bulan</th> -->
                             <th>Verifikasi</th>
                             <th>Action</th>
                         </tr>
@@ -51,6 +52,7 @@
                                  <td> Rp. <?= number_format($nominal, 2 ); ?></td>
 
                             <td><?= $ks["judul"]; ?></td>
+                            <!-- <td><?= $ks["bulan"]; ?></td> -->
                                <?php
                                 $keterangan = "";
                                 $warna = "";
