@@ -12,7 +12,7 @@
                           <div class="mb-3 row">
                             <label class="col-sm-3 col-form-label">Tanggal Donasi</label>
                             <div class="col-sm-9">
-                              <input class="form-control" type="date" name="tgl_donasi" value="<?php echo date("Y-m-d")?>">
+                              <input class="form-control" type="date" name="tgl_donasi" value="<?php echo date('Y-m-d')?>">
                             </div>
                           </div>
                         </div>
@@ -28,21 +28,6 @@
                           </div>
                         </div>
                       </div>
-                      <!-- nama bank  -->
-                      <div class="row">
-                        <div class="col">
-                            <div class="mb-3 row">
-                                <label class="col-sm-3 col-form-label" for="nama_bank">Tipe</label>
-                                <select class="form-select form-control-lg digits col-sm-5" name="nama_bank" id="nama_bank" required="">
-                                    <option selected="" disabled="" value="">Pilih Nama Bank</option>
-                                    <option value="BRI">BRI</option>
-                                    <option value="BNI">BNI</option>
-                                    <option value="BCA">BCA</option>
-                                    <option value="MANDIRI">MANDIRI</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
                          <!-- no rekening -->
                          <div class="row">
                         <div class="col">
@@ -67,7 +52,7 @@
                           </div>
                         </div>
                       </div>
-  
+                   
                     </div>
                     <div class="card-footer" style="margin-left:210px;">
                       <button class="btn btn-secondary" type="submit">Submit</button>
