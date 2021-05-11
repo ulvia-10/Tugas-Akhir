@@ -164,6 +164,7 @@ class M_donasi extends CI_Model
             'status_verif' => "baru",
             'via'  => $this->input->post('via'),
             'nama_bank'  => $this->input->post('nama_bank'),
+            // 'id_profile'  => $this->input->post('full_name'),
             // 'no_rekening'  => $this->input->post('no_rekening'),
             'tgl_donasi'   => $this->input->post('tgl_donasi'),
             'jml_donasi'   => $this->input->post('jml_donasi'),

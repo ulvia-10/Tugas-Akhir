@@ -12,11 +12,6 @@ $this->load->database();
 // Listing kas 
 public function listing()
 {
-// $this->db->select('*');
-// $this->db->from('data_keuangan');
-// $this->db->order_by('id_keuangan', 'ASC');
-// $query = $this->db->get();
-// return $query->result(); 
 
 // opsi query biasa 
 $id_cabang = $this->session->userdata('sess_id_cabang');
@@ -31,12 +26,6 @@ return $this->db->query($sql)->result();
 // listing donasi 
 public function listingdonasi()
 {
-// $this->db->select('*');
-// $this->db->from('data_donasi');
-// $this->db->order_by('id_donasi', 'ASC');
-// $query = $this->db->get();
-// return $query->result(); 
-// query result 
 $id_cabang = $this->session->userdata('sess_id_cabang');
 $sql="SELECT data_donasi.*,master_cabang.*,akun_profile.full_name
 FROM data_donasi
@@ -60,6 +49,16 @@ function assetDonasi($bulan, $id_cabang, $jenis){
     $sql = 'SELECT * FROM `data_donasi` 
     WHERE MONTHNAME(tgl_donasi) = "'.$bulan.'" AND 
     id_cabang = '.$id_cabang.' AND jenis = "'.$jenis.'"';
+    return $this->db->query($sql);
+}
+function labarugi(){
+    // session id_cabang 
+    $id_cabang = $this->session->userdata('sess_id_cabang');
+
+    $sql="SELECT data_keuangan.*,master_cabang.*
+    FROM data_keuangan 
+    JOIN master_cabang ON master_cabang.id_cabang = data_keuangan.id_cabang 
+    WHERE data_keuangan.jenis_keuangan = 'keluar' AND master_cabang.id_cabang = '$id_cabang'";
     return $this->db->query($sql);
 }
 }

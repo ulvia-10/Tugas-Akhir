@@ -13,11 +13,7 @@
                     <a href="<?= base_url('AdminKorwil/tambahKeuangan'); ?>" class="btn btn-outline-primary"
                         type="button" data-original-title="btn btn-outline-danger-2x" style="width: 200px;" title="">
                       <i class="fa fa-plus-circle" aria-hidden="true"></i>  Tambah Data</a>
-                </div>
-
-                <div class="card-body">
-
-                    <?php
+                      <?php
 
                     $totalPemasukan    = 0;
                     $totalPengeluaran   = 0;
@@ -34,7 +30,21 @@
                         $totalPengeluaran = $keluar->TOTAL;
                     }
                     ?>
-                    <div class="table-responsive">
+                    <tr>
+                    <div style="margin-left:550px;">
+                    <strong>
+                        <th colspan=4> Total Kas Masuk:</th>
+                        <th >Rp. <?php echo number_format($totalPemasukan, 2) ?></th> <br>
+                        <th colspan=1> Total Kas Keluar:</th>
+                        <th>Rp. <?php echo number_format($totalPengeluaran, 2) ?></th>
+                </th>
+                </strong>
+                </div>
+            </tr>
+                </div>
+
+                <div class="card-body">
+       <div class="table-responsive">
                         <table class="display" id="API-3">
                             <thead style=" text-align: center;">
                                 <tr>
@@ -73,23 +83,7 @@
                                 ?>
                           <td> <span class="badge badge-<?=$warna;?>"><?= $keterangan; ?></td></span>
                             
-                           
-                          <td>  
-                             <!-- edit -->
-                             <a href="<?= base_url(); ?>keuangan/editkasanggota/<?= $ks['id_keuangan']; ?>"
-                                    class="badge badge-secondary">
-                                 <i class="fa fa-pencil" aria-hidden="true"></i></a></a>
-                             
-                             <!-- detail -->
-                              <a href="<?= base_url(); ?>keuangan/detailkasanggota/<?= $ks['id_keuangan']; ?>"
-                                    class="badge badge-primary">
-                                    <i class="fa fa-eye" aria-hidden="true"></i></a></a>
-
-                            <!-- delete -->
-                            <a href="<?= base_url(); ?>keuangan/delete/<?= $ks['id_keuangan']; ?>"
-                                    class="badge badge-danger">
-                                   <i class="fa fa-trash" aria-hidden="true"></i></a></a>
-                            </td>
+                                <td><span class="badge badge-secondary"><i class="fa fa-eye" aria-hidden="true"></i> </span> </td>
 
                                     <?php
                                 }
@@ -106,13 +100,7 @@
                                     <th>Action</th>
                                 </tr>
                             </tfoot>
-                            <tr>
-                                <th colspan=2>Total Kas Masuk:</th>
-                                <th >Rp. <?php echo number_format($totalPemasukan, 2) ?></th>
-                                <th colspan=1> Total Kas Keluar:</th>
-                                <th>Rp. <?php echo number_format($totalPengeluaran, 2) ?></th>
-                                </th>
-                            </tr>
+                          
                         </table>
                     </div>
                 </div>
