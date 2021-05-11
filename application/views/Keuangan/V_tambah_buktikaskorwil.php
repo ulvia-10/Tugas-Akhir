@@ -37,7 +37,6 @@
 				</div>
 			</div>
 		</div>
-		</div>
         <div class="row">
 				<div class="col">
 					<div class="mb-3 row">
@@ -93,10 +92,11 @@
 						</div>
 					</div>
 				</div>
-				</div>
+					</div>
+					</div>
 			<br>
 		
-			<div class="row"  >
+			<!-- <div class="row"  >
 					<div class="col">
 						<div class="mb-3 row">
 							<label class="col-sm-3 col-form-label">No Rekening</label>
@@ -106,7 +106,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 			
             <div class="row">
 				<div class="col">
@@ -136,7 +136,7 @@
 	</form>
 </div>
 </div>
-+<!-- wilayah -->
+<!-- wilayah -->
 <script>
 	let elementWilayah = $('#element-wilayah');
 

@@ -126,7 +126,6 @@ class Keuangan extends CI_Controller
     // form validation 
     $this->form_validation->set_rules('tgl_bayar','tgl_bayar','required');
     $this->form_validation->set_rules('judul','judul','required');
-    $this->form_validation->set_rules('no_rekening','no_rekening','required');
     $this->form_validation->set_rules('nominal','nominal','required');
     $this->form_validation->set_rules('deskripsi','deskripsi','required');
 
@@ -153,7 +152,6 @@ class Keuangan extends CI_Controller
         // form validation 
         $this->form_validation->set_rules('tgl_bayar','tgl_bayar','required');
         $this->form_validation->set_rules('judul','judul','required');
-        $this->form_validation->set_rules('no_rekening','no_rekening','required');
         $this->form_validation->set_rules('nominal','nominal','required');
         $this->form_validation->set_rules('deskripsi','deskripsi','required');
 
@@ -215,9 +213,9 @@ class Keuangan extends CI_Controller
 	}
     public function deletekasanggota($id)
 	{
-		$this->M_keuangan->hapuskas($id);
+		$this->M_keuangan->hapuskaskorwil($id);
 		$this->session->set_flashdata('flash-data','Account berhasil Dihapus');
-		redirect('kegiatan/historypembayaran','refresh');
+		redirect('adminkorwil/kas','refresh');
 	}
 
     public function editkasanggota($id){

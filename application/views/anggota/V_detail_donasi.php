@@ -22,10 +22,10 @@
 							<label for="tgl_bayar"><b> Tanggal Donasi: </b></label>
 							<?= date('d-m-Y',strtotime( $donasi['tgl_donasi'])); ?>
 						</p>
-						<p class="card-text">
+						<!-- <p class="card-text">
 							<label for="no_rekening"><b>No Rekening: </b></label>
 							<?= $donasi['no_rekening']; ?>
-						</p>
+						</p> -->
 						<p class="card-text">
 							<?php
                                 $nominal= $donasi["jml_donasi"]

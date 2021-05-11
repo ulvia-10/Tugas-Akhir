@@ -221,6 +221,17 @@ class M_keuangan extends CI_Model
             //redirect
             redirect('kegiatan/historypembayaran','refresh');
         }
+        public function hapuskaskorwil($id){
+            $this->db->where('id_keuangan',$id);
+            $this->db->delete('data_keuangan');
+            
+             //flashdata 
+             $elementHTML = '<div class="alert alert-info"><b>Pemberitahuan</b> <br> Data kas berhasil dihapus </div>';
+             $this->session->set_flashdata('flash-data', $elementHTML);
+ 
+            //redirect
+            redirect('adminkorwil/kas','refresh');
+        }
         public function getanggotaByCabang(){
             $id_cabang = $this->session->userdata('sess_id_cabang');
             $sql=" SELECT data_keuangan.*,master_cabang.*,akun_profile.full_name

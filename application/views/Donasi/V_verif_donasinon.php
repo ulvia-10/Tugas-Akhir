@@ -77,7 +77,7 @@
 											<div class="modal-footer">
 												<button class="btn btn-primary btn-sm" type="button"
 													data-bs-dismiss="modal">Batal</button>
-												<a href="<?php echo base_url('donasi/hapusdonasi/'. $db['Id_donasi']) ?>"
+												<a href="<?php echo base_url('donasi_non/hapusdonasikorwil/'. $db['Id_donasi']) ?>"
 													class="btn btn-danger btn-sm" type="button"><i
 														class="fa fa-trash"></i> Hapus</a>
 											</div>
@@ -161,7 +161,7 @@
 											<div class="modal-footer">
 												<button class="btn btn-primary btn-sm" type="button"
 													data-bs-dismiss="modal">Batal</button>
-												<a href="<?php echo base_url('data_akun/delete/' . $dv['Id_donasi']) ?>"
+												<a href="<?php echo base_url('donasi_non/hapusdonasikorwil/' . $dv['Id_donasi']) ?>"
 													class="btn btn-danger btn-sm" type="button"><i
 														class="fa fa-trash"></i> Hapus</a>
 											</div>

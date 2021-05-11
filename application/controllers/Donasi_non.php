@@ -100,7 +100,7 @@ class Donasi_non extends CI_Controller
 }
 // hapus donasi non anggota di korwil 
 public function hapusdonasikorwil($Id_donasi){
-    $this->M_donasi->processDeleteDonasikorwil($Id_donasi);
+    $this->M_donasi->processDeleteDonasinonkorwil($Id_donasi);
     $this->session->set_flashdata('flash-data','Account berhasil Dihapus');
     redirect('donasi_non/datadonasinonanggota','refresh');
 }
@@ -157,7 +157,6 @@ public function tambahdonasinonanggotakorwil(){
        $this->form_validation->set_rules('tgl_donasi','tgl_donasi','required');
        $this->form_validation->set_rules('nama_donatur','nama_donatur','required');
        $this->form_validation->set_rules('email_donatur','email_donatur','required');
-       $this->form_validation->set_rules('no_rekening','no_rekening','required');
        $this->form_validation->set_rules('email_donatur','email_donatur','required');
        $this->form_validation->set_rules('telp_donatur','telp_donatur','required');
        $this->form_validation->set_rules('jml_donasi','jml_donasi','required');

@@ -90,7 +90,16 @@ class M_donasi extends CI_Model
     //edit donasi
     /**===========================================================*/
     /** Fungsi UPDATE */
-
+    function processDeleteDonasinonkorwil($Id_donasi)
+    {
+        $this->db->where('Id_donasi', $Id_donasi);
+        $this->db->delete('data_donasi');
+        // flashdata
+        $elementHTML = '<div class="alert alert-warning"><b>Pemberitahuan</b> <br> Data Donasi berhasil dihapus pada ' . date('d F Y H.i A') . '</div>';
+        $this->session->set_flashdata('pesan', $elementHTML);
+        // redirect
+        redirect('donasi_non/datadonasinonanggota');
+    }
     function edit_data($where, $table)
     {
         return $this->db->get_where($table, $where);
@@ -150,14 +159,15 @@ class M_donasi extends CI_Model
         $id_cabang = $this->session->userdata('sess_id_cabang');
         $data = array
         (
-            'id_profile' => $id_profile,
+            'id_profile'  => $this->input->post('full_name'),
             'id_cabang' => $id_cabang,
             'status_verif' => "baru",
-            'no_rekening'  => $this->input->post('no_rekening'),
+            'via'  => $this->input->post('via'),
+            'nama_bank'  => $this->input->post('nama_bank'),
+            // 'no_rekening'  => $this->input->post('no_rekening'),
             'tgl_donasi'   => $this->input->post('tgl_donasi'),
             'jml_donasi'   => $this->input->post('jml_donasi'),
             'bukti_donasi'  => $upload ['file']['file_name']
-            
         );
         
         $this->db->insert('data_donasi', $data);
@@ -327,7 +337,7 @@ class M_donasi extends CI_Model
             "jenis"         => "masuk",
             "nama_bank"     =>$this->input->post('nama_bank', true),
             'status_verif'  => "baru",
-            'no_rekening'   => $this->input->post('no_rekening'),
+            // 'no_rekening'   => $this->input->post('no_rekening'),
             'tgl_donasi'    => $this->input->post('tgl_donasi'),
             'email_donatur' => $this->input->post('email_donatur'),
             'telp_donatur'  => $this->input->post('telp_donatur'),
@@ -345,6 +355,7 @@ class M_donasi extends CI_Model
         // // redirect
         redirect('donasi_non/datadonasinonanggota');
     }
+    
 }
 
     

@@ -12,6 +12,7 @@ class Donasi extends CI_Controller
 
         $this->load->model('M_donasi');
         $this->load->model('M_master');
+        $this->load->model('M_keuangan');
         
         $this->load->library('form_validation');
 
@@ -155,12 +156,16 @@ class Donasi extends CI_Controller
     public function tambahbuktidonasikorwil()
     {
         // $getDataCabang = $this->M_master->getallwilayah();
-        
+        $dataanggotaCabang = $this->M_keuangan->getanggotaByCabang();
         $data = array(
 
             'namafolder'    => "donasi",
             'namafileview'    => "V_tambah_buktidonasikorwil",
             'title'         => "Donasi",
+
+            // tampilin semua anggota 
+              // // variable
+          'dataAnggota'    =>   $dataanggotaCabang
         );
       
         $this->load->view('templating/korwil/Template_korwil', $data);
@@ -185,7 +190,7 @@ public function datadonasi(){
     // redirect 
     $this->load->view('templating/korwil/Template_korwil', $data);
 }
-// bukti donasi 
+// bukti donasi di anggota 
 public function uploadbuktidonasi(){
     // helper 
     $this->load->helper(array('form', 'url'));
@@ -219,9 +224,8 @@ public function uploadbuktidonasikorwil(){
     $this->load->library('form_validation');
     // form validation 
     $this->form_validation->set_rules('tgl_donasi','tgl_donasi','required');
-    $this->form_validation->set_rules('no_rekening','no_rekening','required');
     $this->form_validation->set_rules('jml_donasi','jml_donasi','required');
-
+    // form 
     if ($this->form_validation->run()==FALSE){
 
         echo validation_errors();

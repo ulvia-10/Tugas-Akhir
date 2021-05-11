@@ -81,12 +81,15 @@
 														class="badge badge-secondary">
 														<i class="fa fa-eye" aria-hidden="true"></i></a></a>
 													<!-- hapus -->
-													<a href="#" data-bs-toggle="modal"
+													<a href="<?= base_url(); ?>keuangan/deletekasanggota/<?= $blm['id_keuangan'];?>"
+														class="badge badge-secondary">
+														<i class="fa fa-trash" aria-hidden="true"></i></a></a>
+													<!-- <a href="#" data-bs-toggle="modal"
 														data-bs-target="#aksi-hapus-<?php echo $blm['id_keuangan'] ?>"
 														class="badge badge-warning "> <i class="fa fa-trash"
-															aria-hidden="true"></i></a>
+															aria-hidden="true"></i></a> -->
 													<!-- pop up  -->
-													<div class="modal fade"
+													<!-- <div class="modal fade"
 														id="aksi-hapus-<?php echo $blm['id_keuangan'] ?>" tabindex=" -1"
 														role="dialog" aria-labelledby="exampleModalCenter"
 														aria-hidden="true">
@@ -106,7 +109,7 @@
 																		class="btn btn-danger btn-sm" type="button"><i
 																			class="fa fa-trash"></i> Hapus</a>
 																</div>
-															</div>
+															</div> -->
 
 												</td>
 											</tr>
@@ -193,7 +196,7 @@
 																<div class="modal-footer">
 																	<button class="btn btn-primary btn-sm" type="button"
 																		data-bs-dismiss="modal">Batal</button>
-																	<a href="<?php echo base_url('keuangan/delete/' . $br['id_keuangan']) ?>"
+																	<a href="<?php echo base_url('keuangan/deletekasanggota/' . $br['id_keuangan']) ?>"
 																		class="btn btn-danger btn-sm" type="button"><i
 																			class="fa fa-trash"></i> Hapus</a>
 																</div>
@@ -289,7 +292,7 @@
 																<div class="modal-footer">
 																	<button class="btn btn-primary btn-sm" type="button"
 																		data-bs-dismiss="modal">Batal</button>
-																	<a href="<?php echo base_url('keuangan/delete/' . $kgt['id_keuangan']) ?>"
+																	<a href="<?php echo base_url('keuangan/deletekasanggota/' . $kgt['id_keuangan']) ?>"
 																		class="btn btn-danger btn-sm" type="button"><i
 																			class="fa fa-trash"></i> Hapus</a>
 																</div>
