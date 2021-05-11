@@ -233,24 +233,35 @@
                                         href="<?= base_url('adminkorwil/kegiatan'); ?>"><i data-feather="user">
                                         </i><span> Kegiatan</span></a>
                                 </li>
-                                <li class="sidebar-list"
-                                    <?= $this->uri->segment(2) == 'kegiatan' ? 'class="sidebar-submenu"' : '' ?>>
-                                    <a class="sidebar-link sidebar-title link-nav"
-                                        href="<?= base_url('donasi/datadonasi'); ?>"><i data-feather="airplay">
-                                        </i><span> Donasi</span></a>
+                                <li class="sidebar-list">
+                                    <a class="sidebar-link sidebar-title" href="#"><i
+                                            data-feather="file-plus"></i><span>Donasi</span></a>
+                                    <ul class="sidebar-submenu">
+                                        <li><a href="<?= base_url('donasi/datadonasi'); ?>">Donasi</a>
+                                        </li>
+
+                                        <li><a href="<?= base_url('donasi_non/datadonasinonanggota'); ?>">Donasi Non Anggota</a></li>
+                                        <li><a href="layout-rtl.html">Laporan Keuangan</a></li>
+                                    </ul>
                                 </li>
-                                <li class="sidebar-list"
-                                    <?= $this->uri->segment(2) == 'kegiatan' ? 'class="sidebar-submenu"' : '' ?>>
-                                    <a class="sidebar-link sidebar-title link-nav"
-                                        href="<?= base_url('donasi_non/datadonasinonanggota'); ?>"><i data-feather="airplay">
-                                        </i><span> Donasi Non Anggota</span></a>
-                                </li>
-                                <li class="sidebar-list"
+                                <li class="sidebar-list">
+                                    <a class="sidebar-link sidebar-title" href="#"><i
+                                            data-feather="file-plus"></i><span>Kas</span></a>
+                                    <ul class="sidebar-submenu">
+                                        <li><a href="<?= base_url('adminkorwil/kas'); ?>">Tabel Keuangan</a>
+                                        </li>
+
+                                        <li><a href="<?= base_url('Adminkorwil/tabeltotalKeuangan'); ?>">Total
+                                                Keuangan</a></li>
+                                        <li><a href="layout-rtl.html">Laporan Keuangan</a></li>
+                                    </ul>
+                                </li> 
+                            <!-- <li class="sidebar-list"
                                     <?= $this->uri->segment(2) == 'kegiatan' ? 'class="sidebar-submenu"' : '' ?>>
                                     <a class="sidebar-link sidebar-title link-nav"
                                         href="<?= base_url('adminkorwil/kas'); ?>"><i data-feather="list">
                                         </i><span> Kas </span></a>
-                                </li>
+                                </li> -->
                                 <!-- <li class="sidebar-list"
                                     <?= $this->uri->segment(2) == 'notifikasi' ? 'class="sidebar-submenu"' : '' ?>>
                                     <a class="sidebar-link sidebar-title link-nav"

@@ -1,8 +1,8 @@
 <div class="container-fluid">
-
-<div class="card">
+<br> <br>
+<div class="card col-sm-6" style="margin-left:200px;">
     <div class="card-header">
-        <h5>Tambah Keuangan Senyum Desa</h5>
+        <h6 class="text-success" style="text-align:center;">Tambah Keuangan Senyum Desa</h6>
     </div>
     <form class="form theme-form" action="<?php echo base_url('adminkorwil/prosesTambahKeuangan') ?>" method="POST">
         <div class="card-body">
@@ -53,7 +53,7 @@
                 </div>
             </div>
 
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col">
                     <div class="mb-3">
                         <label class="form-label" for="cabang">Cabang</label>
@@ -65,7 +65,7 @@
                         </select>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <div class="row">
                 <div class="col">
