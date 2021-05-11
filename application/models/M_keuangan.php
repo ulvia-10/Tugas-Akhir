@@ -4,6 +4,28 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class M_keuangan extends CI_Model
 {
+
+
+    // pengecekan pembayaran bulanan 
+    function cekPembayaranBulanan() {
+
+        $id_profile = $this->session->userdata('sess_id_profile');
+        $bulan      = date('F');
+        $tahun      = date('Y');
+
+        $sql = "SELECT * FROM `data_keuangan` 
+                WHERE 
+                id_profile = '$id_profile' AND 
+                MONTHNAME(tgl_bayar) = '$bulan' AND YEAR(tgl_bayar) = '$tahun' AND 
+                status_verif = 'baru'";
+
+        return $query = $this->db->query( $sql )->num_rows();
+        // output : 0 - 1
+    }
+
+
+
+
     public function getallkeuangan()
     {
         $sql="SELECT data_keuangan.*, master_cabang.*,akun_profile.id_profile,akun_profile.full_name
@@ -140,7 +162,7 @@ class M_keuangan extends CI_Model
         $id_cabang = $this->session->userdata('sess_id_cabang');
         $data = array
         (
-            'id_profile' => $this->input->post('full_name'),
+            'id_profile' => $id_profile,
             'id_cabang' => $id_cabang,
             'judul'  => $this->input->post('judul'),
             'nama_bank'  => $this->input->post('nama_bank'),
@@ -234,11 +256,11 @@ class M_keuangan extends CI_Model
         }
         public function getanggotaByCabang(){
             $id_cabang = $this->session->userdata('sess_id_cabang');
-            $sql=" SELECT data_keuangan.*,master_cabang.*,akun_profile.full_name
-            FROM data_keuangan
-            JOIN master_cabang ON master_cabang.id_cabang = data_keuangan.id_cabang
-            JOIN akun_profile ON akun_profile.id_profile = data_keuangan.id_profile
-            WHERE data_keuangan.id_cabang = '$id_cabang' AND akun_profile.level = 'anggota'";
+            $sql="SELECT master_cabang.*,akun_profile.full_name
+                    FROM akun_profile
+                    JOIN master_cabang ON master_cabang.id_cabang = akun_profile.id_cabang
+                    WHERE akun_profile.id_cabang = '$id_cabang' AND akun_profile.level = 'anggota'";
+
             return $this->db->query($sql)->result_array();
         }
 

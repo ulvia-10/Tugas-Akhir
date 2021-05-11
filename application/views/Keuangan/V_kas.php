@@ -33,6 +33,7 @@
 											<tr>
 												<th>No</th>
 												<th>Tanggal Bayar</th>
+												<th>Bulan</th>
 												<th>Nama</th>
 												<th>Nominal</th>
 												<th>Status</th>
@@ -46,6 +47,7 @@
 											<tr>
 												<td><?=$no++?></td>
 												<td><?= date('d-m-Y',strtotime($blm["tgl_bayar"])); ?></td>
+												<td><?php echo date('F', strtotime( $blm['tgl_bayar'] )); ?></td>
 												<td><?= $blm["full_name"]; ?></td>
 												<?php
 												$nominal=  $blm["nominal"]

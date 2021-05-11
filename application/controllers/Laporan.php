@@ -194,12 +194,19 @@ function exportNeraca() {
                 ->setKeywords('office 2007 openxml php')
                 ->setCategory('Test result file');
 
-    echo '<b>Asset</b> <br><br>';
     // Cntoh memberikan set nilai di kolom A1 dengan nilai "Mencoba"
     $spreadsheet->setActiveSheetIndex(0)->setCellValue('A1', 'Mencoba');
     $spreadsheet->getActiveSheet()->mergeCells('A1:M1');
     $spreadsheet->getActiveSheet()->getStyle('A1')->getFont()->setBold(true); // set bold
     $spreadsheet->getActiveSheet()->getStyle('A1')->getFont()->setSize(14); // set font
+
+
+     // Cntoh memberikan set nilai di kolom A1 dengan nilai "Mencoba"
+     $spreadsheet->setActiveSheetIndex(0)->setCellValue('A2', $jumlahAsset);
+     $spreadsheet->getActiveSheet()->mergeCells('A1:M1');
+     $spreadsheet->getActiveSheet()->getStyle('A1')->getFont()->setBold(true); // set bold
+     $spreadsheet->getActiveSheet()->getStyle('A1')->getFont()->setSize(14); // set font
+
 
     echo '&emsp;&emsp;<b>Asset Lancar</b> <br>';
 

@@ -10,6 +10,7 @@ class Kegiatan extends CI_Controller
 		$this->load->model('M_kegiatan');
 		$this->load->model('M_dataakun');
 		$this->load->model('M_rekruitment');
+		$this->load->model('M_keuangan');
 		$this->load->library('form_validation');
 
 		    // pengecekan sesi 
@@ -96,9 +97,11 @@ public function index()
 
 			'namafolder'	=> "anggota",
 			'namafileview'	=> "V_history_pembayaran",
-			'title'         => "Kas | Senyum Desa"
+			'title'         => "Kas | Senyum Desa",
 		);
 		$data['kas']= $this->M_kegiatan->getDataKas();
+		$data['cektagihan'] = $this->M_keuangan->cekPembayaranBulanan();
+
 		//disesuaikan sama dengan nama view$ 
 		$this->load->view('templating/template_anggotanew', $data);
 	}

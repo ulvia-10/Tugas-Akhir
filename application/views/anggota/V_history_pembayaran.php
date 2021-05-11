@@ -13,8 +13,18 @@
     <div class="card">
         <div class="card-body">
         <!-- alert action -->
-        <a href="<?= base_url(); ?>keuangan/tambahbuktikas/" class="btn btn-primary btn-sm mb-3">
-                    <i class="fa fa-plus" aria-hidden="true"></i>Upload Bukti</a>
+
+        <?php
+
+            if ( $cektagihan == 0 ) {
+        ?>
+            <a href="<?= base_url(); ?>keuangan/tambahbuktikas/" class="btn btn-primary btn-sm mb-3">
+                    <i class="fa fa-plus" aria-hidden="true"></i>Upload Bukti
+            </a>
+
+        <?php } else { ?>
+            <marquee behavior="" direction="">Anda sudah membayar pada bulan ini</marquee>
+        <?php } ?>
             <div class="table-responsive">
             <!-- flash data -->
                 <?php echo $this->session->flashdata('flash-data')?>

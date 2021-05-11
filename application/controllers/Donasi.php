@@ -167,7 +167,8 @@ class Donasi extends CI_Controller
               // // variable
           'dataAnggota'    =>   $dataanggotaCabang
         );
-      
+        
+        
         $this->load->view('templating/korwil/Template_korwil', $data);
     }
 

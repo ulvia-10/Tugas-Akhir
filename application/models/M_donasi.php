@@ -159,7 +159,7 @@ class M_donasi extends CI_Model
         $id_cabang = $this->session->userdata('sess_id_cabang');
         $data = array
         (
-            'id_profile'  => $this->input->post('full_name'),
+            'id_profile'  => $id_profile,
             'id_cabang' => $id_cabang,
             'status_verif' => "baru",
             'via'  => $this->input->post('via'),
