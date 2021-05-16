@@ -81,9 +81,13 @@
                                     $warna = "secondary";
                                 } 
                                 ?>
-                          <td> <span class="badge badge-<?=$warna;?>"><?= $keterangan; ?></td></span>
-                            
-                                <td><span class="badge badge-secondary"><i class="fa fa-eye" aria-hidden="true"></i> </span> </td>
+                          <td> <span class="badge badge-<?=$warna;?>"><?= $keterangan; ?></span></td>
+                                <td>
+                                <a href="<?= base_url(); ?>keuangan/detailkasanggota/<?= $ks['id_keuangan']; ?>"
+                                    class="badge badge-primary">
+                                    <i class="fa fa-eye" aria-hidden="true"></i></a></a>
+
+                                </td>
 
                                     <?php
                                 }

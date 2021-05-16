@@ -185,7 +185,7 @@
 					
 					<a href="<?= base_url(); ?>donasi_non/tambahbuktidonasinonkorwil/" class="btn btn-secondary btn-sm mb-3">
 							<i class="fa fa-plus" aria-hidden="true"></i> Tambah Data</a> <br>
-							<a href="<?= base_url(); ?>laporan/indexdonasi/" class="btn btn-success mb-3" style="margin-left:700px;">
+							<a href="<?= base_url(); ?>laporan/exportdonasi/" class="btn btn-success mb-3" style="margin-left:700px;">
 						<i class="fa fa-print" aria-hidden="true"></i> Cetak Data</a> <br>
 					<table class="display" id="basic-1" style="text-align:center;">
 						<thead>
