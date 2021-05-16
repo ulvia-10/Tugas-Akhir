@@ -194,7 +194,6 @@ public function export()
 
         
         // tulisan total KELUAR 
-
         // tulisan 
         $spreadsheet->setActiveSheetIndex(0) ->setCellValue('J5', 'Total Kas Keluar : ');
         $spreadsheet->getActiveSheet()->getStyle('J5')->getFont()->setBold(true); // set bold
@@ -715,24 +714,15 @@ public function exportLabarugi(){
         $bulan     = "May"; 
         // variable 
         $ambilAssetKeluar = $this->M_laporan->assetKas($bulan, $id_cabang, "keluar");
+        $ambildonasi = $this->M_laporan->jumlahdonasi();
+
+        $ambilKasKeluar = $this->M_laporan->dataassetKas($bulan, $id_cabang, "keluar");
         $ambilDonasiMasuk = $this->M_laporan->assetDonasi($bulan, $id_cabang);
 
-        // $kasKeluar = $this->M_laporan->dataKasKeluar($bulan, $id_cabang);
 
         $jumlahDonasi = 0;
         $jumlahKewajiban = 0; 
-    
-        // AMBIL DONASI 
-        if ( $ambilDonasiMasuk->num_rows() > 0 ) {
 
-            foreach ( $ambilDonasiMasuk->result_array() AS $asset ) {
-
-                $jumlahDonasi = $jumlahDonasi + $asset['jml_donasi'];
-            }
-
-        }
-        $ambildonasi = $this->M_laporan->jumlahdonasi();
-        
         $jumlahdonasi = 0;
         if ( $ambildonasi->num_rows() > 0 ) {
 
@@ -750,6 +740,8 @@ public function exportLabarugi(){
                 $jumlahKewajiban = $jumlahKewajiban + $kewajiban['nominal'];
             }
         }
+        //ambil data kas 
+      
 
           // set borders all borders 
           $styleBorders = [
@@ -761,15 +753,15 @@ public function exportLabarugi(){
             ],
         ];
 
-    $spreadsheet = new Spreadsheet();
-    // Set document properties
-    $spreadsheet->getProperties()->setCreator('Admin Korwil - Senyum Desa')
-                ->setLastModifiedBy('Admin Korwil - Senyum Desa')
-                ->setTitle('Office 2007 XLSX Test Document')
-                ->setSubject('Office 2007 XLSX Test Document')
-                ->setDescription('Test document for Office 2007 XLSX, generated using PHP classes.')
-                ->setKeywords('office 2007 openxml php')
-                ->setCategory('Test result file');
+                $spreadsheet = new Spreadsheet();
+                // Set document properties
+                $spreadsheet->getProperties()->setCreator('Admin Korwil - Senyum Desa')
+                            ->setLastModifiedBy('Admin Korwil - Senyum Desa')
+                            ->setTitle('Office 2007 XLSX Test Document')
+                            ->setSubject('Office 2007 XLSX Test Document')
+                            ->setDescription('Test document for Office 2007 XLSX, generated using PHP classes.')
+                            ->setKeywords('office 2007 openxml php')
+                            ->setCategory('Test result file');
 
                 $spreadsheet->getDefaultStyle()->getFont()->setName('Calibri');
                 $spreadsheet->setActiveSheetIndex(0)->setCellValue('A2', 'YAYASAN SENYUM DESA INDONESIA');
@@ -819,15 +811,21 @@ public function exportLabarugi(){
 
 
                 // result array pengeluaran 
-                // $baris = 10; 
-                // $i = 1;
-                // foreach ($ambilAssetKeluar->result_array() AS $kas){
-                //     // print_r($kas);  
-                //     // echo'<hr>';
-                //     $spreadsheet->setActiveSheetIndex(0)->setCellValue('A'.$baris, $kas->judul);
-                //     $spreadsheet->setActiveSheetIndex(0)->setCellValue('C'.$baris, $kas->nominal);
-                // }
-                // $i++;
+                $baris = 10; 
+                $i = 1;
+                foreach ($ambilKasKeluar as $kas){
+                    // judul
+                    $spreadsheet->setActiveSheetIndex(0)->setCellValue('A'.$baris, $kas["judul"]);
+                    $spreadsheet->getActiveSheet()->getStyle('A8:B16')->applyFromArray($styleBorders);
+
+                    // nominal 
+                    $spreadsheet->setActiveSheetIndex(0)->setCellValue('C'.$baris, 'Rp.'.number_format($kas["nominal"], 2).'');
+                    $spreadsheet->getActiveSheet()->getStyle('C'.$baris) ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
+                    $spreadsheet->getActiveSheet()->getStyle('C8:C16')->applyFromArray($styleBorders);
+                // increment 
+                $baris++;
+                }
+              
 
                 $spreadsheet->setActiveSheetIndex(0)->setCellValue('A17', 'Jumlah Beban');
                 $spreadsheet->getActiveSheet()->getStyle('A17') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);

@@ -46,12 +46,19 @@ public function jumlahdonasi()
     // 
     return $this->db->query($sql);
 }
+
 function assetKas($bulan, $id_cabang, $jenis) {
 
     $sql = 'SELECT * FROM `data_keuangan` 
             WHERE MONTHNAME(tgl_bayar) = "'.$bulan.'" AND  id_cabang = '.$id_cabang.' AND jenis_keuangan = "'.$jenis.'"';
     return $this->db->query($sql);
+}
 
+function dataassetKas($bulan, $id_cabang, $jenis) {
+
+    $sql = 'SELECT * FROM `data_keuangan` 
+            WHERE MONTHNAME(tgl_bayar) = "'.$bulan.'" AND  id_cabang = '.$id_cabang.' AND jenis_keuangan = "'.$jenis.'"';
+    return $this->db->query($sql)->result_array();
 }
 // asset donasi 
 function assetDonasi($bulan, $id_cabang){
