@@ -68,19 +68,39 @@ function assetDonasi($bulan, $id_cabang){
 }
 
 function dataKasKeluar($bulan, $id_cabang){
-    $sql="SELECT * FROM data_keuangan 
+    $sql= "SELECT * FROM data_keuangan 
     WHERE data_keuangan.jenis_keuangan = 'keluar' AND data_keuangan.id_cabang = '$id_cabang' AND MONTHNAME(tgl_bayar) = '.$bulan.'";
     return $this->db->query($sql)->result();
 }
 
-// function labarugi($bulan, $id_cabang, $jenis){
-//     // session id_cabang 
-//     $id_cabang = $this->session->userdata('sess_id_cabang');
+function Kas($tahun){
+    $sql = " 	 SELECT data_keuangan.* , master_cabang.name_cabang, master_cabang.status_cabang, SUM(data_keuangan.nominal) AS jumlah
+    FROM data_keuangan 
+    JOIN master_cabang ON master_cabang.id_cabang = data_keuangan.id_cabang
+    WHERE YEAR(tgl_bayar) = '$tahun' AND master_cabang.status_cabang = 'active'
+    GROUP BY master_cabang.name_cabang";
 
-//     $sql="SELECT data_donasi.*,master_cabang.*
-//     FROM data_donasi 
-//     JOIN master_cabang ON master_cabang.id_cabang = data_keuangan.id_cabang 
-//     WHERE master_cabang.id_cabang = '$id_cabang' AND MONTHNAME(tgl_donasi) = '.$bulan.'";
-//     return $this->db->query($sql);
+    return $this->db->query($sql)->result();
+}
+function totalKas($tahun, $jenis){
+    $sql="SELECT data_keuangan.* , master_cabang.name_cabang, master_cabang.status_cabang
+    FROM data_keuangan 
+    JOIN master_cabang ON master_cabang.id_cabang = data_keuangan.id_cabang
+    WHERE YEAR(tgl_bayar) = '$tahun' AND master_cabang.status_cabang = 'active' AND data_keuangan.jenis_keuangan = '$jenis'
+    GROUP BY master_cabang.name_cabang"; 
+    return $this->db->query($sql);
+}
+
+// function KasKeluar(){
+
 // }
+function Donasi($tahun){
+    $sql ="SELECT data_donasi.*, master_cabang.name_cabang, master_cabang.status_cabang,  SUM(data_donasi.jml_donasi) as jumlah 
+    FROM data_donasi 
+    JOIN master_cabang ON master_cabang.id_cabang = data_donasi.id_cabang 
+    WHERE YEAR(tgl_donasi) = 2021 AND master_cabang.status_cabang = 'active'
+    GROUP BY master_cabang.name_cabang";
+    return $this->db->query($sql);
+}
+
 }

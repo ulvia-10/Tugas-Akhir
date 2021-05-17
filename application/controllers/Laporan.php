@@ -10,7 +10,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     use PhpOffice\PhpSpreadsheet\Style\Border;
     use PhpOffice\PhpSpreadsheet\Style\Color;
 
-// End load library phpspreadsheet
+    // End load library phpspreadsheet
+
 
 class Laporan extends CI_Controller {
 
@@ -47,7 +48,9 @@ class Laporan extends CI_Controller {
             );
             $this->load->view('donasi/V_laporan_donasi', $data, FALSE);
     }
+
 // Export ke excel laporan kas 
+// di korwil
 public function export()
 {       
         // buat varaibel ambil dari model M_laporan.php
@@ -73,6 +76,7 @@ public function export()
 
         }
 
+        //pengecekan asset keluar dari kas  
         if ( $ambilAssetKeluar->num_rows() > 0 ) {
 
             foreach ( $ambilAssetKeluar->result_array() AS $kewajiban ) {
@@ -93,7 +97,7 @@ public function export()
         ->setKeywords('office 2007 openxml php')
         ->setCategory('Test result file');
 
-        // style outline 
+        // style outline -> change outline 
         $styleArray = [
             'borders' => [
                 'outline' => [
@@ -103,7 +107,7 @@ public function export()
             ],
         ];
 
-        // style all borders 
+        // style all borders -> change allBorders 
         $styleBorders  = [
             'borders' => [
                 'allBorders' => [
@@ -505,7 +509,7 @@ function exportNeraca() {
         $id_cabang = $this->session->userdata('sess_id_cabang');
         // $bulan     = date('F'); // default bulan ini 
         $bulan     = "May"; 
-        $tahun = 2021;// default bulan ini 
+        $tahun     =  2021;// default bulan ini 
         // $bulan = $this->input->post('bulan');
 
 
@@ -754,6 +758,7 @@ public function exportLabarugi(){
         ];
 
                 $spreadsheet = new Spreadsheet();
+              
                 // Set document properties
                 $spreadsheet->getProperties()->setCreator('Admin Korwil - Senyum Desa')
                             ->setLastModifiedBy('Admin Korwil - Senyum Desa')
@@ -810,9 +815,11 @@ public function exportLabarugi(){
                 $spreadsheet->getActiveSheet()->getStyle('A9')->getFont()->setSize(11); // set font
 
 
-                // result array pengeluaran 
-                $baris = 10; 
+                // RESULT ARRAY PENGELUARAN KAS 
+                //nOTE: yang di increment adalah $baris nya 
                 $i = 1;
+                $baris = 10; 
+             
                 foreach ($ambilKasKeluar as $kas){
                     // judul
                     $spreadsheet->setActiveSheetIndex(0)->setCellValue('A'.$baris, $kas["judul"]);
@@ -921,6 +928,295 @@ public function exportLabarugi(){
                 $writer->save('php://output');
                 exit;
             }
+    // di admin pusat yang cuma 1 terdiri dari bbrp cabang 
+    public function Kas(){
+            // inisialisasi tahun 
+             $tahun = 2021; 
+
+            // create new spreadsheets 
+            $spreadsheet = new Spreadsheet();
+
+              // Set document properties
+                $spreadsheet->getProperties()->setCreator('Admin Korwil - Senyum Desa')
+                            ->setLastModifiedBy('Admin Korwil - Senyum Desa')
+                            ->setTitle('Office 2007 XLSX Test Document')
+                            ->setSubject('Office 2007 XLSX Test Document')
+                            ->setDescription('Test document for Office 2007 XLSX, generated using PHP classes.')
+                            ->setKeywords('office 2007 openxml php')
+                            ->setCategory('Test result file');
+
+            // style 
+            // set borders all borders 
+            $styleBorders = [
+                'borders' => [
+                    'outline' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                        'color' => ['argb' => '00000000'],
+                    ],
+                ],
+            ];
+
+            $spreadsheet->getDefaultStyle()->getFont()->setName('Calibri');
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('A1', 'YAYASAN SENYUM DESA INDONESIA');
+            $spreadsheet->getActiveSheet()->mergeCells('A1:K1');
+            $spreadsheet->getActiveSheet()->getStyle('A1') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+            $spreadsheet->getActiveSheet()->getStyle('A1')->getFont()->setBold(true); // set bold
+            $spreadsheet->getActiveSheet()->getStyle('A1')->getFont()->setSize(13); // set font
+
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('A2', 'LAPORAN KAS TAHUNAN '.$tahun );
+            $spreadsheet->getActiveSheet()->mergeCells('A2:K2');
+            $spreadsheet->getActiveSheet()->getStyle('A2') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+            $spreadsheet->getActiveSheet()->getStyle('A2')->getFont()->setBold(true); // set bold
+            $spreadsheet->getActiveSheet()->getStyle('A2')->getFont()->setSize(13); // set font
+
+            // title 
+
+            // NOMOR 
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('A4', 'No');
+            $spreadsheet->getActiveSheet()->getStyle('A4') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+            $spreadsheet->getActiveSheet()->getStyle('A4')->applyFromArray($styleBorders);
+            $spreadsheet->getActiveSheet()->getStyle('A4')->getFont()->setBold(true); // set bold
+
+            // NAMA CABANG 
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('B4', 'Nama Cabang');
+            $spreadsheet->getActiveSheet()->getStyle('B4') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+            $spreadsheet->getActiveSheet()->getStyle('B4')->applyFromArray($styleBorders);
+            $spreadsheet->getActiveSheet()->getStyle('B4')->getFont()->setBold(true); // set bold
+
+            // STATUS CABANG 
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('C4', 'Status Cabang');
+            $spreadsheet->getActiveSheet()->getStyle('C4') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+            $spreadsheet->getActiveSheet()->getStyle('C4')->applyFromArray($styleBorders);
+            $spreadsheet->getActiveSheet()->getStyle('C4')->getFont()->setBold(true); // set bold
+
+            //TOTAL KAS 
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('D4', 'Total Kas');
+            $spreadsheet->getActiveSheet()->getStyle('D4') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+            $spreadsheet->getActiveSheet()->getStyle('D4')->applyFromArray($styleBorders);
+            $spreadsheet->getActiveSheet()->getStyle('D4')->getFont()->setBold(true); // set bold
+
+
+              // inisialisasi variabel 
+            $ambilMasuk = $this->M_laporan->totalKas($tahun, "masuk");
+            $ambilKeluar = $this->M_laporan->totalKas($tahun, "keluar");
+
+            $jumlahMasuk = 0;
+            $jumlahKeluar = 0;
+    
+    
+            if ( $ambilMasuk->num_rows() > 0 ) {
+    
+                foreach ( $ambilMasuk->result_array() AS $asset ) {
+    
+                    $jumlahMasuk = $jumlahMasuk + $asset['nominal'];
+                }
+    
+            }
+    
+    
+            if ( $ambilKeluar->num_rows() > 0 ) {
+    
+                foreach ( $ambilKeluar->result_array() AS $kewajiban ) {
+    
+                    $jumlahKeluar = $jumlahKeluar + $kewajiban['nominal'];
+                }
+            }
+            $bersih = $jumlahMasuk - $jumlahKeluar;
+            // $ambil = $this->M_laporan->Kas($tahun);
+            // SET NILAI -> result array 
+            $i = 1;
+            $baris = 5; 
+            
+            foreach($ambilMasuk->result_array() as $kas) {
+             // no 
+             $spreadsheet->setActiveSheetIndex(0)->setCellValue('A'.$baris, $i++);
+             $spreadsheet->getActiveSheet()->getStyle('A'.$baris)->applyFromArray($styleBorders);
+             $spreadsheet->getActiveSheet()->getStyle('A'.$baris) ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+      
+              // nama cabang 
+              $spreadsheet->setActiveSheetIndex(0)->setCellValue('B'.$baris, $kas["name_cabang"]);
+              $spreadsheet->getActiveSheet()->getStyle('B'.$baris) ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+              $spreadsheet->getActiveSheet()->getStyle('B'.$baris)->applyFromArray($styleBorders);
+
+                // STATUS_CABANG 
+                $spreadsheet->setActiveSheetIndex(0)->setCellValue('C'.$baris, $kas["status_cabang"]);
+                $spreadsheet->getActiveSheet()->getStyle('C'.$baris)->applyFromArray($styleBorders);
+                $spreadsheet->getActiveSheet()->getStyle('C'.$baris) ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+
+              //  TOTAL 
+              $spreadsheet->setActiveSheetIndex(0)->setCellValue('D'.$baris,'Rp.'.number_format($bersih, 2).'');
+              $spreadsheet->getActiveSheet()->getStyle('D'.$baris) ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
+              $spreadsheet->getActiveSheet()->getStyle('D'.$baris)->applyFromArray($styleBorders);
+
+            $baris++;
+            } 
+
+
+            // set auto size 
+            $spreadsheet->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
+            $spreadsheet->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
+            $spreadsheet->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
+            $spreadsheet->getActiveSheet()->getColumnDimension('D')->setAutoSize(true);
+
+
+            
+                // component 
+               // Rename worksheet
+               $spreadsheet->getActiveSheet()->setTitle('Kas Tahunan '.date('d-m-Y H'));
+
+               // Set active sheet index to the first sheet, so Excel opens this as the first sheet
+               $spreadsheet->setActiveSheetIndex(0);
+
+               // Redirect output to a client’s web browser (Xlsx)
+               header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+               header('Content-Disposition: attachment;filename="Laporan Kas Tahunan.xlsx"');
+               header('Cache-Control: max-age=0');
+
+               // If you're serving to IE 9, then the following may be needed
+               header('Cache-Control: max-age=1');
+
+               // If you're serving to IE over SSL, then the following may be needed
+               header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+               header('Last-Modified: '. gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
+               header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+               header('Pragma: public'); // HTTP/1.0
+
+               $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+               $writer->save('php://output');
+               exit;
+
+
+    }
+
+    public function Donasi(){
+          // inisialisasi tahun 
+          $tahun = 2021; 
+          $ambildataDonasi = $this->M_laporan->Donasi($tahun);
+
+            // create new spreadsheets 
+            $spreadsheet = new Spreadsheet();
+
+              // Set document properties
+                $spreadsheet->getProperties()->setCreator('Admin Korwil - Senyum Desa')
+                            ->setLastModifiedBy('Admin Korwil - Senyum Desa')
+                            ->setTitle('Office 2007 XLSX Test Document')
+                            ->setSubject('Office 2007 XLSX Test Document')
+                            ->setDescription('Test document for Office 2007 XLSX, generated using PHP classes.')
+                            ->setKeywords('office 2007 openxml php')
+                            ->setCategory('Test result file');
+
+            // style 
+            // set borders all borders 
+            $styleBorders = [
+                'borders' => [
+                    'outline' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                        'color' => ['argb' => '00000000'],
+                    ],
+                ],
+            ];
+
+              // set auto size 
+              $spreadsheet->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
+              $spreadsheet->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
+              $spreadsheet->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
+              $spreadsheet->getActiveSheet()->getColumnDimension('D')->setAutoSize(true);
+
+            $spreadsheet->getDefaultStyle()->getFont()->setName('Calibri');
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('A1', 'YAYASAN SENYUM DESA INDONESIA');
+            $spreadsheet->getActiveSheet()->mergeCells('A1:K1');
+            $spreadsheet->getActiveSheet()->getStyle('A1') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+            $spreadsheet->getActiveSheet()->getStyle('A1')->getFont()->setBold(true); // set bold
+            $spreadsheet->getActiveSheet()->getStyle('A1')->getFont()->setSize(13); // set font
+
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('A2', 'LAPORAN DONASI TAHUNAN '.$tahun );
+            $spreadsheet->getActiveSheet()->mergeCells('A2:K2');
+            $spreadsheet->getActiveSheet()->getStyle('A2') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+            $spreadsheet->getActiveSheet()->getStyle('A2')->getFont()->setBold(true); // set bold
+            $spreadsheet->getActiveSheet()->getStyle('A2')->getFont()->setSize(13); // set font
+
+            // title 
+
+            // NOMOR 
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('A4', 'No');
+            $spreadsheet->getActiveSheet()->getStyle('A4') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+            $spreadsheet->getActiveSheet()->getStyle('A4')->applyFromArray($styleBorders);
+            $spreadsheet->getActiveSheet()->getStyle('A4')->getFont()->setBold(true); // set bold
+
+            // NAMA CABANG 
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('B4', 'Nama Cabang');
+            $spreadsheet->getActiveSheet()->getStyle('B4') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+            $spreadsheet->getActiveSheet()->getStyle('B4')->applyFromArray($styleBorders);
+            $spreadsheet->getActiveSheet()->getStyle('B4')->getFont()->setBold(true); // set bold
+
+            // STATUS CABANG 
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('C4', 'Status Cabang');
+            $spreadsheet->getActiveSheet()->getStyle('C4') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+            $spreadsheet->getActiveSheet()->getStyle('C4')->applyFromArray($styleBorders);
+            $spreadsheet->getActiveSheet()->getStyle('C4')->getFont()->setBold(true); // set bold
+
+            //TOTAL KAS 
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('D4', 'Total Donasi Masuk');
+            $spreadsheet->getActiveSheet()->getStyle('D4') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+            $spreadsheet->getActiveSheet()->getStyle('D4')->applyFromArray($styleBorders);
+            $spreadsheet->getActiveSheet()->getStyle('D4')->getFont()->setBold(true); // set bold
+
+
+            // set nilai 
+            $i = 1;
+            $baris = 5; 
+            
+            foreach($ambildataDonasi->result_array() as $kas) {
+                  // no 
+             $spreadsheet->setActiveSheetIndex(0)->setCellValue('A'.$baris, $i++);
+             $spreadsheet->getActiveSheet()->getStyle('A'.$baris)->applyFromArray($styleBorders);
+             $spreadsheet->getActiveSheet()->getStyle('A'.$baris) ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+      
+              // nama cabang 
+              $spreadsheet->setActiveSheetIndex(0)->setCellValue('B'.$baris, $kas["name_cabang"]);
+
+              $spreadsheet->getActiveSheet()->getStyle('B'.$baris) ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+              $spreadsheet->getActiveSheet()->getStyle('B'.$baris)->applyFromArray($styleBorders);
+
+                // STATUS_CABANG 
+                $spreadsheet->setActiveSheetIndex(0)->setCellValue('C'.$baris, $kas["status_cabang"]);
+                $spreadsheet->getActiveSheet()->getStyle('C'.$baris)->applyFromArray($styleBorders);
+                $spreadsheet->getActiveSheet()->getStyle('C'.$baris) ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+
+              //  TOTAL 
+              $spreadsheet->setActiveSheetIndex(0)->setCellValue('D'.$baris,'Rp.'.number_format($kas["jumlah"], 2).'');
+              $spreadsheet->getActiveSheet()->getStyle('D'.$baris) ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
+              $spreadsheet->getActiveSheet()->getStyle('D'.$baris)->applyFromArray($styleBorders);
+
+                $baris++;
+            }
+                  // component 
+                   // Rename worksheet
+                   $spreadsheet->getActiveSheet()->setTitle('Donasi Tahunan '.date('d-m-Y H'));
+
+                   // Set active sheet index to the first sheet, so Excel opens this as the first sheet
+                   $spreadsheet->setActiveSheetIndex(0);
+
+                   // Redirect output to a client’s web browser (Xlsx)
+                   header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+                   header('Content-Disposition: attachment;filename="Laporan Kas Tahunan.xlsx"');
+                   header('Cache-Control: max-age=0');
+
+                   // If you're serving to IE 9, then the following may be needed
+                   header('Cache-Control: max-age=1');
+
+                   // If you're serving to IE over SSL, then the following may be needed
+                   header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+                   header('Last-Modified: '. gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
+                   header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+                   header('Pragma: public'); // HTTP/1.0
+
+                   $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+                   $writer->save('php://output');
+                   exit;
+
+    }
+
 
 }
 
