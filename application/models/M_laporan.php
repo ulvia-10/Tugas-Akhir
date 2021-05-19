@@ -54,9 +54,26 @@ function assetKas($tahun, $id_cabang, $jenis) {
     return $this->db->query($sql);
 }
 function kasbulanan($bulan, $id_cabang, $jenis, $tahun){
-    $sql = "SELECT * FROM `data_keuangan` 
-    WHERE MONTHNAME(tgl_bayar) = '.$bulan.' AND  id_cabang = '.$id_cabang.' AND jenis_keuangan = '.$jenis.' AND YEAR(tgl_bayar) = '.$tahun.'";
-    return $this->db->query($sql);
+    // $sql = "SELECT * FROM `data_keuangan` 
+    // WHERE MONTHNAME(tgl_bayar) = '.$bulan.' AND  id_cabang = '.$id_cabang.' 
+    // AND jenis_keuangan = '.$jenis.' AND YEAR(tgl_bayar) = '.$tahun.'";
+    // $query =  $this->db->query($sql);
+
+    $sqlku = "SELECT * FROM `data_keuangan` WHERE 
+            MONTHNAME(tgl_bayar) = '$bulan' AND 
+            id_cabang = '$id_cabang' AND 
+            jenis_keuangan = '$jenis' AND 
+            YEAR(tgl_bayar) = '$tahun'";
+
+    $query = $this->db->query( $sqlku );
+
+
+    // echo $bulan.' '.$id_cabang.' '.$jenis.' '.$tahun;
+    // echo " | hasil ". $query->num_rows();
+
+    // echo '<hr>';
+
+    return $query;
 }
 
 function dataassetKas($tahun, $id_cabang, $jenis) {

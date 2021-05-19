@@ -134,17 +134,9 @@ public function export()
             }
 
         }
-        // if ( sizeof($ambilAssetMasuk) > 0  ) {
-        //     $jumlahAsset = 0;
-        //     for ( $i = 0; $i<sizeof($ambilAssetMasuk); $i++) {
-        //     //    $a= (int)$ambildonasi[$i]->jml_donasi;
-        //     //     var_dump($a);
-        //         $jumlahAsset = $jumlahAsset + (int)$ambilAssetMasuk[$i]->nominal;
-        //     }
 
-        // }else{
-        //     $jumlahAsset = 0;
-        // }
+
+     
 
         // pengecekan asset keluar dari kas  
         if ( $ambilAssetKeluar->num_rows() > 0 ) {
@@ -155,17 +147,6 @@ public function export()
             }
         }
 
-        // if ( sizeof($ambilAssetKeluar) > 0  ) {
-        //     $jumlahKewajiban = 0;
-        //     for ( $i = 0; $i<sizeof($ambilAssetKeluar); $i++) {
-        //     //    $a= (int)$ambildonasi[$i]->jml_donasi;
-        //     //     var_dump($a);
-        //         $jumlahKewajiban = $jumlahKewajiban + (int)$ambilAssetKeluar[$i]->nominal;
-        //     }
-
-        // }else{
-        //     $jumlahKewajiban = 0;
-        // }
 
         // Create new Spreadsheet object
         $spreadsheet = new Spreadsheet();
@@ -383,7 +364,39 @@ public function export()
         $writer->save('php://output');
         exit;
 
+
+        
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // export laporan  donasi
 public function exportdonasi()
 {       

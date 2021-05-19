@@ -22,6 +22,20 @@
                     <i class="fa fa-plus" aria-hidden="true"></i>Upload Bukti
             </a>
 
+
+            <?php
+
+                $tanggalSekarang = date('d');
+                if ( intval( $tanggalSekarang ) > 10 ) {
+
+                    echo '<div class="alert alert-danger">
+                    
+                        <b>Pemberitahuan</b> <br>
+                        <small>harap lakukan pembayaran kas, dikarenakan melebihi tanggal yang ditentukan '.date('d F Y').'</small>
+                    </div>';
+                }
+            ?>
+
         <?php } else { ?>
             <marquee behavior="" direction="">Anda sudah membayar pada bulan ini</marquee>
         <?php } ?>
