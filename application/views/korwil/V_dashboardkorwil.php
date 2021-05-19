@@ -4,13 +4,7 @@
             <div class="col-6">
                 <h3>WELCOME ADMIN KORWIL</h3>
             </div>
-            <div class="col-6">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html"> <i data-feather="home"></i></a></li>
-                    <li class="breadcrumb-item">DASHBOARD</li>
-                    <li class="breadcrumb-item active">ADMIN KORWIL</li>
-                </ol>
-            </div>
+       
         </div>
     </div>
 </div>
@@ -115,60 +109,9 @@
         </div>
 
 
-        <div class="col-xl-4 xl-50 notification box-col-6">
-            <div class="card">
-                <div class="card-header card-no-border">
-                    <div class="header-top">
-                        <h5 class="m-0">Notifikasi</h5>
+    
 
-                    </div>
-                </div>
-                <div class="card-body pt-0">
-                    <div class="media">
-                        <div class="media-body">
-                            <p>20-04-2020 <span>10:10</span></p>
-                            <h6>Updated Product<span class="dot-notification"></span></h6><span>Quisque a
-                                consequat ante sit
-                                amet magna...</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-xl-4 xl-50 appointment box-col-6">
-            <div class="card">
-                <div class="card-header">
-                    <div class="header-top">
-                        <h5 class="m-0">News & Update Kegiatan</h5>
-                        <div class="card-header-right-icon">
-                            <select class="button btn btn-primary">
-                                <option>Today</option>
-                                <option>Tomorrow</option>
-                                <option>Yesterday</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body p-0">
-                    <div class="news-update">
-                        <h6>36% off For pixel lights Couslations Types.</h6><span>Lorem Ipsum is simply
-                            dummy...</span>
-                    </div>
-                    <div class="news-update">
-                        <h6>We are produce new product this</h6><span> Lorem Ipsum is simply text of the
-                            printing... </span>
-                    </div>
-                    <div class="news-update">
-                        <h6>50% off For COVID Couslations Types.</h6><span>Lorem Ipsum is simply
-                            dummy...</span>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <div class="bottom-btn"><a href="#">More...</a></div>
-                </div>
-            </div>
-        </div>
+      
 
 
 

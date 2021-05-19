@@ -1,72 +1,79 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title><?php echo $title ?></title>
-<style type="text/css" media="screen">
-body {
-background-color: #EEE;
-font-family: Arial ;
-}
-.container {
-width: 80%;
-padding: 20px;
-background-color: #fff;
-min-height: 300px;
-margin: 40px auto;
-border-radius: 10px;
-}
-table {
-border: solid thin #000;
-border-collapse: collapse;
-width: 100%;
-}
-tr {
-border-collapse: collapse;
-}
-td,th {
-padding: 6px 12px;
-border-bottom: solid thin #EEE;
-text-align: left;
-}
-</style>
-</head>
-<body>
-<div class="container">
-<h1><?php echo $title ?></h1>
-<p><a href="<?php echo base_url() ?>laporan/export" class="btn btn-primary btn-sm mb-3">  Export ke Excel</a></p>
-<table>
-<thead>
-<tr>
-<th>No.</th>
-<th width="5%">Judul</th>
-<th>Tanggal Laporan </th>
-<th>No Rekening </th>
-<th>Nominal</th>
-<th>Status</th>
-<th>Deskripsi</th>
-</tr>
-</thead>
-<tbody>
+<br><br>
+<div class="col-sm-12 col-xl-10" style="margin-left:50px;">
+	<div class="card card-absolute">
+		<div class="card-header bg-secondary">
+			<h5 class="text-white"> <i class="fa fa-search" aria-hidden="true"></i> Filter Cetak Laporan</h5>
+		</div>
+		<div class="card-body">
+			<h5 class="text-bold" style="text-align:center;">Cetak Laporan Kas <i class="fa fa-download"
+					aria-hidden="true"></i> </h5>
+			<br><br>
+			<?php echo $this->session->flashdata('flash-data') ?>
+			<form action="<?php echo base_url('laporan/export/') ?>" method="POST">
+				<div class="row" style="margin-left:50px;">
+					<div class="form-group" style="margin-left:100px;">
 
-<?php $no=1;
-foreach($kas as $kas) { ?>
-<tr>
-<td><?php echo $no++?></td>
-<td><?php echo $kas->judul ?></td>
-<td><?php echo date('d-m-Y',strtotime($kas->tanggal_laporan)) ?></td>
-<td><?php echo $kas->no_rekening ?></td>
-<?php
-$nominal=  $kas->nominal ?>
+						<div class="row" id="element-wilayah">
+							<div class="mb-2 row">
+								<label class="col-sm-2 col-form-label">Bulan:</label>
+								<div class="col-sm-5">
+										<select name="bulan" class="form-select digits" id=""
+										required="wilayah harap DiIsi">
+										<option value="bulan">-- Pilih salah satu --</option>
+										<option value="January">Januari</option>
+										<option value="February">Februari</option>
+										<option value="March">Maret</option>
+										<option value="April">April</option>
+										<option value="May">Mei</option>
+										<option value="June">Juni</option>
+										<option value="July">Juli</option>
+										<option value="August">Agustus</option>
+										<option value="September">September</option>
+										<option value="October">Oktober</option>
+										<option value="November">November</option>
+										<option value="December">Desember</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+					<br> <br>
+					<!-- tahun -->
+					<div class="form-group" style="margin-left:100px;">
 
-<td>Rp.<?= number_format($nominal, 2 ); ?></td>
-<td><?php echo $kas->status ?></td>
-<td><?php echo $kas->deskripsi?></td>
-</tr>
-<?php } ?>
-</tbody>
-</table>
+						<div class="row" id="element-wilayah">
+							<div class="mb-2 row">
+								<label class="col-sm-2 col-form-label">Tahun:</label>
+								<div class="col-sm-5">
+								<select name="tahun" class="form-select digits" id="" required="wilayah harap DiIsi">
+										<option value="tahun">-- Pilih salah satu --</option>
+										<?php for($i=0; $i<sizeof($tahun); $i++){	?>
+										<option value="<?php echo $tahun[$i]?>">
+										<?php echo $tahun[$i]?>
+										</option>
+										<?php } ?>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-2">
+					<button type="submit" style="margin-top: 35px; margin-left: 400px;"
+						class="btn btn-secondary">Cetak</button>
+
+				</div>
+				<div class="col-md-2">
+					<a style="margin-left:500px; margin-top:-55px;" href="<?php echo base_url('laporan/index/') ?>"
+						class="btn btn-default">Reset</a>
+				</div>
+		</div>
+
+		</form>
+
+		<div class="card-footer" style="margin-left:150px;">
+			<p>Silahkan mencetak laporan sesuai dengan filter yang dipilih! </p>
+		</div>
+	</div>
 </div>
-</body>
-</html>

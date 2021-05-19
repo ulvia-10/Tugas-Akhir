@@ -32,40 +32,58 @@ text-align: center;
 }
 </style>
 </head>
+<br><br>
 <body>
 <div class="container">
 <h1><?php echo $title ?></h1>
 <p><a href="<?php echo base_url() ?>laporan/exportdonasi" class="btn btn-primary btn-sm mb-3">  Export ke Excel</a></p>
-<table>
-<thead>
-<tr>
-<th>No.</th>
-<th width="5%">Tanggal Donasi</th>
-<th>Nama Donatur</th>
-<th>No Rekening </th>
-<th>Nominal</th>
-<th>Email</th>
-<th>Telp</th>
-<th>Status</th>
-</tr>
-</thead>
-<tbody>
 
-<?php $no = 1;
-foreach($donasi as $donasi) { ?>
-<td><?php echo $no++?></td>
+<!-- bulan -->
+        <div class="form-group">
+						<div class="row" id="element-wilayah">
+							<div class="mb-2 row">
+								<label class="col-sm-3 col-form-label">Bulan</label>
+								<div class="col-sm-9">
+									<select name="bulan" class="form-select digits" id=""
+										required="Bulan harap diisi" >
+										<option  disabled="disabled" value="bulan">-- Pilih salah satu --</option>
 
-<td><?php echo date('d-m-Y',strtotime($donasi->tgl_donasi))?></td>
-<td><?php echo $donasi->nama_donatur?></td>
-<td><?php echo $donasi->no_rekening?></td>
-<td><?php echo $donasi->jml_donasi ?></td>
-<td><?php echo $donasi->email_donatur?></td>
-<td><?php echo $donasi->telp_donatur ?></td>
-<td><?php echo $donasi->status?></td>
-</tr>
-<?php } ?>
-</tbody>
-</table>
+										<?php
+                                        foreach ($pilih as $bulan) {
+
+                                            echo '<option value="' . $bulan['bulan'] . '">' . $bulan['bulan'] . '</option>';
+                                        }
+                                        ?>
+									</select>
+								</div>
+							</div>
+						</div>
+				
+        </div>
+        <br>
+        <!-- tahun -->
+        <div class="form-group">
+
+        <div class="row" id="element-wilayah">
+            <div class="mb-2 row">
+                <label class="col-sm-3 col-form-label">Tahun</label>
+                <div class="col-sm-4">
+                    <select name="tahun" class="form-select digits" id=""
+                        required="wilayah harap Diisi">
+                        <option value="tahun">-- Pilih salah satu --</option>
+
+                        <?php
+                        foreach ($pilih->result_array() as $bulan) {
+
+                            echo '<option value="' . $bulan['tahun'] . '">' . $bulan['tahun'] . '</option>';
+                        }
+                        ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+        </div>
+
 </div>
 </body>
 </html>

@@ -225,9 +225,9 @@
 										class="btn btn-primary btn-sm mb-3">
 										<i class="fa fa-plus" aria-hidden="true"></i> Tambah Data</a> <br>
 									<div style="margin-left:80%; margin-top:20px;">
-									<a href="<?= base_url(); ?>laporan/index/"
+									<!-- <a href="<?= base_url(); ?>laporan/index/"
 										class="btn btn-info  mb-3">
-										<i class="fa fa-print" aria-hidden="true"></i> Cetak Data</a> <br>
+										<i class="fa fa-print" aria-hidden="true"></i> Cetak Data</a> <br> -->
 									</div>
 									<table class="display" id="basic-1" style="text-align:center;">
 										<thead>

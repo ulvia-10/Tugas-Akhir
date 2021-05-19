@@ -64,7 +64,7 @@ class Data_akun extends CI_Controller
 		$this->form_validation->set_rules('full_name','full_name','required');
 		$this->form_validation->set_rules('username','username','required');
 		// $this->form_validation->set_rules('email','email','required');
-		$this->form_validation->set_rules('password','password','required');
+		// $this->form_validation->set_rules('password','password','required');
 		// $this->form_validation->set_rules('telp','telp','required');
 		$this->form_validation->set_rules('tempat_lahir','tempat_lahir','required');
 		$this->form_validation->set_rules('tanggal_lahir','tanggal_lahir','required');
@@ -76,6 +76,7 @@ class Data_akun extends CI_Controller
 		
 		if ($this->form_validation->run() == FALSE){
 			#code...    
+			echo validation_errors();
 			$data['profile']= $this->M_dataakun->getProfileByID($id);        
 			$this->load->view('templating/template_dashboardadmin', $data);
 		}

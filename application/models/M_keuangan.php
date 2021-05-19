@@ -260,7 +260,6 @@ class M_keuangan extends CI_Model
                     FROM akun_profile
                     JOIN master_cabang ON master_cabang.id_cabang = akun_profile.id_cabang
                     WHERE akun_profile.id_cabang = '$id_cabang' AND akun_profile.level = 'anggota'";
-
             return $this->db->query($sql)->result_array();
         }
 

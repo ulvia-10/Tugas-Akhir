@@ -4,6 +4,7 @@
 <!-- Container-fluid starts-->
 
 <!-- Zero Configuration  Starts-->
+<br><br>
 <div class="col-sm-12">
     <div class="card">
         <div class="card-header">
@@ -73,7 +74,7 @@
 												</div>
 											</div>
 										</div>
-									</div>
+									
 
                             </td>
 
@@ -85,6 +86,5 @@
                 </table>
             </div>
         </div>
-    </div>
 </div>
 </div>

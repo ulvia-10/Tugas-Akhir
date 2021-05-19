@@ -219,7 +219,7 @@
 
                               
                                 <li class="sidebar-list">
-                                    <a class="sidebar-link sidebar-title link-nav" href="kanban.html"><i
+                                    <a class="sidebar-link sidebar-title link-nav" href="<?= base_url('laporan/donasitahunan/')?>"><i
                                             data-feather="book-open">
                                         </i><span>Laporan Dana</span></a>
                                 </li>

@@ -32,35 +32,94 @@ class Laporan extends CI_Controller {
 
 // Main page
     public function index()
-    {
-                $provinsi = $this->M_laporan->listing();
-                $data = array( 'title' => 'Laporan Kas Masuk - Senyum Desa',
-                'kas' => $provinsi
-                );
-                $this->load->view('keuangan/V_laporan_kas', $data, FALSE);
+    {   
+        $data = array(
+
+			'namafolder'	=> "keuangan",
+			'namafileview'	=> "V_laporan_kas",
+			'title'         => "Kas | Senyum Desa"
+		);
+		//disesuaikan sama dengan nama view$ 
+        $data['tahun'] = range(date('Y'), 2020);
+        $data['pilih'] = $this->M_laporan->pilihBulanKas();
+        // load template 
+		$this->load->view('templating/korwil/template_korwil', $data);
+            
     }
 // // donasi page 
     public function indexdonasi()
-    {
-            $provinsi = $this->M_laporan->listingdonasi();
-            $data = array( 'title' => 'Laporan Donasi Masuk - Senyum Desa',
-            'donasi' => $provinsi
-            );
-            $this->load->view('donasi/V_laporan_donasi', $data, FALSE);
+    {       
+        $data = array(
+			'namafolder'	=> "donasi",
+			'namafileview'	=> "V_filter_donasi",
+			'title'         => "Donasi | Senyum Desa"
+		);
+		//disesuaikan sama dengan nama view$  
+        $data['tahun'] = range(date('Y'), 2020);
+        $data['pilih'] = $this->M_laporan->pilihBulan();
+		$this->load->view('templating/korwil/template_korwil', $data);
     }
+
+    public function indexneraca(){
+            // isi variable 
+            $id_cabang = $this->session->userdata('sess_id_cabang');
+            // load $data 
+            $data = array(
+
+                'namafolder'	=> "keuangan",
+                'namafileview'	=> "V_laporan_neraca",
+                'title'         => "Cetak Laporan Neraca | Senyum Desa"
+            );
+            $data['tahun'] = range(date('Y'), 2020);
+            $data['pilih'] = $this->M_laporan->pilihBulan();
+            $this->load->view('templating/korwil/template_korwil', $data);
+    }
+    // index laba rugi 
+    public function indexlabarugi(){
+        // isi variable 
+        $id_cabang = $this->session->userdata('sess_id_cabang');
+        // load $data 
+        $data = array(
+
+            'namafolder'	=> "keuangan",
+            'namafileview'	=> "V_laporan_labarugi",
+            'title'         => "Cetak Laporan Laba Rugi | Senyum Desa"
+        );
+        $data['tahun'] = range(date('Y'), 2020);
+        $data['pilih'] = $this->M_laporan->pilihBulan();
+        $this->load->view('templating/korwil/template_korwil', $data);
+}
+
+ public function donasitahunan(){
+      // load $data 
+      $data = array(
+
+        'namafolder'	=> "keuangan",
+        'namafileview'	=> "V_laporan_donasitahunan",
+        'title'         => "Cetak Laporan Donasi | Senyum Desa"
+    );
+
+    $data['tahun'] = range(date('Y'), 2020);
+    $this->load->view('templating/template_dashboardadmin', $data);
+ }
+
 
 // Export ke excel laporan kas 
 // di korwil
 public function export()
 {       
-        // buat varaibel ambil dari model M_laporan.php
-        $bulan = "May";
         $id_cabang = $this->session->userdata('sess_id_cabang');
+        $tahun = $this->input->post('tahun');
+        $bulan = $this->input->post('bulan');
         
-        $ambilAssetMasuk = $this->M_laporan->assetKas($bulan, $id_cabang, "masuk");
-        $ambilAssetKeluar = $this->M_laporan->assetKas($bulan, $id_cabang, "keluar");
+        $provinsi = $this->M_laporan->listing($id_cabang,$bulan,$tahun);
 
-        $provinsi = $this->M_laporan->listing();
+        // menampilkan jumlah 
+        $ambilAssetMasuk = $this->M_laporan->kasbulanan($bulan, $id_cabang, "masuk", $tahun);
+        $ambilAssetKeluar = $this->M_laporan->kasbulanan($bulan, $id_cabang, "keluar", $tahun);
+        // echo '<pre>';
+        // var_dump($ambilAssetMasuk, $ambilAssetKeluar);
+        // echo '<pre>';
 
         // inisialisasi 
         $jumlahAsset = 0;
@@ -75,8 +134,19 @@ public function export()
             }
 
         }
+        // if ( sizeof($ambilAssetMasuk) > 0  ) {
+        //     $jumlahAsset = 0;
+        //     for ( $i = 0; $i<sizeof($ambilAssetMasuk); $i++) {
+        //     //    $a= (int)$ambildonasi[$i]->jml_donasi;
+        //     //     var_dump($a);
+        //         $jumlahAsset = $jumlahAsset + (int)$ambilAssetMasuk[$i]->nominal;
+        //     }
 
-        //pengecekan asset keluar dari kas  
+        // }else{
+        //     $jumlahAsset = 0;
+        // }
+
+        // pengecekan asset keluar dari kas  
         if ( $ambilAssetKeluar->num_rows() > 0 ) {
 
             foreach ( $ambilAssetKeluar->result_array() AS $kewajiban ) {
@@ -84,6 +154,18 @@ public function export()
                 $jumlahKewajiban = $jumlahKewajiban + $kewajiban['nominal'];
             }
         }
+
+        // if ( sizeof($ambilAssetKeluar) > 0  ) {
+        //     $jumlahKewajiban = 0;
+        //     for ( $i = 0; $i<sizeof($ambilAssetKeluar); $i++) {
+        //     //    $a= (int)$ambildonasi[$i]->jml_donasi;
+        //     //     var_dump($a);
+        //         $jumlahKewajiban = $jumlahKewajiban + (int)$ambilAssetKeluar[$i]->nominal;
+        //     }
+
+        // }else{
+        //     $jumlahKewajiban = 0;
+        // }
 
         // Create new Spreadsheet object
         $spreadsheet = new Spreadsheet();
@@ -116,8 +198,6 @@ public function export()
                 ],
             ],
         ];
-        
-     
 
         // title
         $spreadsheet->setActiveSheetIndex(0)->setCellValue('B1', 'YAYASAN SOSIAL SENYUM DESA ');
@@ -126,7 +206,7 @@ public function export()
         $spreadsheet->getActiveSheet()->getStyle('B1') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
 
 
-        $spreadsheet->setActiveSheetIndex(0)->setCellValue('B2', 'Laporan Kas ');
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('B2', 'Laporan Kas Bulan '.$bulan.' Tahun '.$tahun.' ');
         $spreadsheet->getActiveSheet()->getStyle('B2')->getFont()->setBold(true); // set bold
         $spreadsheet->getActiveSheet()->mergeCells('B2:G2');//merge cells
         $spreadsheet->getActiveSheet()->getStyle('B2') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
@@ -254,10 +334,10 @@ public function export()
         $spreadsheet->getActiveSheet()->getStyle('D'.$i) ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
         $spreadsheet->getActiveSheet()->getStyle('D'.$i)->applyFromArray($styleBorders);
         $spreadsheet->getActiveSheet()->getColumnDimension('D')->setAutoSize(true);
-        
+    
         //nominal
-        $spreadsheet->setActiveSheetIndex(0)->setCellValue('E'.$i, $provinsi->nominal);
-        $spreadsheet->getActiveSheet()->getStyle('E'.$i) ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('E'.$i,    'Rp.'.number_format($provinsi->nominal, 2).'' );
+        $spreadsheet->getActiveSheet()->getStyle('E'.$i) ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
         $spreadsheet->getActiveSheet()->getStyle('E'.$i)->applyFromArray($styleBorders);
         $spreadsheet->getActiveSheet()->getColumnDimension('E')->setAutoSize(true);
         
@@ -281,14 +361,14 @@ public function export()
         $i++;
         }
         // Rename worksheet
-        $spreadsheet->getActiveSheet()->setTitle('Laporan Kas Masuk '.date('d-m-Y H'));
+        $spreadsheet->getActiveSheet()->setTitle('Laporan Kas'.date('d-m-Y H'));
 
         // Set active sheet index to the first sheet, so Excel opens this as the first sheet
         $spreadsheet->setActiveSheetIndex(0);
 
         // Redirect output to a client’s web browser (Xlsx)
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="Laporan Kas Masuk.xlsx"');
+        header('Content-Disposition: attachment;filename="Laporan Kas Masuk Bulan ' .$bulan.' Tahun '.$tahun.'.xlsx"');
         header('Cache-Control: max-age=0');
         // If you're serving to IE 9, then the following may be needed
         header('Cache-Control: max-age=1');
@@ -302,26 +382,38 @@ public function export()
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
         $writer->save('php://output');
         exit;
+
 }
-
-
 // export laporan  donasi
 public function exportdonasi()
 {       
-     
-        // $bulan     = "May";
-        $provinsi = $this->M_laporan->listingdonasi();
-        $ambildonasi = $this->M_laporan->jumlahdonasi();
+
+        $id_cabang = $this->session->userdata('sess_id_cabang');
+
+        $bulan = $this->input->post('bulan');
+        $tahun = $this->input->post('tahun');
+
+        // // $bulan     = "May";
+        $provinsi = $this->M_laporan->listingdonasi($id_cabang, $bulan, $tahun);
         
-        $jumlahdonasi = 0;
-        if ( $ambildonasi->num_rows() > 0 ) {
-
-            foreach ( $ambildonasi->result_array() AS $asset ) {
-
-                $jumlahdonasi = $jumlahdonasi + $asset['jml_donasi'];
+        $ambildonasi = $this->M_laporan->jumlahdonasi($id_cabang,$bulan,$tahun);
+        
+    
+        if ( sizeof($ambildonasi) > 0  ) {
+            $jumlahdonasi = 0;
+            for ( $i = 0; $i<sizeof($ambildonasi); $i++) {
+            //    $a= (int)$ambildonasi[$i]->jml_donasi;
+            //     var_dump($a);
+                $jumlahdonasi = $jumlahdonasi + (int)$ambildonasi[$i]->jml_donasi;
             }
 
+        }else{
+            $jumlahdonasi = 0;
         }
+        // echo '<pre>';
+        // var_dump($ambildonasi, $jumlahdonasi);
+        // echo '<pre>';
+
         // Create new Spreadsheet object
         $spreadsheet = new Spreadsheet();
 
@@ -365,7 +457,7 @@ public function exportdonasi()
         $spreadsheet->getActiveSheet()->getStyle('C1')->getFont()->setSize(12); // set font
         
         // TITLE LAPORAN DONASI 
-        $spreadsheet->setActiveSheetIndex(0)->setCellValue('C2', 'LAPORAN DONASI BULAN');
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('C2', 'LAPORAN DONASI BULAN '.$bulan.' TAHUN'.$tahun.'');
         $spreadsheet->getActiveSheet()->mergeCells('C2:F2');//merge cells
         $spreadsheet->getActiveSheet()->getStyle('C2')->getFont()->setBold(true); // set bold
         $spreadsheet->getActiveSheet()->getStyle('C2') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);//set align center 
@@ -486,12 +578,11 @@ public function exportdonasi()
 
         // Redirect output to a client’s web browser (Xlsx)
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="Laporan Donasi.xlsx"');
+        header('Content-Disposition: attachment;filename="Laporan Donasi Bulan '.$bulan.'Tahun '.$tahun.'.xlsx"');
         header('Cache-Control: max-age=0');
 
         // If you're serving to IE 9, then the following may be needed
         header('Cache-Control: max-age=1');
-
         // If you're serving to IE over SSL, then the following may be needed
         header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
         header('Last-Modified: '. gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
@@ -508,13 +599,12 @@ function exportNeraca() {
 
         $id_cabang = $this->session->userdata('sess_id_cabang');
         // $bulan     = date('F'); // default bulan ini 
-        $bulan     = "May"; 
-        $tahun     =  2021;// default bulan ini 
+        $tahun = $this->input->post('tahun');
         // $bulan = $this->input->post('bulan');
 
 
-        $ambilAssetMasuk = $this->M_laporan->assetKas($bulan, $id_cabang, "masuk");
-        $ambilAssetKeluar = $this->M_laporan->assetKas($bulan, $id_cabang, "keluar");
+        $ambilAssetMasuk = $this->M_laporan->assetKas($tahun, $id_cabang, "masuk");
+        $ambilAssetKeluar = $this->M_laporan->assetKas($tahun, $id_cabang, "keluar");
 
         $jumlahAsset = 0;
         $jumlahKewajiban = 0;
@@ -528,7 +618,6 @@ function exportNeraca() {
             }
 
         }
-
 
         if ( $ambilAssetKeluar->num_rows() > 0 ) {
 
@@ -612,7 +701,7 @@ function exportNeraca() {
         $spreadsheet->getActiveSheet()->getStyle('C7')->getFont()->setSize(11); // set font
 
         $spreadsheet->setActiveSheetIndex(0)->setCellValue('G7', 'Rp. '.number_format($jumlahAsset, 2).'');
-        $spreadsheet->getActiveSheet()->getStyle('G7') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+        $spreadsheet->getActiveSheet()->getStyle('G7') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
         $spreadsheet->getActiveSheet()->getStyle('G7')->getFont()->setSize(11); // set font
         $spreadsheet->getActiveSheet()->getColumnDimension('G')->setAutoSize(true);
         
@@ -633,7 +722,7 @@ function exportNeraca() {
         $spreadsheet->getActiveSheet()->getStyle('A12')->getFont()->setSize(11); // set font
 
         $spreadsheet->setActiveSheetIndex(0)->setCellValue('G12','Rp. '.number_format($jumlahAsset, 2).'');
-        $spreadsheet->getActiveSheet()->getStyle('G12') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+        $spreadsheet->getActiveSheet()->getStyle('G12') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
         $spreadsheet->getActiveSheet()->getStyle('G12')->getFont()->setBold(true); // set bold
         $spreadsheet->getActiveSheet()->getStyle('G12')->getFont()->setSize(11); // set font
         
@@ -650,7 +739,7 @@ function exportNeraca() {
         $spreadsheet->getActiveSheet()->getStyle('C14')->getFont()->setSize(11); // set font
 
         $spreadsheet->setActiveSheetIndex(0)->setCellValue('G14','Rp.'.number_format($jumlahKewajiban, 2).'');
-        $spreadsheet->getActiveSheet()->getStyle('G14') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+        $spreadsheet->getActiveSheet()->getStyle('G14') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
         $spreadsheet->getActiveSheet()->getStyle('G14')->getFont()->setSize(11); // set font
 
         $spreadsheet->setActiveSheetIndex(0)->setCellValue('B16','ASSET BERSIH');
@@ -678,7 +767,7 @@ function exportNeraca() {
         
         $bersih = $jumlahAsset - $jumlahKewajiban;
         $spreadsheet->setActiveSheetIndex(0)->setCellValue('G21', 'Rp.'.number_format($bersih, 2).'');
-        $spreadsheet->getActiveSheet()->getStyle('G21') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+        $spreadsheet->getActiveSheet()->getStyle('G21') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
         $spreadsheet->getActiveSheet()->getStyle('G21')->getFont()->setBold(true); // set bold
         $spreadsheet->getActiveSheet()->getStyle('G21')->getFont()->setSize(11); // set font
 
@@ -691,7 +780,7 @@ function exportNeraca() {
 
         // Redirect output to a client’s web browser (Xlsx)
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="Neraca Keuangan.xlsx"');
+        header('Content-Disposition: attachment;filename="Neraca Keuangan '.$tahun.'.xlsx"');
         header('Cache-Control: max-age=0');
         // If you're serving to IE 9, then the following may be needed
         header('Cache-Control: max-age=1');
@@ -711,31 +800,32 @@ function exportNeraca() {
 
 // function export laba rugi 
 public function exportLabarugi(){
-
         // isi variable 
         $id_cabang = $this->session->userdata('sess_id_cabang');
-        // $bulan     = date('F'); // default bulan ini 
-        $bulan     = "May"; 
+        $tahun = $this->input->post('tahun');
+        
         // variable 
-        $ambilAssetKeluar = $this->M_laporan->assetKas($bulan, $id_cabang, "keluar");
-        $ambildonasi = $this->M_laporan->jumlahdonasi();
-
-        $ambilKasKeluar = $this->M_laporan->dataassetKas($bulan, $id_cabang, "keluar");
-        $ambilDonasiMasuk = $this->M_laporan->assetDonasi($bulan, $id_cabang);
-
-
-        $jumlahDonasi = 0;
+        // menampilkan total data 
+        $ambilAssetKeluar = $this->M_laporan->assetKas($tahun, $id_cabang, "keluar");
+        // mengambil jumlah donasi 
+        $ambildonasi = $this->M_laporan->jumlahdonasitahunan($id_cabang,$tahun);
+        // menampilkan datanya 
+        $ambilKasKeluar = $this->M_laporan->dataassetKas($tahun, $id_cabang, "keluar");
+       
         $jumlahKewajiban = 0; 
-
-        $jumlahdonasi = 0;
-        if ( $ambildonasi->num_rows() > 0 ) {
-
-            foreach ( $ambildonasi->result_array() AS $asset ) {
-
-                $jumlahdonasi = $jumlahdonasi + $asset['jml_donasi'];
+        
+        if ( sizeof($ambildonasi) > 0  ) {
+            $jumlahdonasi = 0;
+            for ( $i = 0; $i<sizeof($ambildonasi); $i++) {
+            //    $a= (int)$ambildonasi[$i]->jml_donasi;
+            //     var_dump($a);
+                $jumlahdonasi = $jumlahdonasi + (int)$ambildonasi[$i]->jml_donasi;
             }
 
-        }
+        }else{
+            $jumlahdonasi = 0;
+        }   
+
         // ambil kas 
         if ( $ambilAssetKeluar->num_rows() > 0 ) {
 
@@ -747,15 +837,15 @@ public function exportLabarugi(){
         //ambil data kas 
       
 
-          // set borders all borders 
-          $styleBorders = [
-            'borders' => [
-                'outline' => [
-                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-                    'color' => ['argb' => '00000000'],
-                ],
-            ],
-        ];
+                // set borders all borders 
+                $styleBorders = [
+                    'borders' => [
+                        'outline' => [
+                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                            'color' => ['argb' => '00000000'],
+                        ],
+                    ],
+                ];
 
                 $spreadsheet = new Spreadsheet();
               
@@ -775,7 +865,7 @@ public function exportLabarugi(){
                 $spreadsheet->getActiveSheet()->getStyle('A2')->getFont()->setBold(true); // set bold
                 $spreadsheet->getActiveSheet()->getStyle('A2')->getFont()->setSize(11); // set font
 
-                $spreadsheet->setActiveSheetIndex(0)->setCellValue('A3', 'LABA RUGI');
+                $spreadsheet->setActiveSheetIndex(0)->setCellValue('A3', 'LABA RUGI '.$tahun.'');
                 $spreadsheet->getActiveSheet()->mergeCells('A3:E3');
                 $spreadsheet->getActiveSheet()->getStyle('A3') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
                 $spreadsheet->getActiveSheet()->getStyle('A3')->getFont()->setBold(true); // set bold
@@ -913,7 +1003,7 @@ public function exportLabarugi(){
 
                 // Redirect output to a client’s web browser (Xlsx)
                 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-                header('Content-Disposition: attachment;filename="Laporan Laba Rugi.xlsx"');
+                header('Content-Disposition: attachment;filename="Laporan Laba Rugi Tahun '.$tahun.'.xlsx"');
                 header('Cache-Control: max-age=0');
                 // If you're serving to IE 9, then the following may be needed
                 header('Cache-Control: max-age=1');
@@ -1090,7 +1180,8 @@ public function exportLabarugi(){
 
     public function Donasi(){
           // inisialisasi tahun 
-          $tahun = 2021; 
+
+          $tahun = $this->input->post('tahun');
           $ambildataDonasi = $this->M_laporan->Donasi($tahun);
 
             // create new spreadsheets 
@@ -1115,7 +1206,6 @@ public function exportLabarugi(){
                     ],
                 ],
             ];
-
               // set auto size 
               $spreadsheet->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
               $spreadsheet->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
@@ -1167,29 +1257,30 @@ public function exportLabarugi(){
             $baris = 5; 
             
             foreach($ambildataDonasi->result_array() as $kas) {
-                  // no 
-             $spreadsheet->setActiveSheetIndex(0)->setCellValue('A'.$baris, $i++);
-             $spreadsheet->getActiveSheet()->getStyle('A'.$baris)->applyFromArray($styleBorders);
-             $spreadsheet->getActiveSheet()->getStyle('A'.$baris) ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-      
-              // nama cabang 
-              $spreadsheet->setActiveSheetIndex(0)->setCellValue('B'.$baris, $kas["name_cabang"]);
+                    // no 
+                $spreadsheet->setActiveSheetIndex(0)->setCellValue('A'.$baris, $i++);
+                $spreadsheet->getActiveSheet()->getStyle('A'.$baris)->applyFromArray($styleBorders);
+                $spreadsheet->getActiveSheet()->getStyle('A'.$baris) ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+        
+                // nama cabang 
+                $spreadsheet->setActiveSheetIndex(0)->setCellValue('B'.$baris, $kas["name_cabang"]);
 
-              $spreadsheet->getActiveSheet()->getStyle('B'.$baris) ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-              $spreadsheet->getActiveSheet()->getStyle('B'.$baris)->applyFromArray($styleBorders);
+                $spreadsheet->getActiveSheet()->getStyle('B'.$baris) ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+                $spreadsheet->getActiveSheet()->getStyle('B'.$baris)->applyFromArray($styleBorders);
 
                 // STATUS_CABANG 
                 $spreadsheet->setActiveSheetIndex(0)->setCellValue('C'.$baris, $kas["status_cabang"]);
                 $spreadsheet->getActiveSheet()->getStyle('C'.$baris)->applyFromArray($styleBorders);
                 $spreadsheet->getActiveSheet()->getStyle('C'.$baris) ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
 
-              //  TOTAL 
-              $spreadsheet->setActiveSheetIndex(0)->setCellValue('D'.$baris,'Rp.'.number_format($kas["jumlah"], 2).'');
-              $spreadsheet->getActiveSheet()->getStyle('D'.$baris) ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
-              $spreadsheet->getActiveSheet()->getStyle('D'.$baris)->applyFromArray($styleBorders);
+                //  TOTAL 
+                $spreadsheet->setActiveSheetIndex(0)->setCellValue('D'.$baris,'Rp.'.number_format($kas["jumlah"], 2).'');
+                $spreadsheet->getActiveSheet()->getStyle('D'.$baris) ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
+                $spreadsheet->getActiveSheet()->getStyle('D'.$baris)->applyFromArray($styleBorders);
 
                 $baris++;
-            }
+              }
+              
                   // component 
                    // Rename worksheet
                    $spreadsheet->getActiveSheet()->setTitle('Donasi Tahunan '.date('d-m-Y H'));
@@ -1199,7 +1290,7 @@ public function exportLabarugi(){
 
                    // Redirect output to a client’s web browser (Xlsx)
                    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-                   header('Content-Disposition: attachment;filename="Laporan Kas Tahunan.xlsx"');
+                   header('Content-Disposition: attachment;filename="Laporan Donasi Tahunan '.$tahun.' .xlsx"');
                    header('Cache-Control: max-age=0');
 
                    // If you're serving to IE 9, then the following may be needed
@@ -1216,8 +1307,6 @@ public function exportLabarugi(){
                    exit;
 
     }
-
-
 }
 
 // end OF LAPORAN.PHP ^-^

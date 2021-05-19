@@ -44,7 +44,7 @@ class M_dataakun extends CI_Model
         $id_profile = $this->input->post('id_profile');
 
         $data = [
-        
+            'id_profile' => $id_profile,
             'full_name'    => $this->input->post('full_name'),
             'id_cabang'    => $this->input->post('name_cabang'),
             'username'    => $this->input->post('username'),
@@ -60,9 +60,7 @@ class M_dataakun extends CI_Model
             // 'address'   => $this->input->post('address'),
             'photo'  => $upload ['file']['file_name']
     ];
-    
         //flashdata 
-        print_r($data);
         $msg = '<div class="alert alert-info">Akun berhasil diperbarui <br><small>Pada tanggal '.date('d F Y H.i A').'</small></div>';
         $this->session->set_flashdata('flash-data', $msg);
         //redirect 
