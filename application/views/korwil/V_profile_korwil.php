@@ -64,6 +64,7 @@
 					<p class="card-text">Tanggal Lahir: <?= $tanggal ?></p>
 					<p class="card-text">Asal: <?= $profile['asal']; ?></p>
 					<p class="card-text">Alamat: <?= $profile['address']; ?></p>
+					<p class="card-text">Upload pada: <?=   date('d-m-Y',strtotime($profile['created_at'])); ?></p>
 					<a href="<?= base_url('profile/editprofilkorwil'); ?>" class="btn btn-warning"
 						style="margin-left:200px;">Edit <i class="fa fa-edit"></i></a>
 				</div>

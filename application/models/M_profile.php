@@ -34,7 +34,34 @@ class M_profile extends CI_Model
             // redirect
             redirect('kegiatan/viewprofile');
   }
-  
+  function updateprofilekorwil($upload){
+
+    $id_profile = $this->input->post('id_profile');
+
+    // updae data di akun_profile 
+      $dataProfile = array(
+        'photo'  => $upload ['file']['file_name']
+      );
+      $this->db->insert('akun_profile', $dataProfile);
+
+      //  update data di informasi_profile 
+      $dataInformasiProfile = [
+     
+        'telp'          => $this->input->post('telp'),
+        'address'       => $this->input->post('address'),
+        'email'         => $this->input->post('email')
+    ];
+      // query
+      $this->db->where('id_profile',$id_profile);
+      $this->db->update('data_informasiprofile', $dataInformasiProfile);    
+
+      // flash data 
+      $msg = '<div class="alert alert-info">Data berhasil di dirubah <br><small>Pada tanggal ' . date('d F Y H.i A') . '</small></div>';
+      $this->session->set_flashdata('pesan', $msg);
+      // print_r($data);
+      // redirect
+      redirect('profile/profilkorwil');
+}
 
   public function upload(){    
         $config['upload_path'] = './assets/images/';    

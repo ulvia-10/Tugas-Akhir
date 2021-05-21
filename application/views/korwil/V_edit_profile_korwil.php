@@ -6,7 +6,7 @@
                     <h5 class="text-white">Edit Profile</h5>
                   </div>
                   <div class="card-body">
-                  <form class="theme-form" action="<?php echo base_url('profile/editprofileanggota/'. $profile['id_profile']) ?>" method="POST" enctype="multipart/form-data">
+                  <form class="theme-form" action="<?php echo base_url('profile/editprofilekorwil/'. $profile['id_profile']) ?>" method="POST" enctype="multipart/form-data">
 				<input type="hidden" name="id_profile">
 				<!-- email  -->
 				<div class="mb-2">

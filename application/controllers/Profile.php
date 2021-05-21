@@ -66,6 +66,7 @@ class Profile extends CI_Controller
         );
 
         $data['profile']= $this->M_rekruitment->getDataProfile();
+         
         
         $this->load->view('templating/korwil/template_korwil', $data);
         // templating
@@ -143,4 +144,31 @@ class Profile extends CI_Controller
     }
 }
 
+    // proses 
+    public function editprofilekorwil(){
+        $this->load->helper(array('form', 'url'));
+        $this->load->library('form_validation');
+
+        // form validation 
+        $this->form_validation->set_rules('email','email','required');
+        $this->form_validation->set_rules('address','address','required');
+        $this->form_validation->set_rules('telp','telp','required');
+        // redirect 
+        if ($this->form_validation->run() == FALSE){
+            echo validation_errors();
+        }
+        else{
+            $upload = $this->M_profile->upload();
+            if($upload ['result'] == 'success'){
+                $this->M_profile->updateprofilekorwil($upload);
+                // print_r($upload);
+                redirect('profile/profilkorwil','refresh');
+            }else{
+                echo $upload['error'];
+            }
+            redirect('profile/profilkorwil','refresh');  
+    }
 }
+    }
+
+
