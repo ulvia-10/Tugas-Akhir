@@ -125,8 +125,8 @@ class Keuangan extends CI_Controller
     $this->load->library('form_validation');
     // form validation 
     $this->form_validation->set_rules('tgl_bayar','tgl_bayar','required');
-    $this->form_validation->set_rules('judul','judul','required');
-    $this->form_validation->set_rules('nominal','nominal','required');
+    // $this->form_validation->set_rules('judul','judul','required');
+    // $this->form_validation->set_rules('nominal','nominal','required');
     $this->form_validation->set_rules('deskripsi','deskripsi','required');
 
     if ($this->form_validation->run()==FALSE){
@@ -233,10 +233,10 @@ class Keuangan extends CI_Controller
         $this->load->library('form_validation');
         
         // form validation 
-        $this->form_validation->set_rules('judul','judul','required');
+        // $this->form_validation->set_rules('judul','judul','required');
         $this->form_validation->set_rules('tgl_bayar','tgl_bayar','required');
-        $this->form_validation->set_rules('nominal','nominal','required');
-        $this->form_validation->set_rules('no_rekening','no_rekening','required');
+        // $this->form_validation->set_rules('nominal','nominal','required');
+        // $this->form_validation->set_rules('no_rekening','no_rekening','required');
         $this->form_validation->set_rules('deskripsi','deskripsi','required');
         
         if ($this->form_validation->run() == FALSE){

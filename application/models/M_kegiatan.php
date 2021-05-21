@@ -7,10 +7,8 @@ class M_kegiatan extends CI_Model
     public function getDataKas()
     {
         $id_profile = $this->session->userdata('sess_id_profile');
-        $sql ="SELECT akun_profile.*, data_keuangan.*
-        FROM data_keuangan
-        LEFT JOIN akun_profile ON akun_profile.id_profile = data_keuangan.id_profile
-        WHERE data_keuangan.id_profile = '$id_profile'";
+        $sql ="SELECT data_keuangan.*,  MONTHNAME(tgl_bayar) AS bulan FROM data_keuangan
+                WHERE data_keuangan.id_profile = '$id_profile'";
         $query = $this->db->query($sql);
         return $query;
     }
@@ -36,8 +34,7 @@ class M_kegiatan extends CI_Model
         FROM akun_profile
        
         LEFT JOIN data_kegiatan ON akun_profile.id_profile = akun_profile.id_profile   
-       
-        WHERE akun_profile.id_profile  = '$id_profile'AND data_kegiatan.status = 'publish'";
+        WHERE akun_profile.id_profile  = '$id_profile'AND data_kegiatan.status = 'publish' AND DATE(data_kegiatan.tanggal_kegiatan) > DATE(NOW())";
        
         return $this ->db->query($sql);
 

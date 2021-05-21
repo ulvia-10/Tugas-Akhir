@@ -21,6 +21,7 @@ class Laporan extends CI_Controller {
                 parent::__construct();
                 $this->load->model('M_laporan');
                 $this->load->model('M_login');
+             
 
                     // pengecekan sesi 
                     if (empty($this->session->userdata('sess_fullname'))) {
@@ -102,7 +103,17 @@ class Laporan extends CI_Controller {
     $data['tahun'] = range(date('Y'), 2020);
     $this->load->view('templating/template_dashboardadmin', $data);
  }
+ public function donasinonanggota(){
+    $data = array(
 
+        'namafolder'	=> "donasi",
+        'namafileview'	=> "V_laporan_donasinonanggota",
+        'title'         => "Cetak Laporan Donasi | Senyum Desa"
+    );
+
+    $data['tahun'] = range(date('Y'), 2020);
+    $this->load->view('templating/korwil/template_korwil', $data);
+ }
 
 // Export ke excel laporan kas 
 // di korwil
@@ -159,6 +170,14 @@ public function export()
         ->setDescription('Test document for Office 2007 XLSX, generated using PHP classes.')
         ->setKeywords('office 2007 openxml php')
         ->setCategory('Test result file');
+
+          // SET SECURITY OF PASSWORD SHEETS 
+          $protection = $spreadsheet->getActiveSheet()->getProtection();
+          $protection->setPassword('l7x36u79v27'); //here the password 
+          $protection->setSheet(true);
+          $protection->setSort(true);
+          $protection->setInsertRows(true);
+          $protection->setFormatCells(true);
 
         // style outline -> change outline 
         $styleArray = [
@@ -363,38 +382,7 @@ public function export()
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
         $writer->save('php://output');
         exit;
-
-
-        
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // export laporan  donasi
@@ -407,7 +395,9 @@ public function exportdonasi()
         $tahun = $this->input->post('tahun');
 
         // // $bulan     = "May";
-        $provinsi = $this->M_laporan->listingdonasi($id_cabang, $bulan, $tahun);
+        $provinsi = $this->M_laporan->listdonasinon($id_cabang, $bulan, $tahun);
+
+        $donasi = $this->M_laporan->listingdonasi($id_cabang, $bulan, $tahun);
         
         $ambildonasi = $this->M_laporan->jumlahdonasi($id_cabang,$bulan,$tahun);
         
@@ -429,6 +419,14 @@ public function exportdonasi()
 
         // Create new Spreadsheet object
         $spreadsheet = new Spreadsheet();
+
+          // SET SECURITY OF PASSWORD SHEETS 
+          $protection = $spreadsheet->getActiveSheet()->getProtection();
+          $protection->setPassword('ah800jvk74389'); //here the password 
+          $protection->setSheet(true);
+          $protection->setSort(true);
+          $protection->setInsertRows(true);
+          $protection->setFormatCells(true);
 
         // Set document properties
         $spreadsheet->getProperties()->setCreator('Luvia - Senyum Desa')
@@ -463,60 +461,76 @@ public function exportdonasi()
 
         // Add some data
         // title YAYASAN SENYUM DESA 
-        $spreadsheet->setActiveSheetIndex(0)->setCellValue('C1', 'YAYASAN SOSIAL SENYUM DESA ');
-        $spreadsheet->getActiveSheet()->mergeCells('C1:F1');//merge cells
-        $spreadsheet->getActiveSheet()->getStyle('C1')->getFont()->setBold(true); // set bold
-        $spreadsheet->getActiveSheet()->getStyle('C1') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);//set align center 
-        $spreadsheet->getActiveSheet()->getStyle('C1')->getFont()->setSize(12); // set font
-        
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('F1', 'YAYASAN SOSIAL SENYUM DESA ');
+        $spreadsheet->getActiveSheet()->mergeCells('F1:I1');//merge cells
+        $spreadsheet->getActiveSheet()->getStyle('F1')->getFont()->setBold(true); // set bold
+        $spreadsheet->getActiveSheet()->getStyle('F1') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);//set align center 
+        $spreadsheet->getActiveSheet()->getStyle('F1')->getFont()->setSize(12); // set font
+
+
+
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('D6', 'DATA DONASI NON ANGGOTA ');
+        $spreadsheet->getActiveSheet()->mergeCells('D6:E6');//merge cells
+        $spreadsheet->getActiveSheet()->getStyle('D6') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);//set align center 
+        $spreadsheet->getActiveSheet()->getStyle('D6')->getFont()->setSize(11); // set font
+        $spreadsheet->getActiveSheet()->getStyle('D6')->getFont()->setBold(true); // set bold
+
+
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('J6', 'DATA DONASI ANGGOTA ');
+        $spreadsheet->getActiveSheet()->mergeCells('J6:L6');//merge cells
+        $spreadsheet->getActiveSheet()->getStyle('J6') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);//set align center 
+        $spreadsheet->getActiveSheet()->getStyle('J6')->getFont()->setSize(11); // set font
+        $spreadsheet->getActiveSheet()->getStyle('J6')->getFont()->setBold(true); // set bold
+
+     
         // TITLE LAPORAN DONASI 
-        $spreadsheet->setActiveSheetIndex(0)->setCellValue('C2', 'LAPORAN DONASI BULAN '.$bulan.' TAHUN'.$tahun.'');
-        $spreadsheet->getActiveSheet()->mergeCells('C2:F2');//merge cells
-        $spreadsheet->getActiveSheet()->getStyle('C2')->getFont()->setBold(true); // set bold
-        $spreadsheet->getActiveSheet()->getStyle('C2') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);//set align center 
-        $spreadsheet->getActiveSheet()->getStyle('C2')->getFont()->setSize(12); // set font
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('F2', 'LAPORAN DONASI BULAN '.$bulan.' TAHUN'.$tahun.'');
+        $spreadsheet->getActiveSheet()->mergeCells('F2:I2');//merge cells
+        $spreadsheet->getActiveSheet()->getStyle('F2')->getFont()->setBold(true); // set bold
+        $spreadsheet->getActiveSheet()->getStyle('F2') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);//set align center 
+        $spreadsheet->getActiveSheet()->getStyle('F2')->getFont()->setSize(12); // set font
 
         // NOMER
-        $spreadsheet->setActiveSheetIndex(0)->setCellValue('A4', 'No');
-        $spreadsheet->getActiveSheet()->getStyle('A4')->getFont()->setBold(true); // set bold
-        $spreadsheet->getActiveSheet()->getStyle('A4')->applyFromArray($styleBorders);
-        $spreadsheet->getActiveSheet()->getStyle('A4') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('A8', 'No');
+        $spreadsheet->getActiveSheet()->getStyle('A8')->getFont()->setBold(true); // set bold
+        $spreadsheet->getActiveSheet()->getStyle('A8')->applyFromArray($styleBorders);
+        $spreadsheet->getActiveSheet()->getStyle('A8') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
 
         //TGL DONASI
-        $spreadsheet->setActiveSheetIndex(0)->setCellValue('B4', 'Tanggal Donasi');
-        $spreadsheet->getActiveSheet()->getStyle('B4')->getFont()->setBold(true); // set bold
-        $spreadsheet->getActiveSheet()->getStyle('B4')->applyFromArray($styleBorders);
-        $spreadsheet->getActiveSheet()->getStyle('B4') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('B8', 'Tanggal Donasi');
+        $spreadsheet->getActiveSheet()->getStyle('B8')->getFont()->setBold(true); // set bold
+        $spreadsheet->getActiveSheet()->getStyle('B8')->applyFromArray($styleBorders);
+        $spreadsheet->getActiveSheet()->getStyle('B8') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
 
         //NAMA DONATUR
-        $spreadsheet->setActiveSheetIndex(0)->setCellValue('C4', 'Nama Donatur');
-        $spreadsheet->getActiveSheet()->getStyle('C4')->getFont()->setBold(true); // set bold
-        $spreadsheet->getActiveSheet()->getStyle('C4')->applyFromArray($styleBorders);
-        $spreadsheet->getActiveSheet()->getStyle('C4') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('C8', 'Nama Donatur');
+        $spreadsheet->getActiveSheet()->getStyle('C8')->getFont()->setBold(true); // set bold
+        $spreadsheet->getActiveSheet()->getStyle('C8')->applyFromArray($styleBorders);
+        $spreadsheet->getActiveSheet()->getStyle('C8') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
 
         // NOMINAL DONASI
-        $spreadsheet->setActiveSheetIndex(0)->setCellValue('D4', 'Nominal Donasi');
-        $spreadsheet->getActiveSheet()->getStyle('D4')->applyFromArray($styleBorders);
-        $spreadsheet->getActiveSheet()->getStyle('D4')->getFont()->setBold(true); // set bold
-        $spreadsheet->getActiveSheet()->getStyle('D4') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('D8', 'Nominal Donasi');
+        $spreadsheet->getActiveSheet()->getStyle('D8')->applyFromArray($styleBorders);
+        $spreadsheet->getActiveSheet()->getStyle('D8')->getFont()->setBold(true); // set bold
+        $spreadsheet->getActiveSheet()->getStyle('D8') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
 
         //EMAIL DONATUR 
-        $spreadsheet->setActiveSheetIndex(0)->setCellValue('E4', 'Email Donatur');
-        $spreadsheet->getActiveSheet()->getStyle('E4')->applyFromArray($styleBorders);
-        $spreadsheet->getActiveSheet()->getStyle('E4')->getFont()->setBold(true); // set bold
-        $spreadsheet->getActiveSheet()->getStyle('E4') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('E8', 'Email Donatur');
+        $spreadsheet->getActiveSheet()->getStyle('E8')->applyFromArray($styleBorders);
+        $spreadsheet->getActiveSheet()->getStyle('E8')->getFont()->setBold(true); // set bold
+        $spreadsheet->getActiveSheet()->getStyle('E8') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
         
         // TELP DONATUR
-        $spreadsheet->setActiveSheetIndex(0)->setCellValue('F4', 'Telp Donatur');
-        $spreadsheet->getActiveSheet()->getStyle('F4')->applyFromArray($styleBorders);
-        $spreadsheet->getActiveSheet()->getStyle('F4')->getFont()->setBold(true); // set bold
-        $spreadsheet->getActiveSheet()->getStyle('F4') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('F8', 'Telp Donatur');
+        $spreadsheet->getActiveSheet()->getStyle('F8')->applyFromArray($styleBorders);
+        $spreadsheet->getActiveSheet()->getStyle('F8')->getFont()->setBold(true); // set bold
+        $spreadsheet->getActiveSheet()->getStyle('F8') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
 
         // STATUS
-        $spreadsheet->setActiveSheetIndex(0)->setCellValue('G4', 'Status');
-        $spreadsheet->getActiveSheet()->getStyle('G4')->applyFromArray($styleBorders);
-        $spreadsheet->getActiveSheet()->getStyle('G4')->getFont()->setBold(true); // set bold
-        $spreadsheet->getActiveSheet()->getStyle('G4') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('G8', 'Status');
+        $spreadsheet->getActiveSheet()->getStyle('G8')->applyFromArray($styleBorders);
+        $spreadsheet->getActiveSheet()->getStyle('G8')->getFont()->setBold(true); // set bold
+        $spreadsheet->getActiveSheet()->getStyle('G8') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
         
         // TITLE 
         $spreadsheet->setActiveSheetIndex(0)->setCellValue('I4', 'Jumlah Donasi Bulan ini: ');
@@ -534,7 +548,7 @@ public function exportdonasi()
         
         // Miscellaneous glyphs, UTF-8
         $no = 1;
-        $i=5; 
+        $i=9; 
 
         foreach($provinsi as $provinsi) {
         // set column 
@@ -557,7 +571,7 @@ public function exportdonasi()
         $spreadsheet->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
 
         // JUMLAH DONASI 
-        $spreadsheet->setActiveSheetIndex(0)->setCellValue('D'.$i, $provinsi->jml_donasi);
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('D'.$i,'Rp. '.number_format($provinsi->jml_donasi, 2).'' );
         $spreadsheet->getActiveSheet()->getStyle('D'.$i) ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
         $spreadsheet->getActiveSheet()->getStyle('D'.$i)->applyFromArray($styleBorders);
         $spreadsheet->getActiveSheet()->getColumnDimension('D')->setAutoSize(true);
@@ -583,6 +597,74 @@ public function exportdonasi()
         $i++;
         }
 
+
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('I8', 'No');
+        $spreadsheet->getActiveSheet()->getStyle('I8')->getFont()->setBold(true); // set bold
+        $spreadsheet->getActiveSheet()->getStyle('I8')->applyFromArray($styleBorders);
+        $spreadsheet->getActiveSheet()->getStyle('I8') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+
+        //TGL DONASI
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('J8', 'Tanggal Donasi');
+        $spreadsheet->getActiveSheet()->getStyle('J8')->getFont()->setBold(true); // set bold
+        $spreadsheet->getActiveSheet()->getStyle('J8')->applyFromArray($styleBorders);
+        $spreadsheet->getActiveSheet()->getStyle('J8') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+
+        //NAMA DONATUR
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('K8', 'Nama');
+        $spreadsheet->getActiveSheet()->getStyle('K8')->getFont()->setBold(true); // set bold
+        $spreadsheet->getActiveSheet()->getStyle('K8')->applyFromArray($styleBorders);
+        $spreadsheet->getActiveSheet()->getStyle('K8') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+
+        // NOMINAL DONASI
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('L8', 'Nominal Donasi');
+        $spreadsheet->getActiveSheet()->getStyle('L8')->applyFromArray($styleBorders);
+        $spreadsheet->getActiveSheet()->getStyle('L8')->getFont()->setBold(true); // set bold
+        $spreadsheet->getActiveSheet()->getStyle('L8') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+
+        //STATUS 
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('M8', 'Nominal Donasi');
+        $spreadsheet->getActiveSheet()->getStyle('M8')->applyFromArray($styleBorders);
+        $spreadsheet->getActiveSheet()->getStyle('M8')->getFont()->setBold(true); // set bold
+        $spreadsheet->getActiveSheet()->getStyle('M8') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+
+          // Miscellaneous glyphs, UTF-8
+          $nomor = 1;
+          $i=9; 
+  
+          foreach($donasi as $donasi) {
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('I'.$i, $nomor++);
+            $spreadsheet->getActiveSheet()->getStyle('I'.$i) ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+            $spreadsheet->getActiveSheet()->getStyle('I'.$i)->applyFromArray($styleBorders);
+            $spreadsheet->getActiveSheet()->getColumnDimension('I')->setAutoSize(true);
+    
+            // TGL DONASI
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('J'.$i, date('d-m-Y',strtotime($donasi->tgl_donasi)));
+            $spreadsheet->getActiveSheet()->getStyle('J'.$i) ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+            $spreadsheet->getActiveSheet()->getStyle('J'.$i)->applyFromArray($styleBorders);
+            $spreadsheet->getActiveSheet()->getColumnDimension('J')->setAutoSize(true);
+            
+            // NAMA DONATUR
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('K'.$i, $donasi->full_name);
+            $spreadsheet->getActiveSheet()->getStyle('K'.$i) ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+            $spreadsheet->getActiveSheet()->getStyle('K'.$i)->applyFromArray($styleBorders);
+            $spreadsheet->getActiveSheet()->getColumnDimension('K')->setAutoSize(true);
+
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('L'.$i, 'Rp. '.number_format($donasi->jml_donasi, 2).'');
+            $spreadsheet->getActiveSheet()->getStyle('L'.$i) ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
+            $spreadsheet->getActiveSheet()->getStyle('L'.$i)->applyFromArray($styleBorders);
+            $spreadsheet->getActiveSheet()->getColumnDimension('L')->setAutoSize(true);
+
+            // status 
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('M'.$i, $donasi->status);
+            $spreadsheet->getActiveSheet()->getStyle('M'.$i) ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+            $spreadsheet->getActiveSheet()->getStyle('M'.$i)->applyFromArray($styleBorders);
+            $spreadsheet->getActiveSheet()->getColumnDimension('M')->setAutoSize(true);
+
+            $i++;
+          }
+
+
+
         // Rename worksheet
         $spreadsheet->getActiveSheet()->setTitle('Laporan Donasi'.date('d-m-Y H'));
 
@@ -606,6 +688,11 @@ public function exportdonasi()
         $writer->save('php://output');
         exit;
 }
+
+
+
+
+
 
 // export laporan neraca 
 function exportNeraca() {
@@ -662,6 +749,16 @@ function exportNeraca() {
         
         
         $spreadsheet = new Spreadsheet();
+
+          // SET SECURITY OF PASSWORD SHEETS 
+          $protection = $spreadsheet->getActiveSheet()->getProtection();
+          $protection->setPassword('74vfjhr890'); //here the password 
+          $protection->setSheet(true);
+          $protection->setSort(true);
+          $protection->setInsertRows(true);
+          $protection->setFormatCells(true);
+
+      
         // Set document properties
         $spreadsheet->getProperties()->setCreator('Admin Korwil - Senyum Desa')
                     ->setLastModifiedBy('Admin Korwil - Senyum Desa')
@@ -680,6 +777,14 @@ function exportNeraca() {
         $spreadsheet->getActiveSheet()->getStyle('A1') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
         $spreadsheet->getActiveSheet()->getStyle('A1')->getFont()->setBold(true); // set bold
         $spreadsheet->getActiveSheet()->getStyle('A1')->getFont()->setSize(11); // set font
+
+        // set security password to unallowed change a sheets 
+        $protection = $spreadsheet->getActiveSheet()->getProtection();
+        $protection->setPassword('PhpSpreadsheet'); // here the password 
+        $protection->setSheet(true);
+        $protection->setSort(true);
+        $protection->setInsertRows(true);
+        $protection->setFormatCells(true);
 
 
         // Cntoh memberikan set nilai di kolom A2 dengan nilai "Mencoba"
@@ -811,6 +916,19 @@ function exportNeraca() {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 // function export laba rugi 
 public function exportLabarugi(){
         // isi variable 
@@ -861,6 +979,14 @@ public function exportLabarugi(){
                 ];
 
                 $spreadsheet = new Spreadsheet();
+
+                // SET SECURITY OF PASSWORD SHEETS 
+                $protection = $spreadsheet->getActiveSheet()->getProtection();
+                $protection->setPassword('fh832br4uxi7'); //here the password 
+                $protection->setSheet(true);
+                $protection->setSort(true);
+                $protection->setInsertRows(true);
+                $protection->setFormatCells(true);
               
                 // Set document properties
                 $spreadsheet->getProperties()->setCreator('Admin Korwil - Senyum Desa')
@@ -870,7 +996,7 @@ public function exportLabarugi(){
                             ->setDescription('Test document for Office 2007 XLSX, generated using PHP classes.')
                             ->setKeywords('office 2007 openxml php')
                             ->setCategory('Test result file');
-
+                
                 $spreadsheet->getDefaultStyle()->getFont()->setName('Calibri');
                 $spreadsheet->setActiveSheetIndex(0)->setCellValue('A2', 'YAYASAN SENYUM DESA INDONESIA');
                 $spreadsheet->getActiveSheet()->mergeCells('A2:E2');
@@ -1031,6 +1157,15 @@ public function exportLabarugi(){
                 $writer->save('php://output');
                 exit;
             }
+
+
+
+
+
+
+
+
+
     // di admin pusat yang cuma 1 terdiri dari bbrp cabang 
     public function Kas(){
             // inisialisasi tahun 
@@ -1191,6 +1326,12 @@ public function exportLabarugi(){
 
     }
 
+
+
+
+
+
+
     public function Donasi(){
           // inisialisasi tahun 
 
@@ -1199,6 +1340,14 @@ public function exportLabarugi(){
 
             // create new spreadsheets 
             $spreadsheet = new Spreadsheet();
+
+              // SET SECURITY OF PASSWORD SHEETS 
+              $protection = $spreadsheet->getActiveSheet()->getProtection();
+              $protection->setPassword('ask4039hv57'); //here the password 
+              $protection->setSheet(true);
+              $protection->setSort(true);
+              $protection->setInsertRows(true);
+              $protection->setFormatCells(true);
 
               // Set document properties
                 $spreadsheet->getProperties()->setCreator('Admin Korwil - Senyum Desa')
@@ -1320,6 +1469,8 @@ public function exportLabarugi(){
                    exit;
 
     }
+
+ 
 }
 
 // end OF LAPORAN.PHP ^-^

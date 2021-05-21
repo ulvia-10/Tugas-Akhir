@@ -41,15 +41,14 @@
         <?php } ?>
             <div class="table-responsive">
             <!-- flash data -->
-                <?php echo $this->session->flashdata('flash-data')?>
+                <!-- <?php echo $this->session->flashdata('flash-data')?> -->
                 <table class="display" id="basic-1" style="text-align:center;">
                     <thead>
                         <tr>
                             <th>No</th>
                             <th>Tanggal Bayar</th>
-                            <th>Nominal </th>
-                            <th>Judul</th>
-                            <!-- <th>Bulan</th> -->
+                            <th>Bulan</th>
+                            <th>Via </th>
                             <th>Verifikasi</th>
                             <th>Action</th>
                         </tr>
@@ -62,21 +61,21 @@
                             <?php
 														
 														$tanggal = "-";
-														if ( $ks['tanggal_laporan'] ){
+														if ( $ks['tgl_bayar'] ){
 
-															$tanggal = date('d-m-Y',strtotime($ks['tanggal_laporan']));
+															$tanggal = date('d-m-Y',strtotime($ks['tgl_bayar']));
 														}
 													?>
                             <td><?= $tanggal ?></td>
 
                           
-                                <?php
+                                <!-- <?php
                                 $nominal= $ks["nominal"]
                                 ?>
-                                 <td> Rp. <?= number_format($nominal, 2 ); ?></td>
-
-                            <td><?= $ks["judul"]; ?></td>
-                            <!-- <td><?= $ks["bulan"]; ?></td> -->
+                                 <td> Rp. <?= number_format($nominal, 2 ); ?></td> -->
+                                 <td><?= $ks["bulan"]; ?></td>
+                            <td><span class="badge badge-primary"><?= $ks["via"]; ?></span></td>
+                          
                                <?php
                                 $keterangan = "";
                                 $warna = "";
@@ -107,9 +106,9 @@
                                     <i class="fa fa-eye" aria-hidden="true"></i></a></a>
 
                             <!-- delete -->
-                            <a href="<?= base_url(); ?>keuangan/delete/<?= $ks['id_keuangan']; ?>"
+                            <!-- <a href="<?= base_url(); ?>keuangan/delete/<?= $ks['id_keuangan']; ?>"
                                     class="badge badge-danger">
-                                   <i class="fa fa-trash" aria-hidden="true"></i></a></a>
+                                   <i class="fa fa-trash" aria-hidden="true"></i></a></a> -->
                             </td>
 
                             <?php

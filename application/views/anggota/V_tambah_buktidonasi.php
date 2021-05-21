@@ -18,7 +18,7 @@
                         </div>
                       </div>
                         <!-- no rekening -->
-                        <div class="row">
+                        <!-- <div class="row">
                         <div class="col">
                           <div class="mb-3 row">
                             <label class="col-sm-3 col-form-label">No Rekening</label>
@@ -27,9 +27,9 @@
                             </div>
                           </div>
                         </div>
-                      </div>
+                      </div> -->
                       <!-- nama bank -->
-					<div class="form-group" id="element-wilayah">
+					<!-- <div class="form-group" id="element-wilayah">
 				<div class="row">
 					<div class="mb-2 row">
 						<label class="col-sm-3 col-form-label">Nama Bank</label>
@@ -46,9 +46,9 @@
 					</div>
 				</div>
 				</div>
-			<br>
+			<br> -->
                          <!-- no rekening -->
-                         <div class="row">
+                         <!-- <div class="row">
                         <div class="col">
                           <div class="mb-3 row">
                             <label class="col-sm-3 col-form-label">Nominal</label>
@@ -57,7 +57,7 @@
                             </div>
                           </div>
                         </div>
-                      </div>
+                      </div> -->
                       <!-- jumlah donasi  -->
                       
                       <!-- upload bukti -->

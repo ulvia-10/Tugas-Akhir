@@ -17,9 +17,6 @@ class M_master extends CI_Model
         return $this->db->get('master_cabang')->result_array();
     }
 
-
-
-
     // proses insert
     function processInsertCabang()
     {

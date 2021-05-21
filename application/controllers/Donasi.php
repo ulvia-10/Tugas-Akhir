@@ -198,9 +198,9 @@ public function uploadbuktidonasi(){
     $this->load->library('form_validation');
     // form validation 
     $this->form_validation->set_rules('tgl_donasi','tgl_donasi','required');
-    $this->form_validation->set_rules('no_rekening','no_rekening','required');
-    $this->form_validation->set_rules('nama_bank','nama_bank','required');
-    $this->form_validation->set_rules('jml_donasi','jml_donasi','required');
+    // $this->form_validation->set_rules('no_rekening','no_rekening','required');
+    // $this->form_validation->set_rules('nama_bank','nama_bank','required');
+    // $this->form_validation->set_rules('jml_donasi','jml_donasi','required');
 
     if ($this->form_validation->run()==FALSE){
 
@@ -284,16 +284,16 @@ public function hapusdonasikorwil($Id_donasi){
 //DONASI EDIT BAGI ANGGOTA 
 public function editdonasianggota($id){
  
-    $data = array(
+        $data = array(
 
-        'namafolder'    => "donasi",
-        'namafileview'  => "V_edit_donasi_anggota",
-        'title'         => "Donasi Anggota | Senyum Desa",
+            'namafolder'    => "donasi",
+            'namafileview'  => "V_edit_donasi_anggota",
+            'title'         => "Donasi Anggota | Senyum Desa",
 
-    );
-    $data['donasi'] = $this->M_donasi->getDonasiById($id);
-    
-    $this->load->view('templating/Template_anggotanew', $data);
+        );
+        $data['donasi'] = $this->M_donasi->getDonasiById($id);
+        
+        $this->load->view('templating/Template_anggotanew', $data);
 }
 
 public function proseseditdonasianggota(){
@@ -302,9 +302,8 @@ public function proseseditdonasianggota(){
     
     // form validation 
     $this->form_validation->set_rules('tgl_donasi','tgl_donasi','required');
-    $this->form_validation->set_rules('no_rekening','no_rekening','required');
-    $this->form_validation->set_rules('jml_donasi','jml_donasi','required');
-    $this->form_validation->set_rules('nama_bank','nama_bank','required');
+
+ 
     
     if ($this->form_validation->run() == FALSE){
         echo validation_errors();
@@ -312,8 +311,8 @@ public function proseseditdonasianggota(){
       else{
         $upload = $this->M_donasi->upload();
         if($upload ['result'] == 'success'){
-            $this->M_donasi->updatedonasianggota();
-            redirect('donasi','refresh');
+            $this->M_donasi->updatedonasianggota($upload);
+            redirect('donasi/datadonasi','refresh');
         }else{
             echo $upload['error'];
         }
@@ -331,6 +330,7 @@ public function proseseditdonasianggota(){
         'title'         => "Donasi Anggota | Senyum Desa",
 
     );
+
     $data['donasi'] = $this->M_donasi->getDonasiById($id);
     $this->load->view('templating/korwil/Template_korwil', $data);
  }
@@ -348,9 +348,8 @@ public function proseseditdonasianggota(){
  }
 
 
-public function proseseditdonasiverif($id){
+public function proseseditdonasiverif(){
 
-    $this->form_validation->set_rules('status','status','required');
     $this->form_validation->set_rules('status_verif','status_verif','required');
      
       if ($this->form_validation->run() == FALSE){
@@ -367,7 +366,7 @@ public function proseseditdonasiverif($id){
         redirect('donasi/datadonasi','refresh');  
 }
 }
-public function proseseditdonasinonverif($id){
+public function proseseditdonasinonverif(){
 
     $this->form_validation->set_rules('status','status','required');
     $this->form_validation->set_rules('status_verif','status_verif','required');

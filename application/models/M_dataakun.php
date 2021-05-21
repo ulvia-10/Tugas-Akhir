@@ -7,11 +7,11 @@ class M_dataakun extends CI_Model
 
         public function get_dataakun(){
      
-        $query = $this->db->query('SELECT a.id_profile, a.full_name,a.asal, a.username,a.level,b.id_cabang,b.name_cabang 
-        from akun_profile a, master_cabang b 
-        where a.id_cabang = b.id_cabang');
-        return $query;
-    
+            $query = $this->db->query('SELECT a.id_profile, a.full_name,a.asal, a.username,a.level,b.id_cabang,b.name_cabang 
+            from akun_profile a, master_cabang b 
+            where a.id_cabang = b.id_cabang');
+            return $query;
+        
     }
         public function get_allakun(){
             $sql = "SELECT akun_profile.*, data_informasiprofile.*, master_cabang.*

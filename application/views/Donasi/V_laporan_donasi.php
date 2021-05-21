@@ -37,6 +37,7 @@ text-align: center;
 <div class="container">
 <h1><?php echo $title ?></h1>
 <p><a href="<?php echo base_url() ?>laporan/exportdonasi" class="btn btn-primary btn-sm mb-3">  Export ke Excel</a></p>
+<hr>
 
 <!-- bulan -->
         <div class="form-group">
@@ -44,9 +45,8 @@ text-align: center;
 							<div class="mb-2 row">
 								<label class="col-sm-3 col-form-label">Bulan</label>
 								<div class="col-sm-9">
-									<select name="bulan" class="form-select digits" id=""
-										required="Bulan harap diisi" >
-										<option  disabled="disabled" value="bulan">-- Pilih salah satu --</option>
+									<select name="bulan" class="form-select digits" required="" >
+										<option value="bulan">-- Pilih salah satu --</option>
 
 										<?php
                                         foreach ($pilih as $bulan) {
@@ -68,8 +68,7 @@ text-align: center;
             <div class="mb-2 row">
                 <label class="col-sm-3 col-form-label">Tahun</label>
                 <div class="col-sm-4">
-                    <select name="tahun" class="form-select digits" id=""
-                        required="wilayah harap Diisi">
+                    <select name="tahun" class="form-select digits" required="">
                         <option value="tahun">-- Pilih salah satu --</option>
 
                         <?php

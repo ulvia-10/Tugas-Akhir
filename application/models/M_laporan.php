@@ -16,9 +16,18 @@ public function listing($id_cabang,$bulan,$tahun)
     FROM data_keuangan
     JOIN master_cabang ON master_cabang.id_cabang = data_keuangan.id_cabang
     JOIN akun_profile ON akun_profile.id_profile = data_keuangan.id_profile
-    WHERE data_keuangan.id_cabang = '$id_cabang' AND MONTHNAME(tgl_bayar)= '$bulan' AND YEAR(tgl_bayar)='$tahun' 
+    WHERE data_keuangan.id_cabang = '$id_cabang' AND MONTHNAME(tgl_bayar)= '$bulan' AND YEAR(tgl_bayar)='$tahun' AND data_donasi.status_verif ='baru'
     ORDER BY data_keuangan.id_keuangan ASC";
 
+    return $this->db->query($sql)->result();
+}
+public function listdonasinon($id_cabang,$bulan,$tahun ){
+    $sql=" SELECT data_donasi.*,master_cabang.*
+    FROM data_donasi
+    JOIN master_cabang ON master_cabang.id_cabang = data_donasi.id_cabang
+    WHERE data_donasi.id_cabang = '$id_cabang' AND MONTHNAME(tgl_donasi)= '$bulan' 
+    AND YEAR(tgl_donasi) = '$tahun' AND data_donasi.tipe = 'non anggota' 
+    AND data_donasi.status_verif ='baru' ORDER BY data_donasi.id_donasi ASC";
     return $this->db->query($sql)->result();
 }
 // listing donasi 
@@ -28,13 +37,20 @@ public function listingdonasi($id_cabang, $bulan, $tahun)
     FROM data_donasi
     JOIN master_cabang ON master_cabang.id_cabang = data_donasi.id_cabang
     JOIN akun_profile ON akun_profile.id_profile = data_donasi.id_profile
-    WHERE data_donasi.id_cabang = '$id_cabang' AND MONTHNAME(tgl_donasi)= '$bulan' AND YEAR(tgl_donasi) = '$tahun' ORDER BY data_donasi.id_donasi ASC";
+    WHERE data_donasi.id_cabang = '$id_cabang' AND MONTHNAME(tgl_donasi)= '$bulan' 
+    AND YEAR(tgl_donasi) = '$tahun'
+    AND data_donasi.tipe = 'anggota' 
+    AND data_donasi.status_verif ='baru'
+    ORDER BY data_donasi.id_donasi ASC";
     return $this->db->query($sql)->result();
 }
 public function jumlahdonasi($id_cabang,$bulan,$tahun)
 {
     $sql="SELECT * FROM data_donasi
-    WHERE data_donasi.id_cabang = '$id_cabang' AND MONTHNAME(tgl_donasi)= '$bulan' AND YEAR(tgl_donasi)='$tahun'";
+    WHERE data_donasi.id_cabang = '$id_cabang' 
+    AND MONTHNAME(tgl_donasi)= '$bulan' 
+    AND YEAR(tgl_donasi)='$tahun'
+    AND data_donasi.status_verif='baru'";
     return $this->db->query($sql)->result();
 }
 public function jumlahdonasitahunan($id_cabang,$tahun)
@@ -54,10 +70,6 @@ function assetKas($tahun, $id_cabang, $jenis) {
     return $this->db->query($sql);
 }
 function kasbulanan($bulan, $id_cabang, $jenis, $tahun){
-    // $sql = "SELECT * FROM `data_keuangan` 
-    // WHERE MONTHNAME(tgl_bayar) = '.$bulan.' AND  id_cabang = '.$id_cabang.' 
-    // AND jenis_keuangan = '.$jenis.' AND YEAR(tgl_bayar) = '.$tahun.'";
-    // $query =  $this->db->query($sql);
 
     $sqlku = "SELECT * FROM `data_keuangan` WHERE 
             MONTHNAME(tgl_bayar) = '$bulan' AND 

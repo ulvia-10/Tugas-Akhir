@@ -14,12 +14,12 @@ class Donasi_non extends CI_Controller
 
 
             // pengecekan sesi 
-            if (empty($this->session->userdata('sess_fullname'))) {
+        //     if (empty($this->session->userdata('sess_fullname'))) {
 
-                $this->session->set_flashdata('msg', '<div class="alert alert-warning"><b>Pemberitahuan</b> <br> <small>Maaf anda harus login terlebih dahulu</small></div>');
-                redirect('login');
-            }
-        }
+        //         $this->session->set_flashdata('msg', '<div class="alert alert-warning"><b>Pemberitahuan</b> <br> <small>Maaf anda harus login terlebih dahulu</small></div>');
+        //         redirect('login');
+        //     }
+    }
 //index donas non anggota 
     public function donasinonanggota()
     {
@@ -66,10 +66,10 @@ class Donasi_non extends CI_Controller
      $this->load->library('form_validation');
      // form validation 
      $this->form_validation->set_rules('nama_donatur','nama_donatur','required');
-     $this->form_validation->set_rules('no_rekening','no_rekening','required');
+    //  $this->form_validation->set_rules('no_rekening','no_rekening','required');
      $this->form_validation->set_rules('email_donatur','email_donatur','required');
      $this->form_validation->set_rules('telp_donatur','telp_donatur','required');
-     $this->form_validation->set_rules('jml_donasi','jml_donasi','required');
+    //  $this->form_validation->set_rules('jml_donasi','jml_donasi','required');
  
      if ($this->form_validation->run()==FALSE){
          echo validation_errors();
@@ -104,7 +104,7 @@ public function hapusdonasikorwil($Id_donasi){
     $this->session->set_flashdata('flash-data','Account berhasil Dihapus');
     redirect('donasi_non/datadonasinonanggota','refresh');
 }
-public function editdonasinonverif(){
+public function editdonasinonverif($id){
     $data = array(
         'namafolder'    => "donasi",
         'namafileview'    => "V_edit_donasinon_verif",
@@ -116,7 +116,6 @@ public function editdonasinonverif(){
 
 public function proseseditdonasinonverif(){
     
-    $this->form_validation->set_rules('status','status','required');
     $this->form_validation->set_rules('status_verif','status_verif','required');
      
       if ($this->form_validation->run() == FALSE){
@@ -124,7 +123,7 @@ public function proseseditdonasinonverif(){
       }
       else{
         //run ke model 
-        $this->M_donasi->ubahdata();
+        $this->M_donasi->ubahdatanondonasi();
         //session 
         $elementHTML = '<div class="alert alert-danger"><b>Pemberitahuan</b> <br> Notifikasi Kegiatan sudah dibaca pada ' . date('d F Y H.i A') . '</div>';
         $this->session->set_flashdata('msg', $elementHTML);

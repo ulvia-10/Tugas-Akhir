@@ -107,13 +107,18 @@ class M_keuangan extends CI_Model
             ->where('id_keuangan', $data['id_keuangan'])
             ->update($data);
     }
+
     //function ubah data kas id
     public function ubahdata()
     {
         $id_keuangan = $this->input->post('id_keuangan');
         $data = [
-            "status"=>$this->input->post('status',true),
-            "status_verif"   => $this->input->post('status_verif', true)
+            "status"=>$this->input->post('status'),
+            "nominal"=>$this->input->post('nominal'),
+            "nama_bank"=>$this->input->post('nama_bank'),
+            "status_verif"   => $this->input->post('status_verif'),
+            "ket_upload"     => $this->input->post('ket_upload'),
+            "judul"     => $this->input->post('judul')
             ];
         $this->db->where('id_keuangan', $this->input->post('id_keuangan'));
         $this->db->update('data_keuangan', $data);      
@@ -121,9 +126,8 @@ class M_keuangan extends CI_Model
         $msg = '<div class="alert alert-info">Informasi pelaporan berhasil diperbarui <br><small>Pada tanggal ' . date('d F Y H.i A') . '</small></div>';
         $this->session->set_flashdata('flash-data', $msg);
 
-        print_r($data);
-        echo $id_keuangan;
-        // redirect('adminkorwil/Kas' . $id_keuangan);
+        // echo $id_keuangan;
+        redirect('adminkorwil/Kas');
       
     }
 
@@ -137,11 +141,11 @@ class M_keuangan extends CI_Model
             'id_profile' => $id_profile,
             'id_cabang' => $id_cabang,
             'via'       => "transfer",
-            'judul'  => $this->input->post('judul'),
-            'no_rekening'  => $this->input->post('no_rekening'),
-            'nama_bank'  => $this->input->post('nama_bank'),
-            'tgl_bayar'   => $this->input->post('tgl_bayar'),
-            'nominal'   => $this->input->post('nominal'),
+            // 'judul'  => $this->input->post('judul'),
+            // 'no_rekening'  => $this->input->post('no_rekening'),
+            // 'nama_bank'  => $this->input->post('nama_bank'),
+            // 'tgl_bayar'   => $this->input->post('tgl_bayar'),
+            // 'nominal'   => $this->input->post('nominal'),
             'bukti_bayar'  => $upload ['file']['file_name'],
             'deskripsi'   => $this->input->post('deskripsi')
         );
@@ -265,12 +269,12 @@ class M_keuangan extends CI_Model
 
         public function ubahkasanggota($upload){
             $data = [
-                "judul"=>$this->input->post('judul',true),
+                // "judul"=>$this->input->post('judul',true),
                 "tgl_bayar"=>$this->input->post('tgl_bayar',true),
-                "nominal"=>$this->input->post('nominal',true),
+                // "nominal"=>$this->input->post('nominal',true),
                 "via" => "transfer",
-                "nama_bank"=>$this->input->post('nama_bank',true),
-                "no_rekening"=>$this->input->post('no_rekening',true),
+                // "nama_bank"=>$this->input->post('nama_bank',true),
+                // "no_rekening"=>$this->input->post('no_rekening',true),
                 "deskripsi"=>$this->input->post('deskripsi',true),
                 'bukti_bayar'  => $upload ['file']['file_name']
                 ];

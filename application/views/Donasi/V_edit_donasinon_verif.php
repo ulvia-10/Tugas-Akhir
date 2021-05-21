@@ -18,9 +18,8 @@
 				<div class="mb-2">
                         <div class="col-form-label">Status</div>
                         <select class="form-select form-control-primary" name="status" value="<?$donasi['status'];?>"> 
-						  <option value="Lunas">Lunas</option>
-                                <option value="Belum Lunas">Belum Lunas</option>
-                                <option value="Kadaluwarsa">Kadaluwarsa</option>
+						  <option value="Lunas">Diterima</option>
+                                <option value="Belum Lunas">Gagal</option>
                         </select>
                       </div> <br>
 					<label class="col-form-label">Status Verifikasi</label>
@@ -33,8 +32,7 @@
 										Pending</span></label>
 							</div>
 							<div class="form-check form-check-inline radio radio-primary">
-								<input class="form-check-input" id="radioinline7" type="radio" name="status_verif"
-							value="baru">
+								<input class="form-check-input" id="radioinline7" type="radio" name="status_verif"	value="baru">
 								<label class="form-check-label mb-0" for="radioinline7"><span class="digits"> Verified
 									</span></label>
 							</div>

@@ -18,13 +18,13 @@ class M_login extends CI_Model
 
         $dataProfile = array(
             'id_profile'    => $this->input->post('id_profile'),
-            'full_name'    => $this->input->post('full_name'),
-            'username'    => $this->input->post('username'),
-            'password'     => $password,
-            'level'     => "calon_anggota",
-            'gender'      => $this->input->post('gender'),
-            'tempat_lahir'    => $this->input->post('tempat_lahir'),
-            'tanggal_lahir'    => $this->input->post('tanggal_lahir'),
+            'full_name'     => $this->input->post('full_name'),
+            'username'      => $this->input->post('username'),
+            'password'      => $password,
+            'level'         => "calon_anggota",
+            'gender'        => $this->input->post('gender'),
+            'tempat_lahir'  => $this->input->post('tempat_lahir'),
+            'tanggal_lahir' => $this->input->post('tanggal_lahir'),
         );
 
         $this->db->insert('akun_profile', $dataProfile);

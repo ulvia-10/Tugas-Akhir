@@ -11,9 +11,8 @@ class M_rekruitment extends CI_Model
         $id_profile = $this->session->userdata('sess_id_profile');
         $sql ="SELECT akun_profile.*, data_informasiprofile.*, master_cabang.name_cabang, master_cabang.status_cabang
         FROM akun_profile
-        LEFT JOIN data_informasiprofile ON data_informasiprofile.id_profile = akun_profile.id_profile
-        LEFT JOIN master_cabang ON master_cabang.id_cabang = akun_profile.id_cabang
-       
+        JOIN data_informasiprofile ON data_informasiprofile.id_profile = akun_profile.id_profile
+        LEFT JOIN  master_cabang ON master_cabang.id_cabang = akun_profile.id_cabang
         WHERE akun_profile.id_profile = '$id_profile'";
         $query = $this->db->query($sql)->row_array();
 

@@ -3,15 +3,17 @@
 		<br>
 		<div class="row">
 			<div class="col-5" style="margin-left:300px;">
-				<h5>Detail Donasi <i class="fa fa-check-circle" aria-hidden="true"></i></h5>
+				<h5>Detail Donasi <i class="fa fa-check-circle" aria-hidden="true"></i></h5> <br>
 			</div>
 			<br> <br> <br><br> <br>
 			<div class="col-sm-5">
 				<div class="card">
 					<div class="card-body">
+					<h6 style="text-align:center;">Keterangan</h6>
+					<hr>
 						<!-- <img src="<?= base_url('./assets/images/' . $donasi['bukti_donasi']); ?>" alt="Maaf bukti_donasi tidak tersedia" style="width:50%; height:45%; margin-left:90px;"> -->
 						<p class="card-text">
-							<label for="full_name"><b>Nama: </b></label>
+							<label for="full_name"><b>Nama Lengkap: </b></label>
 							<?= $donasi['full_name']; ?>
 						</p>
 						<p class="card-text">
@@ -22,10 +24,7 @@
 							<label for="tgl_bayar"><b> Tanggal Donasi: </b></label>
 							<?= date('d-m-Y',strtotime( $donasi['tgl_donasi'])); ?>
 						</p>
-						<!-- <p class="card-text">
-							<label for="no_rekening"><b>No Rekening: </b></label>
-							<?= $donasi['no_rekening']; ?>
-						</p> -->
+						<!-- <?= $donasi['no_rekening']; ?> -->
 						<p class="card-text">
 							<?php
                                 $nominal= $donasi["jml_donasi"]
@@ -82,7 +81,7 @@
 						</p>
 						<p class="card-text">
 							<label for="no_rekening"><b>Nama Bank: </b></label>
-							<span class="badge badge-primary"><?= $donasi['nama_bank']; ?></span>
+							<span class="badge badge-primary">BANK <?= $donasi['nama_bank']; ?></span>
 						</p>
 						<p class="card-text">
 							<label for="created_"><b>Upload pada: </b></label>
@@ -96,11 +95,12 @@
 				<div class="card">
 					<div class="card-header">
 						<h6 style="margin-left:90px;">Bukti Bayar</h6>
+						<hr>
 
 					</div>
 					<div class="card-body">
 						<img src="<?= base_url('./assets/images/' . $donasi['bukti_donasi']); ?>"
-							alt="Maaf bukti pembayaran tidak tersedia" style="width:50%; height:45%; margin-left:90px;">
+							alt="Maaf bukti pembayaran tidak tersedia" style="width:50%; height:85%; margin-left:50px;"> <br> 
 					</div>
 				</div>
 			</div>

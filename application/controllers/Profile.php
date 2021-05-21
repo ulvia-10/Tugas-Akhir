@@ -14,6 +14,7 @@ class Profile extends CI_Controller
         $this->load->model('M_login');
         $this->load->model('M_dataakun');
         $this->load->model('M_rekruitment');
+        $this->load->model('M_profile');
 
             // pengecekan sesi 
             if (empty($this->session->userdata('sess_fullname'))) {
@@ -87,11 +88,15 @@ class Profile extends CI_Controller
         redirect('Profile');
     }
     public function editprofileanggota(){
-         // helper 
+        // helper 
         $this->load->helper(array('form', 'url'));
         $this->load->library('form_validation');
+
         // form validation 
+        $this->form_validation->set_rules('email','email','required');
+        $this->form_validation->set_rules('address','address','required');
         $this->form_validation->set_rules('photo','photo','required');
+        $this->form_validation->set_rules('telp','telp','required');
         // redirect 
         if ($this->form_validation->run() == FALSE){
             echo validation_errors();
@@ -99,7 +104,7 @@ class Profile extends CI_Controller
         else{
             $upload = $this->M_profile->upload();
             if($upload ['result'] == 'success'){
-                $this->M_profile->updateprofileanggota();
+                $this->M_profile->updateprofileanggota($upload);
                 redirect('kegiatan/viewprofile','refresh');
             }else{
                 echo $upload['error'];

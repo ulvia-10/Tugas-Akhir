@@ -35,7 +35,7 @@
 												<th>Tanggal Bayar</th>
 												<th>Bulan</th>
 												<th>Nama</th>
-												<th>Nominal</th>
+												<th>Via</th>
 												<th>Status</th>
 												<th>Action</th>
 											</tr>
@@ -49,11 +49,7 @@
 												<td><?= date('d-m-Y',strtotime($blm["tgl_bayar"])); ?></td>
 												<td><?php echo date('F', strtotime( $blm['tgl_bayar'] )); ?></td>
 												<td><?= $blm["full_name"]; ?></td>
-												<?php
-												$nominal=  $blm["nominal"]
-												?>
-
-												<td> Rp. <?= number_format($nominal, 2 ); ?></td>
+												<td><span class="badge badge-info"><?=$blm["via"];?></span></td>
 												<?php
 														$keterangan = "";
 														$warna = "";
@@ -145,7 +141,7 @@
 										</thead>
 										<tbody>
 											<?php $no = 1;
-						  foreach ($kegiatan_baru AS $br) { ?>
+										  foreach ($kegiatan_baru AS $br) { ?>
 											<tr>
 												<td><?=$no++?></td>
 												<td><?= date('d-m-Y',strtotime($br["tgl_bayar"])); ?></td>
@@ -236,7 +232,7 @@
 												<th>Tanggal Bayar</th>
 												<th>Bulan</th>
 												<th>Nama</th>
-												<th>Nominal</th>
+												<th>Via</th>
 												<th>Status</th>
 												<th>Action</th>
 
@@ -251,10 +247,7 @@
 												<td><?= date('d-m-Y',strtotime($kgt["tgl_bayar"])); ?></td>
 												<td><?php echo date('F', strtotime( $kgt['tgl_bayar'] )); ?></td>
 												<td><?= $kgt["full_name"]; ?></td>
-												<?php
-                                            $nominal=  $kgt["nominal"]
-                                            ?>
-												<td> Rp.<?= number_format($nominal, 2 ); ?></td>
+												<td><span class="badge badge-info"><?=$kgt["via"]?></span></td>
 												<?php
 										$keterangan = "";
 										$warna = "";
@@ -275,15 +268,15 @@
 												<td>
 													<!-- detail -->
 													<a href="<?= base_url(); ?>keuangan/detailkaskorwil/<?= $kgt['id_keuangan'];?>"
-														class="badge badge-secondary">
+														class="badge badge-primary">
 														<i class="fa fa-eye" aria-hidden="true"></i></a></a>
 													<!-- hapus -->
-													<a href="#" data-bs-toggle="modal"
+													<!-- <a href="#" data-bs-toggle="modal"
 														data-bs-target="#aksi-hapus-<?php echo $kgt['id_keuangan'] ?>"
 														class="badge badge-warning "> <i class="fa fa-trash"
-															aria-hidden="true"></i></a>
+															aria-hidden="true"></i></a> -->
 													<!-- pop up  -->
-													<div class="modal fade"
+													<!-- <div class="modal fade"
 														id="aksi-hapus-<?php echo $kgt['id_keuangan'] ?>" tabindex=" -1"
 														role="dialog" aria-labelledby="exampleModalCenter"
 														aria-hidden="true">
@@ -302,7 +295,7 @@
 																		class="btn btn-danger btn-sm" type="button"><i
 																			class="fa fa-trash"></i> Hapus</a>
 																</div>
-															</div>
+															</div> -->
 
 												</td>
 											</tr>

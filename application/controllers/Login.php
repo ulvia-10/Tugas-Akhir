@@ -35,6 +35,7 @@ class Login extends CI_Controller
         $this->load->view('templating/template_loginfooter', $data);
     }
 
+    // register 
     function register()
     {
         $data = array(
@@ -47,7 +48,8 @@ class Login extends CI_Controller
       $this->load->view('templating/template_loginheader', $data);
       $this->load->view('templating/template_loginfooter', $data);
     }
-
+    
+    // change password 
     function changepassword()
     {
         $data = array(

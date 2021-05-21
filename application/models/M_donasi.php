@@ -133,12 +133,12 @@ class M_donasi extends CI_Model
         (
             'id_profile' => $id_profile,
             'id_cabang' => $id_cabang,
-            'nama_bank'  => $this->input->post('nama_bank'),
+            // 'nama_bank'  => $this->input->post('nama_bank'),
             'via'         =>  "transfer",
             'tipe'      => "anggota",
-            'no_rekening'  => $this->input->post('no_rekening'),
+            // 'no_rekening'  => $this->input->post('no_rekening'),
             'tgl_donasi'   => $this->input->post('tgl_donasi'),
-            'jml_donasi'   => $this->input->post('jml_donasi'),
+            // 'jml_donasi'   => $this->input->post('jml_donasi'),
             'bukti_donasi'  => $upload ['file']['file_name']
             
         );
@@ -187,7 +187,8 @@ class M_donasi extends CI_Model
             'id_cabang'   => $this->input->post('name_cabang'),
             'nama_donatur'  => $this->input->post('nama_donatur'),
             'tipe'          => "non anggota",
-            'no_rekening'  => $this->input->post('no_rekening'),
+            'via'  => "transfer",
+            // 'no_rekening'  => $this->input->post('no_rekening'),
             'tgl_donasi'   => $this->input->post('tgl_donasi'),
             'email_donatur'   => $this->input->post('email_donatur'),
             'telp_donatur'   => $this->input->post('telp_donatur'),
@@ -272,6 +273,10 @@ class M_donasi extends CI_Model
     {
         $data = [
             "status"=>$this->input->post('status',true),
+            "nama_bank"=>$this->input->post('nama_bank',true),
+            "jml_donasi"=>$this->input->post('jml_donasi',true),
+            "status"=>$this->input->post('status',true),
+            "ket_upload"=>$this->input->post('ket_upload',true),
             "status_verif"   => $this->input->post('status_verif', true)
             ];
         $this->db->where('Id_donasi', $this->input->post('Id_donasi'));
@@ -290,37 +295,38 @@ class M_donasi extends CI_Model
     public function ubahdatanondonasi()
     {
         $data = [
+            "Id_donasi" =>$this->input->post('Id_donasi'),
             "status"=>$this->input->post('status',true),
             "status_verif"   => $this->input->post('status_verif', true)
             ];
         $this->db->where('Id_donasi', $this->input->post('Id_donasi'));
         $this->db->update('data_donasi', $data);      
         // show flash data 
-   
-        $msg = '     <div class="alert alert-success" role="alert">
-        Data berhasil di verifikasi! </div>';
+    //    echo "<pre>";
+    //     echo var_dump($data);
+    //     echo "</pre>";
+        $msg = '     <div class="alert alert-success" role="alert"> Data berhasil di verifikasi! </div>';
         $this->session->set_flashdata('pesan', $msg);
-        
+       
         // redirect 
         redirect('donasi_non/datadonasinonanggota/');
       
     }
-    public function updatedonasianggota(){
+    public function updatedonasianggota($upload){
         // post data 
         $data = [
             "tgl_donasi"=>$this->input->post('tgl_donasi',true),
             "tipe"      =>"anggota",
             "via"       =>"transfer",
-            "nama_bank"=>$this->input->post('nama_bank',true),
-            "no_rekening"=>$this->input->post('no_rekening',true),
-            "jml_donasi"=>$this->input->post('jml_donasi',true),
+            // "nama_bank"=>$this->input->post('nama_bank',true),
+            // "jml_donasi"=>$this->input->post('jml_donasi',true),
             'bukti_donasi'  => $upload ['file']['file_name']
             ];
         // query
         $this->db->where('Id_donasi', $this->input->post('Id_donasi'));
         $this->db->update('data_donasi', $data);      
         // flash data 
-        $msg = '<div class="alert alert-info">Data berhasil di verifikasi! <br><small>Pada tanggal ' . date('d F Y H.i A') . '</small></div>';
+        $msg = '<div class="alert alert-success">Data berhasil di di ubah! <br><small>Pada tanggal ' . date('d F Y H.i A') . '</small></div>';
         $this->session->set_flashdata('pesan', $msg);
         // redirect
         redirect('donasi/riwayatdonasi/');

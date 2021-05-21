@@ -22,7 +22,7 @@
 					<!-- show flash data from model M_donasi  -->
 					
 					<div class="table-responsive">
-					<!-- <?php echo $this->session->flashdata('pesan') ?> -->
+					<?php echo $this->session->flashdata('pesan') ?>
 						<table class="display" id="basic-3" style="text-align:center;">
 					</div>
 
@@ -31,7 +31,7 @@
 							<th>No</th>
 							<th>Tanggal Donasi</th>
 							<th>Nama Donatur</th>
-							<th>Nominal</th>
+							<th>Via</th>
 							<th>Verifikasi</th>
 							<th>Action</th>
 
@@ -45,15 +45,15 @@
 							<td><?=$no++?></td>
 							<td><?= date('d-m-Y',strtotime($db["tgl_donasi"])); ?></td>
 							<td><?= $db['nama_donatur'];?></td>
-							<?php
+							<!-- <?php
 								$nominal=  $db["jml_donasi"]
 							?>
-							<td>Rp. <?= number_format($nominal, 2 ); ?></td>
-						
+							<td>Rp. <?= number_format($nominal, 2 ); ?></td> -->
+							<td> <span class="badge badge-primary"><?= $db['via'];?></span></td>
 							<td><span class="badge badge-secondary"><?= $db["status_verif"]; ?></span></td>
 							<td>
 								<!-- edit -->
-								<a href="<?= base_url(); ?>donasi/editdonasiverif/<?=$db['Id_donasi'];?>" class="badge badge-success">
+								<a href="<?= base_url(); ?>donasi/editdonasinonverif/<?=$db['Id_donasi'];?>" class="badge badge-success">
 									<i class="fa fa-pencil" aria-hidden="true"></i></a></a>
 								<!-- detail -->
 								<a href="<?= base_url(); ?>donasi/detaildonasikorwil/<?=$db['Id_donasi'];?>" class="badge badge-secondary">

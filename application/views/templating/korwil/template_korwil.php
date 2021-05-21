@@ -211,11 +211,6 @@
                                             data-feather="home"></i><span class="lan-3">Dashboard </span></a>
                                 </li>
                                 <li class="sidebar-list"
-                                    <?= $this->uri->segment(2) == 'Cetak Anggota' ? 'class="sidebar-submenu"' : '' ?>>
-                                    <a class="sidebar-link " href="<?= base_url('Adminkorwil/Dashboard'); ?>"><i
-                                            data-feather="home"></i><span class="lan-3">Cetak Anggota </span></a>
-                                </li>
-                                <li class="sidebar-list"
                                     <?= $this->uri->segment(2) == 'cabangkegiatan' ? 'class="sidebar-submenu"' : '' ?>>
                                     <a class="sidebar-link sidebar-title link-nav"
                                         href="<?= base_url('Adminkorwil/cabangkegiatan'); ?>"><i data-feather="info">
@@ -254,9 +249,9 @@
                                     <ul class="sidebar-submenu">
                                         <li><a href="<?= base_url('donasi/datadonasi'); ?>">Donasi</a>
                                         </li>
-
                                         <li><a href="<?= base_url('donasi_non/datadonasinonanggota'); ?>">Donasi Non Anggota</a></li>
-                                        <li><a href="<?= base_url('laporan/indexdonasi'); ?>">Cetak Laporan Donasi</a></li>
+                                        <li><a href="<?= base_url('laporan/indexdonasi'); ?>">Laporan Donasi Anggota</a></li>
+                                        <!-- <li><a href="<?= base_url('laporan/donasinonanggota/'); ?>">Laporan Donasi Non Anggota</a></li> -->
                                     </ul>
                                 </li>
                                

@@ -371,9 +371,7 @@ class Adminkorwil extends CI_Controller
       }
       public function proseseditkas($id){
 
-        $this->form_validation->set_rules('status','status','required');
         $this->form_validation->set_rules('status_verif','status_verif','required');
-		 
           if ($this->form_validation->run() == FALSE){
             echo validation_errors();
           }

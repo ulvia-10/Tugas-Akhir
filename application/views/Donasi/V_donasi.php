@@ -32,7 +32,7 @@
 							<th>No</th>
 							<th>Tanggal Donasi</th>
 							<th>Nama</th>
-							<th>Nominal</th>
+							<th>Via</th>
 							<th>Verifikasi</th>
 							<th>Action</th>
 
@@ -46,15 +46,16 @@
 							<td><?=$no++?></td>
 							<td><?= date('d-m-Y',strtotime($db["tgl_donasi"])); ?></td>
 							<td><?= $db['full_name'];?></td>
-							<?php
+							<td><span class="badge badge-primary"><?= $db['via'];?></span></td>
+							<!-- <?php
 								$nominal=  $db["jml_donasi"]
 							?>
-							<td>Rp. <?= number_format($nominal, 2 ); ?></td>
+							<td>Rp. <?= number_format($nominal, 2 ); ?></td> -->
 						
 							<td><span class="badge badge-info"><?= $db["status_verif"]; ?></span></td>
 							<td>
 								<!-- edit -->
-								<a href="<?= base_url(); ?>donasi/editdonasinonverif/<?=$db['Id_donasi'];?>" class="badge badge-success">
+								<a href="<?= base_url(); ?>donasi/editdonasiverif/<?=$db['Id_donasi'];?>" class="badge badge-success">
 									<i class="fa fa-pencil" aria-hidden="true"></i></a></a>
 								<!-- detail -->
 								<a href="<?= base_url(); ?>donasi/detaildonasikorwil/<?=$db['Id_donasi'];?>" class="badge badge-secondary">

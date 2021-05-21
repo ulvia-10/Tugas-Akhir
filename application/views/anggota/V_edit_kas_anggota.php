@@ -5,9 +5,9 @@
 		<h5 style="margin-left:150px;">Edit Bukti Transfer Kas <i data-feather="upload"></i> </h5>
 	</div>
 	<form class="form theme-form" action="<?php echo base_url('keuangan/proseseditkasanggota/'. $kas['id_keuangan']) ?>" method="POST" enctype="multipart/form-data">
-		<div class="card-body" style="margin-left: 50px;">
+		<div class="card-body" style="margin-left: 30px;">
 		<input class="form-control form-control-lg" name="id_keuangan" id="id_keuangan" value="<?= $kas['id_keuangan'];?>" type="hidden">
-		<div class="row">
+		<!-- <div class="row">
 				<div class="col">
 					<div class="mb-3 row">
 						<label class="col-sm-3 col-form-label">Judul</label>
@@ -16,18 +16,18 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> -->
         <div class="row">
 				<div class="col">
 					<div class="mb-3 row">
 						<label class="col-sm-3 col-form-label">Tanggal Bayar</label>
 						<div class="col-sm-5">
-							<input class="form-control" type="date" name="tgl_bayar" value="<?php echo date('Y-m-d')?>">
+							<input class="form-control" type="date" name="tgl_bayar" value="<?php echo date('d-M-Y');?>">
 						</div>
 					</div>
 				</div>
 			</div>
-            <div class="row">
+            <!-- <div class="row">
 				<div class="col">
 					<div class="mb-3 row">
 						<label class="col-sm-3 col-form-label">Nominal</label>
@@ -36,8 +36,8 @@
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="row">
+			</div> -->
+			<!-- <div class="row">
 				<div class="col">
 					<div class="mb-3 row">
 						<label class="col-sm-3 col-form-label">Nomor Rekening</label>
@@ -46,9 +46,9 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> -->
 					<!-- nama bank -->
-					<div class="form-group" id="element-wilayah">
+					<!-- <div class="form-group" id="element-wilayah">
 				<div class="row">
 					<div class="mb-2 row">
 						<label class="col-sm-3 col-form-label">Nama Bank</label>
@@ -65,7 +65,7 @@
 					</div>
 				</div>
 				</div>
-			<br>
+			<br> -->
 			
             <div class="row">
 				<div class="col">

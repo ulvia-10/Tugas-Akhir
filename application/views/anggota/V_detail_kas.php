@@ -11,17 +11,21 @@
 					<div class="card-body">
 						<!-- <img src="<?= base_url('./assets/images/' . $kas['bukti_bayar']); ?>" alt="Maaf bukti_donasi tidak tersedia" style="width:50%; height:45%; margin-left:90px;"> -->
 						<p class="card-text">
-							<label for="full_name"><b> Nama :</b></label>
+							<label for="full_name"><b> Nama Lengkap :</b></label>
 							<?= $kas['full_name']; ?>
+						</p>
+						<p class="card-text">
+							<label for="full_name"><b> Judul :</b></label>
+							<?= $kas['judul']; ?>
 						</p>
 						<p class="card-text">
 							<label for="name_cabang"><b> Nama Cabang:</b></label>
 							<?= $kas['name_cabang']; ?>
 						</p>
-						<p class="card-text">
+						<!-- <p class="card-text">
 							<label for="judul"><b> Judul :</b></label>
 							<?= $kas['judul']; ?>
-						</p>
+						</p> -->
 						<?php
 														
 														$tanggal = "-";
@@ -35,13 +39,14 @@
 							<label for="tgl_bayar"><b> Tanggal Bayar Kas: </b></label>
 							<?= $tanggal ?>
 						</p>
-						<p class="card-text">
+						<!-- <p class="card-text">
 							<label for="no_rekening"><b>No Rekening: </b></label>
-							<?= $kas['no_rekening']; ?>
-						</p>
+						
+						</p> -->
+						<!-- <?= $kas['no_rekening']; ?> -->
 						<p class="card-text">
 							<?php
-                                $nominal= $kas["nominal"]
+                                $nominal= $kas['nominal']
                                 ?>
 
 							<label for="nominal"><b>Nominal: </b></label>
@@ -91,7 +96,7 @@
 						</p>
 						<p class="card-text">
 							<label for="deskripsi"><b>Nama Bank: </b></label>
-						<b> BANK<?= $kas['nama_bank']; ?></b>
+						<span class="badge badge-success">BANK <?= $kas['nama_bank']; ?></span>
 						<?php
 														
 														$via = "-";
@@ -103,6 +108,10 @@
 						<p class="card-text">
 							<label for="tgl_bayar"><b> Via Pembayaran:  </b></label>
 							<?= $via ?>
+						</p>
+						<p class="card-text">
+							<label for="deskripsi"><b>Keterangan Upload: </b></label>
+							<?= $kas['ket_upload']; ?>
 						</p>
 						<p class="card-text">
 							<label for="created_"><b>Upload pada: </b></label>

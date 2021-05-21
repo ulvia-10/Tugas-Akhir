@@ -22,6 +22,7 @@
         <a href="<?= base_url(); ?>donasi/tambahbuktidonasi/" class="btn btn-secondary btn-sm mb-3">
                     <i class="fa fa-plus" aria-hidden="true"></i>Upload Bukti</a>
                     <?php echo $this->session->flashdata('msg') ?> 
+                    <?php echo $this->session->flashdata('pesan') ?> 
                     
             <div class="table-responsive">
                 <table class="display" id="basic-1" style="text-align:center;">
@@ -29,8 +30,7 @@
                         <tr>
                             <th>No</th>
                             <th>Tanggal Donasi</th>
-                            <th>No Rekening</th>
-                            <th>Jumlah Donasi</th>
+                            <th>Via</th>
                             <th>Verifikasi</th>
                             <th>Action</th>
                         </tr>
@@ -49,11 +49,12 @@
 														}
 													?>
                             <td><?= $tanggal ?></td>
-                            <td><?= $ds["no_rekening"]; ?></td>
-                            <td> Rp.<?php
+                      
+                            <!-- <td> Rp.<?php
                                 $nominal=  $ds["jml_donasi"]
                                 ?>
-                                <?= number_format($nominal, 2 ); ?> </td>
+                                <?= number_format($nominal, 2 ); ?> </td> -->
+                                <td><span class=" badge badge-primary"><?= $ds["via"]; ?></span></td>
                            <?php
                                 $keterangan = "";
                                 $warna = "";
@@ -69,7 +70,7 @@
 
                                 } 
                                 ?>
-                            <td> <span class="badge badge-<?php echo $warna ?>">
+                            <td>  <span class="badge badge-<?php echo $warna ?>">
                                 <?php echo $keterangan?></span></td>
                             <td>
                                 <!-- edit -->
@@ -81,9 +82,9 @@
                                     class="badge badge-primary">
                                     <i class="fa fa-eye" aria-hidden="true"></i></a></a>
                                 <!-- hapus -->
-                                <a href="<?= base_url(); ?>donasi/hapusdonasi/<?= $ds['Id_donasi']; ?>"
+                                <!-- <a href="<?= base_url(); ?>donasi/hapusdonasi/<?= $ds['Id_donasi']; ?>"
                                     class="badge badge-info">
-                                    <i class="fa fa-trash" aria-hidden="true"></i></a></a>
+                                    <i class="fa fa-trash" aria-hidden="true"></i></a></a> -->
                             </td>
 
                             <?php
