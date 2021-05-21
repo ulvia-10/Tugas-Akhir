@@ -1,14 +1,12 @@
 <br><br> <br>
 <div class="container-fluid">
 	<!-- set flash data  -->
-	<?php echo $this->session->flashdata('pesan') ?>
 	<div class="row" style="margin-left:50px;">
 
-		<div class="col-xl-4 box-col-6">
+		<div class="col-xl-4 box-col-10">
 			<br> <br>
 			<div class="card custom-card">
-				<div class="card-header"><img class="img-fluid"
-						src="http://admin.pixelstrap.com/cuba/assets/images/user-card/3.jpg" alt=""></div>
+            <div class="card-header"><img class="img-fluid" src="http://admin.pixelstrap.com/cuba/assets/images/user-card/2.jpg" alt=""></div>
 				<div class="card-profile"><img class="rounded-circle"
 						src="<?= base_url('./assets/images/' . $profile['photo']); ?>" alt=""></div>
 				<ul class="card-social">
@@ -20,19 +18,21 @@
 				</ul>
 				<div class="text-center profile-details">
 					<h4> <?= $profile['full_name']; ?></h4>
-					<h6><?= $profile['level']; ?></h6>
+					<h6>Admin <?= $profile['level']; ?></h6>
 				</div>
 				<div class="card-footer row">
 					<div class="col-7 col-sm-4">
 						<p>Name</p>
-						<h3 class="counter"><?= $profile['username']; ?></h3>
+						<h6 class="counter text-bold"><?= $profile['username']; ?></h6>
 					</div>
 					<div class="col-4 col-sm-4">
-						<h7>Status <br</h7> <h3><span class="counter"><?= $profile['status_account']; ?></h3>
+						<p>Status <br</p> 
+                        <h6><span class="counter"><?= $profile['status_account']; ?></h6>
 					</div>
 					<div class="col-4 col-sm-4">
-						<h6>Total</h6>
-						<h3><span class="counter"><?=$total;?></h3>
+						<p>Cabang</p>
+                        <h6><span class="counter"><?= $profile['name_cabang']; ?></h6>
+						
 					</div>
 				</div>
 			</div>
@@ -64,7 +64,7 @@
 					<p class="card-text">Tanggal Lahir: <?= $tanggal ?></p>
 					<p class="card-text">Asal: <?= $profile['asal']; ?></p>
 					<p class="card-text">Alamat: <?= $profile['address']; ?></p>
-					<a href="<?= base_url('kegiatan/editprofile'); ?>" class="btn btn-primary"
+					<a href="<?= base_url('profile/editprofilkorwil'); ?>" class="btn btn-warning"
 						style="margin-left:200px;">Edit <i class="fa fa-edit"></i></a>
 				</div>
 			</div>

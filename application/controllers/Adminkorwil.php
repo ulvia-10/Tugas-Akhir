@@ -44,7 +44,13 @@ class Adminkorwil extends CI_Controller
             'getKegiatan'    => $getKegiatan,
             'getWilayah'    => $getWilayah
 
+
         );
+        $data['nama'] = $this->M_korwil->getnama();
+
+        // echo "<pre>";
+        // var_dump($data);
+        // echo "<pre>"
         $this->load->view('templating/korwil/Template_korwil', $data);
     }
     //--------------  *** end controller Dashboard Korwil****/--------------------------------------------------------//
@@ -224,6 +230,7 @@ class Adminkorwil extends CI_Controller
         $this->session->set_flashdata('msg', $elementHTML);
         return redirect(base_url('Adminkorwil/notifikasi'));
     }
+
     //notifikasi hapus  tandai semua dibaca
     public function hapusnotifsemua()
     {
@@ -290,14 +297,13 @@ class Adminkorwil extends CI_Controller
         );
 
         $data['data_keuangan'] = $this->M_korwil->getallkeuangan();
-
+        $data['tahun'] = range(date('Y'), 2020);
 
         if ($this->input->post('keyword')) {
         }
 
         $this->load->view('templating/korwil/Template_korwil', $data);
     }
-
 
 
     //Tampilan Tambah Keuangan

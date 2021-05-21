@@ -1,8 +1,8 @@
 <div class="container-fluid">
     <div class="page-title">
         <div class="row">
-            <div class="col-6">
-                <h3>WELCOME ADMIN KORWIL</h3>
+            <div class="col-6" style="margin-left: 250px;">
+                <h3 >WELCOME ADMIN KORWIL <?=$nama['name_cabang']?>  </h3>
             </div>
        
         </div>
@@ -92,26 +92,21 @@
                         </div>
                     </div>
                     <div class="greeting-user text-center">
+                     <p><span> <h5 class="text-light"> Hello! <?php echo $this->session->userdata('sess_fullname') ?></h5> </span>
+                        </p>
                         <div class="profile-vector"><img class="img-fluid" width="200px" height="200px"
                                 src="<?php echo base_url('assets/images/' . $this->session->userdata('sess_foto')) ?>"
                                 alt="">
                         </div>
-                        <h4 class="f-w-600"><span id="greeting">Good Morning</span> <span class="right-circle"><i
-                                    class="fa fa-check-circle f-14 middle"></i></span></h4>
-                        <p><span> Welcome <?php echo $this->session->userdata('sess_fullname') ?> Lihat Profil
-                                Saya</span>
-                        </p>
-                        <div class="whatsnew-btn"><a class="btn btn-primary">Profile</a></div>
+                        <h4 class="f-w-600"><span id="greeting">Good Morning</span> <span class="right-circle"><i data-feather="loader">
+                                        </i>  </span></h4>
+                       
+                        <div class="whatsnew-btn"><a href="#" class="btn btn-primary">My Profile</a></div>
 
                     </div>
                 </div>
             </div>
         </div>
-
-
-    
-
-      
 
 
 

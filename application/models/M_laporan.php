@@ -16,7 +16,7 @@ public function listing($id_cabang,$bulan,$tahun)
     FROM data_keuangan
     JOIN master_cabang ON master_cabang.id_cabang = data_keuangan.id_cabang
     JOIN akun_profile ON akun_profile.id_profile = data_keuangan.id_profile
-    WHERE data_keuangan.id_cabang = '$id_cabang' AND MONTHNAME(tgl_bayar)= '$bulan' AND YEAR(tgl_bayar)='$tahun' AND data_donasi.status_verif ='baru'
+    WHERE data_keuangan.id_cabang = '$id_cabang' AND MONTHNAME(tgl_bayar)= '$bulan' AND YEAR(tgl_bayar)='$tahun' AND data_keuangan.status_verif ='baru'
     ORDER BY data_keuangan.id_keuangan ASC";
 
     return $this->db->query($sql)->result();

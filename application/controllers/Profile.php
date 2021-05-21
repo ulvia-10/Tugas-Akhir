@@ -24,8 +24,6 @@ class Profile extends CI_Controller
             }
         }
 
-
-
     // main view tampilan
     function index()
     {
@@ -39,6 +37,38 @@ class Profile extends CI_Controller
         $this->load->view('templating/template_dashboardadmin', $data);
         // templating
      
+    }
+    // DI KORWIL YA INI 
+    // HALAMAN PROFILENYA 
+    public function profilkorwil(){
+        
+        $data = array(
+            'namafolder'    => "korwil",
+            'namafileview'  => "V_profile_korwil",
+            'title'         => "Profile Admin Korwil | Senyum Desa"
+        );
+        $data['profile']= $this->M_profile->dataprofile();
+       
+        // echo'<pre>';
+        // var_dump($data);
+        // echo'<pre>';
+   
+        $this->load->view('templating/korwil/template_korwil', $data);
+        // templating
+    }
+    // HALAMAN EDIT PROFILE 
+    public function editprofilkorwil(){
+        
+        $data = array(
+            'namafolder'    => "korwil",
+            'namafileview'  => "V_edit_profile_korwil",
+            'title'         => "Profile Admin Korwil | Senyum Desa"
+        );
+
+        $data['profile']= $this->M_rekruitment->getDataProfile();
+        
+        $this->load->view('templating/korwil/template_korwil', $data);
+        // templating
     }
 
     public function prosesedit($id_profile)
@@ -112,4 +142,5 @@ class Profile extends CI_Controller
             redirect('kegiatan/viewprofile','refresh');  
     }
 }
+
 }

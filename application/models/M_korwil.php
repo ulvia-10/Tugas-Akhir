@@ -77,6 +77,16 @@ class M_korwil extends CI_Model
 
         return $this->db->query($sql)->row_array();
     }
+    public function getnama(){
+        // sess id _profile
+        $id_profile = $this->session->userdata('sess_id_profile');
+
+        $sql = "SELECT akun_profile.*, master_cabang.*
+        FROM akun_profile 
+        JOIN master_cabang ON master_cabang.id_cabang = akun_profile.id_cabang 
+        WHERE akun_profile.id_profile = '$id_profile'";
+          return $this->db->query($sql)->row_array();
+    }
 
     // Proses tabel tambah kegiatan Multiple 
     public function tambahKegiatan()
@@ -359,13 +369,9 @@ class M_korwil extends CI_Model
         $sql ="SELECT data_keuangan.*, master_cabang.*
         FROM data_keuangan 
         JOIN master_cabang ON master_cabang.id_cabang = data_keuangan.id_cabang 
-        WHERE data_keuangan.id_cabang = '$id_cabang'";
+        WHERE data_keuangan.id_cabang = '$id_cabang'
+        AND data_keuangan.status_verif='baru'";
         return $this->db->query($sql)->result_array();
-
-        // $this->db->select('data_keuangan.id_keuangan,data_keuangan.jenis_keuangan,data_keuangan.judul,data_keuangan.nominal,data_keuangan.tanggal_laporan, master_cabang.id_cabang, master_cabang.name_cabang')
-        //     ->from('data_keuangan')
-        //     ->join('master_cabang', 'data_keuangan.id_cabang = master_cabang.id_cabang');
-        // return $this->db->get();
     }
     //Tambah Keuangang
     // proses insert/tambah data
@@ -418,7 +424,11 @@ class M_korwil extends CI_Model
     function getTotalKeuangan($jenis_keuangan)
     {
         $id_cabang = $this->session->userdata('sess_id_cabang'); 
-        $sql = "SELECT SUM(nominal) AS TOTAL FROM data_keuangan WHERE jenis_keuangan = '$jenis_keuangan' AND id_cabang = '$id_cabang'";
+        $sql = "SELECT SUM(nominal) AS TOTAL 
+        FROM data_keuangan 
+        WHERE jenis_keuangan = '$jenis_keuangan' 
+        AND id_cabang = '$id_cabang' 
+        AND status_verif='baru'";
         return $this->db->query($sql)->row();
     }
 

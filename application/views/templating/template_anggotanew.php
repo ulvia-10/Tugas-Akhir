@@ -223,8 +223,8 @@
 							
                                 <li class="sidebar-list">
 									<a class="sidebar-link sidebar-title link-nav" href="<?= base_url('login/logout'); ?>"><i
-											data-feather="power">
-										</i><span>Log out</span></a>
+											data-feather="log-out">
+										</i><span>Sign out</span></a>
 								</li>
 
 							</ul>

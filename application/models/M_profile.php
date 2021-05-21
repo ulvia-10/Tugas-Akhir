@@ -48,4 +48,17 @@ class M_profile extends CI_Model
             return $return;   
         }  
 }
+
+public function dataprofile(){
+  // pasang session 
+  $id_profile = $this->session->userdata('sess_id_profile');
+  // query
+  $sql="SELECT akun_profile.*, data_informasiprofile.*, master_cabang.id_cabang, master_cabang.name_cabang
+  FROM akun_profile 
+  JOIN data_informasiprofile ON akun_profile.id_profile = data_informasiprofile.id_profile 
+  JOIN master_cabang ON master_cabang.id_cabang = akun_profile.id_cabang
+  WHERE akun_profile.id_profile = '$id_profile'";
+     $query = $this->db->query($sql)->row_array();
+     return $query;
+}
 }
