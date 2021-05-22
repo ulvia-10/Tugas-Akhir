@@ -187,7 +187,7 @@ public function datadonasi(){
     // variabel
     $data['donasi_sudah_verifikasi'] = $this->M_donasi->datadonasi("baru");
     $data['donasi_baru'] = $this->M_donasi->datadonasi("belum verifikasi");
-    $data['donasi']=$this->M_donasi-> getalldatadonasi();
+    $data['donasi']=$this->M_donasi->getalldatadonasi();
     // redirect 
     $this->load->view('templating/korwil/Template_korwil', $data);
 }
@@ -365,7 +365,7 @@ public function proseseditdonasianggota(){
     );
     $data['event'] = $this->M_donasi->geteventdonasi();
 //    load template 
-    $this->load->view('templating/korwil/Template_korwil', $data);
+    $this->load->view('templating/template_dashboardadmin', $data);
 }
 
 // tambah event donasi 
@@ -380,12 +380,12 @@ public function tambaheventdonasi(){
     );
     $data['event'] = $this->M_donasi->geteventdonasi();
 //    load template 
-    $this->load->view('templating/korwil/Template_korwil', $data);
+    $this->load->view('templating/template_dashboardadmin', $data);
 }
 
 
 // edit event donasi 
-public function editeventdonasi(){
+public function editeventdonasi($id){
 
     $data = array(
 
@@ -394,24 +394,77 @@ public function editeventdonasi(){
         'title'         => "Edit Event  | Senyum Desa",
         
     );
-    $data['event'] = $this->M_donasi->geteventdonasi();
+    $data['event'] = $this->M_donasi->getdataeventdonasi($id);
 //    load template 
-    $this->load->view('templating/korwil/Template_korwil', $data);
+    $this->load->view('templating/template_dashboardadmin', $data);
 }
 
 // detail event donasi 
-public function detaileventdonasi(){
+public function detaileventdonasi($id){
 
     $data = array(
 
         'namafolder'    => "korwil",
-        'namafileview'    => "V_detail_event_donasi",
+        'namafileview'    => "V_detaileventdonasi",
         'title'         => "Detail Event | Senyum Desa",
         
     );
-    $data['event'] = $this->M_donasi->geteventdonasi();
+    $data['event'] = $this->M_donasi->getdataeventdonasi($id);
 //    load template 
-    $this->load->view('templating/korwil/Template_korwil', $data);
+    $this->load->view('templating/template_dashboardadmin', $data);
+}
+public function proseseditevent(){
+
+    // set form validation
+    $this->form_validation->set_rules('nama_event','nama_event','required');
+    $this->form_validation->set_rules('durasi_mulai','durasi_mulai','required');
+    $this->form_validation->set_rules('durasi_berakhir','durasi_berakhir','required');
+    $this->form_validation->set_rules('deskripsi_event','deskripsi_event','required');
+
+    // check process form validation 
+    if ($this->form_validation->run() == FALSE){
+        echo validation_errors();
+      }
+      else{
+        $upload = $this->M_donasi->uploadevent();
+        if($upload ['result'] == 'success'){
+            $this->M_donasi->editdataevent($upload);
+            // redirect('donasi/eventdonasi','refresh');
+        }else{
+            echo $upload['error'];
+        }
+        // redirect('donasi/eventdonasi','refresh');  
+    }
+}
+
+public function hapuseventdonasi($id){
+    $this->M_donasi->hapuseventdonasi($id);
+    $this->session->set_flashdata('flash-data','Event berhasil Dihapus');
+    redirect('donasi/eventdonasi/','refresh');
+}
+// proses tambah event donasi 
+public function prosesuploadevent(){
+
+    // set form validation
+    $this->form_validation->set_rules('nama_event','nama_event','required');
+    $this->form_validation->set_rules('durasi_mulai','durasi_mulai','required');
+    $this->form_validation->set_rules('durasi_berakhir','durasi_berakhir','required');
+    $this->form_validation->set_rules('deskripsi_event','deskripsi_event','required');
+
+    // check process form validation 
+    if ($this->form_validation->run() == FALSE){
+        echo validation_errors();
+      }
+      else{
+        $upload = $this->M_donasi->uploadevent();
+        if($upload ['result'] == 'success'){
+            $this->M_donasi->uploaddataevent($upload);
+            redirect('donasi/eventdonasi','refresh');
+        }else{
+            echo $upload['error'];
+        }
+        redirect('donasi/eventdonasi','refresh');  
+}
 }
 
 public function proseseditdonasiverif(){

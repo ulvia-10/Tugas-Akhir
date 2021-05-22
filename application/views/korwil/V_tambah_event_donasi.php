@@ -5,7 +5,7 @@
                     <h5>Tambah Event Donasi</h5>
                   </div>
                   <div class="card-body">
-                    <form action="" method="POST " enctype="multipart/form-data">
+                    <form action="<?php echo base_url('donasi/prosesuploadevent/') ?>"  method="POST" enctype="multipart/form-data">
                     <!-- NAMA EVENT  -->
                     <div class="row">
                         <div class="col">
@@ -49,7 +49,7 @@
                             <div class="mb-3 row">
                                 <label class="col-sm-4 col-form-label"> Gambar Event: </label>
                                 <div class="col-sm-6">
-                                    <textarea class="form-control" type="file" name="gambar_event" ></textarea>
+                                    <input class="form-control" type="file" name="gambar_event" >
                                 </div>
                             </div>
                         </div>
@@ -66,9 +66,9 @@
                             </div>
                         </div>
                     </div>
-                    
-                    
-                    
+                    <div class="card-footer" style="margin-left:350px;">
+                        <button class="btn btn-dark" type="submit">Submit Data <i class="fa fa-check-circle" aria-hidden="true"></i></button>
+                    </div>
                     
                     </form>
                   </div>

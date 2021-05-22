@@ -78,6 +78,37 @@
                 </div>
         </section>
 
+        <section class="py-4">
+  <div class="container">
+    <div class="row align-items-center justify-content-between">
+      <div class="col-12 col-lg-6">
+        <img src="http://themeht.com/winck/ltr/assets/images/about/06.png" alt="Image" class="img-fluid">
+      </div>
+      <div class="col-12 col-lg-5 mt-5 mt-lg-0">
+        <div class="mb-4">
+          <h2><span class="font-w-4 d-block">Mari Berdonasi ~</span> Berbagi Kebaikan</h2>
+          <p class="lead mb-0">Membantu saudara kita merajut asa</p>
+        </div>
+        <div class="row no-gutters">
+          <div class="col-sm">
+            <div class="mb-3">
+              <div class="d-flex align-items-center">
+                <div> <i class="las la-angle-right"></i>
+                </div>
+                <p class="mb-0 ms-3">Yuk Liat Event Donasi Terbaru!</p> <br><br>
+                <p class="mb-0 ms-3">Mari kita lihat saudara kita yang telah donasi!</p> <br><br>
+              </div>
+            </div>
+          </div>
+        <a href="<?= base_url('donasi_non/jadwaleventdonasi'); ?>" class="btn btn-outline-primary mt-4">
+                Learn More
+              </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
         <!--feature end-->
 
 

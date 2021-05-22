@@ -94,10 +94,30 @@ class Donasi_non extends CI_Controller
         'namafileview'    => "V_riwayat_nondonasi",
         'title'         => "Donasi Non Anggota | Senyum Desa",
     );
+
     $data['donasi'] = $this->M_donasi->getallDonasinon();
+    $data['donasi_anggota'] = $this->M_donasi->getDonasiAnggota();
+    $data['anonim'] = $this->M_donasi->getalldonasinonanonim();
     $this->load->view('templating/template_donasinon' , $data);
   
 }
+
+public function jadwaleventdonasi(){
+    $data = array(
+
+        'namafolder'    => "donasi",
+        'namafileview'    => "V_jadwal_event_donasi",
+        'title'         => "Jadwal Event Donasi | Senyum Desa",
+
+    );
+    // get variable 
+    $data['jadwal'] = $this->M_donasi->getjadwaldonasi();
+    // redirect 
+    $this->load->view('templating/template_headerpage', $data);
+        $this->load->view('templating/template_footerpage', $data);
+}
+
+
 // hapus donasi non anggota di korwil 
 public function hapusdonasikorwil($Id_donasi){
     $this->M_donasi->processDeleteDonasinonkorwil($Id_donasi);

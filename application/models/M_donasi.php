@@ -20,6 +20,27 @@ class M_donasi extends CI_Model
        WHERE data_donasi.tipe = 'non anggota'AND data_donasi.status_verif = 'baru' AND data_donasi.tampil = 'tampil'";
         return $this->db->query($sql)->result_array();
     }
+
+    public function getDonasiAnggota(){
+        $sql = "SELECT data_donasi.*,master_cabang.name_cabang,akun_profile.full_name, akun_profile.id_profile
+        FROM data_donasi 
+        JOIN master_cabang on master_cabang.id_cabang = data_donasi.id_cabang
+        JOIN akun_profile ON akun_profile.id_profile = akun_profile.id_profile
+        WHERE data_donasi.tipe ='anggota' AND data_donasi.status_verif = 'baru' AND data_donasi.tampil = 'tampil'";
+         return $this->db->query($sql)->result_array();
+    }
+    public function getalldonasinonanonim(){
+        $sql = "SELECT data_donasi.*,master_cabang.name_cabang
+        FROM data_donasi 
+        JOIN master_cabang on master_cabang.id_cabang = data_donasi.id_cabang
+        WHERE data_donasi.tipe = 'non anggota'AND data_donasi.status_verif = 'baru' AND data_donasi.tampil = 'anonim'";
+        return $this->db->query($sql)->result_array();
+    }
+    public function getjadwaldonasi(){
+        $sql = "SELECT * FROM data_event
+        WHERE data_event.durasi_mulai <= NOW() AND data_event.durasi_berakhir >= NOW()";
+        return $this->db->query($sql)->result_array();
+    }
     //tampilan Cari Data
     public function cariData()
     {
@@ -87,6 +108,7 @@ class M_donasi extends CI_Model
         // redirect
         redirect('donasi/datadonasi');
     }
+
     //edit donasi
     /**===========================================================*/
     /** Fungsi UPDATE */
@@ -379,13 +401,91 @@ class M_donasi extends CI_Model
     // EVENT DONASI 
     public function geteventdonasi(){
         // pasang session 
-        $id_cabang = $this->session->userdata('sess_id_cabang');
+        // $id_cabang = $this->session->userdata('sess_id_cabang');
         // query 
+        $sql =" SELECT data_event.*,data_donasi.*
+        FROM data_event 
+        JOIN data_donasi ON data_donasi.Id_donasi = data_event.Id_donasi ";
+             return $this->db->query($sql)->result_array();
+    }
+    public function getdataeventdonasi($id){
         $sql =" SELECT data_event.*, data_donasi.*
         FROM data_event 
         JOIN data_donasi ON data_donasi.Id_donasi = data_event.Id_donasi
-        WHERE data_donasi.id_cabang = '$id_cabang' ";
-             return $this->db->query($sql)->result_array();
+        WHERE data_event.id_event = '$id' ";
+             return $this->db->query($sql)->row_array();
+    }
+    
+    
+    // tambah gambar event 
+    public function uploadevent(){
+        $config['upload_path'] = './assets/images/';    
+        $config['allowed_types'] = 'jpg|png|jpeg';
+        $this->load->library('upload', $config);
+        if($this->upload->do_upload('gambar_event')){
+            $return = array('result' => 'success', 'file' => $this->upload->data(), 'error' => '');      
+            return $return;
+        }else{    
+            $return = array('result' => 'failed', 'file' => '', 'error' => $this->upload->display_errors());     
+             return $return;   
+        }  
+    }
+
+    // proses upload data event
+    public function uploaddataevent($upload){
+
+        $data = array
+        (
+            'id_event' => $this->input->post('id_event'),
+            'nama_event'  => $this->input->post('nama_event'),
+            'durasi_mulai'  => $this->input->post('durasi_mulai'),
+            'durasi_berakhir'  => $this->input->post('durasi_berakhir'),
+            'deskripsi_event'  => $this->input->post('deskripsi_event'),
+            'gambar_event'  => $upload ['file']['file_name']
+            
+        );
+        
+        $this->db->insert('data_event', $data);
+
+        // flashdata
+        $elementHTML = '<div class="alert alert-secondary"><strong>Success</strong> Data Donasi berhasil ditambahkan pada ' . date('d F Y H.i A') . '';
+        $this->session->set_flashdata('pesan', $elementHTML);
+        // print_r($data);
+        // // redirect
+        redirect('donasi_non/datadonasinonanggota');
+    }
+    // proses hapus 
+    public function hapuseventdonasi($id){
+        $this->db->where('id_event',$id);
+        $this->db->delete('data_event');
+
+         //flashdata 
+         $elementHTML = '<div class="alert alert-secondary"><b>Pemberitahuan</b> <br> Akun berhasil dihapus </div>';
+         $this->session->set_flashdata('msg', $elementHTML);
+
+        //redirect
+        redirect('donasi/eventdonasi/','refresh');
+    }
+    public function editdataevent($upload){
+
+        $data = [
+            'id_event'      => $this->input->post('id_event'),
+            'nama_event'  => $this->input->post('nama_event'),
+            'durasi_mulai'  => $this->input->post('durasi_mulai'),
+            'durasi_berakhir'  => $this->input->post('durasi_berakhir'),
+            'deskripsi_event'  => $this->input->post('deskripsi_event'),
+            'gambar_event'  => $upload ['file']['file_name']
+            ];
+        // query
+        $this->db->where('id_event', $this->input->post('id_event'));
+        $this->db->update('data_event', $data);      
+
+        // var_dump($data);
+        // flash data 
+        $msg = '<div class="alert alert-success">Data berhasil di di ubah! <br><small>Pada tanggal ' . date('d F Y H.i A') . '</small></div>';
+        $this->session->set_flashdata('pesan', $msg);
+        // redirect
+        redirect('donasi/eventdonasi/');
     }
     
 }

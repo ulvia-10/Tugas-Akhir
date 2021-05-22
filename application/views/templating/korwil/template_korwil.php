@@ -261,8 +261,6 @@
 									<ul class="sidebar-submenu">
 										<li><a href="<?= base_url('donasi/datadonasi'); ?>">Donasi Anggota</a>
 										</li>
-										<li><a href="<?= base_url('donasi/eventdonasi'); ?>"> Event Donasi </a>
-										</li>
 										<li><a href="<?= base_url('donasi_non/datadonasinonanggota'); ?>">Donasi Non
 												Anggota</a></li>
 										<li><a href="<?= base_url('laporan/indexdonasi'); ?>">Laporan Donasi </a></li>

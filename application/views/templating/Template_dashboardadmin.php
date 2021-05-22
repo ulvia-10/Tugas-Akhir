@@ -206,7 +206,7 @@
                                             data-feather="archive">
                                         </i><span>Data Master Cabang</span></a>
                                 </li>
-                                <li class="sidebar-list">
+                                <!-- <li class="sidebar-list">
                                     <a class="sidebar-link sidebar-title link-nav" href="<?= base_url('Donasi'); ?>"><i
                                             data-feather="file-text">
                                         </i><span>Data Donasi</span></a>
@@ -217,7 +217,12 @@
                                         </i><span>Data Keuangan</span></a>
                                 </li>
 
-                              
+                               -->
+                               <li class="sidebar-list">
+                                    <a class="sidebar-link sidebar-title link-nav" href="<?= base_url('donasi/eventdonasi/')?>"><i
+                                            data-feather="book-open">
+                                        </i><span>Event Donasi</span></a>
+                                </li>
                                 <li class="sidebar-list">
                                     <a class="sidebar-link sidebar-title link-nav" href="<?= base_url('laporan/donasitahunan/')?>"><i
                                             data-feather="book-open">

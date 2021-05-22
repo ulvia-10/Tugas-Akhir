@@ -30,9 +30,10 @@
                           <td><?= date('d-M-Y',strtotime($evt['durasi_berakhir']));?></td>
                           <td><span class="badge badge-danger"><?= $evt['status_event'];?></td></span>
                           <td>
-                          <span class="badge badge-primary"> <i class="fa fa-eye" aria-hidden="true"></i></span>
-                          <span class="badge badge-info"> <i class="fa fa-pencil-square" aria-hidden="true"></i></span>
-                          <span class="badge badge-warning"><i class="fa fa-trash" aria-hidden="true"></i> </span>
+                          
+                          <a href="<?= base_url(); ?>donasi/detaileventdonasi/<?= $evt['id_event']; ?>" class="badge badge-primary">		<i class="fa fa-eye" aria-hidden="true"></i></a></a>
+                          <a href="<?= base_url(); ?>donasi/editeventdonasi/<?= $evt['id_event']; ?>" class="badge badge-info">		<i class="fa fa-pencil-square" aria-hidden="true"></i></a></a>
+                          <a href="<?= base_url(); ?>donasi/hapuseventdonasi/<?= $evt['id_event']; ?>" class="badge badge-warning">	<i class="fa fa-trash" aria-hidden="true"></i></a></a>
                           </td>
                           </tr>
                           <?php
