@@ -220,7 +220,8 @@
 										<li><a href="<?= base_url('profile/editprofilkorwil'); ?>">Edit Profile</a></li>
 									</ul>
 								</li>
-
+								
+								<!-- kegiatan -->
 								<!-- KEGIATAN  -->
 								<li class="sidebar-list"
 									<?= $this->uri->segment(2) == 'cabangkegiatan' ? 'class="sidebar-submenu"' : '' ?>>
@@ -260,12 +261,20 @@
 									<ul class="sidebar-submenu">
 										<li><a href="<?= base_url('donasi/datadonasi'); ?>">Donasi Anggota</a>
 										</li>
+										<li><a href="<?= base_url('donasi/eventdonasi'); ?>"> Event Donasi </a>
+										</li>
 										<li><a href="<?= base_url('donasi_non/datadonasinonanggota'); ?>">Donasi Non
 												Anggota</a></li>
 										<li><a href="<?= base_url('laporan/indexdonasi'); ?>">Laporan Donasi </a></li>
 									</ul>
 								</li>
-
+								<!-- CHANGE PASSWORD  -->
+								<li class="sidebar-list"
+									<?= $this->uri->segment(2) == 'cabangkegiatan' ? 'class="sidebar-submenu"' : '' ?>>
+									<a class="sidebar-link sidebar-title link-nav"
+										href="<?= base_url('adminkorwil/changepassword'); ?>"><i data-feather="lock">
+										</i><span>Change Password</span></a>
+								</li>
 								<!-- LOG OUT  -->
 								<li class="sidebar-list"
 									<?= $this->uri->segment(2) == 'cabangkegiatan' ? 'class="sidebar-submenu"' : '' ?>>

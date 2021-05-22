@@ -101,7 +101,7 @@
                         <h4 class="f-w-600"><span id="greeting">Good Morning</span> <span class="right-circle"><i data-feather="loader">
                                         </i>  </span></h4>
                        
-                        <div class="whatsnew-btn"><a href="#" class="btn btn-primary">My Profile</a></div>
+                        <div class="whatsnew-btn"><a href="<?= base_url('profile/profilkorwil'); ?>" class="btn btn-primary">My Profile</a></div>
 
                     </div>
                 </div>

@@ -102,6 +102,17 @@
 						<img src="<?= base_url('./assets/images/' . $donasi['bukti_donasi']); ?>"
 							alt="Maaf bukti pembayaran tidak tersedia" style="width:50%; height:85%; margin-left:50px;"> <br> 
 					</div>
+					<div class="card-footer">
+					<label for="ket_upload"><b>Kesalahan Upload: </b></label>
+					<?php
+														
+														$ket = "-";
+														if ( $donasi['ket_upload'] ){
+															$ket = $donasi['ket_upload'];
+														}
+													?>
+							<?= $ket ?>
+					</div>
 				</div>
 			</div>
 		</div>

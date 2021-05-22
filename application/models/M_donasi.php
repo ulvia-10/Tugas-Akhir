@@ -17,7 +17,7 @@ class M_donasi extends CI_Model
        $sql = "SELECT data_donasi.*,master_cabang.name_cabang
        FROM data_donasi 
        JOIN master_cabang on master_cabang.id_cabang = data_donasi.id_cabang
-       WHERE data_donasi.tipe = 'non anggota'AND data_donasi.status_verif = 'baru'";
+       WHERE data_donasi.tipe = 'non anggota'AND data_donasi.status_verif = 'baru' AND data_donasi.tampil = 'tampil'";
         return $this->db->query($sql)->result_array();
     }
     //tampilan Cari Data
@@ -229,6 +229,14 @@ class M_donasi extends CI_Model
         WHERE data_donasi.Id_donasi = '$id' AND master_cabang.id_cabang = '$id_cabang'";
         return $this->db->query($sql)->row_array();
     }
+    public function getdonasi($id){
+        $id_cabang = $this->session->userdata('sess_id_cabang');
+        $sql="SELECT data_donasi.*
+        FROM data_donasi
+        WHERE data_donasi.Id_donasi = '$id'AND   data_donasi.id_cabang = '$id_cabang'";
+        return $this->db->query($sql)->row_array();
+    }
+
     public function getalldatadonasi(){
         $id_cabang = $this->session->userdata('sess_id_cabang');
         $sql="SELECT data_donasi.*, master_cabang.id_cabang,akun_profile.full_name
@@ -294,22 +302,26 @@ class M_donasi extends CI_Model
     // ubah data donasi non anggota di korwil 
     public function ubahdatanondonasi()
     {
+        $id_donasi = $this->input->post('Id_donasi');
         $data = [
-            "Id_donasi" =>$this->input->post('Id_donasi'),
+            "Id_donasi" => $id_donasi,
             "status"=>$this->input->post('status',true),
-            "status_verif"   => $this->input->post('status_verif', true)
+            "status_verif"   => $this->input->post('status_verif', true),
+            "jml_donasi"   => $this->input->post('jml_donasi', true),
+            "nama_bank"   => $this->input->post('nama_bank', true),
             ];
-        $this->db->where('Id_donasi', $this->input->post('Id_donasi'));
-        $this->db->update('data_donasi', $data);      
+        $this->db->where('Id_donasi', $id_donasi);
+        $this->db->update('data_donasi', $data);   
+
         // show flash data 
-    //    echo "<pre>";
-    //     echo var_dump($data);
-    //     echo "</pre>";
-        $msg = '     <div class="alert alert-success" role="alert"> Data berhasil di verifikasi! </div>';
-        $this->session->set_flashdata('pesan', $msg);
+         echo "<pre>";
+        echo var_dump($data);
+        echo "</pre>";
+        // $msg = '     <div class="alert alert-success" role="alert"> Data berhasil di verifikasi! </div>';
+        // $this->session->set_flashdata('pesan', $msg);
        
-        // redirect 
-        redirect('donasi_non/datadonasinonanggota/');
+        // // redirect 
+        // redirect('donasi_non/datadonasinonanggota/');
       
     }
     public function updatedonasianggota($upload){
@@ -342,6 +354,7 @@ class M_donasi extends CI_Model
             'nama_donatur'  => $this->input->post('nama_donatur'),
             'tipe'          => "non anggota",
             "jenis"         => "masuk",
+            "tampil"        => $this->input->post('tampil'),
             "nama_bank"     =>$this->input->post('nama_bank', true),
             'status_verif'  => "baru",
             // 'no_rekening'   => $this->input->post('no_rekening'),
@@ -361,6 +374,18 @@ class M_donasi extends CI_Model
         // print_r($data);
         // // redirect
         redirect('donasi_non/datadonasinonanggota');
+    }
+
+    // EVENT DONASI 
+    public function geteventdonasi(){
+        // pasang session 
+        $id_cabang = $this->session->userdata('sess_id_cabang');
+        // query 
+        $sql =" SELECT data_event.*, data_donasi.*
+        FROM data_event 
+        JOIN data_donasi ON data_donasi.Id_donasi = data_event.Id_donasi
+        WHERE data_donasi.id_cabang = '$id_cabang' ";
+             return $this->db->query($sql)->result_array();
     }
     
 }

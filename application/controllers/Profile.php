@@ -83,9 +83,7 @@ class Profile extends CI_Controller
         $this->load->view('Donasi/V_editprofile', $data);
         $this->load->view('templating/dashboardadmin/template_footer');
     }
-    public function changepassword(){
-        
-    }
+  
 
     function update()
     {
@@ -119,6 +117,7 @@ class Profile extends CI_Controller
         redirect('Profile');
     }
     public function editprofileanggota(){
+        
         // helper 
         $this->load->helper(array('form', 'url'));
         $this->load->library('form_validation');
@@ -126,7 +125,6 @@ class Profile extends CI_Controller
         // form validation 
         $this->form_validation->set_rules('email','email','required');
         $this->form_validation->set_rules('address','address','required');
-        $this->form_validation->set_rules('photo','photo','required');
         $this->form_validation->set_rules('telp','telp','required');
         // redirect 
         if ($this->form_validation->run() == FALSE){
@@ -169,6 +167,34 @@ class Profile extends CI_Controller
             redirect('profile/profilkorwil','refresh');  
     }
 }
-    }
+
+// PROSES EDIT PASSWORD
+public function editpassword(){
+    $this->load->helper(array('form', 'url'));
+    $this->load->library('form_validation');
+
+    // form validation 
+    $this->form_validation->set_rules('username','username','required');
+    $this->form_validation->set_rules('password','password','required');
+             // redirect 
+             if ($this->form_validation->run() == FALSE){
+                echo validation_errors();
+              }
+              else{
+                //run ke model 
+                $this->M_profile->editpasswordkorwil();
+        
+                // echo "<pre>";
+                // echo var_dump($data);
+                // echo "</pre>";
+                //redirect 
+              redirect('profile/profilkorwil','refresh');
+          
+            // print_r($upload);
+            // redirect('profile/profilkorwil','refresh');
+}
+}
+}
+    
 
 

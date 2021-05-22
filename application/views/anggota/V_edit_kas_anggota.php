@@ -22,7 +22,7 @@
 					<div class="mb-3 row">
 						<label class="col-sm-3 col-form-label">Tanggal Bayar</label>
 						<div class="col-sm-5">
-							<input class="form-control" type="date" name="tgl_bayar" value="<?php echo date('d-M-Y');?>">
+							<input class="form-control" type="date" name="tgl_bayar"  value="<?php echo date('Y-m-d')?>">
 						</div>
 					</div>
 				</div>

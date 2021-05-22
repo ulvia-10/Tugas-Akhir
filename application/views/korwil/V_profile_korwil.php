@@ -47,9 +47,6 @@
 				</div>
 				<div class="card-body" style="margin-left:30px;">
 					<h5 class="card-title" style="text-align:center;"><?= $profile['full_name']; ?> </h5> <br>
-					<p class="card-text">Username: <?= $profile['username']; ?></p>
-					<p class="card-text">Jabatan: <?= $profile['level']; ?></p>
-					<p class="card-text">Gender: <?= $profile['gender']; ?></p>
 					<p class="card-text">Email: <?= $profile['email']; ?></p>
 					<p class="card-text">Telepon: <?= $profile['telp']; ?></p>
 					<p class="card-text">Tempat Lahir: <?= $profile['tempat_lahir']; ?></p>
@@ -64,7 +61,7 @@
 					<p class="card-text">Tanggal Lahir: <?= $tanggal ?></p>
 					<p class="card-text">Asal: <?= $profile['asal']; ?></p>
 					<p class="card-text">Alamat: <?= $profile['address']; ?></p>
-					<p class="card-text">Upload pada: <?=   date('d-m-Y',strtotime($profile['created_at'])); ?></p>
+					<p class="card-text"> Telah diubah pada: <?= date('d-m-Y H:i',strtotime($profile['created_at'])); ?></p>
 					<a href="<?= base_url('profile/editprofilkorwil'); ?>" class="btn btn-warning"
 						style="margin-left:200px;">Edit <i class="fa fa-edit"></i></a>
 				</div>

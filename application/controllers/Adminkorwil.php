@@ -14,6 +14,7 @@ class Adminkorwil extends CI_Controller
         $this->load->model('M_master');
         $this->load->model('M_kegiatan');
         $this->load->model('M_keuangan');
+        $this->load->model('M_profile');
 
         // pengecekan sesi 
         if (empty($this->session->userdata('sess_fullname'))) {
@@ -147,6 +148,22 @@ class Adminkorwil extends CI_Controller
         );
         $this->load->view('templating/korwil/Template_korwil', $data);
     }
+
+    // change password
+    public function changepassword(){
+        $data = array(
+
+            'namafolder'    => "korwil",
+            'namafileview'    => "V_change_password_korwil",
+            'title'         => "Change Password | Senyum Desa",
+
+            
+        );
+        $data['profile']= $this->M_profile->dataprofile();
+        $this->load->view('templating/korwil/Template_korwil', $data);
+    }
+
+   
 
     //proses tabel tambah kegiatan
     function prosesTambahkegiatan()

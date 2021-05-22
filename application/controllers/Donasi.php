@@ -242,6 +242,8 @@ public function uploadbuktidonasikorwil(){
         }
     }
 } 
+
+
 public function detaildonasianggota($id){
  
     $data = array(
@@ -256,6 +258,8 @@ public function detaildonasianggota($id){
     // redirect 
     $this->load->view('templating/Template_anggotanew', $data);
 }
+
+
 // detail donasi di korwil
 public function detaildonasikorwil($id){
  
@@ -303,8 +307,6 @@ public function proseseditdonasianggota(){
     // form validation 
     $this->form_validation->set_rules('tgl_donasi','tgl_donasi','required');
 
- 
-    
     if ($this->form_validation->run() == FALSE){
         echo validation_errors();
       }
@@ -343,10 +345,74 @@ public function proseseditdonasianggota(){
         'title'         => "Donasi Anggota | Senyum Desa",
 
     );
-    $data['donasi'] = $this->M_donasi->getDonasiById($id);
+    $data['donasi'] = $this->M_donasi->getdonasi($id);
+    // echo'<pre>';
+    // var_dump($data);
+    // echo'<pre>';
     $this->load->view('templating/korwil/Template_korwil', $data);
  }
 
+//  tambah event donasi 
+ // event donasi 
+ public function eventdonasi(){
+
+    $data = array(
+
+        'namafolder'    => "korwil",
+        'namafileview'    => "V_event_donasi",
+        'title'         => "Change Password | Senyum Desa",
+        
+    );
+    $data['event'] = $this->M_donasi->geteventdonasi();
+//    load template 
+    $this->load->view('templating/korwil/Template_korwil', $data);
+}
+
+// tambah event donasi 
+public function tambaheventdonasi(){
+
+    $data = array(
+
+        'namafolder'    => "korwil",
+        'namafileview'    => "V_tambah_event_donasi",
+        'title'         => "Tambah Event | Senyum Desa",
+        
+    );
+    $data['event'] = $this->M_donasi->geteventdonasi();
+//    load template 
+    $this->load->view('templating/korwil/Template_korwil', $data);
+}
+
+
+// edit event donasi 
+public function editeventdonasi(){
+
+    $data = array(
+
+        'namafolder'    => "korwil",
+        'namafileview'    => "V_edit_event_donasi",
+        'title'         => "Edit Event  | Senyum Desa",
+        
+    );
+    $data['event'] = $this->M_donasi->geteventdonasi();
+//    load template 
+    $this->load->view('templating/korwil/Template_korwil', $data);
+}
+
+// detail event donasi 
+public function detaileventdonasi(){
+
+    $data = array(
+
+        'namafolder'    => "korwil",
+        'namafileview'    => "V_detail_event_donasi",
+        'title'         => "Detail Event | Senyum Desa",
+        
+    );
+    $data['event'] = $this->M_donasi->geteventdonasi();
+//    load template 
+    $this->load->view('templating/korwil/Template_korwil', $data);
+}
 
 public function proseseditdonasiverif(){
 
@@ -376,13 +442,11 @@ public function proseseditdonasinonverif(){
       }
       else{
         //run ke model 
-        $this->M_donasi-> ubahdatanondonasi();
+        $this->M_donasi->ubahdatanondonasi();
         //session 
         $elementHTML = '<div class="alert alert-danger"><b>Pemberitahuan</b> <br> Notifikasi Kegiatan sudah dibaca pada ' . date('d F Y H.i A') . '</div>';
         $this->session->set_flashdata('msg', $elementHTML);
-        // echo "<pre>";
-        // echo var_dump($data);
-        // echo "</pre>";
+      
         //redirect 
         redirect('donasi_non/datadonasinonanggota','refresh');  
 }
