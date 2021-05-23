@@ -304,6 +304,17 @@ class M_donasi extends CI_Model
         return $this->db->query($sql)->row_array();
     }
 
+    public function getdonasinon($id){
+        $id_cabang = $this->session->userdata('sess_id_cabang');
+
+        $sql="SELECT  data_donasi.*, master_cabang.id_cabang, master_cabang.*, data_event.*
+        FROM data_donasi
+        JOIN master_cabang ON master_cabang.id_cabang = data_donasi.id_cabang
+        JOIN data_event ON data_event.id_event = data_donasi.id_event
+        WHERE data_donasi.Id_donasi = '$id' AND master_cabang.id_cabang = '$id_cabang'";
+        return $this->db->query($sql)->row_array();
+    }
+
     public function getalldatadonasi(){
         $id_cabang = $this->session->userdata('sess_id_cabang');
         $sql="SELECT data_donasi.*, master_cabang.id_cabang,akun_profile.full_name

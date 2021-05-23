@@ -274,7 +274,8 @@ public function detaildonasikorwil($id){
     );
     $data['donasi'] = $this->M_donasi->getDonasiById($id);
     
-    $this->load->view('templating/korwil/Template_korwil', $data);
+    var_dump($data);
+    // $this->load->view('templating/korwil/Template_korwil', $data);
 }
 // hapus donasi di anggota 
 public function hapusdonasi($Id_donasi){
@@ -349,6 +350,21 @@ public function proseseditdonasianggota(){
 
     );
     $data['donasi'] = $this->M_donasi->getdonasi($id);
+    // echo'<pre>';
+    // var_dump($data);
+    // echo'<pre>';
+    $this->load->view('templating/korwil/Template_korwil', $data);
+ }
+
+ public function detaildonasinondikorwil($id){
+    $data = array(
+
+        'namafolder'    => "donasi",
+        'namafileview'  => "V_detail_donasi_non",
+        'title'         => "Detail Donasi Non | Senyum Desa",
+
+    );
+    $data['donasi'] = $this->M_donasi->getdonasinon($id);
     // echo'<pre>';
     // var_dump($data);
     // echo'<pre>';
@@ -521,5 +537,7 @@ public function proseseditdonasinonverif(){
         redirect('donasi_non/datadonasinonanggota','refresh');  
 }
 }
+
+
  
 }

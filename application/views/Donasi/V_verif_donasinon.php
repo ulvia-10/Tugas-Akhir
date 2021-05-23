@@ -56,7 +56,7 @@
 								<a href="<?= base_url(); ?>donasi/editdonasinonverif/<?=$db['Id_donasi'];?>" class="badge badge-success">
 									<i class="fa fa-pencil" aria-hidden="true"></i></a></a>
 								<!-- detail -->
-								<a href="<?= base_url(); ?>donasi/detaildonasikorwil/<?=$db['Id_donasi'];?>" class="badge badge-secondary">
+								<a href="<?= base_url(); ?>donasi/detaildonasinondikorwil/<?=$db['Id_donasi'];?>" class="badge badge-secondary">
 									<i class="fa fa-eye" aria-hidden="true"></i></a></a>
 								<!-- hapus -->
 								<a href="#" data-bs-toggle="modal"
