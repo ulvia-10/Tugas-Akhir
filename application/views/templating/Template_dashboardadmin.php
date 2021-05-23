@@ -193,11 +193,17 @@
                                     <a class="sidebar-link " href="<?= base_url('Dashboard'); ?>"><i
                                             data-feather="home"></i><span class="lan-3">Dashboard </span></a>
                                 </li>
-                                <li class="sidebar-list">
-                                    <a class="sidebar-link sidebar-title link-nav" href="<?= base_url('Profile'); ?>"><i
-                                            data-feather="user-check">
-                                        </i><span>Profile</span></a>
-                                </li>
+                                <!-- PROFILE  -->
+								<li class="sidebar-list">
+									<a class="sidebar-link sidebar-title" href="#"><i data-feather="user"></i><span>My
+											Profile</span></a>
+									<ul class="sidebar-submenu">
+										<li><a href="<?= base_url('profile/index/'); ?>">My Profile</a>
+										</li>
+										<li><a href="<?= base_url('profile/editprofilpusat'); ?>">Edit Profile</a></li>
+									</ul>
+								</li>
+                               
                                 <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav"
                                         href="<?= base_url('Data_akun'); ?>"><i data-feather="user"></i></i><span>Data
                                             Akun</span></a></li>
@@ -206,18 +212,7 @@
                                             data-feather="archive">
                                         </i><span>Data Master Cabang</span></a>
                                 </li>
-                                <!-- <li class="sidebar-list">
-                                    <a class="sidebar-link sidebar-title link-nav" href="<?= base_url('Donasi'); ?>"><i
-                                            data-feather="file-text">
-                                        </i><span>Data Donasi</span></a>
-                                </li>
-                                <li class="sidebar-list">
-                                    <a class="sidebar-link sidebar-title link-nav"
-                                        href="<?= base_url('Keuangan'); ?>"><i data-feather="file">
-                                        </i><span>Data Keuangan</span></a>
-                                </li>
-
-                               -->
+                              
                                <li class="sidebar-list">
                                     <a class="sidebar-link sidebar-title link-nav" href="<?= base_url('donasi/eventdonasi/')?>"><i
                                             data-feather="book-open">

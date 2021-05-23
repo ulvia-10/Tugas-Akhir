@@ -2,11 +2,11 @@
 <br><br>
 <div class="col-sm-12 col-xl-6" style="margin-left: 200px;">
                 <div class="card card-absolute">
-                  <div class="card-header bg-secondary">
+                  <div class="card-header bg-success">
                     <h5 class="text-white">Edit Profile</h5>
                   </div>
                   <div class="card-body">
-                  <form class="theme-form" action="<?php echo base_url('profile/editprofilekorwil/'. $profile['id_profile']) ?>" method="POST" enctype="multipart/form-data">
+                  <form class="theme-form" action="<?php echo base_url('profile/proseseditprofilpusat/'. $profile['id_profile']) ?>" method="POST" enctype="multipart/form-data">
 				<input type="hidden" name="id_profile">
 				<!-- email  -->
 				<div class="mb-2">
@@ -30,7 +30,7 @@
 				</div>
 				<!--  button edit -->
 				<div class="text-sm-end">
-					<button class="btn btn-secondary">Submit <i class="fa fa-check-circle" aria-hidden="true"></i> </button>
+					<button class="btn btn-success">Submit <i class="fa fa-check-circle" aria-hidden="true"></i> </button>
 				</div>
 			</form>
     <div>

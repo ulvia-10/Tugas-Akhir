@@ -5,8 +5,10 @@
     <div class="row">
       <div class="col">
         <!-- Blog Card -->
+        <h5 style="text-align:center;">Jadwal Event Donasi Saat ini </h5> <br>
         <?php foreach($jadwal AS $jdw){ ?>
         <div class="card border-0 flex-md-row align-items-center">
+      
           <div class="col-md-4">
             <img class="img-fluid" style="width:50%; margin-left:120px;" src="<?= base_url('./assets/images/' . $jdw['gambar_event']); ?> "alt="Image">
           </div>

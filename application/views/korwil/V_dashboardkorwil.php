@@ -129,6 +129,76 @@
                 </div>
             </div>
         </div>
+
+        <div class="col-xl-3 risk-col xl-100 box-col-12">
+                <div class="card total-users">
+                  <div class="card-header card-no-border">
+                    <h5>Info Donasi Masuk </h5> <br>
+                  <div style="text-align:center;">
+                              <h6 class="font-primary">Sampai Saat ini</h6>
+                              <h6 class="f-w-400"><?=date('l, d-M-Y ')?></h6>
+                            
+                              </div>    
+                         
+                    <hr>
+                    <div class="card-header-right">
+                      <ul class="list-unstyled card-option">
+                        <li><i class="fa fa-spin fa-cog"></i></li>
+                        <li><i class="view-html fa fa-code"></i></li>
+                        <li><i class="icofont icofont-maximize full-card"></i></li>
+                        <li><i class="icofont icofont-minus minimize-card"></i></li>
+                        <li><i class="icofont icofont-refresh reload-card"></i></li>
+                        <li><i class="icofont icofont-error close-card"></i></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="card-body pt-0">
+                  <?php foreach ($donasimasuk AS $jadwal){ ?>
+                    <div class="apex-chart-container goal-status text-center row">
+                      <div class="rate-card col-xl-12">
+                        <div class="goal-chart">
+                          <div id="riskfactorchart"></div>
+                        </div>
+                        <div class="goal-end-point">
+                          <ul>
+                          
+                            <li>
+                            <h5 class="font-primary">Event <?=$jadwal['nama_event'];?></h5> <br>
+                              <h6 class="mb-2 f-w-400">Total Dana</h6>
+                              <h5 class="mb-0">Rp. <?=number_format($jadwal['totaldonasi'], 2 );?></h5>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <ul class="col-xl-12">
+                        <li>
+                          <div class="goal-detail">
+                            <h6> <span class="font-primary">Tanggal Mulai : </span><?= date('d-M-Y', strtotime($jadwal['durasi_mulai']))?></h6>
+                            <div class="progress sm-progress-bar progress-animate">
+                              <div class="progress-gradient-primary" role="progressbar" style="width: 60%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                          </div>
+                          <div class="goal-detail mb-0">      
+                            <h6><span class="font-primary">Tanggal Berakhir: </span><?= date('d-M-Y', strtotime($jadwal['durasi_berakhir']))?></h6>
+                            <div class="progress sm-progress-bar progress-animate">
+                              <div class="progress-gradient-primary" role="progressbar" style="width: 50%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                          </div>
+                        </li>
+                        <!-- <li>
+                          <div class="btn-download btn btn-gradient f-w-500">Download details</div>
+                        </li> -->
+                      </ul>
+                    </div>
+                    <br>
+                    <hr>
+                    <br>
+                  <?php
+                 }?>
+                    </div>
+                  </div>
+                </div>
+              </div>
     </div>
 </div>
 <!-- Container-fluid Ends-->

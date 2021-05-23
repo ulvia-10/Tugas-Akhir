@@ -8,7 +8,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.html"> <i data-feather="home"></i></a></li>
                     <li class="breadcrumb-item">Data Tables</li>
-                    <li class="breadcrumb-item active">KeuanganSenyum Desa</li>
+                    <li class="breadcrumb-item active">Keuangan Senyum Desa</li>
                 </ol>
             </div>
         </div>

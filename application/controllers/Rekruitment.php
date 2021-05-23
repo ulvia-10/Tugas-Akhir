@@ -32,7 +32,7 @@ class Rekruitment extends CI_Controller
 			'title'         => "Home | Senyum Desa"
 		);
 		//disesuaikan sama dengan nama view$ 
-		$data['event'] = $this->M_donasi->getjadwaldonasi();
+		$data['event'] = $this->M_donasi->getdonasimasuk();
 		$this->load->view('templating/template_anggotanew', $data);
        
 	}

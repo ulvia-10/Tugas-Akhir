@@ -49,15 +49,14 @@
 					<hr> <br>
 					<!-- result array -->
 					<?php foreach($event AS $event ){ ?>
-					<div class="col-sm-12 col-xl-6">
+					<div class="col-sm-12 col-xl-6" >
 						<div class="card">
 							<div class="card-header">
-								<h5><?=$event['nama_event']?></h5>
-
+								<h5 class="font-info">Event <?=$event['nama_event']?></h5>
 							</div>
 							<div class="card-body">
-								<h6> <?= date('d-M-Y',strtotime($event['durasi_mulai']))?> sampai
-									<?= date('d-M-Y',strtotime($event['durasi_berakhir']))?></h6>
+								<h6> <?= date('d M Y',strtotime($event['durasi_mulai']))?> sampai
+									<?= date('d M Y',strtotime($event['durasi_berakhir']))?></h6>
 								<p><?= $event['deskripsi_event']?></p>
 								<br>
 								<span class="badge badge-warning text-dark">Open Now Donasi!</span>
@@ -67,7 +66,7 @@
 					<?php } ?>
 					<div class="m-t-15">
 
-						<a style=margin-left:40%; class="btn btn-secondary"
+						<a style=margin-left:35%; class="btn btn-secondary"
 							href="<?= base_url('donasi/riwayatdonasi'); ?>"> <i class="fa fa-heart me-1"></i> Aku Mau
 							Berdonasi! </a>
 					</div>

@@ -81,6 +81,35 @@ class M_profile extends CI_Model
         }  
 }
 
+public function updateprofilepusat($upload){
+  $id_profile = $this->session->userdata('sess_id_profile');
+
+    // updae data di akun_profile 
+      $dataProfile = array(
+        'photo'  => $upload ['file']['file_name']
+      );
+      $this->db->where('id_profile',$id_profile);
+      $this->db->update('akun_profile', $dataProfile);
+
+      //  update data di informasi_profile 
+      $dataInformasiProfile = [
+     
+        'telp'          => $this->input->post('telp'),
+        'address'       => $this->input->post('address'),
+        'email'         => $this->input->post('email')
+    ];
+      // query
+      $this->db->where('id_profile',$id_profile);
+      $this->db->update('data_informasiprofile', $dataInformasiProfile);    
+
+      // flash data 
+      $msg = '<div class="alert alert-success">Data berhasil di dirubah <br><small>Pada tanggal ' . date('d F Y H.i A') . '</small></div>';
+      $this->session->set_flashdata('pesan', $msg);
+      // print_r($data);
+      // redirect
+      redirect('profile/index');
+}
+
 public function dataprofile(){
       // pasang session 
       $id_profile = $this->session->userdata('sess_id_profile');

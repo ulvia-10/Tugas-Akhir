@@ -17,7 +17,7 @@ class M_donasi extends CI_Model
        $sql = "SELECT data_donasi.*,master_cabang.name_cabang, data_event.*
        FROM data_donasi 
        JOIN master_cabang on master_cabang.id_cabang = data_donasi.id_cabang
-     JOIN data_event  ON data_event.id_event = data_donasi.id_event
+        JOIN data_event  ON data_event.id_event = data_donasi.id_event
        WHERE data_donasi.tipe = 'non anggota'
        AND data_donasi.status_verif = 'baru' 
        AND data_donasi.tampil = 'tampil'";
@@ -25,12 +25,11 @@ class M_donasi extends CI_Model
     }
 
     public function getDonasiAnggota(){
-        $sql = "SELECT data_donasi.*,master_cabang.name_cabang,akun_profile.full_name, akun_profile.id_profile,  data_event.*
+        $sql = "SELECT data_donasi.*, data_event.*, akun_profile.*
         FROM data_donasi 
-        JOIN master_cabang on master_cabang.id_cabang = data_donasi.id_cabang
-        JOIN data_event  ON data_event.id_event = data_donasi.id_event
-        JOIN akun_profile ON akun_profile.id_profile = akun_profile.id_profile
-        WHERE data_donasi.tipe ='anggota' AND data_donasi.status_verif = 'baru' AND data_donasi.tampil = 'tampil'";
+        JOIN data_event ON data_event.id_event = data_donasi.id_event 
+        JOIN akun_profile ON akun_profile.id_profile = data_donasi.id_profile 
+        WHERE data_donasi.tipe = 'anggota' AND data_donasi.tampil = 'tampil' AND data_donasi.status_verif = 'baru'";
          return $this->db->query($sql)->result_array();
     }
     public function getalldonasinonanonim(){
@@ -54,12 +53,6 @@ class M_donasi extends CI_Model
         $this->db->or_like('Id_donasi', $keyword);
         return $this->db->get('data_donasi')->result_array();
     }
-
-    // public function getevent(){
-    //     $sql = "SELECT * FROM data_event
-    //     WHERE data_event.durasi_mulai <= NOW() AND data_event.durasi_berakhir >= NOW()";
-    //     return $this->db->query($sql)->row_array();
-    // }
 
     // Proses Tambah Donasi
     function processInsertDonasi()
@@ -333,6 +326,18 @@ class M_donasi extends CI_Model
         JOIN akun_profile ON akun_profile.id_profile = data_donasi.id_profile
         WHERE data_donasi.id_cabang = '$id_cabang' AND data_donasi.status_verif= '$status'";
         return $this->db->query($sql)->result_array();
+    }
+
+    public function getdonasimasuk(){
+        $id_cabang = $this->session->userdata('sess_id_cabang');
+
+        $sql="SELECT data_donasi.*, SUM(jml_donasi) AS totaldonasi, data_event.*, master_cabang.name_cabang
+        FROM data_donasi 
+        JOIN data_event ON data_event.id_event = data_donasi.id_event 
+        JOIN master_cabang ON master_cabang.id_cabang = data_donasi.id_cabang
+        WHERE data_donasi.id_cabang = '$id_cabang' 
+        GROUP BY data_donasi.id_event";
+         return $this->db->query($sql)->result_array();
     }
 
     // ini untuk yg non anggota 

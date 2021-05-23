@@ -30,8 +30,22 @@ class Profile extends CI_Controller
 
         $data = array(
             'namafolder'    => "profile",
-            'namafileview'  => "V_editProfile",
+            'namafileview'  => "V_profil_pusat",
             'title'         => "Profile | Senyum Desa"
+        );
+        $data['profile']= $this->M_rekruitment->getDataProfile();
+        $this->load->view('templating/template_dashboardadmin', $data);
+        // templating
+     
+    }
+
+    function editprofilpusat()
+    {
+
+        $data = array(
+            'namafolder'    => "profile",
+            'namafileview'  => "V_edit_profile_pusat",
+            'title'         => "Profile Admin Pusat | Senyum Desa"
         );
         $data['profile']= $this->M_rekruitment->getDataProfile();
         $this->load->view('templating/template_dashboardadmin', $data);
@@ -48,10 +62,6 @@ class Profile extends CI_Controller
             'title'         => "Profile Admin Korwil | Senyum Desa"
         );
         $data['profile']= $this->M_profile->dataprofile();
-       
-        // echo'<pre>';
-        // var_dump($data);
-        // echo'<pre>';
    
         $this->load->view('templating/korwil/template_korwil', $data);
         // templating
@@ -166,6 +176,31 @@ class Profile extends CI_Controller
             }
             redirect('profile/profilkorwil','refresh');  
     }
+}
+
+public function proseseditprofilpusat(){
+    $this->load->helper(array('form', 'url'));
+    $this->load->library('form_validation');
+
+    // form validation 
+    $this->form_validation->set_rules('email','email','required');
+    $this->form_validation->set_rules('address','address','required');
+    $this->form_validation->set_rules('telp','telp','required');
+    // redirect 
+    if ($this->form_validation->run() == FALSE){
+        echo validation_errors();
+    }
+    else{
+        $upload = $this->M_profile->upload();
+        if($upload ['result'] == 'success'){
+            $this->M_profile->updateprofilepusat($upload);
+            // print_r($upload);
+            redirect('profile/index','refresh');
+        }else{
+            echo $upload['error'];
+        }
+        redirect('profile/index','refresh');  
+}
 }
 
 // PROSES EDIT PASSWORD

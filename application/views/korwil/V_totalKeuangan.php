@@ -34,10 +34,9 @@
 						<tr>
 
 							<div class="col-sm-4" style="margin-left:550px;">
-								<p class="text-primary" style="text-align:center;"><b>Filter Jumlah Kas</b></p>
-								<!-- select option  -->
-								<!-- bulan -->
-								<form action="">
+								<!-- <p class="text-primary" style="text-align:center;"><b>Filter Jumlah Kas</b></p> -->
+								
+								<!-- <form action="">
 									<select name="bulan" class="form-select digits" id=""
 										required="wilayah harap DiIsi">
 										<option value="Tahun" disable="disable">-- Pilih bulan --</option>
@@ -67,7 +66,7 @@
                                             <div class="text-sm-end">
 					<button class="btn btn-primary">Submit  </button>
 				</div>
-								</form>
+								</form> -->
 								<br>
 								<!-- tahun -->
 								<strong>

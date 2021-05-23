@@ -15,6 +15,7 @@ class Adminkorwil extends CI_Controller
         $this->load->model('M_kegiatan');
         $this->load->model('M_keuangan');
         $this->load->model('M_profile');
+        $this->load->model('M_donasi');
 
         // pengecekan sesi 
         if (empty($this->session->userdata('sess_fullname'))) {
@@ -48,6 +49,7 @@ class Adminkorwil extends CI_Controller
 
         );
         $data['nama'] = $this->M_korwil->getnama();
+        $data['donasimasuk'] = $this->M_donasi->getdonasimasuk();
 
         // echo "<pre>";
         // var_dump($data);
