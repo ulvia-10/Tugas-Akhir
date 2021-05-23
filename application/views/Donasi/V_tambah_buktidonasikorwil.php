@@ -24,8 +24,8 @@
 				<div class="mb-2 row">
 					<label class="col-sm-3 col-form-label">Nama Anggota</label>
 					<div class="col-sm-9">
-						<select name="full_name" class="form-select digits" id=""
-							required="Nama Harap diisi ">
+						<select name="nama_anggota" class="form-select digits" id=""
+							required="Nama Harap diisi " >
 							<option value="full_name">-- Pilih salah satu --</option>
 
 							<?php
@@ -40,7 +40,27 @@
 					</div>
 				</div>
 		</div>
+		<div class="row">
+					<div class="col">
+						<div class="mb-3 row">
+							<label class="col-sm-3 col-form-label">Nama Event</label>
+							<div class="col-sm-9">
+								<select name="nama_event" class="form-select digits" id="" required="wilayah harap DiIsi">
+									<option value="nama_event">-- Pilih Nama Event --</option>
 
+									<?php
+
+
+                                        foreach ($event as $event) {
+
+                                            echo '<option value="' . $event['id_event'] . '">' . $event['nama_event'] . '</option>';
+                                        }
+                                        ?>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
 		<div class="row">
 						<label class="col-sm-3 col-form-label">Via Pembayaran</label>
 						<div class="col-sm-9">
@@ -82,18 +102,6 @@
 				</div>
 				</div>
 			<br>
-				<!-- no rekening -->
-				<!-- <div class="row">
-					<div class="col">
-						<div class="mb-3 row">
-							<label class="col-sm-3 col-form-label">No Rekening</label>
-							<div class="col-sm-9">
-								<input class="form-control" type="number" minlength="16" maxlength="20" name="no_rekening"
-									placeholder="Masukkan No Rekening">
-							</div>
-						</div>
-					</div>
-				</div> -->
 				<!-- nominal -->
 				<div class="row">
 					<div class="col">
@@ -118,7 +126,16 @@
 						</div>
 					</div>
 				</div>
-
+							
+			</div>
+			<div class="row">
+					<!-- check  -->
+			<div class="form-group mb-0" style="margin-left:150px;">
+				<div class="checkbox p-0">
+					<input id="checkbox1" type="checkbox" name="tampil" value="anonim">
+					<label class="text-dark" for="checkbox1"> <i class="fa fa-user-circle" aria-hidden="true"></i> Tampilkan sebagai anonim</label>
+				</div>
+        </div>
 			</div>
 			<div class="card-footer" style="margin-left:190px;">
 				<button class="btn btn-secondary" type="submit">Submit</button>

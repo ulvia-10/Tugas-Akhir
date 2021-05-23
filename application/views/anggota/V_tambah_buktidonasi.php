@@ -17,49 +17,28 @@
                           </div>
                         </div>
                       </div>
-                        <!-- no rekening -->
-                        <!-- <div class="row">
-                        <div class="col">
-                          <div class="mb-3 row">
-                            <label class="col-sm-3 col-form-label">No Rekening</label>
-                            <div class="col-sm-9">
-                              <input class="form-control" type="number" minlength="16" maxlength="20" name="no_rekening" placeholder="Masukkan no rekening">
-                            </div>
-                          </div>
-                        </div>
-                      </div> -->
-                      <!-- nama bank -->
-					<!-- <div class="form-group" id="element-wilayah">
-				<div class="row">
-					<div class="mb-2 row">
-						<label class="col-sm-3 col-form-label">Nama Bank</label>
-						<div class="col-sm-6">
-							<select name="nama_bank" class="form-select digits" 
-								required="Nama Anggota harus diisi ">
-								<option value="nama_bank" disable>-- Pilih nama bank--</option>
-								<option value="BRI">BANK BRI </option>
-								<option value="BNI">BANK BNI</option>
-								<option value="MANDIRI">BANK MANDIRI</option>
-								<option value="BCA">BANK BCA</option>
-							</select>
+                      <!-- pilih event  -->
+                      	<!-- pilih event  -->
+                        <div class="row">
+                        <label class="col-sm-3 col-form-label">Nama Event</label>
+                        <div class="form-group col-md-6" style="margin-left:5px;">
+                        <select name="nama_event" class="form-select digits" id="" required="wilayah harap DiIsi">
+                          <option>-- Pilih Nama Event --</option>
+
+                          <?php
+
+
+                                                  foreach ($event as $event) {
+
+                                                      echo '<option value="' . $event['id_event'] . '">' . $event['nama_event'] . '</option>';
+                                                  }
+                                                  ?>
+                        </select>
+						
+								
 						</div>
-					</div>
-				</div>
-				</div>
-			<br> -->
-                         <!-- no rekening -->
-                         <!-- <div class="row">
-                        <div class="col">
-                          <div class="mb-3 row">
-                            <label class="col-sm-3 col-form-label">Nominal</label>
-                            <div class="col-sm-9">
-                              <input class="form-control" type="number" name="jml_donasi" placeholder="Masukkan nominal donasi">
-                            </div>
-                          </div>
-                        </div>
-                      </div> -->
-                      <!-- jumlah donasi  -->
-                      
+                      </div>
+                      <br>
                       <!-- upload bukti -->
                       <div class="row">
                         <div class="col">

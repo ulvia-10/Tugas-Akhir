@@ -11,7 +11,9 @@ class Rekruitment extends CI_Controller
 		$this->load->model('M_dataakun');
 		$this->load->model('M_master');
 		$this->load->model('M_login');
+		$this->load->model('M_donasi');
 		$this->load->library('form_validation');
+		
 
 		// pengecekan sesi 
 		  // pengecekan sesi 
@@ -30,6 +32,7 @@ class Rekruitment extends CI_Controller
 			'title'         => "Home | Senyum Desa"
 		);
 		//disesuaikan sama dengan nama view$ 
+		$data['event'] = $this->M_donasi->getjadwaldonasi();
 		$this->load->view('templating/template_anggotanew', $data);
        
 	}

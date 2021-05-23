@@ -97,7 +97,6 @@
 				aria-labelledby="profile-top-tab">
 					<!-- show flash data from model M_donasi  -->
 				<div class="table-responsive">
-				<!-- <?php echo $this->session->flashdata('pesan') ?> -->
 					<table class="display" id="basic-2" style="text-align:center;">
 						<thead>
 							<tr>

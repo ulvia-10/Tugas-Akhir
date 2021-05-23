@@ -129,11 +129,12 @@ function totalKas($tahun, $jenis){
 
 // }
 function Donasi($tahun){
-    $sql ="SELECT data_donasi.*, master_cabang.name_cabang, master_cabang.status_cabang,  SUM(data_donasi.jml_donasi) as jumlah 
+    $sql ="SELECT data_donasi.*, master_cabang.name_cabang, master_cabang.status_cabang,  SUM(data_donasi.jml_donasi) as jumlah , data_event.*
     FROM data_donasi 
     JOIN master_cabang ON master_cabang.id_cabang = data_donasi.id_cabang 
+    JOIN data_event  on data_event.id_event = data_donasi.id_event
     WHERE YEAR(tgl_donasi) = '$tahun' AND master_cabang.status_cabang = 'active'
-    GROUP BY master_cabang.name_cabang";
+    GROUP BY master_cabang.name_cabang, data_event.id_event";
     return $this->db->query($sql);
 }
 

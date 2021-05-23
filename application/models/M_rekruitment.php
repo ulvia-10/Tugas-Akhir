@@ -29,8 +29,8 @@ class M_rekruitment extends CI_Model
             'full_name'    => $this->input->post('full_name'),
             'asal'         => $this->input->post('asal'),
             'reason_join'  => $this->input->post('reason_join'),
-            'photo'  => $foto,
-            'cv'     => $cv,
+            'photo'         => $foto,
+            'cv'            => $cv,
             'bukti_follow' => $this->input->post('bukti_follow'),
             'bukti_bayar'  => $buktibayar
         );

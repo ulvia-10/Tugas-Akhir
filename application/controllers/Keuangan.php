@@ -116,6 +116,8 @@ class Keuangan extends CI_Controller
           // // variable
           'dataAnggota'    =>   $dataanggotaCabang
         );
+
+        // echo var_dump($data);
         $this->load->view('templating/korwil/template_korwil', $data);
     }
     // kas anggota 
@@ -125,8 +127,7 @@ class Keuangan extends CI_Controller
     $this->load->library('form_validation');
     // form validation 
     $this->form_validation->set_rules('tgl_bayar','tgl_bayar','required');
-    // $this->form_validation->set_rules('judul','judul','required');
-    // $this->form_validation->set_rules('nominal','nominal','required');
+   
     $this->form_validation->set_rules('deskripsi','deskripsi','required');
 
     if ($this->form_validation->run()==FALSE){
@@ -144,6 +145,7 @@ class Keuangan extends CI_Controller
         }
     }
     }
+
     // di korwil ya ini buat tambah kas 
     public function uploadbuktikaskorwil(){
         // helper 
@@ -169,6 +171,7 @@ class Keuangan extends CI_Controller
             }
         }
         }
+
     public function detailkasanggota($id)
 	{
 		$data = array(

@@ -162,7 +162,7 @@ class M_keuangan extends CI_Model
     // korwil kas 
     public function tambahbuktikaskorwil($upload){
 
-        $id_profile = $this->session->userdata('sess_id_profile');
+        $id_profile = $this->input->post('nama_anggota');
         $id_cabang = $this->session->userdata('sess_id_cabang');
         $data = array
         (
@@ -260,7 +260,7 @@ class M_keuangan extends CI_Model
         }
         public function getanggotaByCabang(){
             $id_cabang = $this->session->userdata('sess_id_cabang');
-            $sql="SELECT master_cabang.*,akun_profile.full_name
+            $sql="SELECT master_cabang.*,akun_profile.full_name, akun_profile.id_profile
                     FROM akun_profile
                     JOIN master_cabang ON master_cabang.id_cabang = akun_profile.id_cabang
                     WHERE akun_profile.id_cabang = '$id_cabang' AND akun_profile.level = 'anggota'";

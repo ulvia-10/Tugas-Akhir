@@ -151,8 +151,10 @@ class Donasi extends CI_Controller
             'namafileview'    => "V_tambah_buktidonasi",
             'title'         => "Donasi",
         );
+        $data['event'] = $this->M_donasi->getjadwaldonasi();
         $this->load->view('templating/Template_anggotanew', $data);
     }
+
     public function tambahbuktidonasikorwil()
     {
         // $getDataCabang = $this->M_master->getallwilayah();
@@ -167,8 +169,10 @@ class Donasi extends CI_Controller
               // // variable
           'dataAnggota'    =>   $dataanggotaCabang
         );
-        
-        
+        // echo'<pre>';
+        // echo var_dump($data);
+        // echo'</pre>';
+        $data['event'] = $this->M_donasi->getjadwaldonasi();
         $this->load->view('templating/korwil/Template_korwil', $data);
     }
 
@@ -196,12 +200,10 @@ public function uploadbuktidonasi(){
     // helper 
     $this->load->helper(array('form', 'url'));
     $this->load->library('form_validation');
+
     // form validation 
     $this->form_validation->set_rules('tgl_donasi','tgl_donasi','required');
-    // $this->form_validation->set_rules('no_rekening','no_rekening','required');
-    // $this->form_validation->set_rules('nama_bank','nama_bank','required');
-    // $this->form_validation->set_rules('jml_donasi','jml_donasi','required');
-
+  
     if ($this->form_validation->run()==FALSE){
 
         echo validation_errors();
@@ -296,6 +298,8 @@ public function editdonasianggota($id){
 
         );
         $data['donasi'] = $this->M_donasi->getDonasiById($id);
+        $data['event'] = $this->M_donasi->getjadwaldonasi();
+
         
         $this->load->view('templating/Template_anggotanew', $data);
 }
@@ -314,13 +318,12 @@ public function proseseditdonasianggota(){
         $upload = $this->M_donasi->upload();
         if($upload ['result'] == 'success'){
             $this->M_donasi->updatedonasianggota($upload);
-            redirect('donasi/datadonasi','refresh');
+            // redirect('donasi/datadonasi','refresh');
         }else{
             echo $upload['error'];
         }
-        redirect('donasi/riwayatdonasi','refresh');  
+        // redirect('donasi/riwayatdonasi','refresh');  
 }
-
 }
 
 // DONASI VERIFIKASI DI KORWIL
@@ -364,6 +367,20 @@ public function proseseditdonasianggota(){
         
     );
     $data['event'] = $this->M_donasi->geteventdonasi();
+//    load template 
+    $this->load->view('templating/template_dashboardadmin', $data);
+}
+
+public function rekapdonasi(){
+    
+    $data = array(
+
+        'namafolder'    => "donasi",
+        'namafileview'    => "V_rekap_donasi",
+        'title'         => "Rekap Donasi | Senyum Desa",
+        
+    );
+    $data['rekap'] = $this->M_donasi->rekapdonasi();
 //    load template 
     $this->load->view('templating/template_dashboardadmin', $data);
 }
@@ -429,11 +446,11 @@ public function proseseditevent(){
         $upload = $this->M_donasi->uploadevent();
         if($upload ['result'] == 'success'){
             $this->M_donasi->editdataevent($upload);
-            // redirect('donasi/eventdonasi','refresh');
+            redirect('donasi/eventdonasi','refresh');
         }else{
             echo $upload['error'];
         }
-        // redirect('donasi/eventdonasi','refresh');  
+        redirect('donasi/eventdonasi','refresh');  
     }
 }
 

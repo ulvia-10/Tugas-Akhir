@@ -42,7 +42,7 @@
 
 						<div class="form-group col-md-6">
 							<select name="name_cabang" class="form-select digits" id="" required="wilayah harap DiIsi">
-								<option value="name_cabang">-- Pilih salah satu --</option>
+								<option value="name_cabang">-- Pilih Cabang Bayar --</option>
 
 								<?php
 
@@ -53,10 +53,30 @@
                                         }
                                         ?>
 							</select>
-              <div class="help-block with-errors"></div>
-              <p>Pilih Nama Cabang</p>
-
+						<div class="help-block with-errors"></div>
+			
+								
 						</div>
+
+						<!-- pilih event  -->
+						<div class="form-group col-md-6" style="margin-left:200px;">
+							<select name="nama_event" class="form-select digits" id="" required="wilayah harap DiIsi">
+								<option value="nama_event">-- Pilih Nama Event --</option>
+
+								<?php
+
+
+                                        foreach ($event as $event) {
+
+                                            echo '<option value="' . $event['id_event'] . '">' . $event['nama_event'] . '</option>';
+                                        }
+                                        ?>
+							</select>
+						
+								
+						</div>
+						
+						<!-- tampilkan sebagai anonim  -->
 						<div class="form-group col-md-6" style="margin-left:250px;">
 							<input type="checkbox" id="tampil" name="tampil" value="tampil"> Tampilkan sebagai anonim 
 						</div>

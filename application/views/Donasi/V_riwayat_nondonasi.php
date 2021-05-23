@@ -13,6 +13,7 @@
 								<div class="media"><img class="align-self-center img-fluid img-60"
 										src="http://admin.pixelstrap.com/cuba/assets/images/ecommerce/product-table-6.png" alt="#">
 									<div class="media-body ms-3">
+									<p><span class="badge badge-primary"><?=$dns['nama_event']?></span></p>
 										<div class="product-name">
 											<h6><?= $dns["nama_donatur"]?> Telah Berdonasi </h6>
 										</div>
@@ -31,7 +32,8 @@
 										<div class="avaiabilty">
 											<div class="text-success">
 												Tanggal: <td><?= date('d/m/Y',strtotime($dns["tgl_donasi"])); ?></td>
-											</div>
+											</div> <br>
+											
 										</div>
 										<?php
                                 $keterangan = "";
@@ -46,7 +48,7 @@
                                     $warna = "info";
                                 } 
                                 ?>
-										<span style="margin-left: 380px;" class="badge badge-<?=$warna;?>"><?= $keterangan; ?></td>
+										<span style="margin-left: 350px;" class="badge badge-<?=$warna;?>"><?= $keterangan; ?></td>
 									</div>
 								</div>
 							</div>
@@ -69,6 +71,7 @@
 								<div class="media"><img class="align-self-center img-fluid img-60"
 										src="http://admin.pixelstrap.com/cuba/assets/images/ecommerce/product-table-6.png" alt="#">
 									<div class="media-body ms-3">
+									<p><span class="badge badge-primary"><?=$anm['nama_event']?></span></p>
 										<div class="product-name">
 											<h6>Anonim telah berdonasi</h6>
 										</div>
@@ -100,7 +103,7 @@
                                     $warna = "info";
                                 } 
                                 ?>
-										<span style="margin-left: 380px;" class="badge badge-<?=$warna;?>"><?= $keterangan; ?></td>
+										<span style="margin-left: 350px;" class="badge badge-<?=$warna;?>"><?= $keterangan; ?></td>
 									
 									</div>
 								</div>
@@ -123,6 +126,7 @@
 								<div class="media"><img class="align-self-center img-fluid img-60"
 										src="http://admin.pixelstrap.com/cuba/assets/images/ecommerce/product-table-6.png" alt="#">
 									<div class="media-body ms-3">
+									<p><span class="badge badge-primary"><?=$ang['nama_event']?></span></p>
 										<div class="product-name">
 											<h6><?=$ang['full_name']?> telah berdonasi</h6>
 										</div>
@@ -154,7 +158,7 @@
                                     $warna = "info";
                                 } 
                                 ?>
-										<span style="margin-left: 380px;" class="badge badge-<?=$warna;?>"><?= $keterangan; ?></td>
+										<span style="margin-left: 350px;" class="badge badge-<?=$warna;?>"><?= $keterangan; ?></td>
 									
 									</div>
 								</div>

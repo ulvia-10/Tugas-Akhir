@@ -30,7 +30,7 @@
 
             </ul>
           </div>
-          <div class="col-md-2"> <a href="blog-listing.html" class="btn btn-primary">
+          <div class="col-md-2"> <a href="<?= base_url('donasi_non/donasinonanggota/')?>" class="btn btn-primary">
                 Donasi <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
               </a>
           </div>

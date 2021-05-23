@@ -228,6 +228,11 @@
                                             data-feather="book-open">
                                         </i><span>Laporan Dana</span></a>
                                 </li>
+                                <li class="sidebar-list">
+                                    <a class="sidebar-link sidebar-title link-nav" href="<?= base_url('donasi/rekapdonasi/')?>"><i
+                                            data-feather="chevrons-right">
+                                        </i><span> Rekap Donasi</span></a>
+                                </li>
                             </ul>
                         </div>
                         <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>

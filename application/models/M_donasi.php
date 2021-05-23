@@ -14,25 +14,30 @@ class M_donasi extends CI_Model
     }
     public function getallDonasinon()
     {
-       $sql = "SELECT data_donasi.*,master_cabang.name_cabang
+       $sql = "SELECT data_donasi.*,master_cabang.name_cabang, data_event.*
        FROM data_donasi 
        JOIN master_cabang on master_cabang.id_cabang = data_donasi.id_cabang
-       WHERE data_donasi.tipe = 'non anggota'AND data_donasi.status_verif = 'baru' AND data_donasi.tampil = 'tampil'";
+     JOIN data_event  ON data_event.id_event = data_donasi.id_event
+       WHERE data_donasi.tipe = 'non anggota'
+       AND data_donasi.status_verif = 'baru' 
+       AND data_donasi.tampil = 'tampil'";
         return $this->db->query($sql)->result_array();
     }
 
     public function getDonasiAnggota(){
-        $sql = "SELECT data_donasi.*,master_cabang.name_cabang,akun_profile.full_name, akun_profile.id_profile
+        $sql = "SELECT data_donasi.*,master_cabang.name_cabang,akun_profile.full_name, akun_profile.id_profile,  data_event.*
         FROM data_donasi 
         JOIN master_cabang on master_cabang.id_cabang = data_donasi.id_cabang
+        JOIN data_event  ON data_event.id_event = data_donasi.id_event
         JOIN akun_profile ON akun_profile.id_profile = akun_profile.id_profile
         WHERE data_donasi.tipe ='anggota' AND data_donasi.status_verif = 'baru' AND data_donasi.tampil = 'tampil'";
          return $this->db->query($sql)->result_array();
     }
     public function getalldonasinonanonim(){
-        $sql = "SELECT data_donasi.*,master_cabang.name_cabang
+        $sql = "SELECT data_donasi.*,master_cabang.name_cabang, data_event.*
         FROM data_donasi 
         JOIN master_cabang on master_cabang.id_cabang = data_donasi.id_cabang
+        JOIN data_event  ON data_event.id_event = data_donasi.id_event
         WHERE data_donasi.tipe = 'non anggota'AND data_donasi.status_verif = 'baru' AND data_donasi.tampil = 'anonim'";
         return $this->db->query($sql)->result_array();
     }
@@ -49,6 +54,12 @@ class M_donasi extends CI_Model
         $this->db->or_like('Id_donasi', $keyword);
         return $this->db->get('data_donasi')->result_array();
     }
+
+    // public function getevent(){
+    //     $sql = "SELECT * FROM data_event
+    //     WHERE data_event.durasi_mulai <= NOW() AND data_event.durasi_berakhir >= NOW()";
+    //     return $this->db->query($sql)->row_array();
+    // }
 
     // Proses Tambah Donasi
     function processInsertDonasi()
@@ -151,21 +162,22 @@ class M_donasi extends CI_Model
 
         $id_profile = $this->session->userdata('sess_id_profile');
         $id_cabang = $this->session->userdata('sess_id_cabang');
-        $data = array
+        
+        $datadonasi = array
         (
+            'id_event'     => $this->input->post('nama_event'),
             'id_profile' => $id_profile,
             'id_cabang' => $id_cabang,
-            // 'nama_bank'  => $this->input->post('nama_bank'),
             'via'         =>  "transfer",
             'tipe'      => "anggota",
-            // 'no_rekening'  => $this->input->post('no_rekening'),
             'tgl_donasi'   => $this->input->post('tgl_donasi'),
-            // 'jml_donasi'   => $this->input->post('jml_donasi'),
             'bukti_donasi'  => $upload ['file']['file_name']
             
         );
+
+        $this->db->insert('data_donasi', $datadonasi);
         
-        $this->db->insert('data_donasi', $data);
+        // var_dump($datadonasi);
 
         // flashdata
         $elementHTML = '<div class="alert alert-secondary"><b>Pemberitahuan</b> <br> Data Donasi berhasil ditambahkan pada ' . date('d F Y H.i A') . ' Silahkan menunggu verifikasi lebih lanjut</div>';
@@ -177,24 +189,36 @@ class M_donasi extends CI_Model
     // di korwil bro 
     public function tambahbuktidonasikorwil($upload){
 
-        $id_profile = $this->session->userdata('sess_id_profile');
+        $id_profile = $this->input->post('nama_anggota');
         $id_cabang = $this->session->userdata('sess_id_cabang');
-        $data = array
-        (
-            'id_profile'  => $id_profile,
+
+        $datadonasi = array
+        (   
+            'id_event'  =>  $this->input->post('nama_event'),
+            'Id_donasi'  => $this->input->post('Id_donasi'),
+            'id_profile' => $id_profile,
+            // 'id_profile' => $this->input->post('full_name'),
             'id_cabang' => $id_cabang,
             'status_verif' => "baru",
             'via'  => $this->input->post('via'),
+            'tampil' => $this->input->post('tampil'),
             'nama_bank'  => $this->input->post('nama_bank'),
-            // 'id_profile'  => $this->input->post('full_name'),
-            // 'no_rekening'  => $this->input->post('no_rekening'),
             'tgl_donasi'   => $this->input->post('tgl_donasi'),
             'jml_donasi'   => $this->input->post('jml_donasi'),
             'bukti_donasi'  => $upload ['file']['file_name']
         );
         
-        $this->db->insert('data_donasi', $data);
+        $this->db->insert('data_donasi', $datadonasi);
+        // $ambilId_donasi = $this->db->insert_id();
 
+        // $dataevent = array
+        // (   
+        //     'Id_donasi'    => $ambilId_donasi
+        // );
+        
+        //  // execute
+        //  $this->db->insert( 'data_event', $dataevent );
+         
         // flashdata
         $elementHTML = '<div class="alert alert-success"><b>Pemberitahuan</b> <br> Data Donasi berhasil ditambahkan pada ' . date('d F Y H.i A') . '</div>';
         $this->session->set_flashdata('pesan', $elementHTML);
@@ -204,27 +228,38 @@ class M_donasi extends CI_Model
     }
     // donasi non anggota tambah bukti upload 
     public function tambahbuktidonasinon($upload){
-        $data = array
-        (
-            'id_cabang'   => $this->input->post('name_cabang'),
+        $datadonasi = array
+        (   
+            'id_event'     =>$this->input->post('nama_event'),
+            'Id_donasi'    => $this->input->post('Id_donasi'),
+            'id_cabang'      => $this->input->post('name_cabang'),
             'nama_donatur'  => $this->input->post('nama_donatur'),
             'tipe'          => "non anggota",
-            'via'  => "transfer",
-            // 'no_rekening'  => $this->input->post('no_rekening'),
-            'tgl_donasi'   => $this->input->post('tgl_donasi'),
+            'via'           => "transfer",
+            'tgl_donasi'    => $this->input->post('tgl_donasi'),
             'email_donatur'   => $this->input->post('email_donatur'),
             'telp_donatur'   => $this->input->post('telp_donatur'),
             'jml_donasi'   => $this->input->post('jml_donasi'),
             'bukti_donasi'  => $upload ['file']['file_name']
             
         );
+        $this->db->insert('data_donasi', $datadonasi);
         
-        $this->db->insert('data_donasi', $data);
+        // $ambilId_donasi = $this->db->insert_id();
 
+        // $dataevent = array
+        // (   
+        //     'Id_donasi'    => $ambilId_donasi
+        // );
+        
+        //  // execute
+        //  $this->db->insert( 'data_event', $dataevent );
+        
+        // var_dump($datadonasi, $dataevent );
         // flashdata
         $elementHTML = '<div class="alert alert-success"><b>Pemberitahuan</b> <br> Data Donasi berhasil ditambahkan pada ' . date('d F Y H.i A') . '';
         $this->session->set_flashdata('pesan', $elementHTML);
-        // print_r($data);
+        // // print_r($data);
         // // redirect
         redirect('donasi_non/donasinonanggota');
     }
@@ -241,13 +276,23 @@ class M_donasi extends CI_Model
              return $return;   
         }  
     }
+
+    // rekap donasi 
+    public function rekapdonasi(){
+        $sql="SELECT data_donasi.*, SUM(jml_donasi) as TOTAL, data_event.*
+        FROM data_donasi
+        JOIN data_event  on data_event.id_event = data_donasi.id_event
+        GROUP BY data_event.id_event";
+          return $this->db->query($sql)->result_array();
+    }
     
     public function getDonasiById($id){
         $id_cabang = $this->session->userdata('sess_id_cabang');
-        $sql="SELECT  data_donasi.*, master_cabang.id_cabang, master_cabang.*, akun_profile.id_profile, akun_profile.full_name
+        $sql="SELECT  data_donasi.*, master_cabang.id_cabang, master_cabang.*, akun_profile.id_profile, akun_profile.full_name, data_event.*
         FROM data_donasi
         JOIN master_cabang ON master_cabang.id_cabang = data_donasi.id_cabang
         JOIN akun_profile ON akun_profile.id_profile = data_donasi.id_profile
+        JOIN data_event ON data_event.id_event = data_donasi.id_event
         WHERE data_donasi.Id_donasi = '$id' AND master_cabang.id_cabang = '$id_cabang'";
         return $this->db->query($sql)->row_array();
     }
@@ -339,38 +384,55 @@ class M_donasi extends CI_Model
          echo "<pre>";
         echo var_dump($data);
         echo "</pre>";
-        // $msg = '     <div class="alert alert-success" role="alert"> Data berhasil di verifikasi! </div>';
-        // $this->session->set_flashdata('pesan', $msg);
+        $msg = '     <div class="alert alert-success" role="alert"> Data berhasil di verifikasi! </div>';
+        $this->session->set_flashdata('pesan', $msg);
        
-        // // redirect 
-        // redirect('donasi_non/datadonasinonanggota/');
+        // redirect 
+        redirect('donasi_non/datadonasinonanggota/');
       
     }
+    
+    // bug error (tinggal id nya )
     public function updatedonasianggota($upload){
+
+    $id_donasi = $this->input->post('Id_donasi');
         // post data 
-        $data = [
+        $datadonasi = [
             "tgl_donasi"=>$this->input->post('tgl_donasi',true),
             "tipe"      =>"anggota",
             "via"       =>"transfer",
-            // "nama_bank"=>$this->input->post('nama_bank',true),
-            // "jml_donasi"=>$this->input->post('jml_donasi',true),
             'bukti_donasi'  => $upload ['file']['file_name']
             ];
+
         // query
-        $this->db->where('Id_donasi', $this->input->post('Id_donasi'));
-        $this->db->update('data_donasi', $data);      
+        $this->db->where('Id_donasi', $id_donasi);
+        $this->db->update('data_donasi', $datadonasi);      
         // flash data 
+        
+        $dataevent = [
+            "id_donasi"=>$this->input->post('id_donasi',true),
+            
+            ];
+            
+            $this->db->where('Id_donasi',$id_donasi);
+            $this->db->update('data_event', $dataevent); 
+
+        // var_dump($datadonasi,$dataevent);   
         $msg = '<div class="alert alert-success">Data berhasil di di ubah! <br><small>Pada tanggal ' . date('d F Y H.i A') . '</small></div>';
         $this->session->set_flashdata('pesan', $msg);
         // redirect
         redirect('donasi/riwayatdonasi/');
     }
+
     // tambah donasi non anggota di masing" korwil 
     public function tambahbuktidonasinonkorwil($upload){
         $id_profile = $this->session->userdata('sess_id_profile');
         $id_cabang = $this->session->userdata('sess_id_cabang');
-        $data = array
+
+        $datadonasi = array
         (
+            'id_event'     =>$this->input->post('nama_event'),
+            'Id_donasi'    => $this->input->post('Id_donasi'),
             'id_profile'    => $id_profile,
             'id_cabang'     => $id_cabang,
             'nama_donatur'  => $this->input->post('nama_donatur'),
@@ -379,7 +441,6 @@ class M_donasi extends CI_Model
             "tampil"        => $this->input->post('tampil'),
             "nama_bank"     =>$this->input->post('nama_bank', true),
             'status_verif'  => "baru",
-            // 'no_rekening'   => $this->input->post('no_rekening'),
             'tgl_donasi'    => $this->input->post('tgl_donasi'),
             'email_donatur' => $this->input->post('email_donatur'),
             'telp_donatur'  => $this->input->post('telp_donatur'),
@@ -388,32 +449,26 @@ class M_donasi extends CI_Model
             
         );
         
-        $this->db->insert('data_donasi', $data);
+        $this->db->insert('data_donasi', $datadonasi);
 
         // flashdata
         $elementHTML = '<div class="alert alert-secondary"><strong>Success</strong> Data Donasi berhasil ditambahkan pada ' . date('d F Y H.i A') . '';
         $this->session->set_flashdata('pesan', $elementHTML);
         // print_r($data);
         // // redirect
-        redirect('donasi_non/datadonasinonanggota');
+        redirect('donasi_non/datadonasinonanggota/','refresh');
     }
 
     // EVENT DONASI 
     public function geteventdonasi(){
-        // pasang session 
-        // $id_cabang = $this->session->userdata('sess_id_cabang');
-        // query 
-        $sql =" SELECT data_event.*,data_donasi.*
-        FROM data_event 
-        JOIN data_donasi ON data_donasi.Id_donasi = data_event.Id_donasi ";
-             return $this->db->query($sql)->result_array();
+        $sql =" SELECT * FROM data_event";
+        return $this->db->query($sql)->result_array();
     }
     public function getdataeventdonasi($id){
-        $sql =" SELECT data_event.*, data_donasi.*
+        $sql =" SELECT data_event.*
         FROM data_event 
-        JOIN data_donasi ON data_donasi.Id_donasi = data_event.Id_donasi
         WHERE data_event.id_event = '$id' ";
-             return $this->db->query($sql)->row_array();
+         return $this->db->query($sql)->row_array();
     }
     
     
@@ -433,8 +488,7 @@ class M_donasi extends CI_Model
 
     // proses upload data event
     public function uploaddataevent($upload){
-
-        $data = array
+        $dataevent = array
         (
             'id_event' => $this->input->post('id_event'),
             'nama_event'  => $this->input->post('nama_event'),
@@ -445,14 +499,14 @@ class M_donasi extends CI_Model
             
         );
         
-        $this->db->insert('data_event', $data);
+        $this->db->insert('data_event', $dataevent);
 
         // flashdata
         $elementHTML = '<div class="alert alert-secondary"><strong>Success</strong> Data Donasi berhasil ditambahkan pada ' . date('d F Y H.i A') . '';
         $this->session->set_flashdata('pesan', $elementHTML);
         // print_r($data);
         // // redirect
-        redirect('donasi_non/datadonasinonanggota');
+        redirect('donasi/eventdonasi/');
     }
     // proses hapus 
     public function hapuseventdonasi($id){
@@ -489,5 +543,6 @@ class M_donasi extends CI_Model
     }
     
 }
+
 
     

@@ -21,18 +21,17 @@
 			<div class="mb-2 row">
 				<label class="col-sm-3 col-form-label">Nama Anggota</label>
 				<div class="col-sm-9">
-					<select name="full_name" class="form-select digits" id=""
+					<select name="nama_anggota" class="form-select digits" id=""
 						required="Nama Harap diisi ">
 						<option value="full_name">-- Pilih salah satu --</option>
 
 						<?php
-
-
 						foreach ($dataAnggota AS $anggota) {
 
 							echo '<option value="' . $anggota['id_profile'] . '">' . $anggota['full_name'] . '</option>';
 						}
 						?>
+
 					</select>
 				</div>
 			</div>
@@ -96,17 +95,6 @@
 					</div>
 			<br>
 		
-			<!-- <div class="row"  >
-					<div class="col">
-						<div class="mb-3 row">
-							<label class="col-sm-3 col-form-label">No Rekening</label>
-							<div class="col-sm-5">
-								<input class="form-control" type="number" maxlength="6" name="no_rekening"
-									placeholder=" No rekening">
-							</div>
-						</div>
-					</div>
-				</div> -->
 			
             <div class="row">
 				<div class="col">
@@ -134,6 +122,7 @@
 			<input class="btn btn-light" type="reset" value="Reset">
 		</div>
 	</form>
+</div>
 </div>
 </div>
 <!-- wilayah -->

@@ -84,6 +84,10 @@
 							<span class="badge badge-primary">BANK <?= $donasi['nama_bank']; ?></span>
 						</p>
 						<p class="card-text">
+							<label for="no_rekening"><b>Nama Event: </b></label>
+							 <?= $donasi['nama_event']; ?>
+						</p>
+						<p class="card-text">
 							<label for="created_"><b>Upload pada: </b></label>
 							<?= date('d-m-Y H:i:s',strtotime($donasi['created_at'])); ?>
 						</p>

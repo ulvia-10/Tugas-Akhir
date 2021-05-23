@@ -1373,6 +1373,7 @@ public function exportLabarugi(){
               $spreadsheet->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
               $spreadsheet->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
               $spreadsheet->getActiveSheet()->getColumnDimension('D')->setAutoSize(true);
+              $spreadsheet->getActiveSheet()->getColumnDimension('E')->setAutoSize(true);
 
             $spreadsheet->getDefaultStyle()->getFont()->setName('Calibri');
             $spreadsheet->setActiveSheetIndex(0)->setCellValue('A1', 'YAYASAN SENYUM DESA INDONESIA');
@@ -1407,11 +1408,17 @@ public function exportLabarugi(){
             $spreadsheet->getActiveSheet()->getStyle('C4')->applyFromArray($styleBorders);
             $spreadsheet->getActiveSheet()->getStyle('C4')->getFont()->setBold(true); // set bold
 
-            //TOTAL KAS 
-            $spreadsheet->setActiveSheetIndex(0)->setCellValue('D4', 'Total Donasi Masuk');
+            // NAMA EVENT 
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('D4', 'Nama Event');
             $spreadsheet->getActiveSheet()->getStyle('D4') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
             $spreadsheet->getActiveSheet()->getStyle('D4')->applyFromArray($styleBorders);
             $spreadsheet->getActiveSheet()->getStyle('D4')->getFont()->setBold(true); // set bold
+
+            //TOTAL KAS 
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('E4', 'Total Donasi Masuk');
+            $spreadsheet->getActiveSheet()->getStyle('E4') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+            $spreadsheet->getActiveSheet()->getStyle('E4')->applyFromArray($styleBorders);
+            $spreadsheet->getActiveSheet()->getStyle('E4')->getFont()->setBold(true); // set bold
 
 
             // set nilai 
@@ -1435,10 +1442,15 @@ public function exportLabarugi(){
                 $spreadsheet->getActiveSheet()->getStyle('C'.$baris)->applyFromArray($styleBorders);
                 $spreadsheet->getActiveSheet()->getStyle('C'.$baris) ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
 
-                //  TOTAL 
-                $spreadsheet->setActiveSheetIndex(0)->setCellValue('D'.$baris,'Rp.'.number_format($kas["jumlah"], 2).'');
-                $spreadsheet->getActiveSheet()->getStyle('D'.$baris) ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
+                // NAMA EVENT 
+                $spreadsheet->setActiveSheetIndex(0)->setCellValue('D'.$baris, $kas["nama_event"]);
                 $spreadsheet->getActiveSheet()->getStyle('D'.$baris)->applyFromArray($styleBorders);
+                $spreadsheet->getActiveSheet()->getStyle('D'.$baris) ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+                //  TOTAL 
+
+                $spreadsheet->setActiveSheetIndex(0)->setCellValue('E'.$baris,'Rp.'.number_format($kas["jumlah"], 2).'');
+                $spreadsheet->getActiveSheet()->getStyle('E'.$baris) ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
+                $spreadsheet->getActiveSheet()->getStyle('E'.$baris)->applyFromArray($styleBorders);
 
                 $baris++;
               }

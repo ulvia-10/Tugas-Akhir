@@ -25,7 +25,7 @@ class Donasi_non extends CI_Controller
     {
         
         $dataMasterCabang = $this->M_master->getallwilayah();
-        // $data['donasi'] = $this->M_donasi->getDetailDonasi();
+
         $data = array(
 
             'namafolder'    => "Donasi",
@@ -35,7 +35,8 @@ class Donasi_non extends CI_Controller
 			'data_master'	=> $dataMasterCabang
         );
         // status 
-       
+       $data['event'] = $this->M_donasi->getjadwaldonasi();
+
         // redirect 
         $this->load->view('templating/template_headerpage', $data);
         
@@ -66,10 +67,8 @@ class Donasi_non extends CI_Controller
      $this->load->library('form_validation');
      // form validation 
      $this->form_validation->set_rules('nama_donatur','nama_donatur','required');
-    //  $this->form_validation->set_rules('no_rekening','no_rekening','required');
      $this->form_validation->set_rules('email_donatur','email_donatur','required');
      $this->form_validation->set_rules('telp_donatur','telp_donatur','required');
-    //  $this->form_validation->set_rules('jml_donasi','jml_donasi','required');
  
      if ($this->form_validation->run()==FALSE){
          echo validation_errors();
@@ -98,6 +97,7 @@ class Donasi_non extends CI_Controller
     $data['donasi'] = $this->M_donasi->getallDonasinon();
     $data['donasi_anggota'] = $this->M_donasi->getDonasiAnggota();
     $data['anonim'] = $this->M_donasi->getalldonasinonanonim();
+    
     $this->load->view('templating/template_donasinon' , $data);
   
 }
@@ -114,7 +114,7 @@ public function jadwaleventdonasi(){
     $data['jadwal'] = $this->M_donasi->getjadwaldonasi();
     // redirect 
     $this->load->view('templating/template_headerpage', $data);
-        $this->load->view('templating/template_footerpage', $data);
+    $this->load->view('templating/template_footerpage', $data);
 }
 
 
@@ -161,10 +161,10 @@ public function tambahbuktidonasinonkorwil(){
         'namafileview'    => "V_tambah_donasinon_korwil",
         'title'         => "Donasi Non Anggota | Senyum Desa",
     );
-
-    // $data['donasi'] = $this->M_donasi->getallDonasinon();
+    $data['event'] = $this->M_donasi->getjadwaldonasi();
     
-    //templating 
+    // var_dump($data);
+    // //templating 
     $this->load->view('templating/korwil/template_korwil', $data);
 }
 // proses tambah donasi non anggota di koriwil 
@@ -189,10 +189,11 @@ public function tambahdonasinonanggotakorwil(){
            if($upload ['result'] == 'success'){
                $this->M_donasi->tambahbuktidonasinonkorwil($upload);
                $this->session->set_flashdata('flash-data','ditambahkan');
-               redirect('donasi_non/donasinonanggota/','refresh');
+               redirect('donasi_non/datadonasinonanggota','refresh');  
            }else{
                echo $upload['error'];
            }
+           redirect('donasi_non/datadonasinonanggota','refresh');  
        }
 }
 }
