@@ -41,8 +41,7 @@ class M_donasi extends CI_Model
         return $this->db->query($sql)->result_array();
     }
     public function getjadwaldonasi(){
-        $sql = "SELECT * FROM data_event
-        WHERE data_event.durasi_mulai <= NOW() AND data_event.durasi_berakhir >= NOW()";
+        $sql = "SELECT * FROM data_event";
         return $this->db->query($sql)->result_array();
     }
     //tampilan Cari Data

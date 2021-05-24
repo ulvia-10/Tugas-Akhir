@@ -6,7 +6,26 @@
       <div class="col">
         <!-- Blog Card -->
         <h5 style="text-align:center;">Jadwal Event Donasi Saat ini </h5> <br>
-        <?php foreach($jadwal AS $jdw){ ?>
+        <?php 
+        
+        $tanggal_sekarang = (date('Y-m-d H:i:s'));
+        
+        foreach($jadwal AS $jdw){
+
+          $tanggal_awal = ($jdw['durasi_mulai']);
+          $tanggal_akhir = ($jdw['durasi_berakhir']);
+
+          // echo 'apakah '. $tanggal_sekarang.' >= '.$tanggal_awal.' dan '. $tanggal_sekarang.' <= '. $tanggal_akhir; 
+
+          // echo ( ($tanggal_sekarang >= $tanggal_awal) && ($tanggal_sekarang <= $tanggal_akhir) ) ? " |tampilkan" : " |expired";
+
+
+          if ( ($tanggal_sekarang >= $tanggal_awal) && ($tanggal_sekarang <= $tanggal_akhir)  ) {
+
+
+
+            // 24 <= (24) && 29 >= (24)
+        ?>
         <div class="card border-0 flex-md-row align-items-center">
       
           <div class="col-md-4">
@@ -39,7 +58,10 @@
         </div>
         <br>
         <!-- End Blog Card -->
-        <?php }?> 
+        <?php }
+          
+          
+          }?> 
       
         <!-- End Blog Card -->
       </div>
