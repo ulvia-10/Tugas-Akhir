@@ -46,7 +46,7 @@
 					<div class="mb-3 row" >
 						<label class="col-sm-3 col-form-label">Judul</label>
 						<div class="col-sm-5">
-							<input class="form-control" type="text" maxlength="6" name="judul" min="0" placeholder="Masukkan judul">
+							<input class="form-control" type="text"" name="judul"  placeholder="Masukkan judul">
 						</div>
 					</div>
 				</div>
@@ -55,7 +55,7 @@
 					<div class="mb-3 row">
 						<label class="col-sm-3 col-form-label">Nominal</label>
 						<div class="col-sm-5">
-							<input class="form-control" type="number" maxlength="6" name="nominal" min="0" placeholder="Masukkan nominal">
+							<input class="form-control" type="number" name="nominal"  placeholder="Masukkan nominal">
 						</div>
 					</div>
 				</div>
@@ -91,6 +91,12 @@
                         </select>
                       </div> 
 					  </div>
+
+					  <!-- catatan  -->
+					  <div class="form-group" id="catatan">
+						<label for="catatan">Catatan: </label>
+						<textarea name="catatan" class="form-control"></textarea>
+					</div>
 				
 			
 			<div class="card-footer" style="margin-left:200px;">
@@ -102,97 +108,115 @@
 </div>
 </div>
 <script>
+
+// JAVA SCRIPT UNTUK HIDE 
 	let elementWilayah = $('#element-kesalahan');
 
-// sembunyikan
-elementWilayah.hide();
+		// sembunyikan
+		elementWilayah.hide();
 
-// perintah event on click
-$('input[name="status_verif"]').change(function () {
-
-
-	if (this.value == "baru") {
-
-		elementWilayah.fadeOut();
-	} else {
-
-		elementWilayah.fadeIn();
-	}
-})
-
-let element = $('#element');
+		// perintah event on click
+		$('input[name="status_verif"]').change(function () {
 
 
-// sembunyikan
-element.hide();
+			if (this.value == "baru") {
 
-// perintah event on click
-$('input[name="status_verif"]').change(function () {
+				elementWilayah.fadeOut();
+			} else {
 
+				elementWilayah.fadeIn();
+			}
+		})
 
-	if (this.value == "belum verifikasi") {
-
-		element.fadeOut();
-	} else {
-
-		element.fadeIn();
-	}
-})
-
-//judul 
-let elementjudul = $('#judul');
-// sembunyikan
-elementjudul.hide();
-
-$('input[name="status_verif"]').change(function () {
+		let element = $('#element');
 
 
-if (this.value == "belum verifikasi") {
+		// sembunyikan
+		element.hide();
 
-	elementjudul.fadeOut();
-} else {
-
-	elementjudul.fadeIn();
-}
-})
-
-// bank
-//judul 
-let elementbank = $('#bank');
-// sembunyikan
-elementbank.hide();
-
-$('input[name="status_verif"]').change(function () {
+		// perintah event on click
+		$('input[name="status_verif"]').change(function () {
 
 
-if (this.value == "belum verifikasi") {
+			if (this.value == "belum verifikasi") {
 
-	elementbank.fadeOut();
-} else {
+				element.fadeOut();
+			} else {
 
-	elementbank.fadeIn();
-}
-})
-
-// status 
-let elementstatus = $('#status');
-// sembunyikan
-elementstatus.hide();
-
-$('input[name="status_verif"]').change(function () {
+				element.fadeIn();
+			}
+		})
 
 
-if (this.value == "belum verifikasi") {
+		//judul 
+		let elementjudul = $('#judul');
+		// sembunyikan
+		elementjudul.hide();
 
-	elementstatus.fadeOut();
-} else {
-
-	elementstatus.fadeIn();
-}
-})
+		$('input[name="status_verif"]').change(function () {
 
 
+		if (this.value == "belum verifikasi") {
 
+			elementjudul.fadeOut();
+		} else {
+
+			elementjudul.fadeIn();
+		}
+		})
+
+
+		// bank
+		let elementbank = $('#bank');
+		// sembunyikan
+		elementbank.hide();
+
+		$('input[name="status_verif"]').change(function () {
+
+
+		if (this.value == "belum verifikasi") {
+
+			elementbank.fadeOut();
+		} else {
+
+			elementbank.fadeIn();
+		}
+		})
+
+
+		// status 
+		let elementstatus = $('#status');
+		// sembunyikan
+		elementstatus.hide();
+
+		$('input[name="status_verif"]').change(function () {
+
+
+		if (this.value == "belum verifikasi") {
+
+			elementstatus.fadeOut();
+		} else {
+
+			elementstatus.fadeIn();
+		}
+		})
+
+// catatan untuk anggota 
+let elementcatatan = $('#catatan');
+		// sembunyikan
+		elementcatatan.hide();
+
+		$('input[name="status_verif"]').change(function () {
+
+
+		if (this.value == "belum verifikasi") {
+
+			elementcatatan.fadeOut();
+		} else {
+
+			elementcatatan.fadeIn();
+		}
+		})
 
 
 

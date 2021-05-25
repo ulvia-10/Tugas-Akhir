@@ -164,7 +164,7 @@ class Keuangan extends CI_Controller
             $upload = $this->M_keuangan->upload();
             if($upload ['result'] == 'success'){
                 $this->M_keuangan->tambahbuktikaskorwil($upload);
-                $this->session->set_flashdata('flash-data','ditambahkan');
+                $this->session->set_flashdata('pesan','ditambahkan');
                 redirect('keuangan','refresh');
             }else{
                 echo $upload['error'];
@@ -211,13 +211,13 @@ class Keuangan extends CI_Controller
     public function delete($id)
 	{
 		$this->M_keuangan->hapuskas($id);
-		$this->session->set_flashdata('flash-data','Account berhasil Dihapus');
+		$this->session->set_flashdata('pesan','Account berhasil Dihapus');
 		redirect('kegiatan/historypembayaran','refresh');
 	}
     public function deletekasanggota($id)
 	{
 		$this->M_keuangan->hapuskaskorwil($id);
-		$this->session->set_flashdata('flash-data','Account berhasil Dihapus');
+		$this->session->set_flashdata('pesan','Data berhasil Dihapus!');
 		redirect('adminkorwil/kas','refresh');
 	}
 

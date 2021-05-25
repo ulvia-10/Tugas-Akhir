@@ -201,15 +201,7 @@ class M_donasi extends CI_Model
         );
         
         $this->db->insert('data_donasi', $datadonasi);
-        // $ambilId_donasi = $this->db->insert_id();
-
-        // $dataevent = array
-        // (   
-        //     'Id_donasi'    => $ambilId_donasi
-        // );
-        
-        //  // execute
-        //  $this->db->insert( 'data_event', $dataevent );
+    
          
         // flashdata
         $elementHTML = '<div class="alert alert-success"><b>Pemberitahuan</b> <br> Data Donasi berhasil ditambahkan pada ' . date('d F Y H.i A') . '</div>';
@@ -236,23 +228,9 @@ class M_donasi extends CI_Model
             
         );
         $this->db->insert('data_donasi', $datadonasi);
-        
-        // $ambilId_donasi = $this->db->insert_id();
-
-        // $dataevent = array
-        // (   
-        //     'Id_donasi'    => $ambilId_donasi
-        // );
-        
-        //  // execute
-        //  $this->db->insert( 'data_event', $dataevent );
-        
-        // var_dump($datadonasi, $dataevent );
-        // flashdata
         $elementHTML = '<div class="alert alert-success"><b>Pemberitahuan</b> <br> Data Donasi berhasil ditambahkan pada ' . date('d F Y H.i A') . '';
         $this->session->set_flashdata('pesan', $elementHTML);
-        // // print_r($data);
-        // // redirect
+      
         redirect('donasi_non/donasinonanggota');
     }
 
@@ -288,6 +266,7 @@ class M_donasi extends CI_Model
         WHERE data_donasi.Id_donasi = '$id' AND master_cabang.id_cabang = '$id_cabang'";
         return $this->db->query($sql)->row_array();
     }
+    
     public function getdonasi($id){
         $id_cabang = $this->session->userdata('sess_id_cabang');
         $sql="SELECT data_donasi.*
@@ -441,6 +420,7 @@ class M_donasi extends CI_Model
 
     // tambah donasi non anggota di masing" korwil 
     public function tambahbuktidonasinonkorwil($upload){
+        
         $id_profile = $this->session->userdata('sess_id_profile');
         $id_cabang = $this->session->userdata('sess_id_cabang');
 
@@ -469,7 +449,7 @@ class M_donasi extends CI_Model
         // flashdata
         $elementHTML = '<div class="alert alert-secondary"><strong>Success</strong> Data Donasi berhasil ditambahkan pada ' . date('d F Y H.i A') . '';
         $this->session->set_flashdata('pesan', $elementHTML);
-        // print_r($data);
+        // var_dump($datadonasi);
         // // redirect
         redirect('donasi_non/datadonasinonanggota/','refresh');
     }

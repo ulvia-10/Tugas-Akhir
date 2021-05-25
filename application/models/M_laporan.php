@@ -22,21 +22,24 @@ public function listing($id_cabang,$bulan,$tahun)
     return $this->db->query($sql)->result();
 }
 public function listdonasinon($id_cabang,$bulan,$tahun ){
-    $sql=" SELECT data_donasi.*,master_cabang.*
+    $sql=" SELECT data_donasi.*,master_cabang.*, data_event.*
     FROM data_donasi
     JOIN master_cabang ON master_cabang.id_cabang = data_donasi.id_cabang
+    JOIN data_event ON data_event.id_event = data_donasi.id_event
     WHERE data_donasi.id_cabang = '$id_cabang' AND MONTHNAME(tgl_donasi)= '$bulan' 
     AND YEAR(tgl_donasi) = '$tahun' AND data_donasi.tipe = 'non anggota' 
     AND data_donasi.status_verif ='baru' ORDER BY data_donasi.id_donasi ASC";
+  
     return $this->db->query($sql)->result();
 }
 // listing donasi 
 public function listingdonasi($id_cabang, $bulan, $tahun)
 {
-    $sql=" SELECT data_donasi.*,master_cabang.*,akun_profile.full_name
+    $sql=" SELECT data_donasi.*,master_cabang.*,akun_profile.full_name, data_event.*
     FROM data_donasi
     JOIN master_cabang ON master_cabang.id_cabang = data_donasi.id_cabang
     JOIN akun_profile ON akun_profile.id_profile = data_donasi.id_profile
+    JOIN data_event ON data_event.id_event = data_donasi.id_event
     WHERE data_donasi.id_cabang = '$id_cabang' AND MONTHNAME(tgl_donasi)= '$bulan' 
     AND YEAR(tgl_donasi) = '$tahun'
     AND data_donasi.tipe = 'anggota' 

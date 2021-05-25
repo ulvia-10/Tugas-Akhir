@@ -22,12 +22,13 @@
 									aria-selected="false"> <i class="fa fa-paperclip
 								" aria-hidden="true"></i> All Data</a></li>
 						</ul>
+
 						<div class="tab-content" id="pills-clrtabContent1">
 							<div class="tab-pane fade show active" id="pills-clrhome1" role="tabpanel"
 								aria-labelledby="pills-clrhome-tab1">
-								<?php echo $this->session->flashdata('pesan') ?>
-
+							
 								<div class="table-responsive">
+								<?php echo $this->session->flashdata('pesan') ?>
 									<table class="display" id="basic-3" style="text-align:center;">
 										<thead>
 											<tr>
@@ -122,9 +123,10 @@
 							</div>
 							<div class="tab-pane fade" id="pills-clrprofile1" role="tabpanel"
 								aria-labelledby="pills-clrprofile-tab1">
-								<?php echo $this->session->flashdata('pesan') ?>
+						
 
 								<div class="table-responsive">
+								<?php echo $this->session->flashdata('pesan') ?>
 									<table class="display" id="basic-2" style="text-align:center;">
 										<thead>
 											<tr>
@@ -214,9 +216,10 @@
 							<div class="tab-pane fade" id="pills-clrcontact1" role="tabpanel"
 								aria-labelledby="pills-clrcontact-tab1">
 								<!-- flash data  -->
-								<?php echo $this->session->flashdata('pesan') ?>
+							
 
 								<div class="table-responsive">
+								<?php echo $this->session->flashdata('pesan') ?>
 									<a href="<?= base_url(); ?>keuangan/tambahbuktikaskorwil/"
 										class="btn btn-primary btn-sm mb-3">
 										<i class="fa fa-plus" aria-hidden="true"></i> Tambah Data</a> <br>

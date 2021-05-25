@@ -413,9 +413,7 @@ public function exportdonasi()
         }else{
             $jumlahdonasi = 0;
         }
-        // echo '<pre>';
-        // var_dump($ambildonasi, $jumlahdonasi);
-        // echo '<pre>';
+    
 
         // Create new Spreadsheet object
         $spreadsheet = new Spreadsheet();
@@ -477,7 +475,7 @@ public function exportdonasi()
 
 
         $spreadsheet->setActiveSheetIndex(0)->setCellValue('J6', 'DATA DONASI ANGGOTA ');
-        $spreadsheet->getActiveSheet()->mergeCells('J6:L6');//merge cells
+        $spreadsheet->getActiveSheet()->mergeCells('J6:N6');//merge cells
         $spreadsheet->getActiveSheet()->getStyle('J6') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);//set align center 
         $spreadsheet->getActiveSheet()->getStyle('J6')->getFont()->setSize(11); // set font
         $spreadsheet->getActiveSheet()->getStyle('J6')->getFont()->setBold(true); // set bold
@@ -545,7 +543,15 @@ public function exportdonasi()
         $spreadsheet->getActiveSheet()->getColumnDimension('J')->setAutoSize(true);
         $spreadsheet->getActiveSheet()->getStyle('J4') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
         
+           
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('H8','Nama Event');
+        $spreadsheet->getActiveSheet()->getStyle('H8')->applyFromArray($styleBorders);
+        $spreadsheet->getActiveSheet()->getStyle('H8')->getFont()->setBold(true); // set bold
+        $spreadsheet->getActiveSheet()->getColumnDimension('H')->setAutoSize(true);
+        $spreadsheet->getActiveSheet()->getStyle('H8') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
         
+        
+
         // Miscellaneous glyphs, UTF-8
         $no = 1;
         $i=9; 
@@ -593,72 +599,94 @@ public function exportdonasi()
         $spreadsheet->getActiveSheet()->getStyle('G'.$i)->applyFromArray($styleBorders);
         $spreadsheet->getActiveSheet()->getStyle('G'.$i) ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
         $spreadsheet->getActiveSheet()->getColumnDimension('G')->setAutoSize(true);
+        
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('H'.$i, $provinsi->nama_event);
+        $spreadsheet->getActiveSheet()->getStyle('H'.$i)->applyFromArray($styleBorders);
+        $spreadsheet->getActiveSheet()->getStyle('H'.$i) ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+        $spreadsheet->getActiveSheet()->getColumnDimension('H')->setAutoSize(true);
 
         $i++;
         }
 
 
-        $spreadsheet->setActiveSheetIndex(0)->setCellValue('I8', 'No');
-        $spreadsheet->getActiveSheet()->getStyle('I8')->getFont()->setBold(true); // set bold
-        $spreadsheet->getActiveSheet()->getStyle('I8')->applyFromArray($styleBorders);
-        $spreadsheet->getActiveSheet()->getStyle('I8') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
 
-        //TGL DONASI
-        $spreadsheet->setActiveSheetIndex(0)->setCellValue('J8', 'Tanggal Donasi');
+
+
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('J8', 'No');
         $spreadsheet->getActiveSheet()->getStyle('J8')->getFont()->setBold(true); // set bold
         $spreadsheet->getActiveSheet()->getStyle('J8')->applyFromArray($styleBorders);
         $spreadsheet->getActiveSheet()->getStyle('J8') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
 
-        //NAMA DONATUR
-        $spreadsheet->setActiveSheetIndex(0)->setCellValue('K8', 'Nama');
+        //TGL DONASI
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('K8', 'Tanggal Donasi');
         $spreadsheet->getActiveSheet()->getStyle('K8')->getFont()->setBold(true); // set bold
         $spreadsheet->getActiveSheet()->getStyle('K8')->applyFromArray($styleBorders);
         $spreadsheet->getActiveSheet()->getStyle('K8') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
 
-        // NOMINAL DONASI
-        $spreadsheet->setActiveSheetIndex(0)->setCellValue('L8', 'Nominal Donasi');
-        $spreadsheet->getActiveSheet()->getStyle('L8')->applyFromArray($styleBorders);
+        //NAMA DONATUR
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('L8', 'Nama');
         $spreadsheet->getActiveSheet()->getStyle('L8')->getFont()->setBold(true); // set bold
+        $spreadsheet->getActiveSheet()->getStyle('L8')->applyFromArray($styleBorders);
         $spreadsheet->getActiveSheet()->getStyle('L8') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
 
-        //STATUS 
+        // NOMINAL DONASI
         $spreadsheet->setActiveSheetIndex(0)->setCellValue('M8', 'Nominal Donasi');
         $spreadsheet->getActiveSheet()->getStyle('M8')->applyFromArray($styleBorders);
         $spreadsheet->getActiveSheet()->getStyle('M8')->getFont()->setBold(true); // set bold
         $spreadsheet->getActiveSheet()->getStyle('M8') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
 
-          // Miscellaneous glyphs, UTF-8
+        //STATUS 
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('N8', 'Nominal Donasi');
+        $spreadsheet->getActiveSheet()->getStyle('N8')->applyFromArray($styleBorders);
+        $spreadsheet->getActiveSheet()->getStyle('N8')->getFont()->setBold(true); // set bold
+        $spreadsheet->getActiveSheet()->getStyle('N8') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+
+        // nama event 
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('O8', 'Nama Event ');
+        $spreadsheet->getActiveSheet()->getStyle('O8')->applyFromArray($styleBorders);
+        $spreadsheet->getActiveSheet()->getStyle('O8')->getFont()->setBold(true); // set bold
+        $spreadsheet->getActiveSheet()->getStyle('O8') ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+
+
+
+
           $nomor = 1;
           $i=9; 
   
           foreach($donasi as $donasi) {
-            $spreadsheet->setActiveSheetIndex(0)->setCellValue('I'.$i, $nomor++);
-            $spreadsheet->getActiveSheet()->getStyle('I'.$i) ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-            $spreadsheet->getActiveSheet()->getStyle('I'.$i)->applyFromArray($styleBorders);
-            $spreadsheet->getActiveSheet()->getColumnDimension('I')->setAutoSize(true);
-    
-            // TGL DONASI
-            $spreadsheet->setActiveSheetIndex(0)->setCellValue('J'.$i, date('d-m-Y',strtotime($donasi->tgl_donasi)));
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('J'.$i, $nomor++);
             $spreadsheet->getActiveSheet()->getStyle('J'.$i) ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
             $spreadsheet->getActiveSheet()->getStyle('J'.$i)->applyFromArray($styleBorders);
             $spreadsheet->getActiveSheet()->getColumnDimension('J')->setAutoSize(true);
-            
-            // NAMA DONATUR
-            $spreadsheet->setActiveSheetIndex(0)->setCellValue('K'.$i, $donasi->full_name);
+    
+            // TGL DONASI
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('K'.$i, date('d-m-Y',strtotime($donasi->tgl_donasi)));
             $spreadsheet->getActiveSheet()->getStyle('K'.$i) ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
             $spreadsheet->getActiveSheet()->getStyle('K'.$i)->applyFromArray($styleBorders);
             $spreadsheet->getActiveSheet()->getColumnDimension('K')->setAutoSize(true);
-
-            $spreadsheet->setActiveSheetIndex(0)->setCellValue('L'.$i, 'Rp. '.number_format($donasi->jml_donasi, 2).'');
-            $spreadsheet->getActiveSheet()->getStyle('L'.$i) ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
+            
+            // NAMA DONATUR
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('L'.$i, $donasi->full_name);
+            $spreadsheet->getActiveSheet()->getStyle('L'.$i) ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
             $spreadsheet->getActiveSheet()->getStyle('L'.$i)->applyFromArray($styleBorders);
             $spreadsheet->getActiveSheet()->getColumnDimension('L')->setAutoSize(true);
 
-            // status 
-            $spreadsheet->setActiveSheetIndex(0)->setCellValue('M'.$i, $donasi->status);
-            $spreadsheet->getActiveSheet()->getStyle('M'.$i) ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('M'.$i, 'Rp. '.number_format($donasi->jml_donasi, 2).'');
+            $spreadsheet->getActiveSheet()->getStyle('M'.$i) ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
             $spreadsheet->getActiveSheet()->getStyle('M'.$i)->applyFromArray($styleBorders);
             $spreadsheet->getActiveSheet()->getColumnDimension('M')->setAutoSize(true);
+
+            // status 
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('N'.$i, $donasi->status);
+            $spreadsheet->getActiveSheet()->getStyle('N'.$i) ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+            $spreadsheet->getActiveSheet()->getStyle('N'.$i)->applyFromArray($styleBorders);
+            $spreadsheet->getActiveSheet()->getColumnDimension('N')->setAutoSize(true);
+
+            // NAMA EVENT 
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('O'.$i, $donasi->nama_event);
+            $spreadsheet->getActiveSheet()->getStyle('O'.$i) ->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+            $spreadsheet->getActiveSheet()->getStyle('O'.$i)->applyFromArray($styleBorders);
+            $spreadsheet->getActiveSheet()->getColumnDimension('O')->setAutoSize(true);
 
             $i++;
           }
@@ -1325,12 +1353,6 @@ public function exportLabarugi(){
 
 
     }
-
-
-
-
-
-
 
     public function Donasi(){
           // inisialisasi tahun 

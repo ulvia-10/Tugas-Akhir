@@ -62,14 +62,30 @@
 						<div class="form-group col-md-6" style="margin-left:200px;">
 							<select name="nama_event" class="form-select digits" id="" required="wilayah harap DiIsi">
 								<option value="nama_event">-- Pilih Nama Event --</option>
+							
 
-								<?php
 
 
-                                        foreach ($event as $event) {
+         
+		<?php 
+        
+        $tanggal_sekarang = (date('Y-m-d H:i:s'));
+        
+        foreach($event AS $event){
+
+          $tanggal_awal = ($event['durasi_mulai']);
+          $tanggal_akhir = ($event['durasi_berakhir']);
+
+          // echo 'apakah '. $tanggal_sekarang.' >= '.$tanggal_awal.' dan '. $tanggal_sekarang.' <= '. $tanggal_akhir; 
+
+          // echo ( ($tanggal_sekarang >= $tanggal_awal) && ($tanggal_sekarang <= $tanggal_akhir) ) ? " |tampilkan" : " |expired";
+
+
+          if ( ($tanggal_sekarang >= $tanggal_awal) && ($tanggal_sekarang <= $tanggal_akhir)  ) {
 
                                             echo '<option value="' . $event['id_event'] . '">' . $event['nama_event'] . '</option>';
                                         }
+									}
                                         ?>
 							</select>
 						
@@ -90,38 +106,7 @@
 			</div>
 		</div>
 		<br>
-		<div class="col-12 col-lg-4 ms-auto mt-5 mt-lg-0">
-			<div class="d-flex align-items-center bg-white p-3 shadow-sm rounded mb-3">
-				<div class="me-3">
-					<div class="f-icon-s p-3 rounded" data-bg-color="#d0faec"> <i class="fa fa-map" aria-hidden="true"></i>
-					</div>
-				</div>
-				<div>
-					<h5 class="mb-1">Address:</h5>
-					<span class="text-black">Road Wordwide Country, USA</span>
-				</div>
-			</div>
-			<div class="d-flex align-items-center bg-white p-3 shadow-sm rounded mb-3">
-				<div class="me-3">
-					<div class="f-icon-s p-3 rounded" data-bg-color="#d0faec"> <i class="fa fa-envelope" aria-hidden="true"></i>
-					</div>
-				</div>
-				<div>
-					<h5 class="mb-1">Email Us:</h5>
-					<a class="btn-link" href="mailto:themeht23@gmail.com"> themeht23@gmail.com</a>
-				</div>
-			</div>
-			<div class="d-flex align-items-center bg-white p-3 shadow-sm rounded">
-				<div class="me-3">
-					<div class="f-icon-s p-3 rounded" data-bg-color="#d0faec"> <i class="fa fa-phone" aria-hidden="true"></i>
-					</div>
-				</div>
-				<div>
-					<h5 class="mb-1">Call Us:</h5>
-					<a class="btn-link" href="tel:+912345678900">+91-234-567-8900</a>
-				</div>
-			</div>
-		</div>
+	
 	</div>
 
 

@@ -134,11 +134,24 @@
 						<p class="card-text">
 							<label for="deskripsi"><b>Nama Bank: </b></label>
 						<span class="badge badge-success"> <?= $bank ?></span>
+
+						<?php
+														
+														$catatan = "-";
+														if ( $kas['catatan'] ){
+															$catatan = $kas['via'];
+														}
+													?>
+						<!-- catatan  -->
+						<p class="card-text">
+							<label for="catatan"><b> Catatan Pembayaran:  </b></label>
+							<?= $catatan; ?>
+						</p>
 						<?php
 														
 														$via = "-";
 														if ( $kas['via'] ){
-															$kas = $kas['via'];
+															$via = $kas['via'];
 														}
 													?>
         
@@ -146,14 +159,8 @@
 							<label for="tgl_bayar"><b> Via Pembayaran:  </b></label>
 							<?= $via; ?>
 						</p>
-						<!-- <p class="card-text">
-							<label for="deskripsi"><b>Keterangan Upload: </b></label>
-							<?= $kas['ket_upload']; ?>
-						</p> -->
-						<!-- <p class="card-text">
-							<label for="created_"><b>Upload pada: </b></label>
-							<?= date('d-m-Y H:i:s',strtotime($kas['created_at'])); ?>
-						</p> -->
+						
+					
 						</p>
 					</div>
 				</div>

@@ -11,15 +11,8 @@ class Donasi_non extends CI_Controller
         $this->load->model('M_kegiatan');
         $this->load->model('M_keuangan');
         $this->load->model('M_donasi');
-
-
-            // pengecekan sesi 
-        //     if (empty($this->session->userdata('sess_fullname'))) {
-
-        //         $this->session->set_flashdata('msg', '<div class="alert alert-warning"><b>Pemberitahuan</b> <br> <small>Maaf anda harus login terlebih dahulu</small></div>');
-        //         redirect('login');
-        //     }
     }
+
 //index donas non anggota 
     public function donasinonanggota()
     {
@@ -71,7 +64,9 @@ class Donasi_non extends CI_Controller
      $this->form_validation->set_rules('telp_donatur','telp_donatur','required');
  
      if ($this->form_validation->run()==FALSE){
-         echo validation_errors();
+        $data['event'] = $this->M_donasi->getjadwaldonasi();
+        $data['data_master'] = $this->M_master->getallwilayah();
+        $this->load->view("donasi/V_tambah_nonanggota", $data);
      }
      else{
          $upload = $this->M_donasi->upload();
@@ -121,7 +116,7 @@ public function jadwaleventdonasi(){
 // hapus donasi non anggota di korwil 
 public function hapusdonasikorwil($Id_donasi){
     $this->M_donasi->processDeleteDonasinonkorwil($Id_donasi);
-    $this->session->set_flashdata('flash-data','Account berhasil Dihapus');
+    $this->session->set_flashdata('pesan','Account berhasil Dihapus');
     redirect('donasi_non/datadonasinonanggota','refresh');
 }
 public function editdonasinonverif($id){
@@ -147,10 +142,7 @@ public function proseseditdonasinonverif(){
         //session 
         $elementHTML = '<div class="alert alert-danger"><b>Pemberitahuan</b> <br> Notifikasi Kegiatan sudah dibaca pada ' . date('d F Y H.i A') . '</div>';
         $this->session->set_flashdata('msg', $elementHTML);
-        // echo "<pre>";
-        // echo var_dump($data);
-        // echo "</pre>";
-        //redirect 
+      
         redirect('donasi_non/datadonasinonanggota','refresh');  
 }
 }
@@ -183,17 +175,18 @@ public function tambahdonasinonanggotakorwil(){
    
        if ($this->form_validation->run()==FALSE){
            echo validation_errors();
+      
        }
        else{
            $upload = $this->M_donasi->upload();
            if($upload ['result'] == 'success'){
                $this->M_donasi->tambahbuktidonasinonkorwil($upload);
-               $this->session->set_flashdata('flash-data','ditambahkan');
-               redirect('donasi_non/datadonasinonanggota','refresh');  
+
+          
            }else{
                echo $upload['error'];
            }
-           redirect('donasi_non/datadonasinonanggota','refresh');  
+ 
        }
 }
 }

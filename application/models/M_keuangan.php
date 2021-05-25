@@ -113,12 +113,13 @@ class M_keuangan extends CI_Model
     {
         $id_keuangan = $this->input->post('id_keuangan');
         $data = [
-            "status"=>$this->input->post('status'),
-            "nominal"=>$this->input->post('nominal'),
-            "nama_bank"=>$this->input->post('nama_bank'),
-            "status_verif"   => $this->input->post('status_verif'),
-            "ket_upload"     => $this->input->post('ket_upload'),
-            "judul"     => $this->input->post('judul')
+            "status"            =>$this->input->post('status'),
+            "nominal"           =>$this->input->post('nominal'),
+            "nama_bank"         =>$this->input->post('nama_bank'),
+            "status_verif"      => $this->input->post('status_verif'),
+            "ket_upload"         => $this->input->post('ket_upload'),
+            "judul"              => $this->input->post('judul'),
+            "catatan"            =>$this->input->post('catatan')
             ];
         $this->db->where('id_keuangan', $this->input->post('id_keuangan'));
         $this->db->update('data_keuangan', $data);      
@@ -182,7 +183,7 @@ class M_keuangan extends CI_Model
     
     
             // flashdata
-            $elementHTML = '<div class="alert alert-success"><b>Pemberitahuan</b> <br> Data Donasi berhasil ditambahkan pada ' . date('d F Y H.i A') . ' Silahkan menunggu verifikasi lebih lanjut</div>';
+            $elementHTML = '<div class="alert alert-success"><b>Pemberitahuan</b> <br> Data Kas berhasil ditambahkan pada ' . date('d F Y H.i A') . ' </div>';
             $this->session->set_flashdata('pesan', $elementHTML);
     
             // redirect
@@ -242,7 +243,7 @@ class M_keuangan extends CI_Model
             
              //flashdata 
              $elementHTML = '<div class="alert alert-info"><b>Pemberitahuan</b> <br> Data kas berhasil dihapus </div>';
-             $this->session->set_flashdata('flash-data', $elementHTML);
+             $this->session->set_flashdata('pesan', $elementHTML);
  
             //redirect
             redirect('kegiatan/historypembayaran','refresh');
@@ -252,8 +253,8 @@ class M_keuangan extends CI_Model
             $this->db->delete('data_keuangan');
             
              //flashdata 
-             $elementHTML = '<div class="alert alert-info"><b>Pemberitahuan</b> <br> Data kas berhasil dihapus </div>';
-             $this->session->set_flashdata('flash-data', $elementHTML);
+             $elementHTML = '<div class="alert alert-info"><b>Pemberitahuan</b> <br> Data kas berhasil dihapus! Pada ' .date('d-M-Y').'</div>';
+             $this->session->set_flashdata('pesan', $elementHTML);
  
             //redirect
             redirect('adminkorwil/kas','refresh');
@@ -269,12 +270,8 @@ class M_keuangan extends CI_Model
 
         public function ubahkasanggota($upload){
             $data = [
-                // "judul"=>$this->input->post('judul',true),
                 "tgl_bayar"=>$this->input->post('tgl_bayar',true),
-                // "nominal"=>$this->input->post('nominal',true),
                 "via" => "transfer",
-                // "nama_bank"=>$this->input->post('nama_bank',true),
-                // "no_rekening"=>$this->input->post('no_rekening',true),
                 "deskripsi"=>$this->input->post('deskripsi',true),
                 'bukti_bayar'  => $upload ['file']['file_name']
                 ];
@@ -284,7 +281,7 @@ class M_keuangan extends CI_Model
             $this->db->update('data_keuangan', $data);      
             // flash data 
     
-            $msg = '<div class="alert alert-info">Data kas anggota berhasil diperbarui <br><small>Pada tanggal ' . date('d F Y H.i A') . '</small></div>';
+            $msg = '<div class="alert alert-info">Data kas anggota berhasil diperbarui <br><small>Pada tanggal ' . date('d-M-Y') . '</small></div>';
             $this->session->set_flashdata('flash-data', $msg);
             
             redirect('kegiatan/historypembayaran');

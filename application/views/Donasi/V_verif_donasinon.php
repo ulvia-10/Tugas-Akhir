@@ -3,7 +3,13 @@
 	<div class="card-header">
 		<h5 class="pull-left">Data Donasi Non Anggota  </h5>
 	</div>
+
+
+
 	<div class="card-body">
+
+
+
 		<div class="tabbed-card">
 			<ul class="pull-right nav nav-pills nav-secondary" id="top-tabdanger" role="tablist">
 				<li class="nav-item"><a class="nav-link" id="top-home-danger" data-bs-toggle="tab"
@@ -16,6 +22,9 @@
 						href="#top-contactdanger" role="tab" aria-controls="top-contactdanger" aria-selected="false"><i
 							class="icofont icofont-contacts"></i>All Data</a></li>
 			</ul>
+
+
+
 			<div class="tab-content" id="top-tabContentdanger">
 				<div class="tab-pane fade" id="top-homedanger" role="tabpanel" aria-labelledby="top-home-tab">
 				<!--  showing flash data -->
@@ -97,6 +106,7 @@
 				aria-labelledby="profile-top-tab">
 					<!-- show flash data from model M_donasi  -->
 				<div class="table-responsive">
+				<?php echo $this->session->flashdata('pesan') ?>
 					<table class="display" id="basic-2" style="text-align:center;">
 						<thead>
 							<tr>
@@ -176,11 +186,15 @@
 					</table>
 
 				</div>
-			</div>
+				</div>
+
+
+
+
 			<div class="tab-pane fade" id="top-contactdanger" role="tabpanel" aria-labelledby="contact-top-tab">
 				<div class="table-responsive">
 					<!-- show flash data from model M_donasi  -->
-					<!-- <?php echo $this->session->flashdata('pesan') ?> -->
+					<?php echo $this->session->flashdata('pesan') ?>
 					
 					<a href="<?= base_url(); ?>donasi_non/tambahbuktidonasinonkorwil/" class="btn btn-secondary btn-sm mb-3">
 							<i class="fa fa-plus" aria-hidden="true"></i> Tambah Data</a> <br>

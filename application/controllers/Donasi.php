@@ -274,8 +274,8 @@ public function detaildonasikorwil($id){
     );
     $data['donasi'] = $this->M_donasi->getDonasiById($id);
     
-    var_dump($data);
-    // $this->load->view('templating/korwil/Template_korwil', $data);
+    // var_dump($data);
+    $this->load->view('templating/korwil/Template_korwil', $data);
 }
 // hapus donasi di anggota 
 public function hapusdonasi($Id_donasi){
