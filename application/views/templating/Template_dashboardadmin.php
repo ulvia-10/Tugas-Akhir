@@ -94,7 +94,7 @@
                             </div>
                         </li>
                         <li> <span class="header-search"><i data-feather="search"></i></span></li>
-                        <li class="onhover-dropdown">
+                        <!-- <li class="onhover-dropdown">
                             <div class="notification-box"><i data-feather="bell"> </i></div>
                             <ul class="notification-dropdown onhover-show-div">
                                 <li><i data-feather="bell"></i>
@@ -118,7 +118,7 @@
                                 </li>
                                 <li><a class="btn btn-primary" href="#">Check all notification</a></li>
                             </ul>
-                        </li>
+                        </li> -->
                         <li>
                             <div class="mode"><i class="fa fa-moon-o"></i></div>
                         </li>

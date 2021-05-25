@@ -333,9 +333,9 @@ class Adminkorwil extends CI_Controller
 
         $data = array(
 
-            'namafolder'    => "korwil",
-            'namafileview'    => "V_tambahKeuangan",
-            'title'         => "TambahKeuangan | Senyum Desa",
+            'namafolder'         => "korwil",
+            'namafileview'       => "V_tambahKeuangan",
+            'title'              => "TambahKeuangan | Senyum Desa",
 
             // variable
             'dataCabang'    => $getDataCabang
@@ -345,8 +345,27 @@ class Adminkorwil extends CI_Controller
     // proses tambah
     function prosesTambahKeuangan()
     {
+        $this->load->helper(array('form', 'url'));
+    $this->load->library('form_validation');
+    
+    // form validation 
+    $this->form_validation->set_rules('nominal','nominal','required');
 
-        $this->M_korwil->processInsertKeuangan();
+    if ($this->form_validation->run() == FALSE){
+        echo validation_errors();
+      }
+      else{
+        $upload = $this->M_korwil->upload();
+        if($upload ['result'] == 'success'){
+            $this->M_korwil->processInsertKeuangan($upload);
+            // redirect('donasi/datadonasi','refresh');
+        }else{
+            echo $upload['error'];
+        }
+        // redirect('donasi/riwayatdonasi','refresh');  
+}
+
+       
     }
 
     // proses hapus

@@ -373,9 +373,11 @@ class M_korwil extends CI_Model
         AND data_keuangan.status_verif='baru'";
         return $this->db->query($sql)->result_array();
     }
+
+
     //Tambah Keuangang
     // proses insert/tambah data
-    function processInsertKeuangan()
+    function processInsertKeuangan($upload)
     {
 
         $id_profile = $this->session->userdata('sess_id_profile');
@@ -385,15 +387,17 @@ class M_korwil extends CI_Model
           
             'id_profile' => $id_profile,
             'id_cabang'  => $id_cabang,
+            'status_verif' =>"baru",
             'judul'   => $this->input->post('judul'),
             'deskripsi' => $this->input->post('deskripsi'),
             'jenis_keuangan' => $this->input->post('jenis_keuangan'),
             'nominal' => $this->input->post('nominal'),
             'tipe' => $this->input->post('tipe'),
+            'bukti_bayar'  => $upload ['file']['file_name']
         );
         $this->db->insert('data_keuangan', $data);
 
-
+        // var_dump($data);
         // flashdata
         $elementHTML = '<div class="alert alert-success"><b>Pemberitahuan</b> <br> Data Keuangan berhasil ditambahkan pada ' . date('d F Y H.i A') . '</div>';
         $this->session->set_flashdata('pesan', $elementHTML);
@@ -419,6 +423,18 @@ class M_korwil extends CI_Model
         redirect('Adminkorwil/tabelKeuangan');
     }
 
+    public function upload(){    
+        $config['upload_path'] = './assets/images/';    
+        $config['allowed_types'] = 'jpg|png|jpeg';
+        $this->load->library('upload', $config);
+        if($this->upload->do_upload('bukti_bayar')){
+            $return = array('result' => 'success', 'file' => $this->upload->data(), 'error' => '');      
+            return $return;
+        }else{    
+            $return = array('result' => 'failed', 'file' => '', 'error' => $this->upload->display_errors());     
+             return $return;   
+        }  
+    }
 
     // 
     function getTotalKeuangan($jenis_keuangan)

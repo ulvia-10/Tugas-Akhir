@@ -4,7 +4,7 @@
 		<div class="card-header">
 			<h6 class="text-success" style="text-align:center;">Tambah Keuangan Senyum Desa</h6>
 		</div>
-		<form class="form theme-form" action="<?php echo base_url('adminkorwil/prosesTambahKeuangan') ?>" method="POST">
+		<form class="form theme-form" action="<?php echo base_url('adminkorwil/prosesTambahKeuangan') ?>" method="POST" enctype="multipart/form-data">
 			<div class="card-body">
 				<div class="row">
 					<div class="col">
@@ -65,9 +65,15 @@
 						</div>
 					</div>
 				</div>
-
-
-
+				<div class="row">
+					<div class="col">
+						<div class="mb-3">
+							<label class="form-label" for="bukti_bayar">Foto Bukti</label>
+							<input class="form-control form-control-lg" name="bukti_bayar" id="bukti_bayar" type="file"
+								placeholder="Masukan deskripsi" required=""></textarea>
+						</div>
+					</div>
+				</div>
 
 			</div>
 			<div class="card-footer">

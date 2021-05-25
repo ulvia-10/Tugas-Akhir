@@ -392,6 +392,8 @@ class M_donasi extends CI_Model
     $id_donasi = $this->input->post('Id_donasi');
         // post data 
         $datadonasi = [
+            "Id_donasi" => $id_donasi,
+            "id_event"  =>$this->input->post('nama_event'),
             "tgl_donasi"=>$this->input->post('tgl_donasi',true),
             "tipe"      =>"anggota",
             "via"       =>"transfer",
@@ -401,15 +403,8 @@ class M_donasi extends CI_Model
         // query
         $this->db->where('Id_donasi', $id_donasi);
         $this->db->update('data_donasi', $datadonasi);      
-        // flash data 
         
-        $dataevent = [
-            "id_donasi"=>$this->input->post('id_donasi',true),
-            
-            ];
-            
-            $this->db->where('Id_donasi',$id_donasi);
-            $this->db->update('data_event', $dataevent); 
+        // var_dump($datadonasi);
 
         // var_dump($datadonasi,$dataevent);   
         $msg = '<div class="alert alert-success">Data berhasil di di ubah! <br><small>Pada tanggal ' . date('d F Y H.i A') . '</small></div>';

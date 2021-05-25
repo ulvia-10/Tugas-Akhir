@@ -23,23 +23,44 @@
 				</div>
 
         <!-- nama event  -->
-				<div class="row">
-					<label class="col-sm-3 col-form-label">Nama Event</label>
-					<div class="form-group col-md-6" style="margin-left:5px;">
-						<select name="name_cabang" class="form-select digits" id="" required="wilayah harap DiIsi">
-							<option value="name_cabang">-- Pilih Nama Event --</option>
+		<div class="row">
+						<div class="col">
+							<div class="mb-3 row">
+								<label class="col-sm-3 col-form-label">Nama Event</label>
+								<div class="col-sm-9">
+									<select name="nama_event" class="form-select digits" id=""
+										required="wilayah harap DiIsi">
+										<option value="nama_event">-- Pilih Nama Event --</option>
+										
+										<!-- foreach rsult array nama event donasi  -->
+										<?php
+                        
+										$tanggal_sekarang = (date('Y-m-d H:i:s'));
+	  
+										foreach($event AS $event){
 
-							<?php
+											$tanggal_awal = ($event['durasi_mulai']);
+											$tanggal_akhir = ($event['durasi_berakhir']);
+
+											// echo 'apakah '. $tanggal_sekarang.' >= '.$tanggal_awal.' dan '. $tanggal_sekarang.' <= '. $tanggal_akhir; 
+
+											// echo ( ($tanggal_sekarang >= $tanggal_awal) && ($tanggal_sekarang <= $tanggal_akhir) ) ? " |tampilkan" : " |expired";
 
 
-                                        foreach ($event as $event) {
+											if ( ($tanggal_sekarang >= $tanggal_awal) && ($tanggal_sekarang <= $tanggal_akhir)  ) {
 
-                                            echo '<option value="' . $event['id_event'] . '">' . $event['nama_event'] . '</option>';
-                                        }
-                                        ?>
-						</select>
+																			echo '<option value="' . $event['id_event'] . '">' . $event['nama_event'] . '</option>';
+																		}
+																	}
+									 	 ?>
+
+
+
+									</select>
+								</div>
+							</div>
+						</div>
 					</div>
-				</div>
 				<br>
 
 				<!-- upload bukti -->

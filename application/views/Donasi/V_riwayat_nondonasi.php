@@ -11,7 +11,7 @@
 						<div class="col-xxl-4 col-md-6">
 							<div class="prooduct-details-box">
 								<div class="media"><img class="align-self-center img-fluid img-60"
-										src="http://admin.pixelstrap.com/cuba/assets/images/ecommerce/product-table-6.png" alt="#">
+										src="https://image.freepik.com/free-vector/man-shows-gesture-great-idea_10045-637.jpg" alt="#">
 									<div class="media-body ms-3">
 									<p><span class="badge badge-primary"><?=$dns['nama_event']?></span></p>
 										<div class="product-name">
@@ -69,7 +69,7 @@
 						<div class="col-xxl-4 col-md-6">
 							<div class="prooduct-details-box">
 								<div class="media"><img class="align-self-center img-fluid img-60"
-										src="http://admin.pixelstrap.com/cuba/assets/images/ecommerce/product-table-6.png" alt="#">
+								src="https://image.freepik.com/free-vector/man-shows-gesture-great-idea_10045-637.jpg" alt="#">
 									<div class="media-body ms-3">
 									<p><span class="badge badge-primary"><?=$anm['nama_event']?></span></p>
 										<div class="product-name">
@@ -124,7 +124,7 @@
 						<div class="col-xxl-4 col-md-6">
 							<div class="prooduct-details-box">
 								<div class="media"><img class="align-self-center img-fluid img-60"
-										src="http://admin.pixelstrap.com/cuba/assets/images/ecommerce/product-table-6.png" alt="#">
+								src="https://image.freepik.com/free-vector/man-shows-gesture-great-idea_10045-637.jpg" alt="#">
 									<div class="media-body ms-3">
 									<p><span class="badge badge-primary"><?=$ang['nama_event']?></span></p>
 										<div class="product-name">
