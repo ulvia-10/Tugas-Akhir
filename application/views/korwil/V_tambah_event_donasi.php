@@ -42,6 +42,7 @@
                         </div>
                     </div>
 
+                
                     <!-- gambar event  -->
 
                     <div class="row">

@@ -36,7 +36,7 @@
               <div class="d-inline-block bg-light text-center px-2 py-1 rounded me-2">
               <span class="text-primary"><?=date('d-M-Y', strtotime($jdw['durasi_mulai']))?>
               </span>
-                    -</div> 
+                    </div> 
                 <a class="d-inline-block btn-link" ><?=date('d-M-Y', strtotime($jdw['durasi_berakhir']))?></a>
             </div>
             <h2 class="h5 my-3">

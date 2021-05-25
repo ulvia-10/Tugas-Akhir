@@ -98,7 +98,7 @@
 
 							</div>
 						</li>
-						<li class="onhover-dropdown">
+						<!-- <li class="onhover-dropdown">
 							<?php
                             $notif = $this->db->get_where('tbl_notif', ['is_read' => 0])->result_array();
                             $notif_count = count($notif);
@@ -128,7 +128,7 @@
 
 								<li><a class="btn btn-primary" href="#">Check all notification</a></li>
 							</ul>
-						</li>
+						</li> -->
 
 						<li>
 							<div class="mode"><i class="fa fa-moon-o"></i></div>
