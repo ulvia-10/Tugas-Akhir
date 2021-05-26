@@ -485,6 +485,7 @@ class M_donasi extends CI_Model
             'durasi_mulai'  => $this->input->post('durasi_mulai'),
             'durasi_berakhir'  => $this->input->post('durasi_berakhir'),
             'deskripsi_event'  => $this->input->post('deskripsi_event'),
+            'status_event '     =>$this->input->post('status_event'),
             'gambar_event'  => $upload ['file']['file_name']
             
         );
@@ -518,6 +519,7 @@ class M_donasi extends CI_Model
             'durasi_mulai'  => $this->input->post('durasi_mulai'),
             'durasi_berakhir'  => $this->input->post('durasi_berakhir'),
             'deskripsi_event'  => $this->input->post('deskripsi_event'),
+            'status_event'  => $this->input->post('status_event'),
             'gambar_event'  => $upload ['file']['file_name']
             ];
         // query

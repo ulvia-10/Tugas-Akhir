@@ -67,11 +67,30 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-footer" style="margin-left:350px;">
-                        <button class="btn btn-dark" type="submit">Submit Data <i class="fa fa-check-circle" aria-hidden="true"></i></button>
+                    <div class="row">
+				
+				<label class=" col-form-label" >Pilih Status Event: </label>
+				<div class="col-sm-9" >
+					<div class="m-checkbox-inline custom-radio-ml">
+					<div class="form-check form-check-inline radio radio-primary">
+							<input class="form-check-input" id="radioinline8" type="radio" name="status_event" value="active">
+							<label class="form-check-label mb-0" for="radioinline8">
+							<span class="digits text"> Aktif </span></label>
+						</div>
+						<div class="form-check form-check-inline radio radio-primary">
+							<input class="form-check-input" id="radioinline7" type="radio" name="status_event" value=
+							"inactive">
+							<label class="form-check-label mb-0" for="radioinline7"><span class="digits"> Tidak Aktif
+								</span></label>
+						</div>
+                        </div>
+                    <div class="card-footer" style="margin-left:300px;">
+                        <button class="btn btn-dark" type="submit">Submit </button>
                     </div>
                     
                     </form>
                   </div>
                 </div>
+              </div>
+              </div>
               </div>
