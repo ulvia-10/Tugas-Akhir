@@ -457,8 +457,8 @@ class M_donasi extends CI_Model
     public function getdataeventdonasi($id){
         $sql =" SELECT data_event.*
         FROM data_event 
-        WHERE data_event.id_event = '$id' ";
-         return $this->db->query($sql)->row_array();
+        WHERE data_event.id_event = '$id'";
+        return $this->db->query($sql)->row_array();
     }
     
     

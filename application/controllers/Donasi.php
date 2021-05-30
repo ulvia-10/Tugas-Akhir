@@ -413,6 +413,7 @@ public function tambaheventdonasi(){
     );
     $data['event'] = $this->M_donasi->geteventdonasi();
 //    load template 
+// var_dump($data);
     $this->load->view('templating/template_dashboardadmin', $data);
 }
 
@@ -444,6 +445,7 @@ public function detaileventdonasi($id){
     );
     $data['event'] = $this->M_donasi->getdataeventdonasi($id);
 //    load template 
+// var_dump($data);
     $this->load->view('templating/template_dashboardadmin', $data);
 }
 public function proseseditevent(){

@@ -32,8 +32,6 @@
 							<?= $event['deskripsi_event']; ?>
 						</p>
                        
-                    
-                    
                   </div>
                 </div>
               </div>
@@ -44,8 +42,7 @@
                     <h5 class="text-white">Gambar Event <i class="fa fa-search-plus" aria-hidden="true"></i></h5>
                   </div>
                   <div class="card-body">
-                  <img src="<?= base_url('./assets/images/' . $event['gambar_event']); ?>"
-							alt="Gambar Event belum terupload! " style="width:50%; height:85%; margin-left:50px;"> <br> 
+                  <img src="<?= base_url('./assets/images/'. $event['gambar_event']); ?>"	alt="Gambar Event belum terupload! " style="width:50%; height:85%; margin-left:50px;"> <br> 
                   </div>
                 </div>
               </div>
