@@ -105,10 +105,6 @@
                                     class="badge badge-primary">
                                     <i class="fa fa-eye" aria-hidden="true"></i></a></a>
 
-                            <!-- delete -->
-                            <!-- <a href="<?= base_url(); ?>keuangan/delete/<?= $ks['id_keuangan']; ?>"
-                                    class="badge badge-danger">
-                                   <i class="fa fa-trash" aria-hidden="true"></i></a></a> -->
                             </td>
 
                             <?php

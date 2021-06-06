@@ -46,7 +46,7 @@
 					<div class="mb-3 row" >
 						<label class="col-sm-3 col-form-label">Judul</label>
 						<div class="col-sm-5">
-							<input class="form-control" type="text"" name="judul"  placeholder="Masukkan judul">
+							<input class="form-control" type="text" name="judul"  placeholder="Masukkan judul">
 						</div>
 					</div>
 				</div>

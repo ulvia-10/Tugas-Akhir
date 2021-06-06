@@ -225,7 +225,7 @@ class M_donasi extends CI_Model
             'telp_donatur'   => $this->input->post('telp_donatur'),
             'jml_donasi'   => $this->input->post('jml_donasi'),
             'bukti_donasi'  => $upload ['file']['file_name']
-            
+
         );
         $this->db->insert('data_donasi', $datadonasi);
         $elementHTML = '<div class="alert alert-success"><b>Pemberitahuan</b> <br> Data Donasi berhasil ditambahkan pada ' . date('d F Y H.i A') . '';
